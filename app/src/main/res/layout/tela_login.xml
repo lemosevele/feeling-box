@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.ufrpe.projeto.feelingsbox.gui.TelaLogin">
+    tools:context="com.ufrpe.feelingsbox.gui.TelaLogin">
 
     <ImageView
         android:id="@+id/logofb"
@@ -18,7 +18,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/FeelingsBox"
+        app:srcCompat="@mipmap/feelingsbox"
         tools:ignore="MissingConstraints" />
 
     <EditText
