@@ -1,4 +1,4 @@
-package com.ufrpe.feelingsbox.feelingsbox.controle.dominio.usuario;
+package com.ufrpe.projeto.feelingsbox.dominio.usuario;
 
 /**
  * Created by evele on 18/07/2017.

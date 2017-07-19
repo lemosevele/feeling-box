@@ -1,4 +1,4 @@
-package com.ufrpe.feelingsbox.feelingsbox;
+package com.ufrpe.projeto.feelingsbox;
 
 import org.junit.Test;
 

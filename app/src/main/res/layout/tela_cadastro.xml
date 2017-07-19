@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.ufrpe.feelingsbox.feelingsbox.controle.gui.TelaCadastro">
+    tools:context="com.ufrpe.projeto.feelingsbox.gui.TelaCadastro">
 
     <EditText
         android:id="@+id/txtNomeCadastro"
@@ -146,5 +146,3 @@
         android:layout_marginLeft="16dp"
         app:layout_constraintLeft_toLeftOf="parent" />
 </android.support.constraint.ConstraintLayout>
-
-</ teste>

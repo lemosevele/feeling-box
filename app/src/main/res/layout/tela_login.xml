@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.ufrpe.feelingsbox.feelingsbox.controle.gui.TelaLogin">
+    tools:context="com.ufrpe.projeto.feelingsbox.gui.TelaLogin">
 
     <ImageView
         android:id="@+id/logofb"
@@ -99,5 +99,3 @@
         app:layout_constraintTop_toTopOf="@+id/btnCadastrar" />
 
 </android.support.constraint.ConstraintLayout>
-
-</ teste>

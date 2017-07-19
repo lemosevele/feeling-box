@@ -1,4 +1,4 @@
-package com.ufrpe.feelingsbox.feelingsbox;
+package com.ufrpe.projeto.feelingsbox;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

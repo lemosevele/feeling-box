@@ -1,9 +1,9 @@
-package com.ufrpe.feelingsbox.feelingsbox.controle.gui;
+package com.ufrpe.projeto.feelingsbox.gui;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.ufrpe.feelingsbox.feelingsbox.R;
+import com.ufrpe.projeto.feelingsbox.R;
 
 public class TelaCadastro extends AppCompatActivity {
 
@@ -13,4 +13,3 @@ public class TelaCadastro extends AppCompatActivity {
         setContentView(R.layout.tela_cadastro);
     }
 }
-// tela

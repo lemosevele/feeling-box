@@ -1,4 +1,4 @@
-package com.ufrpe.feelingsbox.feelingsbox.controle.dominio.usuario;
+package com.ufrpe.projeto.feelingsbox.dominio.usuario;
 
 import java.util.Date;
 

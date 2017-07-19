@@ -1,6 +1,5 @@
-package com.ufrpe.feelingsbox.feelingsbox.controle.dao;
+package com.ufrpe.projeto.feelingsbox.persistencia;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -39,5 +38,27 @@ public class FeelingsBoxDbHelper extends SQLiteOpenHelper {
         COLUMN_DATANASC + "TEXT NOT NULL, " +
         COLUMN_SEXO + "TEXT NOT NULL);");
 
+    }
+
+    public void onUpgrade(SQLiteDatabase feelingsboxdb, int oldVersion, int newVersion){
+        String query = "DROP TABLE IF EXISTS " + TABLE_USER;
+        feelingsboxdb.execSQL(query);
+        this.onCreate(feelingsboxdb);
+    }
+
+    public static String getColumnEmail(){
+        return COLUMN_EMAIL;
+    }
+
+    public static String getColumnNick(){
+        return COLUMN_NICK;
+    }
+
+    public static String getColumnNome(){
+        return COLUMN_NOME;
+    }
+
+    public static String getColumnSenha(){
+        return COLUMN_SENHA;
     }
 }
