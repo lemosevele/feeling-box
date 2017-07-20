@@ -101,12 +101,14 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="7dp"
+        android:backgroundTint="@color/colorBtnBlue"
         android:text="@string/btn_Entrar"
+        android:textColor="@color/colorFontNormalLight"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="@+id/edtSenha"
         app:layout_constraintRight_toRightOf="@+id/edtSenha"
-        app:layout_constraintTop_toBottomOf="@+id/edtSenha"
-        app:layout_constraintHorizontal_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/edtSenha" />
 
     <Button
         android:id="@+id/btnCadastrar"
@@ -115,8 +117,10 @@
         android:layout_marginLeft="0dp"
         android:layout_marginRight="0dp"
         android:layout_marginTop="8dp"
+        android:backgroundTint="@color/colorBtnYellow"
         android:onClick="cadastrarUsuario"
         android:text="@string/btn_cadastrar"
+        android:textColor="@color/colorFontNormalLight"
         app:layout_constraintLeft_toLeftOf="@+id/btnEntrar"
         app:layout_constraintRight_toRightOf="@+id/btnEntrar"
         app:layout_constraintTop_toBottomOf="@+id/btnEntrar" />

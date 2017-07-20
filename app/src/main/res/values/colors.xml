@@ -11,7 +11,13 @@
 
     <color name="colorFontLogo">#03a9f4</color>
     <color name="colorFontSubtitle">#c0c0C0</color>
-    <color name="colorFontNormal">#FFFFFF</color>
+    <color name="colorFontNormalLight">#ffffff</color>
+    <color name="colorFontNormalDark">#000000</color>
+
+    <color name="colorBtnBlue">#03a9f4</color>
+    <color name="colorBtnYellow">#ffc107</color>
+    <color name="colorBtnRed">#d34836</color>
+
 
 
 </resources>

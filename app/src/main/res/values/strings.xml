@@ -34,4 +34,5 @@
     <string name="rbt_female">Feminino</string>
     <string name="rbt_other">Outro</string>
     <string name="btn_cancelar">Cancelar</string>
+    <string name="lbl_title_cadastro">CADASTRO</string>
 </resources>

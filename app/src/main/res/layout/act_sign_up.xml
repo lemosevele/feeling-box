@@ -28,7 +28,7 @@
         android:layout_marginTop="8dp"
         android:elegantTextHeight="false"
         android:gravity="center"
-        android:text="@string/lbl_cadastro"
+        android:text="@string/lbl_title_cadastro"
         android:textColor="@color/colorFontLogo"
         android:textIsSelectable="false"
         android:textSize="36sp"
@@ -122,8 +122,10 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="0dp"
         android:layout_marginTop="8dp"
+        android:backgroundTint="@color/colorBtnRed"
         android:onClick="cancelarCadastro"
         android:text="@string/btn_cancelar"
+        android:textColor="@color/colorFontNormalLight"
         app:layout_constraintLeft_toLeftOf="@+id/edtSenha"
         app:layout_constraintTop_toBottomOf="@+id/spnSexo" />
 
@@ -133,8 +135,10 @@
         android:layout_height="wrap_content"
         android:layout_marginRight="0dp"
         android:layout_marginTop="8dp"
+        android:backgroundTint="@color/colorBtnBlue"
         android:onClick="validarCadastrar"
         android:text="@string/btn_cadastrar"
+        android:textColor="@color/colorFontNormalLight"
         app:layout_constraintRight_toRightOf="@+id/edtSenha"
         app:layout_constraintTop_toBottomOf="@+id/spnSexo" />
 
