@@ -27,16 +27,16 @@ public class FeelingsBoxDbHelper extends SQLiteOpenHelper {
 
     public void onCreate(SQLiteDatabase sqLiteDatabase){
         sqLiteDatabase.execSQL("CREATE TABLE" + TABLE_USER + " (" +
-                        COLUMN_ID + "INTEGER PRIMARY KEY AUTOINCREMENT," +
-                        COLUMN_EMAIL + "TEXT NOT NULL, " +
-                        COLUMN_SENHA + "TEXT NOT NULL, " +
-                        COLUMN_NICK + "TEXT NOT NULL);");
+                                                COLUMN_ID + "INTEGER PRIMARY KEY AUTOINCREMENT," +
+                                                COLUMN_EMAIL + "TEXT NOT NULL, " +
+                                                COLUMN_SENHA + "TEXT NOT NULL, " +
+                                                COLUMN_NICK + "TEXT NOT NULL);");
 
         sqLiteDatabase.execSQL("CREATE TABLE" + TABLE_PESSOA + "(" +
-        COLUMN_PESSOA_ID + "INTEGER PRIMARY KEY AUTOINCREMENT," +
-        COLUMN_NOME + "TEXT NOT NULL, " +
-        COLUMN_DATANASC + "TEXT NOT NULL, " +
-        COLUMN_SEXO + "TEXT NOT NULL);");
+                                                COLUMN_PESSOA_ID + "INTEGER PRIMARY KEY AUTOINCREMENT," +
+                                                COLUMN_NOME + "TEXT NOT NULL, " +
+                                                COLUMN_DATANASC + "TEXT NOT NULL, " +
+                                                COLUMN_SEXO + "TEXT NOT NULL);");
 
     }
 

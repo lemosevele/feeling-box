@@ -2,10 +2,16 @@
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#ff4081</color>
+
     <color name="colorToolBarBase1">#03a9f4</color>         <!-- Azul Base -->
     <color name="colorToolBarBase2">#ffc107</color>         <!-- Amarelo Base -->
     <color name="colorToolBarDark1">#01547a</color>       <!-- Azul Sombra (Talvez não seja necessário) -->
     <color name="colorToolBarDark2">#e5ad06</color>       <!-- Amarelo Sombra (Talvez não seja necessário) -->
+
+    <color name="colorFontLogo">#03a9f4</color>
+    <color name="colorFontSubtitle">#c0c0C0</color>
+    <color name="colorFontNormal">#FFFFFF</color>
+
 
 </resources>

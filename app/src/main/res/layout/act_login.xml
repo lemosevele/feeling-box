@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.ufrpe.feelingsbox.gui.ActLogin">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="0dp"
+        android:layout_height="176dp"
+        app:srcCompat="@drawable/logo"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="16dp" />
+
+    <TextView
+        android:id="@+id/txtLogo1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="8dp"
+        android:elegantTextHeight="false"
+        android:gravity="center"
+        android:text="@string/lbl_logo1"
+        android:textColor="@color/colorFontLogo"
+        android:textIsSelectable="false"
+        android:textSize="36sp"
+        app:layout_constraintLeft_toLeftOf="@+id/imageView"
+        app:layout_constraintRight_toRightOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <TextView
+        android:id="@+id/txtLogo2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="0dp"
+        android:gravity="center"
+        android:text="@string/lbl_logo2"
+        android:textColor="@color/colorFontLogo"
+        android:textSize="36sp"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintLeft_toLeftOf="@+id/txtLogo1"
+        app:layout_constraintRight_toRightOf="@+id/txtLogo1"
+        app:layout_constraintTop_toBottomOf="@+id/txtLogo1" />
+
+    <TextView
+        android:id="@+id/txtSubtitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="0dp"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:text="@string/lbl_subtitle"
+        android:textColor="@color/colorFontSubtitle"
+        app:layout_constraintLeft_toLeftOf="@+id/txtLogo2"
+        app:layout_constraintRight_toRightOf="@+id/txtLogo2"
+        app:layout_constraintTop_toBottomOf="@+id/txtLogo2" />
+
+    <EditText
+        android:id="@+id/edtLogin"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="@string/edt_login"
+        android:inputType="textPersonName"
+        app:layout_constraintLeft_toLeftOf="@+id/txtSubtitle"
+        app:layout_constraintRight_toRightOf="@+id/txtSubtitle"
+        app:layout_constraintTop_toBottomOf="@+id/txtSubtitle" />
+
+    <EditText
+        android:id="@+id/edtSenha"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="@string/edt_senha"
+        android:inputType="textPassword"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="@+id/edtLogin"
+        app:layout_constraintRight_toRightOf="@+id/edtLogin"
+        app:layout_constraintTop_toBottomOf="@+id/edtLogin" />
+
+    <Button
+        android:id="@+id/btnEntrar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/btn_Entrar"
+        app:layout_constraintLeft_toLeftOf="@+id/edtSenha"
+        app:layout_constraintRight_toRightOf="@+id/edtSenha"
+        app:layout_constraintTop_toBottomOf="@+id/edtSenha"
+        app:layout_constraintHorizontal_bias="0.0" />
+
+    <Button
+        android:id="@+id/btnCadastrar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="8dp"
+        android:onClick="cadastrarUsuario"
+        android:text="@string/btn_cadastrar"
+        app:layout_constraintLeft_toLeftOf="@+id/btnEntrar"
+        app:layout_constraintRight_toRightOf="@+id/btnEntrar"
+        app:layout_constraintTop_toBottomOf="@+id/btnEntrar" />
+
+</android.support.constraint.ConstraintLayout>

@@ -1,3 +1,37 @@
 <resources>
     <string name="app_name">feelingsbox</string>
+    <string name="title_activity_act_login">Sign in</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password (optional)</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="lbl_logo1">FEELINGS</string>
+    <string name="lbl_logo2">BOX</string>
+    <string name="lbl_subtitle">Good feelins, create life</string>
+    <string name="lbl_cadastrar">Cadastrar</string>
+    <string name="lbl_login">Login</string>
+    <string name="lbl_senha">Senha</string>
+    <string name="btn_Entrar">Entrar</string>
+    <string name="btn_cadastrar">Cadastrar</string>
+    <string name="edt_login">Login</string>
+    <string name="edt_senha">Senha</string>
+    <string name="edt_nome">Nome</string>
+    <string name="lbl_cadastro">Cadastro</string>
+    <string name="edt_email">Email</string>
+    <string name="lbl_datanasc">Nascimento</string>
+    <string name="edt_nick">Apelido</string>
+    <string name="lbl_sexo">Sexo</string>
+    <string name="rbt_male">Masculino</string>
+    <string name="rbt_female">Feminino</string>
+    <string name="rbt_other">Outro</string>
+    <string name="btn_cancelar">Cancelar</string>
 </resources>
