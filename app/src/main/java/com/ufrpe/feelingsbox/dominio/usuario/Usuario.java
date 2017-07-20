@@ -8,7 +8,7 @@ public class Usuario {
     private String email;
     private String senha;
     private String nick;
-    private int id;
+    private long id;
     private Pessoa pessoa;
 
     public String getEmail(){
@@ -39,12 +39,12 @@ public class Usuario {
         this.nick = novoNick;
     }
 
-    public int getId(){
+    public long getId(){
 
         return this.id;
     }
 
-    public void setId(int novoId){
+    public void setId(long novoId){
 
         this.id = novoId;
     }
