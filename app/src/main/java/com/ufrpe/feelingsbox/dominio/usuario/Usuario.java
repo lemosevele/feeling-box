@@ -9,7 +9,6 @@ public class Usuario {
     private String senha;
     private String nick;
     private int id;
-    private Pessoa pessoa;
 
     public String getEmail(){
 
@@ -49,13 +48,4 @@ public class Usuario {
         this.id = novoId;
     }
 
-    public Pessoa getPessoa(){
-
-        return this.pessoa;
-    }
-
-    public void setPessoa(Pessoa novaPessoa){
-
-        this.pessoa = novaPessoa;
-    }
 }

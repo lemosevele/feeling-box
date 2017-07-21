@@ -13,23 +13,32 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+<<<<<<< HEAD
         android:theme="@style/MyAppTheme">
         <activity
             android:name=".gui.ActLogin"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:theme="@style/MyAppThemeFullscreen"
             android:windowSoftInputMode="stateHidden"> <!-- Impede do teclado abrir automaticamente ao Entrar na Activity -->
+=======
+        android:theme="@style/AppTheme">
+
+        <activity android:name="com.ufrpe.feelingsbox.gui.ActLogin">
+>>>>>>> febcd901782343f8e6a93db53dadc7dc7663841c
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+<<<<<<< HEAD
         </activity>
         <activity
             android:name=".gui.ActSignUp"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:theme="@style/MyAppThemeFullscreen"
             android:windowSoftInputMode="stateHidden"> <!-- Impede do teclado abrir automaticamente ao mudar Orientação e Tamanho da Tela -->
+=======
+>>>>>>> febcd901782343f8e6a93db53dadc7dc7663841c
         </activity>
         <activity
             android:name=".gui.ActHome"

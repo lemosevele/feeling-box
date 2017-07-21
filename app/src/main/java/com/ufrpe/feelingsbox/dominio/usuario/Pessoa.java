@@ -1,16 +1,22 @@
 package com.ufrpe.feelingsbox.dominio.usuario;
 
-import java.util.Date;
 
-/**
- * Created by evele on 18/07/2017.
- */
 
 public class Pessoa {
     private String nome;
     private String sexo;
-    private Date dataNasc;
-    private int id;
+    private String dataNasc;
+    private long id;
+    private long idUsuario;
+    private Usuario usuario;
+
+    public long getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(long idUsuario) {
+        this.idUsuario = idUsuario;
+    }
 
     public void setNome(String novoNome){
 
@@ -22,12 +28,12 @@ public class Pessoa {
         return this.nome;
     }
 
-    public void setDataNasc(Date novaData){
+    public void setDataNasc(String novaData){
 
         this.dataNasc = novaData;
     }
 
-    public Date getDataNasc(){
+    public String getDataNasc(){
 
         return this.dataNasc;
     }
@@ -42,14 +48,24 @@ public class Pessoa {
         return this.sexo;
     }
 
-    public int getId(){
+    public long getId(){
 
         return this.id;
     }
 
-    public void setId(int novoId){
+    public void setId(long novoId){
 
         this.id = novoId;
+    }
+
+    public Usuario getUsuario(){
+
+        return this.usuario;
+    }
+
+    public void setUsuario(Usuario novoUsuario){
+
+        this.usuario = novoUsuario;
     }
 
 }
