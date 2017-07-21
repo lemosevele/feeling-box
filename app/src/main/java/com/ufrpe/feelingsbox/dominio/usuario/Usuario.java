@@ -8,8 +8,7 @@ public class Usuario {
     private String email;
     private String senha;
     private String nick;
-    private long id;
-    private Pessoa pessoa;
+    private int id;
 
     public String getEmail(){
 
@@ -39,23 +38,14 @@ public class Usuario {
         this.nick = novoNick;
     }
 
-    public long getId(){
+    public int getId(){
 
         return this.id;
     }
 
-    public void setId(long novoId){
+    public void setId(int novoId){
 
         this.id = novoId;
     }
 
-    public Pessoa getPessoa(){
-
-        return this.pessoa;
-    }
-
-    public void setPessoa(Pessoa novaPessoa){
-
-        this.pessoa = novaPessoa;
-    }
 }

@@ -9,56 +9,59 @@ public class FeelingsBoxDbHelper extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "feelingsbox.db";
 
-    public static final String TABLE_USER = "usuario";
-    public static final String COLUMN_ID = "_id";
-    public static final String COLUMN_EMAIL = "email";
-    public static final String COLUMN_SENHA = "senha";
-    public static final String COLUMN_NICK = "nick";
+    // TABELA USUÁRIO
+    public static final String TABELA_USUARIO = "usuario";
+    public static final String ID = "_id";
+    public static final String USUARIO_EMAIL = "email";
+    public static final String USUARIO_SENHA = "senha";
+    public static final String USUARIO_NICK = "nick";
 
-    public static final String TABLE_PESSOA = "pessoa";
-    public static final String COLUMN_PESSOA_ID = "pessoa_id";
-    public static final String COLUMN_NOME = "nome";
-    public static final String COLUMN_SEXO = "sexo";
-    public static final String COLUMN_DATANASC = "data_nasc";
+
+    //TABELA PESSOA
+    public static final String TABELA_PESSOA = "pessoa";
+    public static final String PESSOA_USER_ID = "usuario_id";
+    public static final String PESSOA_NOME = "nome";
+    public static final String PESSOA_SEXO = "sexo";
+    public static final String PESSOA_DATANASC = "data_nasc";
+
 
     public FeelingsBoxDbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
-    public void onCreate(SQLiteDatabase sqLiteDatabase){
-        sqLiteDatabase.execSQL("CREATE TABLE" + TABLE_USER + " (" +
-                                                COLUMN_ID + "INTEGER PRIMARY KEY AUTOINCREMENT," +
-                                                COLUMN_EMAIL + "TEXT NOT NULL, " +
-                                                COLUMN_SENHA + "TEXT NOT NULL, " +
-                                                COLUMN_NICK + "TEXT NOT NULL);");
+    public void onCreate(SQLiteDatabase sqLiteDatabase) {
+        sqLiteDatabase.execSQL("CREATE TABLE" + TABELA_USUARIO + " (" +
+                ID + "INTEGER PRIMARY KEY AUTOINCREMENT," +
+                USUARIO_EMAIL + "TEXT NOT NULL, " +
+                USUARIO_SENHA + "TEXT NOT NULL, " +
+                USUARIO_NICK + "TEXT NOT NULL);");
 
-        sqLiteDatabase.execSQL("CREATE TABLE" + TABLE_PESSOA + "(" +
-                                                COLUMN_PESSOA_ID + "INTEGER PRIMARY KEY AUTOINCREMENT," +
-                                                COLUMN_NOME + "TEXT NOT NULL, " +
-                                                COLUMN_DATANASC + "TEXT NOT NULL, " +
-                                                COLUMN_SEXO + "TEXT NOT NULL);");
-
+        sqLiteDatabase.execSQL("CREATE TABLE" + TABELA_PESSOA + "(" +
+                ID + "INTEGER PRIMARY KEY AUTOINCREMENT," +
+                PESSOA_NOME + "TEXT NOT NULL, " +
+                PESSOA_DATANASC + "TEXT NOT NULL, " +
+                PESSOA_USER_ID + "INTEGER,"+
+                PESSOA_SEXO + "TEXT NOT NULL);");
     }
-
     public void onUpgrade(SQLiteDatabase feelingsboxdb, int oldVersion, int newVersion){
-        String query = "DROP TABLE IF EXISTS " + TABLE_USER;
+        String query = "DROP TABLE IF EXISTS " + TABELA_USUARIO;
         feelingsboxdb.execSQL(query);
         this.onCreate(feelingsboxdb);
     }
 
     public static String getColumnEmail(){
-        return COLUMN_EMAIL;
+        return USUARIO_EMAIL;
     }
 
     public static String getColumnNick(){
-        return COLUMN_NICK;
+        return USUARIO_NICK;
     }
 
     public static String getColumnNome(){
-        return COLUMN_NOME;
+        return PESSOA_NOME;
     }
 
     public static String getColumnSenha(){
-        return COLUMN_SENHA;
+        return USUARIO_SENHA;
     }
 }
