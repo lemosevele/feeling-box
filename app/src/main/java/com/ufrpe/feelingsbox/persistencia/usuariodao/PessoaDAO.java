@@ -13,47 +13,58 @@ import android.database.sqlite.SQLiteDatabase;
 
 public class PessoaDAO {
 
-    private FeelingsBoxDbHelper dbHelper;
+    private FeelingsBoxDbHelper dbHelper; //OBJ DA CLASSE FeelingsSBoxDbHelper
     private UsuarioDAO usuarioDAO;
+    private SQLiteDatabase feelingsDb;
+
 
     public PessoaDAO(Context context){
+
         dbHelper = new FeelingsBoxDbHelper(context);
+        usuarioDAO = new UsuarioDAO(context);
     }
+
+    // CURSOR PERCORRE AS COLUNAS DA TABELA E CRIA UM OBJETO PESSOA
 
     public Pessoa criarPessoa(Cursor cursor){
 
-        String nomeColumn = FeelingsBoxDbHelper.PESSOA_NOME;
-        int indexColumnNome = cursor.getColumnIndex(nomeColumn);
-        String nome = cursor.getString(indexColumnNome);
+        String colunaNome = FeelingsBoxDbHelper.PESSOA_NOME;
+        int indexColunaNome = cursor.getColumnIndex(colunaNome);
+        String nome = cursor.getString(indexColunaNome);
 
-        String sexoColumn = FeelingsBoxDbHelper.PESSOA_SEXO;
-        int indexColumnSexo = cursor.getColumnIndex(sexoColumn);
-        String sexo = cursor.getString(indexColumnSexo);
+        String colunaSexo = FeelingsBoxDbHelper.PESSOA_SEXO;
+        int indexColunaSexo = cursor.getColumnIndex(colunaSexo);
+        String sexo = cursor.getString(indexColunaSexo);
 
-        String idColumn = FeelingsBoxDbHelper.ID;
-        int indexColumnId = cursor.getColumnIndex(idColumn);
-        int id  = cursor.getInt(indexColumnId);
+        String colunaId = FeelingsBoxDbHelper.ID;
+        int indexColunaId = cursor.getColumnIndex(colunaId);
+        long id  = cursor.getInt(indexColunaId);
 
-        String dataNascColmun = FeelingsBoxDbHelper.PESSOA_DATANASC;
-        int indexColumnDataNasc = cursor.getColumnIndex(dataNascColmun);
-        String data = cursor.getString(indexColumnDataNasc);
+        String colunaDataNasc = FeelingsBoxDbHelper.PESSOA_DATANASC;
+        int indexColunaDataNasc = cursor.getColumnIndex(colunaDataNasc);
+        String data = cursor.getString(indexColunaDataNasc);
 
-        String idUsuarioColumn =  FeelingsBoxDbHelper.PESSOA_USER_ID;
-        int indexColumnUserId = cursor.getColumnIndex(idUsuarioColumn);
-        int idUsuario = cursor.getInt(indexColumnUserId);
+        String colunaUsuarioId =  FeelingsBoxDbHelper.PESSOA_USER_ID;
+        int indexColunaUsuarioId = cursor.getColumnIndex(colunaUsuarioId);
+        int idUsuario = cursor.getInt(indexColunaUsuarioId);
 
+        Usuario usuario = usuarioDAO.getUsuario(idUsuario);
         Pessoa pessoa = new Pessoa();
+
         pessoa.setId(id);
         pessoa.setSexo(sexo);
         pessoa.setNome(nome);
         pessoa.setDataNasc(data);
         pessoa.setIdUsuario(idUsuario);
+        pessoa.setUsuario(usuario);
 
         return pessoa;
     }
 
+    // INSERE OBJ PESSOA NA TABELA PESSOA, PEGA OS ATRIBUTOS DO OBJ E VAI INSERINDO
+
     public long inserirPessoa(Pessoa pessoa){
-        SQLiteDatabase feelingsDb = dbHelper.getReadableDatabase();
+        feelingsDb = dbHelper.getReadableDatabase();
         ContentValues values = new ContentValues();
 
         String colunaNome =  FeelingsBoxDbHelper.PESSOA_NOME;
@@ -85,7 +96,7 @@ public class PessoaDAO {
     }
 
     public Pessoa getPessoa(Usuario usuario){
-        SQLiteDatabase feelingsDb = dbHelper.getReadableDatabase();
+        feelingsDb = dbHelper.getReadableDatabase();
 
         String query = "SELECT * FROM " + FeelingsBoxDbHelper.TABELA_PESSOA +
                 " WHERE " + FeelingsBoxDbHelper.PESSOA_USER_ID + " LIKE ?";
@@ -109,7 +120,7 @@ public class PessoaDAO {
     }
 
     public Pessoa getPessoa(long id){
-        SQLiteDatabase feelingsDb = dbHelper.getReadableDatabase();
+        feelingsDb = dbHelper.getReadableDatabase();
 
         String query = "SELECT * FROM " + FeelingsBoxDbHelper.TABELA_PESSOA +
                 " WHERE " + FeelingsBoxDbHelper.ID + " LIKE ?";

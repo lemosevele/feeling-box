@@ -1,5 +1,7 @@
 package com.ufrpe.feelingsbox.dominio.usuario;
 
+
+
 public class Pessoa {
     private String nome;
     private String sexo;
@@ -9,7 +11,7 @@ public class Pessoa {
     private Usuario usuario;
 
     public long getIdUsuario() {
-        return idUsuario;
+        return usuario.getId();
     }
 
     public void setIdUsuario(long idUsuario) {

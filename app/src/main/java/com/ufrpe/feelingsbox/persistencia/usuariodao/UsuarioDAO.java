@@ -12,7 +12,7 @@ import com.ufrpe.feelingsbox.persistencia.FeelingsBoxDbHelper;
 public class UsuarioDAO {
 
     private FeelingsBoxDbHelper dbHelper;
-
+    private SQLiteDatabase feelingsDb;
 
     public UsuarioDAO(Context context) {
 
@@ -20,7 +20,7 @@ public class UsuarioDAO {
     }
 
     public Usuario getUsuario(String email, String senha) {
-        SQLiteDatabase feelingsDb = dbHelper.getReadableDatabase();
+        feelingsDb = dbHelper.getReadableDatabase();
 
         String query = "SELECT * FROM " + FeelingsBoxDbHelper.TABELA_USUARIO +
                 " WHERE " + FeelingsBoxDbHelper.USUARIO_EMAIL + " LIKE ? AND " +
@@ -42,7 +42,7 @@ public class UsuarioDAO {
     }
 
     public Usuario getUsuario(String nick) {
-        SQLiteDatabase feelingsDb = dbHelper.getReadableDatabase();
+        feelingsDb = dbHelper.getReadableDatabase();
 
         String query = "SELECT * FROM " + FeelingsBoxDbHelper.TABELA_USUARIO +
                 " WHERE " + FeelingsBoxDbHelper.USUARIO_NICK + " LIKE ?";
@@ -66,7 +66,7 @@ public class UsuarioDAO {
 
 
     public Usuario getUsuario(int id){
-        SQLiteDatabase feelingsDb = dbHelper.getReadableDatabase();
+        feelingsDb = dbHelper.getReadableDatabase();
 
         String query = "SELECT * FROM " + FeelingsBoxDbHelper.TABELA_USUARIO +
                 " WHERE " + FeelingsBoxDbHelper.ID + " LIKE ?";
@@ -90,7 +90,7 @@ public class UsuarioDAO {
     }
 
     public Usuario getUsuarioEmail(String email) {
-        SQLiteDatabase feelingsDb = dbHelper.getReadableDatabase();
+        feelingsDb = dbHelper.getReadableDatabase();
 
         String query = "SELECT * FROM " + FeelingsBoxDbHelper.TABELA_USUARIO +
                 " WHERE " + FeelingsBoxDbHelper.USUARIO_EMAIL + " LIKE ?";
@@ -113,21 +113,21 @@ public class UsuarioDAO {
     }
 
     public long inserir(Usuario usuario){
-        SQLiteDatabase feelingsDb = dbHelper.getReadableDatabase();
+        feelingsDb = dbHelper.getReadableDatabase();
 
         ContentValues values = new ContentValues();
 
-        String emailColumn = FeelingsBoxDbHelper.USUARIO_EMAIL;
+        String colunaEmail = FeelingsBoxDbHelper.USUARIO_EMAIL;
         String email = usuario.getEmail();
-        values.put(emailColumn, email);
+        values.put(colunaEmail, email);
 
-        String senhaColumn = FeelingsBoxDbHelper.USUARIO_SENHA;
+        String colunaSenha = FeelingsBoxDbHelper.USUARIO_SENHA;
         String senha = usuario.getSenha();
-        values.put(senhaColumn, senha);
+        values.put(colunaSenha, senha);
 
-        String nickColumn = FeelingsBoxDbHelper.USUARIO_NICK;
+        String colunaNick = FeelingsBoxDbHelper.USUARIO_NICK;
         String nick = usuario.getNick();
-        values.put(nickColumn, nick);
+        values.put(colunaNick, nick);
 
         String tabela = FeelingsBoxDbHelper.TABELA_USUARIO;
         long id = feelingsDb.insert(tabela, null, values);
@@ -136,23 +136,25 @@ public class UsuarioDAO {
         return id;
     }
 
+    // CURSOR PERCORRE AS COLUNAS DA TABELA E CRIA UM OBJETO PESSOA
+
     public Usuario criarUsuario(Cursor cursor){
 
-        String idColumn = FeelingsBoxDbHelper.ID;
-        int indexColumnID = cursor.getColumnIndex(idColumn);
-        int id = cursor.getInt(indexColumnID);
+        String colunaId = FeelingsBoxDbHelper.ID;
+        int indexColunaId= cursor.getColumnIndex(colunaId);
+        long id = cursor.getInt(indexColunaId);
 
-        String emailColumn = FeelingsBoxDbHelper.USUARIO_EMAIL;
-        int indexColumnEmail = cursor.getColumnIndex(emailColumn);
-        String email = cursor.getString(indexColumnEmail);
+        String colunaEmail = FeelingsBoxDbHelper.USUARIO_EMAIL;
+        int indexColunaEmail = cursor.getColumnIndex(colunaEmail);
+        String email = cursor.getString(indexColunaEmail);
 
-        String senhaColumn = FeelingsBoxDbHelper.USUARIO_SENHA;
-        int indexColumnSenha = cursor.getColumnIndex(senhaColumn);
-        String senha = cursor.getString(indexColumnSenha);
+        String colunaSenha = FeelingsBoxDbHelper.USUARIO_SENHA;
+        int indexColunaSenha = cursor.getColumnIndex(colunaSenha);
+        String senha = cursor.getString(indexColunaSenha);
 
-        String nickColumn = FeelingsBoxDbHelper.USUARIO_NICK;
-        int indexColumnNick = cursor.getColumnIndex(nickColumn);
-        String nick = cursor.getString(indexColumnNick);
+        String colunaNick = FeelingsBoxDbHelper.USUARIO_NICK;
+        int indexColunaNick = cursor.getColumnIndex(colunaNick);
+        String nick = cursor.getString(indexColunaNick);
 
         Usuario usuario = new Usuario();
         usuario.setId(id);
