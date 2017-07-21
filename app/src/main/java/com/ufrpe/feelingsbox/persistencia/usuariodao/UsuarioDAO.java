@@ -112,7 +112,7 @@ public class UsuarioDAO {
         return usuario;
     }
 
-    public long inserir(Usuario usuario){
+    public long inserirUsuario(Usuario usuario){
         feelingsDb = dbHelper.getReadableDatabase();
 
         ContentValues values = new ContentValues();

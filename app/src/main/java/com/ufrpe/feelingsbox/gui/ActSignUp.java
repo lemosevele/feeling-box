@@ -14,9 +14,17 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.ufrpe.feelingsbox.R;
+import com.ufrpe.feelingsbox.dominio.usuario.Pessoa;
+import com.ufrpe.feelingsbox.dominio.usuario.Usuario;
+import com.ufrpe.feelingsbox.negocio.ValidacaoCadastro;
+import com.ufrpe.feelingsbox.persistencia.FeelingsBoxDbHelper;
+import com.ufrpe.feelingsbox.persistencia.usuariodao.PessoaDAO;
+import com.ufrpe.feelingsbox.persistencia.usuariodao.UsuarioDAO;
 
 public class ActSignUp extends AppCompatActivity {
     //Declarando os Elementos da Tela(activity)
+    private UsuarioDAO usuarioDAO;
+    private PessoaDAO pessoaDAO;
     private EditText edtNome, edtNick, edtEmail, edtNasc, edtSenha;
     Spinner spinner;
 
@@ -57,7 +65,6 @@ public class ActSignUp extends AppCompatActivity {
             }
         });
     }
-
     //Ação ao Clicar no botão Cadastrar
     public void validarCadastrar(View view){
         //Pegando os valores dos EditText
@@ -67,21 +74,41 @@ public class ActSignUp extends AppCompatActivity {
         String nasc     = edtNasc.getText().toString();
         String senha    = edtSenha.getText().toString();
 
-
         //Pegando os valor do Spinner
         String sexoTexto = (String) spinner.getSelectedItem();     //Retorna a String do elemento selecionado do Spinner
         //long sexoId = spinner.getSelectedItemId();                  //Retorna o ID do elemento selecionado do Spinner
         //int sexoPosicao = spinner.getSelectedItemPosition();        //Retorna a Posição do elemento selecionado do Spinner
 
+        ValidacaoCadastro validacaoCadastro = new ValidacaoCadastro(this,edtNome,edtNick,edtEmail,edtNasc,edtSenha);
+        if(validacaoCadastro.validarCampos()){
 
-        //"Print" para fim de testes
-        Toast.makeText(this,    "Nome: "+ nome +
-                                ", Nick: " + nick +
-                                ", Email: " + email +
-                                ", Data: " + nasc +
-                                ", Senha: "+ senha +
-                                ", Sexo: " + sexoTexto,
-                                Toast.LENGTH_SHORT).show();
+            Usuario usuario = new Usuario();
+            usuario.setNick(nick);
+            usuario.setEmail(email);
+            usuario.setSenha(senha);
+
+            Pessoa pessoa = new Pessoa();
+            pessoa.setNome(nome);
+            pessoa.setDataNasc(nasc);
+            pessoa.setSexo(sexoTexto);
+
+            usuarioDAO.inserirUsuario(usuario);
+            pessoaDAO.inserirPessoa(pessoa);
+
+            //"Print" para fim de testes
+            Toast.makeText(this,    "Nome: "+ nome +
+                            ", Nick: " + nick +
+                            ", Email: " + email +
+                            ", Data: " + nasc +
+                            ", Senha: "+ senha +
+                            ", Sexo: " + sexoTexto,
+                    Toast.LENGTH_SHORT).show();
+
+        }
+
+
+
+
 
 
     }
