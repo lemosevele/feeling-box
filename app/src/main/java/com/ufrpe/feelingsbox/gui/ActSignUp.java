@@ -58,6 +58,7 @@ public class ActSignUp extends AppCompatActivity {
         });
     }
 
+    //Ação ao Clicar no botão Cadastrar
     public void validarCadastrar(View view){
         //Pegando os valores dos EditText
         String nome     = edtNome.getText().toString();
@@ -75,9 +76,9 @@ public class ActSignUp extends AppCompatActivity {
 
         //"Print" para fim de testes
         Toast.makeText(this,    "Nome: "+ nome +
-                                ", Nick:" + nick +
-                                ", Email" + email +
-                                ", Data:" + nasc +
+                                ", Nick: " + nick +
+                                ", Email: " + email +
+                                ", Data: " + nasc +
                                 ", Senha: "+ senha +
                                 ", Sexo: " + sexoTexto,
                                 Toast.LENGTH_SHORT).show();
@@ -87,8 +88,9 @@ public class ActSignUp extends AppCompatActivity {
 
     public void cancelarCadastro(View view){
         //Trocando a Tela (Cancelar cadastro)
-        Intent it = new Intent(ActSignUp.this, ActLogin.class);
-        startActivity(it);
+        //Intent it = new Intent(ActSignUp.this, ActLogin.class);
+        //startActivity(it);
+        finish();
     }
 
 

@@ -13,25 +13,28 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".feelingsbox">
+        android:theme="@style/MyAppTheme">
+        <activity
+            android:name=".gui.ActLogin"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@style/MyAppThemeFullscreen"
+            android:windowSoftInputMode="stateHidden"> <!-- Impede do teclado abrir automaticamente ao Entrar na Activity -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".gui.TelaLogin" />
-        <activity android:name=".gui.TelaCadastro" />
-
-        <activity android:name="com.ufrpe.feelingsbox.gui.ActLogin">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+        <activity
+            android:name=".gui.ActSignUp"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@style/MyAppThemeFullscreen"
+            android:windowSoftInputMode="stateHidden"> <!-- Impede do teclado abrir automaticamente ao mudar Orientação e Tamanho da Tela -->
         </activity>
-        <activity android:name="com.ufrpe.feelingsbox.gui.ActSignUp"></activity>
+        <activity
+            android:name=".gui.ActHome"
+            android:label="@string/title_activity_act_home"
+            android:theme="@style/MyAppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

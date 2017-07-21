@@ -27,9 +27,18 @@ public class ActLogin extends AppCompatActivity {
 
     }
 
+    //Ação ao Clicar no botão Cadastrar
     public void cadastrarUsuario(View view){
         //Trocando para a Tela de Cadastro
         Intent it = new Intent(ActLogin.this, ActSignUp.class);
+        startActivity(it);
+    }
+
+    //Ação ao Clicar no botão Entrar
+    public void efetuarLogin(View view){
+
+        //Trocando para a Tela de Home
+        Intent it = new Intent(ActLogin.this, ActHome.class);
         startActivity(it);
     }
 

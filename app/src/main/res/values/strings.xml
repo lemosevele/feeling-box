@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">feelingsbox</string>
+    <string name="app_name">Feelings Box</string>
     <string name="title_activity_act_login">Sign in</string>
 
     <!-- Strings related to login -->
@@ -35,4 +35,5 @@
     <string name="rbt_other">Outro</string>
     <string name="btn_cancelar">Cancelar</string>
     <string name="lbl_title_cadastro">CADASTRO</string>
+    <string name="title_activity_act_home">Home</string>
 </resources>
