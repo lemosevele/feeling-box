@@ -1,7 +1,5 @@
 package com.ufrpe.feelingsbox.dominio.usuario;
 
-
-
 public class Pessoa {
     private String nome;
     private String sexo;
