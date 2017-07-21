@@ -19,17 +19,16 @@ public class UsuarioDAO {
         dbHelper = new FeelingsBoxDbHelper(context);
     }
 
-
     public Usuario getUsuario(String email, String senha) {
         SQLiteDatabase feelingsDb = dbHelper.getReadableDatabase();
 
-        String comando = "SELECT * FROM " + FeelingsBoxDbHelper.TABELA_USUARIO +
+        String query = "SELECT * FROM " + FeelingsBoxDbHelper.TABELA_USUARIO +
                 " WHERE " + FeelingsBoxDbHelper.USUARIO_EMAIL + " LIKE ? AND " +
                 FeelingsBoxDbHelper.USUARIO_SENHA + " LIKE ?";
 
         String[] argumentos = {email, senha};
 
-        Cursor cursor = feelingsDb.rawQuery(comando, argumentos);
+        Cursor cursor = feelingsDb.rawQuery(query, argumentos);
 
         Usuario usuario = null;
 
@@ -45,12 +44,12 @@ public class UsuarioDAO {
     public Usuario getUsuario(String nick) {
         SQLiteDatabase feelingsDb = dbHelper.getReadableDatabase();
 
-        String comando = "SELECT * FROM " + FeelingsBoxDbHelper.TABELA_USUARIO +
+        String query = "SELECT * FROM " + FeelingsBoxDbHelper.TABELA_USUARIO +
                 " WHERE " + FeelingsBoxDbHelper.USUARIO_NICK + " LIKE ?";
 
         String[] argumentos = {nick};
 
-        Cursor cursor = feelingsDb.rawQuery(comando, argumentos);
+        Cursor cursor = feelingsDb.rawQuery(query, argumentos);
 
         Usuario usuario = null;
 
@@ -66,21 +65,43 @@ public class UsuarioDAO {
     }
 
 
-
     public Usuario getUsuario(int id){
         SQLiteDatabase feelingsDb = dbHelper.getReadableDatabase();
 
-        String comando = "SELECT * FROM " + FeelingsBoxDbHelper.TABELA_USUARIO +
+        String query = "SELECT * FROM " + FeelingsBoxDbHelper.TABELA_USUARIO +
                 " WHERE " + FeelingsBoxDbHelper.ID + " LIKE ?";
 
         String idString = Long.toString(id);
         String[] argumentos = {idString};
 
-        Cursor cursor = feelingsDb.rawQuery(comando, argumentos);
+        Cursor cursor = feelingsDb.rawQuery(query, argumentos);
 
         Usuario usuario = null;
 
         if(cursor.moveToNext()){
+
+            usuario = criarUsuario(cursor);
+        }
+
+        cursor.close();
+        feelingsDb.close();
+
+        return usuario;
+    }
+
+    public Usuario getUsuarioEmail(String email) {
+        SQLiteDatabase feelingsDb = dbHelper.getReadableDatabase();
+
+        String query = "SELECT * FROM " + FeelingsBoxDbHelper.TABELA_USUARIO +
+                " WHERE " + FeelingsBoxDbHelper.USUARIO_EMAIL + " LIKE ?";
+
+        String[] argumentos = {email};
+
+        Cursor cursor = feelingsDb.rawQuery(query, argumentos);
+
+        Usuario usuario = null;
+
+        if (cursor.moveToNext()) {
 
             usuario = criarUsuario(cursor);
         }

@@ -1,6 +1,8 @@
 package com.ufrpe.feelingsbox.persistencia.usuariodao;
 
 import com.ufrpe.feelingsbox.dominio.usuario.Pessoa;
+import com.ufrpe.feelingsbox.dominio.usuario.Usuario;
+
 import com.ufrpe.feelingsbox.persistencia.FeelingsBoxDbHelper;
 
 import android.content.ContentValues;
@@ -50,7 +52,7 @@ public class PessoaDAO {
         return pessoa;
     }
 
-    public long inserir(Pessoa pessoa){
+    public long inserirPessoa(Pessoa pessoa){
         SQLiteDatabase feelingsDb = dbHelper.getReadableDatabase();
         ContentValues values = new ContentValues();
 
@@ -82,7 +84,52 @@ public class PessoaDAO {
         return id;
     }
 
+    public Pessoa getPessoa(Usuario usuario){
+        SQLiteDatabase feelingsDb = dbHelper.getReadableDatabase();
 
+        String query = "SELECT * FROM " + FeelingsBoxDbHelper.TABELA_PESSOA +
+                " WHERE " + FeelingsBoxDbHelper.PESSOA_USER_ID + " LIKE ?";
 
+        long idUsuario = usuario.getId();
+        String idUsuarioString = Long.toString(idUsuario);
+        String[] argumentos = {idUsuarioString};
 
+        Cursor cursor = feelingsDb.rawQuery(query, argumentos);
+
+        Pessoa pessoa = null;
+
+        if (cursor.moveToNext()) {
+
+            pessoa = criarPessoa(cursor);
+        }
+        cursor.close();
+        feelingsDb.close();
+
+        return pessoa;
+    }
+
+    public Pessoa getPessoa(long id){
+        SQLiteDatabase feelingsDb = dbHelper.getReadableDatabase();
+
+        String query = "SELECT * FROM " + FeelingsBoxDbHelper.TABELA_PESSOA +
+                " WHERE " + FeelingsBoxDbHelper.ID + " LIKE ?";
+
+        String idString = Long.toString(id);
+        String[] argumentos = {idString};
+
+        Cursor cursor = feelingsDb.rawQuery(query, argumentos);
+
+        Pessoa pessoa = null;
+
+        if (cursor.moveToNext()) {
+
+            pessoa = criarPessoa(cursor);
+
+        }
+        cursor.close();
+        feelingsDb.close();
+
+        return pessoa;
+
+    }
 }
