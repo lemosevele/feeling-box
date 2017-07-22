@@ -4,6 +4,8 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+//Classe responsável por criar o banco de dados
+
 public class FeelingsBoxDbHelper extends SQLiteOpenHelper {
 
     private static final int DATABASE_VERSION = 1;
