@@ -1,9 +1,9 @@
-package com.ufrpe.feelingsbox.persistencia.usuariodao;
+package com.ufrpe.feelingsbox.usuario.persistencia.usuariodao;
 
-import com.ufrpe.feelingsbox.dominio.usuario.Pessoa;
-import com.ufrpe.feelingsbox.dominio.usuario.Usuario;
+import com.ufrpe.feelingsbox.usuario.dominio.Pessoa;
+import com.ufrpe.feelingsbox.usuario.dominio.Usuario;
 
-import com.ufrpe.feelingsbox.persistencia.DataBase;
+import com.ufrpe.feelingsbox.usuario.persistencia.DataBase;
 
 import android.content.ContentValues;
 import android.content.Context;

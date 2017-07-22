@@ -1,4 +1,4 @@
-package com.ufrpe.feelingsbox.gui;
+package com.ufrpe.feelingsbox.usuario.gui;
 /*
  * Tela de Login
  */

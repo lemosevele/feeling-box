@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.ufrpe.feelingsbox.gui.ActHome"
+    tools:context=".usuario.gui.ActHome"
     tools:showIn="@layout/act_home">
 
     <ScrollView

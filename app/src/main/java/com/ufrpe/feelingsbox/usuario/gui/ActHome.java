@@ -1,4 +1,4 @@
-package com.ufrpe.feelingsbox.gui;
+package com.ufrpe.feelingsbox.usuario.gui;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;

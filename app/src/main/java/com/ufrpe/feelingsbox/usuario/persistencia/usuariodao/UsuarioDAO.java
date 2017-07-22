@@ -1,12 +1,12 @@
-package com.ufrpe.feelingsbox.persistencia.usuariodao;
+package com.ufrpe.feelingsbox.usuario.persistencia.usuariodao;
 
 import android.content.Context;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.ufrpe.feelingsbox.dominio.usuario.Usuario;
-import com.ufrpe.feelingsbox.persistencia.DataBase;
+import com.ufrpe.feelingsbox.usuario.dominio.Usuario;
+import com.ufrpe.feelingsbox.usuario.persistencia.DataBase;
 
 
 public class UsuarioDAO {

@@ -1,4 +1,4 @@
-package com.ufrpe.feelingsbox.dominio.usuario;
+package com.ufrpe.feelingsbox.usuario.dominio;
 
 public class Usuario {
     private String email;

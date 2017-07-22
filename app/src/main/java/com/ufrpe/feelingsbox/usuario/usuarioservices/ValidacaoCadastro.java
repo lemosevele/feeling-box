@@ -1,12 +1,12 @@
-package com.ufrpe.feelingsbox.negocio;
+package com.ufrpe.feelingsbox.usuario.usuarioservices;
 
 import android.app.AlertDialog;
 import android.text.TextUtils;
 import android.util.Patterns;
 import android.widget.EditText;
 
-import com.ufrpe.feelingsbox.gui.ActSignUp;
-import com.ufrpe.feelingsbox.persistencia.usuariodao.UsuarioDAO;
+import com.ufrpe.feelingsbox.usuario.gui.ActSignUp;
+import com.ufrpe.feelingsbox.usuario.persistencia.usuariodao.UsuarioDAO;
 
 public class ValidacaoCadastro {
     private final EditText edtNome;
