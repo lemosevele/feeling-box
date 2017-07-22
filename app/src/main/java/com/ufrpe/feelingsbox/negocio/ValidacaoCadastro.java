@@ -8,10 +8,6 @@ import android.widget.EditText;
 import com.ufrpe.feelingsbox.gui.ActSignUp;
 import com.ufrpe.feelingsbox.persistencia.usuariodao.UsuarioDAO;
 
-/**
- * Created by Everton on 20/07/2017.
- */
-
 public class ValidacaoCadastro {
     private final EditText edtNome;
     private final EditText edtNick;

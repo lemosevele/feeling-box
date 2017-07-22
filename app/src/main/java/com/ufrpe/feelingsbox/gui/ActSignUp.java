@@ -17,11 +17,12 @@ import com.ufrpe.feelingsbox.R;
 import com.ufrpe.feelingsbox.dominio.usuario.Pessoa;
 import com.ufrpe.feelingsbox.dominio.usuario.Usuario;
 import com.ufrpe.feelingsbox.negocio.ValidacaoCadastro;
-import com.ufrpe.feelingsbox.persistencia.FeelingsBoxDbHelper;
+import com.ufrpe.feelingsbox.persistencia.DataBase;
 import com.ufrpe.feelingsbox.persistencia.usuariodao.PessoaDAO;
 import com.ufrpe.feelingsbox.persistencia.usuariodao.UsuarioDAO;
 
 public class ActSignUp extends AppCompatActivity {
+
     //Declarando os Elementos da Tela(activity)
     private UsuarioDAO usuarioDAO;
     private PessoaDAO pessoaDAO;
@@ -105,12 +106,6 @@ public class ActSignUp extends AppCompatActivity {
                     Toast.LENGTH_SHORT).show();
 
         }
-
-
-
-
-
-
     }
 
     public void cancelarCadastro(View view){

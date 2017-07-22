@@ -3,7 +3,7 @@ package com.ufrpe.feelingsbox.persistencia.usuariodao;
 import com.ufrpe.feelingsbox.dominio.usuario.Pessoa;
 import com.ufrpe.feelingsbox.dominio.usuario.Usuario;
 
-import com.ufrpe.feelingsbox.persistencia.FeelingsBoxDbHelper;
+import com.ufrpe.feelingsbox.persistencia.DataBase;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -13,38 +13,38 @@ import android.database.sqlite.SQLiteDatabase;
 
 public class PessoaDAO {
 
-    private FeelingsBoxDbHelper dbHelper; //OBJ DA CLASSE FeelingsSBoxDbHelper
+    private DataBase dbHelper;
     private UsuarioDAO usuarioDAO;
     private SQLiteDatabase feelingsDb;
 
 
     public PessoaDAO(Context context){
 
-        dbHelper = new FeelingsBoxDbHelper(context);
+        dbHelper = new DataBase(context);
         usuarioDAO = new UsuarioDAO(context);
     }
 
-    // CURSOR PERCORRE AS COLUNAS DA TABELA E CRIA UM OBJETO PESSOA
+    // Cursor percorre as colunas da TABELA_PESSOA e cria Objeto Pessoa
 
     public Pessoa criarPessoa(Cursor cursor){
 
-        String colunaNome = FeelingsBoxDbHelper.PESSOA_NOME;
+        String colunaNome = DataBase.PESSOA_NOME;
         int indexColunaNome = cursor.getColumnIndex(colunaNome);
         String nome = cursor.getString(indexColunaNome);
 
-        String colunaSexo = FeelingsBoxDbHelper.PESSOA_SEXO;
+        String colunaSexo = DataBase.PESSOA_SEXO;
         int indexColunaSexo = cursor.getColumnIndex(colunaSexo);
         String sexo = cursor.getString(indexColunaSexo);
 
-        String colunaId = FeelingsBoxDbHelper.ID;
+        String colunaId = DataBase.ID;
         int indexColunaId = cursor.getColumnIndex(colunaId);
         long id  = cursor.getInt(indexColunaId);
 
-        String colunaDataNasc = FeelingsBoxDbHelper.PESSOA_DATANASC;
+        String colunaDataNasc = DataBase.PESSOA_DATANASC;
         int indexColunaDataNasc = cursor.getColumnIndex(colunaDataNasc);
         String data = cursor.getString(indexColunaDataNasc);
 
-        String colunaUsuarioId =  FeelingsBoxDbHelper.PESSOA_USER_ID;
+        String colunaUsuarioId =  DataBase.PESSOA_USER_ID;
         int indexColunaUsuarioId = cursor.getColumnIndex(colunaUsuarioId);
         int idUsuario = cursor.getInt(indexColunaUsuarioId);
 
@@ -61,33 +61,34 @@ public class PessoaDAO {
         return pessoa;
     }
 
-    // INSERE OBJ PESSOA NA TABELA PESSOA, PEGA OS ATRIBUTOS DO OBJ E VAI INSERINDO
+    // Insere o Obj pessoa na TABELA_PESSOA, pegando os atributos e inserindo
 
     public long inserirPessoa(Pessoa pessoa){
         feelingsDb = dbHelper.getReadableDatabase();
         ContentValues values = new ContentValues();
 
-        String colunaNome =  FeelingsBoxDbHelper.PESSOA_NOME;
+        String colunaNome =  DataBase.PESSOA_NOME;
         String nome = pessoa.getNome();
         values.put(colunaNome, nome);
 
-        String colunaSexo = FeelingsBoxDbHelper.PESSOA_SEXO;
+        String colunaSexo = DataBase.PESSOA_SEXO;
         String sexo = pessoa.getSexo();
         values.put(colunaSexo, sexo);
 
-        String colunaId = FeelingsBoxDbHelper.ID;
+        String colunaId = DataBase.ID;
         long idPessoa = pessoa.getId();
         values.put(colunaId, idPessoa);
 
-        String colunaUserId = FeelingsBoxDbHelper.PESSOA_USER_ID;
+        String colunaUserId = DataBase.PESSOA_USER_ID;
         long idUsuario = pessoa.getIdUsuario();
         values.put(colunaUserId, idUsuario);
 
-        String colunaDataNasc = FeelingsBoxDbHelper.PESSOA_DATANASC;
+        String colunaDataNasc = DataBase.PESSOA_DATANASC;
         String dataNasc = pessoa.getDataNasc();
         values.put(colunaDataNasc, dataNasc);
 
-        String tabela = FeelingsBoxDbHelper.TABELA_PESSOA;
+        String tabela = DataBase.TABELA_PESSOA;
+
         long id = feelingsDb.insert(tabela, null, values);
 
         feelingsDb.close();
@@ -95,11 +96,13 @@ public class PessoaDAO {
         return id;
     }
 
+    // Busca um objeto Pessoa na TABELA_PESSOA passando um objeto Usuario
+
     public Pessoa getPessoa(Usuario usuario){
         feelingsDb = dbHelper.getReadableDatabase();
 
-        String query = "SELECT * FROM " + FeelingsBoxDbHelper.TABELA_PESSOA +
-                " WHERE " + FeelingsBoxDbHelper.PESSOA_USER_ID + " LIKE ?";
+        String query = "SELECT * FROM " + DataBase.TABELA_PESSOA +
+                " WHERE " + DataBase.PESSOA_USER_ID + " LIKE ?";
 
         long idUsuario = usuario.getId();
         String idUsuarioString = Long.toString(idUsuario);
@@ -119,11 +122,13 @@ public class PessoaDAO {
         return pessoa;
     }
 
+    // Busca obj Pessoa na TABELA_PESSOA passando o Id
+
     public Pessoa getPessoa(long id){
         feelingsDb = dbHelper.getReadableDatabase();
 
-        String query = "SELECT * FROM " + FeelingsBoxDbHelper.TABELA_PESSOA +
-                " WHERE " + FeelingsBoxDbHelper.ID + " LIKE ?";
+        String query = "SELECT * FROM " + DataBase.TABELA_PESSOA +
+                " WHERE " + DataBase.ID + " LIKE ?";
 
         String idString = Long.toString(id);
         String[] argumentos = {idString};

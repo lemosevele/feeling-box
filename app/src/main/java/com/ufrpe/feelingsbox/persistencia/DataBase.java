@@ -2,14 +2,14 @@ package com.ufrpe.feelingsbox.persistencia;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
+import android.database.sqlite.SQLiteOpenHelper; // Cria banco de dados
 
 //Classe responsável por criar o banco de dados
 
-public class FeelingsBoxDbHelper extends SQLiteOpenHelper {
+public class DataBase extends SQLiteOpenHelper {
 
     private static final int DATABASE_VERSION = 1;
-    private static final String DATABASE_NAME = "feelingsbox.db";
+    private static final String DATABASE_NAME = "dbfeelingsbox";
 
     // TABELA USUÁRIO
     public static final String TABELA_USUARIO = "usuario";
@@ -27,28 +27,31 @@ public class FeelingsBoxDbHelper extends SQLiteOpenHelper {
     public static final String PESSOA_DATANASC = "data_nasc";
 
 
-    public FeelingsBoxDbHelper(Context context) {
+    public DataBase(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
-    public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        sqLiteDatabase.execSQL("CREATE TABLE" + TABELA_USUARIO + " (" +
-                ID + "INTEGER PRIMARY KEY AUTOINCREMENT," +
-                USUARIO_EMAIL + "TEXT NOT NULL, " +
-                USUARIO_SENHA + "TEXT NOT NULL, " +
-                USUARIO_NICK + "TEXT NOT NULL);");
+    //Criação da tabela
+    public void onCreate(SQLiteDatabase db) {
+        db.execSQL("CREATE TABLE" + TABELA_USUARIO + " (" +
+                ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+                USUARIO_EMAIL + " TEXT NOT NULL, " +
+                USUARIO_SENHA + " TEXT NOT NULL, " +
+                USUARIO_NICK + " TEXT NOT NULL);");
 
-        sqLiteDatabase.execSQL("CREATE TABLE" + TABELA_PESSOA + "(" +
-                ID + "INTEGER PRIMARY KEY AUTOINCREMENT," +
-                PESSOA_NOME + "TEXT NOT NULL, " +
-                PESSOA_DATANASC + "TEXT NOT NULL, " +
-                PESSOA_USER_ID + "INTEGER,"+
-                PESSOA_SEXO + "TEXT NOT NULL);");
+        db.execSQL("CREATE TABLE" + TABELA_PESSOA + " (" +
+                ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+                PESSOA_NOME + " TEXT NOT NULL, " +
+                PESSOA_DATANASC + " TEXT NOT NULL, " +
+                PESSOA_SEXO + " TEXT NOT NULL, " +
+                PESSOA_USER_ID + " INTEGER);");
     }
-    public void onUpgrade(SQLiteDatabase feelingsboxdb, int oldVersion, int newVersion){
+
+    //Atualização da tabela
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){
         String query = "DROP TABLE IF EXISTS " + TABELA_USUARIO;
-        feelingsboxdb.execSQL(query);
-        this.onCreate(feelingsboxdb);
+        db.execSQL(query);
+        this.onCreate(db);
     }
 
     public static String getColumnEmail(){
