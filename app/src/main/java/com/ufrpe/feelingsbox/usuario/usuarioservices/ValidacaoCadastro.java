@@ -1,12 +1,18 @@
 package com.ufrpe.feelingsbox.usuario.usuarioservices;
 
 import android.app.AlertDialog;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.text.TextUtils;
 import android.util.Patterns;
 import android.widget.EditText;
 
 import com.ufrpe.feelingsbox.usuario.gui.ActSignUp;
 import com.ufrpe.feelingsbox.usuario.persistencia.usuariodao.UsuarioDAO;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class ValidacaoCadastro {
     private final EditText edtNome;
@@ -34,22 +40,18 @@ public class ValidacaoCadastro {
         if (res = isCampoVazio(edtNome.getText().toString())) {
             edtNome.requestFocus();
         }
-        else
-            if (res = !isNickValido(edtNick.getText().toString())) {
-                edtNick.requestFocus();
-            }
-            else
-                if (res = !isEmailValido(edtEmail.getText().toString())) {
-                    edtEmail.requestFocus();
-                }
-                else
-                    if (res = !isNascValido(edtNasc.getText().toString())) {
-                        edtNasc.requestFocus();
-                    }
-                    else
-                        if (res = !isSenhaValida(edtSenha.getText().toString())) {
-                            edtSenha.requestFocus();
-                        }
+        if (res = !isNickValido(edtNick.getText().toString())) {
+            edtNick.requestFocus();
+        }
+        if (res = !isEmailValido(edtEmail.getText().toString())) {
+            edtEmail.requestFocus();
+        }
+        if (res = !isNascValido(edtNasc.getText().toString())) {
+            edtNasc.requestFocus();
+        }
+        if (res = !isSenhaValida(edtSenha.getText().toString())) {
+            edtSenha.requestFocus();
+        }
         if (res){
             AlertDialog.Builder dlg = new AlertDialog.Builder(activity);
             dlg.setTitle("Aviso");
@@ -62,9 +64,8 @@ public class ValidacaoCadastro {
 
 
     private boolean isCampoVazio(String campo) {
-        boolean resultado = (TextUtils.isEmpty(campo) || campo.trim().isEmpty());
-        return resultado;
-    }
+         return (TextUtils.isEmpty(campo) || campo.trim().isEmpty());
+        }
 
     private boolean isNickValido(String nick) {
         if (usuarioDAO.getUsuario(nick) != null) {
@@ -83,14 +84,15 @@ public class ValidacaoCadastro {
     }
 
     private boolean isNascValido(String nasc) {
-        if (isCampoVazio(nasc)) {
+        SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+
+            Date date = formatador.parse(nasc);
+            return true;
+
+        }
+        catch (ParseException e) {
             return false;
-        } else {
-            String rex = "([0]{1}[1-9]{1}|[1-2]{1}[0-9]{1}|[3]{1}[0-1]{1})+" +
-                    "\\/([0]{1}[1-9]{1}|[1]{1}[0-2]{2})+" +
-                    "\\/([1]{1}[9]{1}[5-9]{1}[0-9]{1}|[2]{1}[0]{1}([0-4]{1}+ " +
-                    "[0-9]{1}|[5]{1}[0]{1}))";
-            return (nasc.matches(rex));
         }
 
     }
