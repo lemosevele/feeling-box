@@ -1,14 +1,12 @@
-package com.ufrpe.feelingsbox.usuario.usuarioservices;
+package com.ufrpe.feelingsbox.usuario.negocio;
 
 import android.app.AlertDialog;
-import android.os.Build;
-import android.support.annotation.RequiresApi;
 import android.text.TextUtils;
 import android.util.Patterns;
 import android.widget.EditText;
 
 import com.ufrpe.feelingsbox.usuario.gui.ActSignUp;
-import com.ufrpe.feelingsbox.usuario.persistencia.usuariodao.UsuarioDAO;
+import com.ufrpe.feelingsbox.usuario.persistencia.UsuarioDAO;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -68,7 +66,7 @@ public class ValidacaoCadastro {
         }
 
     private boolean isNickValido(String nick) {
-        if (usuarioDAO.getUsuario(nick) != null) {
+        if (usuarioDAO.getUsuarioNick(nick) != null) {
             return true;
         }
         boolean resultado = (!isCampoVazio(nick) && !Patterns.EMAIL_ADDRESS.matcher(nick).matches());

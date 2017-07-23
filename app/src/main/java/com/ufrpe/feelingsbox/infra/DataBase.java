@@ -1,4 +1,4 @@
-package com.ufrpe.feelingsbox.usuario.persistencia;
+package com.ufrpe.feelingsbox.infra;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

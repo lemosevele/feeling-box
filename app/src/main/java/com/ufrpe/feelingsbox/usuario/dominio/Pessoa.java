@@ -6,16 +6,7 @@ public class Pessoa {
     private String sexo;
     private String dataNasc;
     private long id;
-    private long idUsuario;
     private Usuario usuario;
-
-    public long getIdUsuario() {
-        return usuario.getId();
-    }
-
-    public void setIdUsuario(long idUsuario) {
-        this.idUsuario = idUsuario;
-    }
 
     public void setNome(String novoNome){
 

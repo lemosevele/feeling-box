@@ -1,12 +1,12 @@
-package com.ufrpe.feelingsbox.usuario.persistencia.usuariodao;
+package com.ufrpe.feelingsbox.usuario.persistencia;
 
 import android.content.Context;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.ufrpe.feelingsbox.infra.DataBase;
 import com.ufrpe.feelingsbox.usuario.dominio.Usuario;
-import com.ufrpe.feelingsbox.usuario.persistencia.DataBase;
 
 
 public class UsuarioDAO {
@@ -19,7 +19,7 @@ public class UsuarioDAO {
         dbHelper = new DataBase(context);
     }
 
-    public Usuario getUsuario(String email, String senha) {
+    public Usuario getUsuarioEmailSenha(String email, String senha) {
         feelingsDb = dbHelper.getReadableDatabase();
 
         String query = "SELECT * FROM " + DataBase.TABELA_USUARIO +
@@ -41,7 +41,29 @@ public class UsuarioDAO {
         return usuario;
     }
 
-    public Usuario getUsuario(String nick) {
+    public Usuario getUsuarioNickSenha(String nick, String senha) {
+        feelingsDb = dbHelper.getReadableDatabase();
+
+        String query = "SELECT * FROM " + DataBase.TABELA_USUARIO +
+                " WHERE " + DataBase.USUARIO_NICK+ " LIKE ? AND " +
+                DataBase.USUARIO_SENHA + " LIKE ?";
+
+        String[] argumentos = {nick, senha};
+
+        Cursor cursor = feelingsDb.rawQuery(query, argumentos);
+
+        Usuario usuario = null;
+
+        if (cursor.moveToNext()) {
+            usuario = criarUsuario(cursor);
+        }
+        cursor.close();
+        feelingsDb.close();
+
+        return usuario;
+    }
+
+    public Usuario getUsuarioNick(String nick) {
         feelingsDb = dbHelper.getReadableDatabase();
 
         String query = "SELECT * FROM " + DataBase.TABELA_USUARIO +
@@ -65,7 +87,7 @@ public class UsuarioDAO {
     }
 
 
-    public Usuario getUsuario(int id){
+    public Usuario getUsuarioId(int id){
         feelingsDb = dbHelper.getReadableDatabase();
 
         String query = "SELECT * FROM " + DataBase.TABELA_USUARIO +

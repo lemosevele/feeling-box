@@ -1,15 +1,13 @@
-package com.ufrpe.feelingsbox.usuario.persistencia.usuariodao;
+package com.ufrpe.feelingsbox.usuario.persistencia;
 
+import com.ufrpe.feelingsbox.infra.DataBase;
 import com.ufrpe.feelingsbox.usuario.dominio.Pessoa;
 import com.ufrpe.feelingsbox.usuario.dominio.Usuario;
-
-import com.ufrpe.feelingsbox.usuario.persistencia.DataBase;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-
 
 public class PessoaDAO {
 
@@ -48,14 +46,13 @@ public class PessoaDAO {
         int indexColunaUsuarioId = cursor.getColumnIndex(colunaUsuarioId);
         int idUsuario = cursor.getInt(indexColunaUsuarioId);
 
-        Usuario usuario = usuarioDAO.getUsuario(idUsuario);
+        Usuario usuario = usuarioDAO.getUsuarioId(idUsuario);
         Pessoa pessoa = new Pessoa();
 
         pessoa.setId(id);
         pessoa.setSexo(sexo);
         pessoa.setNome(nome);
         pessoa.setDataNasc(data);
-        pessoa.setIdUsuario(idUsuario);
         pessoa.setUsuario(usuario);
 
         return pessoa;
@@ -80,7 +77,7 @@ public class PessoaDAO {
         values.put(colunaId, idPessoa);
 
         String colunaUserId = DataBase.PESSOA_USER_ID;
-        long idUsuario = pessoa.getIdUsuario();
+        long idUsuario = pessoa.getUsuario().getId();
         values.put(colunaUserId, idUsuario);
 
         String colunaDataNasc = DataBase.PESSOA_DATANASC;
