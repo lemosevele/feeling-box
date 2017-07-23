@@ -61,7 +61,7 @@ public class PessoaDAO {
     // Insere o Obj pessoa na TABELA_PESSOA, pegando os atributos e inserindo
 
     public long inserirPessoa(Pessoa pessoa){
-        feelingsDb = dbHelper.getReadableDatabase();
+        feelingsDb = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
 
         String colunaNome =  DataBase.PESSOA_NOME;

@@ -1,4 +1,4 @@
-package com.ufrpe.feelingsbox.usuario.negocio;
+package com.ufrpe.feelingsbox.usuario.usuarioservices;
 
 import android.content.Context;
 

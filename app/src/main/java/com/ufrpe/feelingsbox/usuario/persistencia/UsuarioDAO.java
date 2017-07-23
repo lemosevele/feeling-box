@@ -137,7 +137,7 @@ public class UsuarioDAO {
     // Insere o Obj Usuario na TABELA_USUARIO, pegando os atributos e inserindo
 
     public long inserirUsuario(Usuario usuario){
-        feelingsDb = dbHelper.getReadableDatabase();
+        feelingsDb = dbHelper.getWritableDatabase();
 
         ContentValues values = new ContentValues();
 

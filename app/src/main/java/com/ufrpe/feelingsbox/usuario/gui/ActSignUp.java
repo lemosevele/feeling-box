@@ -15,7 +15,7 @@ import android.widget.Toast;
 import com.ufrpe.feelingsbox.R;
 import com.ufrpe.feelingsbox.usuario.dominio.Pessoa;
 import com.ufrpe.feelingsbox.usuario.dominio.Usuario;
-import com.ufrpe.feelingsbox.usuario.negocio.ValidacaoCadastro;
+import com.ufrpe.feelingsbox.usuario.usuarioservices.ValidacaoCadastro;
 import com.ufrpe.feelingsbox.usuario.persistencia.PessoaDAO;
 import com.ufrpe.feelingsbox.usuario.persistencia.UsuarioDAO;
 
@@ -78,8 +78,8 @@ public class ActSignUp extends AppCompatActivity {
         //long sexoId = spinner.getSelectedItemId();                  //Retorna o ID do elemento selecionado do Spinner
         //int sexoPosicao = spinner.getSelectedItemPosition();        //Retorna a Posição do elemento selecionado do Spinner
 
-        ValidacaoCadastro validacaoCadastro = new ValidacaoCadastro(this,edtNome,edtNick,edtEmail,edtNasc,edtSenha);
-        if(validacaoCadastro.validarCampos()){
+        ValidacaoCadastro validacaoCadastro = new ValidacaoCadastro();
+        if(validacaoCadastro.validarCampos(nome, nick, email, nasc, senha)){
 
             Usuario usuario = new Usuario();
             usuario.setNick(nick);
