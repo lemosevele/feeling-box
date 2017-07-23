@@ -79,31 +79,16 @@ public class ActSignUp extends AppCompatActivity {
         //int sexoPosicao = spinner.getSelectedItemPosition();        //Retorna a Posição do elemento selecionado do Spinner
 
         ValidacaoCadastro validacaoCadastro = new ValidacaoCadastro();
-        if(validacaoCadastro.validarCampos(nome, nick, email, nasc, senha)){
-
-            Usuario usuario = new Usuario();
-            usuario.setNick(nick);
-            usuario.setEmail(email);
-            usuario.setSenha(senha);
-
-            Pessoa pessoa = new Pessoa();
-            pessoa.setNome(nome);
-            pessoa.setDataNasc(nasc);
-            pessoa.setSexo(sexoTexto);
-
-            usuarioDAO.inserirUsuario(usuario);
-            pessoaDAO.inserirPessoa(pessoa);
-
-            //"Print" para fim de testes
-            Toast.makeText(this,    "Nome: "+ nome +
-                            ", Nick: " + nick +
-                            ", Email: " + email +
-                            ", Data: " + nasc +
-                            ", Senha: "+ senha +
-                            ", Sexo: " + sexoTexto,
-                    Toast.LENGTH_SHORT).show();
+        if(validacaoCadastro.isCampoVazio(nome)){
+            edtNome.setError("Nome Inválido");
 
         }
+        if(validacaoCadastro.isNickValido(nick)){
+            edtNome.setError("Apelido Inválido ou Inexistente.");
+
+        }
+
+
     }
 
     public void cancelarCadastro(View view){
@@ -115,3 +100,12 @@ public class ActSignUp extends AppCompatActivity {
 
 
 }
+
+/*"Print" para fim de testes
+            Toast.makeText(this,    "Nome: "+ nome +
+                    ", Nick: " + nick +
+                    ", Email: " + email +
+                    ", Data: " + nasc +
+                    ", Senha: "+ senha +
+                    ", Sexo: " + sexoTexto,
+                    Toast.LENGTH_SHORT).show();*/
