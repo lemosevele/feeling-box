@@ -14,12 +14,16 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.ufrpe.feelingsbox.R;
+import com.ufrpe.feelingsbox.infra.Mask;
 import com.ufrpe.feelingsbox.usuario.dominio.Pessoa;
+import com.ufrpe.feelingsbox.usuario.dominio.SexoEnum;
 import com.ufrpe.feelingsbox.usuario.dominio.Usuario;
 import com.ufrpe.feelingsbox.usuario.usuarioservices.UsuarioService;
 import com.ufrpe.feelingsbox.usuario.usuarioservices.ValidacaoCadastro;
 import com.ufrpe.feelingsbox.usuario.persistencia.PessoaDAO;
 import com.ufrpe.feelingsbox.usuario.persistencia.UsuarioDAO;
+
+import static com.ufrpe.feelingsbox.usuario.dominio.SexoEnum.SexoEnumLista;
 
 public class ActSignUp extends AppCompatActivity {
 
@@ -30,7 +34,7 @@ public class ActSignUp extends AppCompatActivity {
     Spinner spinner;
 
     //Lista para por no Spinner
-    private String[] listaSexo = new String[]{"Masculino", "Feminino", "Outros"};
+    private String[] listaSexo = SexoEnumLista();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +46,7 @@ public class ActSignUp extends AppCompatActivity {
         edtNick = (EditText)findViewById(R.id.edtNick);
         edtEmail = (EditText)findViewById(R.id.edtEmail);
         edtNasc = (EditText)findViewById(R.id.edtNasc);
+        edtNasc.addTextChangedListener(Mask.insert("##/##/####", edtNasc));
         edtSenha = (EditText)findViewById(R.id.edtSenha);
 
         //ArrayAdapter é usado preparar a lista da por no Spinner
