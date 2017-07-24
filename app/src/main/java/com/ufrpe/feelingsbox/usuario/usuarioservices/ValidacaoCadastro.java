@@ -2,16 +2,12 @@ package com.ufrpe.feelingsbox.usuario.usuarioservices;
 
 import android.text.TextUtils;
 import android.util.Patterns;
-import android.widget.EditText;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import com.ufrpe.feelingsbox.R;
 import com.ufrpe.feelingsbox.usuario.persistencia.UsuarioDAO;
-
-import static com.ufrpe.feelingsbox.R.id.edtNome;
 
 public class ValidacaoCadastro {
 
@@ -22,18 +18,11 @@ public class ValidacaoCadastro {
         }
 
     public boolean isNickValido(String nick) {
-        if (usuarioDAO.getUsuarioNick(nick) != null) {
-            return true;
-        }
-        boolean resultado = (!isCampoVazio(nick) && !Patterns.EMAIL_ADDRESS.matcher(nick).matches());
-        return resultado;
+        return  (!isCampoVazio(nick) && !Patterns.EMAIL_ADDRESS.matcher(nick).matches());
     }
 
     public boolean isEmailValido(String email) {
-        if (usuarioDAO.getUsuarioEmail(email) != null){
-            return true;
-        }
-        return (!isCampoVazio(email) && Patterns.EMAIL_ADDRESS.matcher(email).matches())&&(usuarioDAO.getUsuarioEmail(email) != null);
+        return (!isCampoVazio(email) && Patterns.EMAIL_ADDRESS.matcher(email).matches());
 
     }
 

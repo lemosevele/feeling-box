@@ -19,10 +19,10 @@ public class UsuarioService {
     private Criptografia criptografia = new Criptografia();
     private Usuario usuario;
 
-    public UsuarioService(Context context){
-        pessoaDAO = new PessoaDAO(context);
-        usuarioDAO = new UsuarioDAO(context);
-    }
+    //public UsuarioService(Context context){
+      //  pessoaDAO = new PessoaDAO(context);
+       // usuarioDAO = new UsuarioDAO(context);
+    //}
 
     public void cadastrar(String nome, String sexo, String DataNasc,String nick, String email, String senha) throws Exception{
         Usuario verificarEmail = usuarioDAO.getUsuarioEmail(email);

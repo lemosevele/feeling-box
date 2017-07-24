@@ -3,6 +3,7 @@ package com.ufrpe.feelingsbox.usuario.gui;
  * Tela de Cadastro
  */
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 import com.ufrpe.feelingsbox.R;
 import com.ufrpe.feelingsbox.usuario.dominio.Pessoa;
 import com.ufrpe.feelingsbox.usuario.dominio.Usuario;
+import com.ufrpe.feelingsbox.usuario.usuarioservices.UsuarioService;
 import com.ufrpe.feelingsbox.usuario.usuarioservices.ValidacaoCadastro;
 import com.ufrpe.feelingsbox.usuario.persistencia.PessoaDAO;
 import com.ufrpe.feelingsbox.usuario.persistencia.UsuarioDAO;
@@ -80,13 +82,40 @@ public class ActSignUp extends AppCompatActivity {
 
         ValidacaoCadastro validacaoCadastro = new ValidacaoCadastro();
         if(validacaoCadastro.isCampoVazio(nome)){
+            edtNome.requestFocus();
             edtNome.setError("Nome Inválido");
-
         }
-        if(validacaoCadastro.isNickValido(nick)){
-            edtNome.setError("Apelido Inválido ou Inexistente.");
 
+        else if(!validacaoCadastro.isNickValido(nick)){
+            edtNick.requestFocus();
+            edtNick.setError("Apelido Inválido ou Inexistente.");
         }
+
+        else if(!validacaoCadastro.isEmailValido(email)){
+            edtEmail.requestFocus();
+            edtEmail.setError("Endereço de Email Inválido.");
+        }
+
+        else if(!validacaoCadastro.isNascValido(nasc)){
+            edtNasc.requestFocus();
+            edtNasc.setError("Data Inválida.");
+        }
+
+        else if(!validacaoCadastro.isSenhaValida(senha)){
+            edtSenha.requestFocus();
+            edtSenha.setError("Senha fora do padrão.");
+        }
+
+        UsuarioService service = new UsuarioService();
+        try {
+            service.cadastrar(nome, sexoTexto, nasc, nick, email, senha);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        Intent intent = new Intent(ActSignUp.this, ActHome.class);
+        startActivity(intent);
+        finish();
 
 
     }
