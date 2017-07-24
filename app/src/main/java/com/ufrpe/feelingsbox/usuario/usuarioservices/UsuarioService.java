@@ -3,6 +3,7 @@ package com.ufrpe.feelingsbox.usuario.usuarioservices;
 import android.content.Context;
 
 import com.ufrpe.feelingsbox.infra.Criptografia;
+import com.ufrpe.feelingsbox.usuario.gui.ActSignUp;
 import com.ufrpe.feelingsbox.usuario.persistencia.PessoaDAO;
 import com.ufrpe.feelingsbox.usuario.persistencia.UsuarioDAO;
 import com.ufrpe.feelingsbox.usuario.dominio.Usuario;
@@ -24,31 +25,33 @@ public class UsuarioService {
        // usuarioDAO = new UsuarioDAO(context);
     //}
 
-    public void cadastrar(String nome, String sexo, String DataNasc,String nick, String email, String senha) throws Exception{
+    public void cadastrar(Context context, String nome, String sexo, String DataNasc,String nick, String email, String senha) throws Exception {
+        this.usuarioDAO = new UsuarioDAO(context);
+        this.pessoaDAO = new PessoaDAO(context);
         Usuario verificarEmail = usuarioDAO.getUsuarioEmail(email);
         Usuario verificarNick = usuarioDAO.getUsuarioNick(nick);
-        if (verificarEmail != null || verificarNick != null){
+        if (verificarEmail != null || verificarNick != null) {
             throw new Exception("Email ou Nick já cadastrado");
+        } else {
+            String senhaCriptografada = criptografia.criptografarSenha(senha);
+            usuario = new Usuario();
+            usuario.setSenha(senhaCriptografada);
+            usuario.setEmail(email);
+            usuario.setNick(nick);
+            long idUsuario = usuarioDAO.inserirUsuario(usuario);
+            usuario.setId(idUsuario);
+
+            Pessoa pessoa = new Pessoa();
+            pessoa.setNome(nome);
+            pessoa.setSexo(sexo);
+            pessoa.setDataNasc(DataNasc);
+            pessoa.setUsuario(usuario);
+            long idPessoa = pessoaDAO.inserirPessoa(pessoa);
+            pessoa.setId(idPessoa);
+
+            sessao.setUsuarioLogado(usuario);
+            sessao.setPessoaLogada(pessoa);
         }
-
-        String senhaCriptografada = criptografia.criptografarSenha(senha);
-        usuario = new Usuario();
-        usuario.setSenha(senhaCriptografada);
-        usuario.setEmail(email);
-        usuario.setNick(nick);
-        long idUsuario = usuarioDAO.inserirUsuario(usuario);
-        usuario.setId(idUsuario);
-
-        Pessoa pessoa = new Pessoa();
-        pessoa.setNome(nome);
-        pessoa.setSexo(sexo);
-        pessoa.setDataNasc(DataNasc);
-        pessoa.setUsuario(usuario);
-        long idPessoa = pessoaDAO.inserirPessoa(pessoa);
-        pessoa.setId(idPessoa);
-
-        sessao.setUsuarioLogado(usuario);
-        sessao.setPessoaLogada(pessoa);
     }
 
     public void logarEmail(String email, String senha) throws Exception{ // FALTA TERMINAR ESTE MÉTODO

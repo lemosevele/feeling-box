@@ -64,6 +64,7 @@ public class UsuarioDAO {
     }
 
     public Usuario getUsuarioNick(String nick) {
+
         feelingsDb = dbHelper.getReadableDatabase();
 
         String query = "SELECT * FROM " + DataBase.TABELA_USUARIO +

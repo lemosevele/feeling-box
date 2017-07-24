@@ -3,7 +3,7 @@ package com.ufrpe.feelingsbox.infra;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper; // Cria banco de dados
-
+import android.content.ContentValues;
 //Classe responsável por criar o banco de dados
 
 public class DataBase extends SQLiteOpenHelper {
@@ -32,15 +32,16 @@ public class DataBase extends SQLiteOpenHelper {
     }
 
     //Criação da tabela
+    @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE" + TABELA_USUARIO + " (" +
-                ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+        db.execSQL("CREATE TABLE " + TABELA_USUARIO + " (" +
+                ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 USUARIO_EMAIL + " TEXT NOT NULL, " +
                 USUARIO_SENHA + " TEXT NOT NULL, " +
                 USUARIO_NICK + " TEXT NOT NULL);");
 
-        db.execSQL("CREATE TABLE" + TABELA_PESSOA + " (" +
-                ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+        db.execSQL("CREATE TABLE " + TABELA_PESSOA + " (" +
+                ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 PESSOA_NOME + " TEXT NOT NULL, " +
                 PESSOA_DATANASC + " TEXT NOT NULL, " +
                 PESSOA_SEXO + " TEXT NOT NULL, " +
@@ -48,6 +49,7 @@ public class DataBase extends SQLiteOpenHelper {
     }
 
     //Atualização da tabela
+    @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){
         String query = "DROP TABLE IF EXISTS " + TABELA_USUARIO;
         db.execSQL(query);

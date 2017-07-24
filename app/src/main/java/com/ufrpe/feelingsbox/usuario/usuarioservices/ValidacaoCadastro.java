@@ -11,8 +11,6 @@ import com.ufrpe.feelingsbox.usuario.persistencia.UsuarioDAO;
 
 public class ValidacaoCadastro {
 
-    private UsuarioDAO usuarioDAO;
-
     public boolean isCampoVazio(String campo) {
          return (TextUtils.isEmpty(campo) || campo.trim().isEmpty());
         }

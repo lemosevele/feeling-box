@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.ufrpe.feelingsbox.R;
+import com.ufrpe.feelingsbox.infra.DataBase;
 
 public class ActLogin extends AppCompatActivity {
 
@@ -20,6 +21,7 @@ public class ActLogin extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_login);
+
 
         //Encontrando Elemento da Tela(activity)
         edtLogin = (EditText)findViewById(R.id.edtLogin);

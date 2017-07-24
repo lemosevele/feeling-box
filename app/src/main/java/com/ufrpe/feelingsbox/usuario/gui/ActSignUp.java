@@ -86,41 +86,52 @@ public class ActSignUp extends AppCompatActivity {
         //int sexoPosicao = spinner.getSelectedItemPosition();        //Retorna a Posição do elemento selecionado do Spinner
 
         ValidacaoCadastro validacaoCadastro = new ValidacaoCadastro();
+        boolean valid = true;
         if(validacaoCadastro.isCampoVazio(nome)){
             edtNome.requestFocus();
             edtNome.setError("Nome Inválido");
+            valid = false;
         }
 
-        else if(!validacaoCadastro.isNickValido(nick)){
+        if(!validacaoCadastro.isNickValido(nick)){
             edtNick.requestFocus();
             edtNick.setError("Apelido Inválido ou Inexistente.");
+            valid = false;
         }
 
-        else if(!validacaoCadastro.isEmailValido(email)){
+        if(!validacaoCadastro.isEmailValido(email)){
             edtEmail.requestFocus();
             edtEmail.setError("Endereço de Email Inválido.");
+            valid = false;
         }
 
-        else if(!validacaoCadastro.isNascValido(nasc)){
+        if(!validacaoCadastro.isNascValido(nasc)){
             edtNasc.requestFocus();
             edtNasc.setError("Data Inválida.");
+            valid = false;
         }
 
-        else if(!validacaoCadastro.isSenhaValida(senha)){
+        if(!validacaoCadastro.isSenhaValida(senha)){
             edtSenha.requestFocus();
             edtSenha.setError("Senha fora do padrão.");
+            valid = false;
+        }
+        if(valid){
+            UsuarioService service = new UsuarioService();
+            try {
+                service.cadastrar(getApplicationContext(), nome, sexoTexto, nasc, nick, email, senha);
+                Toast.makeText(this, "Cadastrado com Sucesso!",
+                        Toast.LENGTH_LONG).show();
+            } catch (Exception e) {
+                e.printStackTrace();
+                Toast.makeText(this,    e.toString(),
+                        Toast.LENGTH_LONG).show();
+            }
         }
 
-        UsuarioService service = new UsuarioService();
-        try {
-            service.cadastrar(nome, sexoTexto, nasc, nick, email, senha);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        Intent intent = new Intent(ActSignUp.this, ActHome.class);
+        /*Intent intent = new Intent(ActSignUp.this, ActHome.class);
         startActivity(intent);
-        finish();
+        finish();*/
 
 
     }
@@ -129,7 +140,13 @@ public class ActSignUp extends AppCompatActivity {
         //Trocando a Tela (Cancelar cadastro)
         //Intent it = new Intent(ActSignUp.this, ActLogin.class);
         //startActivity(it);
+        //finish();
+
+
+
+
         finish();
+
     }
 
 
