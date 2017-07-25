@@ -3,7 +3,6 @@ package com.ufrpe.feelingsbox.usuario.usuarioservices;
 import android.content.Context;
 
 import com.ufrpe.feelingsbox.infra.Criptografia;
-import com.ufrpe.feelingsbox.usuario.gui.ActSignUp;
 import com.ufrpe.feelingsbox.usuario.persistencia.PessoaDAO;
 import com.ufrpe.feelingsbox.usuario.persistencia.UsuarioDAO;
 import com.ufrpe.feelingsbox.usuario.dominio.Usuario;
@@ -19,15 +18,14 @@ public class UsuarioService {
     private UsuarioDAO usuarioDAO;
     private Criptografia criptografia = new Criptografia();
     private Usuario usuario;
+    private Pessoa pessoa;
 
-    //public UsuarioService(Context context){
-      //  pessoaDAO = new PessoaDAO(context);
-       // usuarioDAO = new UsuarioDAO(context);
-    //}
+    public UsuarioService(Context context){
+        pessoaDAO = new PessoaDAO(context);
+        usuarioDAO = new UsuarioDAO(context);
+    }
 
-    public void cadastrar(Context context, String nome, String sexo, String DataNasc,String nick, String email, String senha) throws Exception {
-        this.usuarioDAO = new UsuarioDAO(context);
-        this.pessoaDAO = new PessoaDAO(context);
+    public void cadastrar(String nome, String sexo, String DataNasc,String nick, String email, String senha) throws Exception {
         Usuario verificarEmail = usuarioDAO.getUsuarioEmail(email);
         Usuario verificarNick = usuarioDAO.getUsuarioNick(nick);
         if (verificarEmail != null || verificarNick != null) {
@@ -41,7 +39,7 @@ public class UsuarioService {
             long idUsuario = usuarioDAO.inserirUsuario(usuario);
             usuario.setId(idUsuario);
 
-            Pessoa pessoa = new Pessoa();
+            pessoa = new Pessoa();
             pessoa.setNome(nome);
             pessoa.setSexo(sexo);
             pessoa.setDataNasc(DataNasc);

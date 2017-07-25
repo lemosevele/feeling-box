@@ -44,7 +44,7 @@ public class PessoaDAO {
 
         String colunaUsuarioId =  DataBase.PESSOA_USER_ID;
         int indexColunaUsuarioId = cursor.getColumnIndex(colunaUsuarioId);
-        int idUsuario = cursor.getInt(indexColunaUsuarioId);
+        long idUsuario = cursor.getInt(indexColunaUsuarioId);
 
         Usuario usuario = usuarioDAO.getUsuarioId(idUsuario);
         Pessoa pessoa = new Pessoa();
@@ -71,10 +71,6 @@ public class PessoaDAO {
         String colunaSexo = DataBase.PESSOA_SEXO;
         String sexo = pessoa.getSexo();
         values.put(colunaSexo, sexo);
-
-        String colunaId = DataBase.ID;
-        long idPessoa = pessoa.getId();
-        values.put(colunaId, idPessoa);
 
         String colunaUserId = DataBase.PESSOA_USER_ID;
         long idUsuario = pessoa.getUsuario().getId();

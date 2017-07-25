@@ -3,7 +3,6 @@ package com.ufrpe.feelingsbox.infra;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper; // Cria banco de dados
-import android.content.ContentValues;
 //Classe responsável por criar o banco de dados
 
 public class DataBase extends SQLiteOpenHelper {

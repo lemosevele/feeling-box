@@ -15,9 +15,6 @@ import android.widget.Toast;
 
 import com.ufrpe.feelingsbox.R;
 import com.ufrpe.feelingsbox.infra.Mask;
-import com.ufrpe.feelingsbox.usuario.dominio.Pessoa;
-import com.ufrpe.feelingsbox.usuario.dominio.SexoEnum;
-import com.ufrpe.feelingsbox.usuario.dominio.Usuario;
 import com.ufrpe.feelingsbox.usuario.usuarioservices.UsuarioService;
 import com.ufrpe.feelingsbox.usuario.usuarioservices.ValidacaoCadastro;
 import com.ufrpe.feelingsbox.usuario.persistencia.PessoaDAO;
@@ -116,47 +113,27 @@ public class ActSignUp extends AppCompatActivity {
             edtSenha.setError("Senha fora do padrão.");
             valid = false;
         }
-        if(valid){
-            UsuarioService service = new UsuarioService();
+        if(valid) {
+            UsuarioService service = new UsuarioService(getApplicationContext());
             try {
-                service.cadastrar(getApplicationContext(), nome, sexoTexto, nasc, nick, email, senha);
+                service.cadastrar(nome, sexoTexto, nasc, nick, email, senha);
                 Toast.makeText(this, "Cadastrado com Sucesso!",
                         Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(ActSignUp.this, ActLogin.class);
+                startActivity(intent);
+                finish();
             } catch (Exception e) {
                 e.printStackTrace();
-                Toast.makeText(this,    e.toString(),
+                Toast.makeText(this, e.getMessage(),
                         Toast.LENGTH_LONG).show();
             }
         }
-
-        /*Intent intent = new Intent(ActSignUp.this, ActHome.class);
-        startActivity(intent);
-        finish();*/
-
-
     }
 
     public void cancelarCadastro(View view){
-        //Trocando a Tela (Cancelar cadastro)
-        //Intent it = new Intent(ActSignUp.this, ActLogin.class);
-        //startActivity(it);
-        //finish();
-
-
-
-
         finish();
 
     }
 
 
 }
-
-/*"Print" para fim de testes
-            Toast.makeText(this,    "Nome: "+ nome +
-                    ", Nick: " + nick +
-                    ", Email: " + email +
-                    ", Data: " + nasc +
-                    ", Senha: "+ senha +
-                    ", Sexo: " + sexoTexto,
-                    Toast.LENGTH_SHORT).show();*/
