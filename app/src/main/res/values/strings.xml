@@ -36,4 +36,6 @@
     <string name="btn_cancelar">Cancelar</string>
     <string name="lbl_title_cadastro">CADASTRO</string>
     <string name="title_activity_act_home">Home</string>
+    <string name="dialogo_titulo_erro">Erro</string>
+    <string name="dialogo_botao_ok">Ok</string>
 </resources>
