@@ -10,7 +10,8 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.ufrpe.feelingsbox.R;
-import com.ufrpe.feelingsbox.infra.DataBase;
+import com.ufrpe.feelingsbox.usuario.usuarioservices.UsuarioService;
+import com.ufrpe.feelingsbox.usuario.usuarioservices.ValidacaoService;
 
 public class ActLogin extends AppCompatActivity {
 
@@ -39,9 +40,36 @@ public class ActLogin extends AppCompatActivity {
     //Ação ao Clicar no botão Entrar
     public void efetuarLogin(View view){
 
-        //Trocando para a Tela de Home
-        Intent it = new Intent(ActLogin.this, ActHome.class);
-        startActivity(it);
+        String login = edtLogin.getText().toString();
+        String senha = edtSenha.getText().toString();
+
+        ValidacaoService validacaoLogin = new ValidacaoService();
+        boolean valid = true;
+        boolean isEmail = true;
+        if (validacaoLogin.isCampoVazio(login)){
+            edtLogin.requestFocus();
+            edtSenha.setError("O campo login está vazio.");
+            valid = false;
+        }
+
+        if (validacaoLogin.isCampoVazio(senha)){
+            edtSenha.requestFocus();
+            edtSenha.setError("O campo senha está vazio.");
+            valid = false;
+        }
+
+        if (valid){
+            UsuarioService buscarValidar = new UsuarioService(getApplicationContext());
+            try {
+                buscarValidar.logar(login, senha);
+                //Trocando para a Tela de Home
+                Intent it = new Intent(ActLogin.this, ActHome.class);
+                startActivity(it);
+                finish();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 }

@@ -16,7 +16,7 @@ import android.widget.Toast;
 import com.ufrpe.feelingsbox.R;
 import com.ufrpe.feelingsbox.infra.Mask;
 import com.ufrpe.feelingsbox.usuario.usuarioservices.UsuarioService;
-import com.ufrpe.feelingsbox.usuario.usuarioservices.ValidacaoCadastro;
+import com.ufrpe.feelingsbox.usuario.usuarioservices.ValidacaoService;
 import com.ufrpe.feelingsbox.usuario.persistencia.PessoaDAO;
 import com.ufrpe.feelingsbox.usuario.persistencia.UsuarioDAO;
 
@@ -82,38 +82,38 @@ public class ActSignUp extends AppCompatActivity {
         //long sexoId = spinner.getSelectedItemId();                  //Retorna o ID do elemento selecionado do Spinner
         //int sexoPosicao = spinner.getSelectedItemPosition();        //Retorna a Posição do elemento selecionado do Spinner
 
-        ValidacaoCadastro validacaoCadastro = new ValidacaoCadastro();
+        ValidacaoService validacaoCadastro = new ValidacaoService();
         boolean valid = true;
-        if(validacaoCadastro.isCampoVazio(nome)){
+        if (validacaoCadastro.isCampoVazio(nome)){
             edtNome.requestFocus();
             edtNome.setError("Nome Inválido");
             valid = false;
         }
 
-        if(!validacaoCadastro.isNickValido(nick)){
+        if (!validacaoCadastro.isNickValido(nick)){
             edtNick.requestFocus();
             edtNick.setError("Apelido Inválido ou Inexistente.");
             valid = false;
         }
 
-        if(!validacaoCadastro.isEmailValido(email)){
+        if (!validacaoCadastro.isEmailValido(email)){
             edtEmail.requestFocus();
             edtEmail.setError("Endereço de Email Inválido.");
             valid = false;
         }
 
-        if(!validacaoCadastro.isNascValido(nasc)){
+        if (!validacaoCadastro.isNascValido(nasc)){
             edtNasc.requestFocus();
             edtNasc.setError("Data Inválida.");
             valid = false;
         }
 
-        if(!validacaoCadastro.isSenhaValida(senha)){
+        if (!validacaoCadastro.isSenhaValida(senha)){
             edtSenha.requestFocus();
             edtSenha.setError("Senha fora do padrão.");
             valid = false;
         }
-        if(valid) {
+        if (valid) {
             UsuarioService service = new UsuarioService(getApplicationContext());
             try {
                 service.cadastrar(nome, sexoTexto, nasc, nick, email, senha);
@@ -132,8 +132,5 @@ public class ActSignUp extends AppCompatActivity {
 
     public void cancelarCadastro(View view){
         finish();
-
     }
-
-
 }

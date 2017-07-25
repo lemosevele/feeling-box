@@ -52,30 +52,23 @@ public class UsuarioService {
         }
     }
 
-    public void logarEmail(String email, String senha) throws Exception{ // FALTA TERMINAR ESTE MÉTODO
+    public void logar(String logar, String senha) throws Exception {
         String senhaCriptografada = criptografia.criptografarSenha(senha);
-        Usuario usuario = usuarioDAO.getUsuarioEmailSenha(email,senhaCriptografada);
+        Usuario nick = usuarioDAO.getUsuarioNickSenha(logar, senhaCriptografada);
+        Usuario email = usuarioDAO.getUsuarioEmailSenha(logar, senhaCriptografada);
 
-        if(usuario==null) {
+        if (nick == null && email == null) {
             throw new Exception("Usuário ou senha inválidos");
-        }
-    }
-
-    public void logarNick(String nick, String senha) throws Exception{ // FALTA TERMINAR ESTE MÉTODO
-        String senhaCriptografada = criptografia.criptografarSenha(senha);
-        Usuario usuario = usuarioDAO.getUsuarioNickSenha(nick,senhaCriptografada);
-
-        if (usuario == null) {
-            throw new Exception("Usuário ou senha inválidos");
-        }
-
-        Pessoa pessoa = pessoaDAO.getPessoa(usuario);
-
-        if (pessoa != null){
+        } else if (nick != null) {
+            Usuario usuario = usuarioDAO.getUsuarioNick(logar);
+            sessao.setUsuarioLogado(usuario);
+            Pessoa pessoa = pessoaDAO.getPessoa(usuario);
+            sessao.setPessoaLogada(pessoa);
+        } else {
+            Usuario usuario = usuarioDAO.getUsuarioEmail(logar);
+            sessao.setUsuarioLogado(usuario);
+            Pessoa pessoa = pessoaDAO.getPessoa(usuario);
             sessao.setPessoaLogada(pessoa);
         }
-
     }
-
-
 }

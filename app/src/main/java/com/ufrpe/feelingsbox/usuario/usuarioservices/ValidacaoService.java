@@ -7,9 +7,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import com.ufrpe.feelingsbox.usuario.persistencia.UsuarioDAO;
-
-public class ValidacaoCadastro {
+public class ValidacaoService {
 
     public boolean isCampoVazio(String campo) {
          return (TextUtils.isEmpty(campo) || campo.trim().isEmpty());
@@ -21,7 +19,6 @@ public class ValidacaoCadastro {
 
     public boolean isEmailValido(String email) {
         return (!isCampoVazio(email) && Patterns.EMAIL_ADDRESS.matcher(email).matches());
-
     }
 
     public boolean isNascValido(String nasc) {
@@ -35,7 +32,6 @@ public class ValidacaoCadastro {
         catch (ParseException e) {
             return false;
         }
-
     }
 
     public boolean isSenhaValida(String senha){
@@ -45,7 +41,5 @@ public class ValidacaoCadastro {
             String rex = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,10})";
             return (senha.matches(rex));
         }
-
     }
-
 }
