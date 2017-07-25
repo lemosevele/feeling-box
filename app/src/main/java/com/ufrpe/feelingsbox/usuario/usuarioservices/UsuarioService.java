@@ -20,12 +20,12 @@ public class UsuarioService {
     private Usuario usuario;
     private Pessoa pessoa;
 
-    public UsuarioService(Context context){
+    public UsuarioService(Context context) {
         pessoaDAO = new PessoaDAO(context);
         usuarioDAO = new UsuarioDAO(context);
     }
 
-    public void cadastrar(String nome, String sexo, String DataNasc,String nick, String email, String senha) throws Exception {
+    public void cadastrar(String nome, String sexo, String DataNasc, String nick, String email, String senha) throws Exception {
         Usuario verificarEmail = usuarioDAO.getUsuarioEmail(email);
         Usuario verificarNick = usuarioDAO.getUsuarioNick(nick);
         if (verificarEmail != null || verificarNick != null) {
@@ -52,20 +52,27 @@ public class UsuarioService {
         }
     }
 
-    public void logar(String logar, String senha) throws Exception {
+    public void logarNick(String nick, String senha) throws Exception {
         String senhaCriptografada = criptografia.criptografarSenha(senha);
-        Usuario nick = usuarioDAO.getUsuarioNickSenha(logar, senhaCriptografada);
-        Usuario email = usuarioDAO.getUsuarioEmailSenha(logar, senhaCriptografada);
-
-        if (nick == null && email == null) {
+        Usuario nickValido = usuarioDAO.getUsuarioNickSenha(nick, senhaCriptografada);
+        if (nickValido == null) {
             throw new Exception("Usuário ou senha inválidos");
-        } else if (nick != null) {
-            Usuario usuario = usuarioDAO.getUsuarioNick(logar);
+        } else {
+            Usuario usuario = usuarioDAO.getUsuarioNick(nick);
             sessao.setUsuarioLogado(usuario);
             Pessoa pessoa = pessoaDAO.getPessoa(usuario);
             sessao.setPessoaLogada(pessoa);
+        }
+    }
+
+    public void logarEmail(String email, String senha) throws Exception {
+        String senhaCriptografada = criptografia.criptografarSenha(senha);
+        Usuario emailValido = usuarioDAO.getUsuarioEmailSenha(email, senhaCriptografada);
+
+        if (emailValido == null) {
+            throw new Exception("Usuário ou senha inválidos");
         } else {
-            Usuario usuario = usuarioDAO.getUsuarioEmail(logar);
+            Usuario usuario = usuarioDAO.getUsuarioEmail(email);
             sessao.setUsuarioLogado(usuario);
             Pessoa pessoa = pessoaDAO.getPessoa(usuario);
             sessao.setPessoaLogada(pessoa);

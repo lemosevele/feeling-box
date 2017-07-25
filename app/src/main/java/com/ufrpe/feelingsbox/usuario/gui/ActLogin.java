@@ -46,10 +46,10 @@ public class ActLogin extends AppCompatActivity {
         ValidacaoService validacaoLogin = new ValidacaoService();
         boolean valid = true;
         boolean isEmail = true;
-        if (validacaoLogin.isCampoVazio(login)){
+        if (!validacaoLogin.isEmailValido(login)){
             edtLogin.requestFocus();
-            edtSenha.setError("O campo login está vazio.");
-            valid = false;
+            edtLogin.setError("O campo login está vazio.");
+            isEmail = false;
         }
 
         if (validacaoLogin.isCampoVazio(senha)){
@@ -58,10 +58,22 @@ public class ActLogin extends AppCompatActivity {
             valid = false;
         }
 
-        if (valid){
+        if (valid && isEmail){
             UsuarioService buscarValidar = new UsuarioService(getApplicationContext());
             try {
-                buscarValidar.logar(login, senha);
+                buscarValidar.logarEmail(login, senha);
+                //Trocando para a Tela de Home
+                Intent it = new Intent(ActLogin.this, ActHome.class);
+                startActivity(it);
+                finish();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        if (valid && !isEmail){
+            UsuarioService buscarValidar = new UsuarioService(getApplicationContext());
+            try {
+                buscarValidar.logarNick(login, senha);
                 //Trocando para a Tela de Home
                 Intent it = new Intent(ActLogin.this, ActHome.class);
                 startActivity(it);
