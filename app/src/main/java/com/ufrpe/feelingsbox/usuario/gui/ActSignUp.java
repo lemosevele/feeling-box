@@ -84,35 +84,33 @@ public class ActSignUp extends AppCompatActivity {
 
         ValidacaoService validacaoCadastro = new ValidacaoService();
         boolean valid = true;
-        if (validacaoCadastro.isCampoVazio(nome)){
-            edtNome.requestFocus();
-            edtNome.setError("Nome Inválido");
+        if (!validacaoCadastro.isSenhaValida(senha)){
+            edtSenha.requestFocus();
+            edtSenha.setError("Senha fora do padrão.");
             valid = false;
         }
-
+        if (!validacaoCadastro.isNascValido(nasc)){
+            edtNasc.requestFocus();
+            edtNasc.setError("Data Inválida.");
+            valid = false;
+        }
+        if (!validacaoCadastro.isEmailValido(email)){
+            edtEmail.requestFocus();
+            edtEmail.setError("Endereço de Email Inválido.");
+            valid = false;
+        }
         if (!validacaoCadastro.isNickValido(nick)){
             edtNick.requestFocus();
             edtNick.setError("Apelido Inválido ou Inexistente.");
             valid = false;
         }
 
-        if (!validacaoCadastro.isEmailValido(email)){
-            edtEmail.requestFocus();
-            edtEmail.setError("Endereço de Email Inválido.");
+        if (validacaoCadastro.isCampoVazio(nome)){
+            edtNome.requestFocus();
+            edtNome.setError("Nome Inválido");
             valid = false;
         }
 
-        if (!validacaoCadastro.isNascValido(nasc)){
-            edtNasc.requestFocus();
-            edtNasc.setError("Data Inválida.");
-            valid = false;
-        }
-
-        if (!validacaoCadastro.isSenhaValida(senha)){
-            edtSenha.requestFocus();
-            edtSenha.setError("Senha fora do padrão.");
-            valid = false;
-        }
         if (valid) {
             UsuarioService service = new UsuarioService(getApplicationContext());
             try {

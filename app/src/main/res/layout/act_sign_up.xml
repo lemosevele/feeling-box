@@ -105,7 +105,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="@string/edt_senha"
+                android:hint="Senha"
                 android:inputType="textPassword"
                 app:layout_constraintLeft_toLeftOf="@+id/edtNasc"
                 app:layout_constraintRight_toRightOf="@+id/edtNasc"

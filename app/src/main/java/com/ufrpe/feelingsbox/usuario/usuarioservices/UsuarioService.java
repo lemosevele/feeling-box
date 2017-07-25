@@ -71,7 +71,8 @@ public class UsuarioService {
 
         if (emailValido == null) {
             throw new Exception("Usuário ou senha inválidos");
-        } else {
+        }
+        else {
             Usuario usuario = usuarioDAO.getUsuarioEmail(email);
             sessao.setUsuarioLogado(usuario);
             Pessoa pessoa = pessoaDAO.getPessoa(usuario);

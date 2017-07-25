@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.ufrpe.feelingsbox.R;
 import com.ufrpe.feelingsbox.usuario.usuarioservices.UsuarioService;
@@ -44,44 +45,49 @@ public class ActLogin extends AppCompatActivity {
         String senha = edtSenha.getText().toString();
 
         ValidacaoService validacaoLogin = new ValidacaoService();
-        boolean valid = true;
-        boolean isEmail = true;
-        if (!validacaoLogin.isEmailValido(login)){
-            edtLogin.requestFocus();
-            edtLogin.setError("O campo login está vazio.");
-            isEmail = false;
-        }
-
+        boolean vazio = false;
         if (validacaoLogin.isCampoVazio(senha)){
             edtSenha.requestFocus();
             edtSenha.setError("O campo senha está vazio.");
-            valid = false;
+            vazio = true;
+        }
+        if (validacaoLogin.isCampoVazio(login)){
+            edtLogin.requestFocus();
+            edtLogin.setError("O campo login está vazio.");
+            vazio = true;
         }
 
-        if (valid && isEmail){
+        if (!vazio) {
             UsuarioService buscarValidar = new UsuarioService(getApplicationContext());
-            try {
-                buscarValidar.logarEmail(login, senha);
-                //Trocando para a Tela de Home
-                Intent it = new Intent(ActLogin.this, ActHome.class);
-                startActivity(it);
-                finish();
-            } catch (Exception e) {
-                e.printStackTrace();
+            if (!validacaoLogin.isEmail(login)) {
+                try {
+                    buscarValidar.logarNick(login, senha);
+                    //Trocando para a Tela de Home
+                    Intent it = new Intent(ActLogin.this, ActHome.class);
+                    startActivity(it);
+                    finish();
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(this, "Login ou senha incorretos.", Toast.LENGTH_LONG).show();
+                }
+            }
+            else {
+                try {
+                    buscarValidar.logarEmail(login, senha);
+                    //Trocando para a Tela de Home
+                    Intent it = new Intent(ActLogin.this, ActHome.class);
+                    startActivity(it);
+                    finish();
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(this, "Login ou senha incorretos.", Toast.LENGTH_LONG).show();
+                }
+
             }
         }
-        if (valid && !isEmail){
-            UsuarioService buscarValidar = new UsuarioService(getApplicationContext());
-            try {
-                buscarValidar.logarNick(login, senha);
-                //Trocando para a Tela de Home
-                Intent it = new Intent(ActLogin.this, ActHome.class);
-                startActivity(it);
-                finish();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+
     }
 
 }
