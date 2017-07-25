@@ -1,8 +1,8 @@
 package com.ufrpe.feelingsbox.redesocial.dominio;
 
 /**
- * Created by eudes on 22/07/17.
+ * Created by evele on 25/07/2017.
  */
 
-public class Perfil {
+public class Post {
 }
