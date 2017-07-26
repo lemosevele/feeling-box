@@ -9,6 +9,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class PessoaDAO {
 
     private DataBase dbHelper;
@@ -187,4 +190,46 @@ public class PessoaDAO {
 
         return id;
     }
+    public List<Pessoa> buscarTodosPessoa(){
+        feelingsDb = dbHelper.getReadableDatabase();
+
+        List<Pessoa>  listaPessoas = new ArrayList<Pessoa>();
+
+        StringBuilder sql = new StringBuilder();
+        sql.append(" SELECT ");
+        sql.append(DataBase.ID + ", ");
+        sql.append(DataBase.PESSOA_NOME + ", ");
+        sql.append(DataBase.PESSOA_DATANASC + ", ");
+        sql.append(DataBase.PESSOA_SEXO + ", ");
+        sql.append(DataBase.PESSOA_USER_ID + " ");
+        sql.append("  FROM ");
+        sql.append(DataBase.TABELA_PESSOA + " ");
+
+        Cursor resultado = feelingsDb.rawQuery(sql.toString(), null);
+
+        if(resultado.getCount() > 0){
+            resultado.moveToFirst();
+
+            do{
+                Pessoa pessoa = new Pessoa();
+
+                pessoa = criarPessoa(resultado);
+
+                /*
+                pessoa.setId( resultado.getLong( resultado.getColumnIndexOrThrow( DataBase.ID ) ) );
+                pessoa.setNome( resultado.getString( resultado.getColumnIndexOrThrow( DataBase.PESSOA_NOME ) ) );
+                pessoa.setDataNasc( resultado.getString( resultado.getColumnIndexOrThrow( DataBase.PESSOA_DATANASC ) ) );
+                pessoa.setSexo( resultado.getString( resultado.getColumnIndexOrThrow( DataBase.PESSOA_SEXO ) ) );
+                //pessoa.setUsuario();
+                */
+
+                listaPessoas.add(pessoa);
+
+            }while(resultado.moveToNext());
+        }
+
+        return listaPessoas;
+
+    }
+
 }
