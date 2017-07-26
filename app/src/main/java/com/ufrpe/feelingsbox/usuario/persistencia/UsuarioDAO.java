@@ -230,7 +230,7 @@ public class UsuarioDAO {
         int id = feelingsDb.delete(tabela, whereClause , parametros);
 
         feelingsDb.close();
-        
+
         return id;
     }
 }
