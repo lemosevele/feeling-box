@@ -141,4 +141,50 @@ public class PessoaDAO {
         return pessoa;
 
     }
+    //Atualiza o Pessoa na Tabela Pessoa
+    public int atualizarPessoa(Pessoa pessoa){
+        feelingsDb = dbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        String colunaNome =  DataBase.PESSOA_NOME;
+        String nome = pessoa.getNome();
+        values.put(colunaNome, nome);
+
+        String colunaSexo = DataBase.PESSOA_SEXO;
+        String sexo = pessoa.getSexo();
+        values.put(colunaSexo, sexo);
+
+        String colunaUserId = DataBase.PESSOA_USER_ID;
+        long idUsuario = pessoa.getUsuario().getId();
+        values.put(colunaUserId, idUsuario);
+
+        String colunaDataNasc = DataBase.PESSOA_DATANASC;
+        String dataNasc = pessoa.getDataNasc();
+        values.put(colunaDataNasc, dataNasc);
+
+        String tabela = DataBase.TABELA_PESSOA;
+
+        String whereClause = DataBase.ID + " = ?";
+        String[] parametros = new String[1];
+        parametros[0] = String.valueOf(pessoa.getId());
+
+        int id = feelingsDb.update(tabela, values, whereClause , parametros);
+
+        feelingsDb.close();
+
+        return id;
+    }
+    //Deleta o Pessoa na Tabela Pessoa
+    public int deletarPessoa(Pessoa pessoa){
+        String tabela = DataBase.TABELA_PESSOA;
+        String whereClause = DataBase.ID + " = ?";
+        String[] parametros = new String[1];
+        parametros[0] = String.valueOf(pessoa.getId());
+
+        int id = feelingsDb.delete(tabela, whereClause , parametros);
+
+        feelingsDb.close();
+
+        return id;
+    }
 }

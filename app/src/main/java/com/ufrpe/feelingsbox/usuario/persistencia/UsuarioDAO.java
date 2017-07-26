@@ -190,4 +190,47 @@ public class UsuarioDAO {
         return usuario;
     }
 
+    //Atualiza o Usuário na Tabela Usuario
+    public int atualizarUsuario(Usuario usuario){
+        feelingsDb = dbHelper.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+
+        String colunaEmail = DataBase.USUARIO_EMAIL;
+        String email = usuario.getEmail();
+        values.put(colunaEmail, email);
+
+        String colunaSenha = DataBase.USUARIO_SENHA;
+        String senha = usuario.getSenha();
+        values.put(colunaSenha, senha);
+
+        String colunaNick = DataBase.USUARIO_NICK;
+        String nick = usuario.getNick();
+        values.put(colunaNick, nick);
+
+        String tabela = DataBase.TABELA_USUARIO;
+
+        String whereClause = DataBase.ID + " = ?";
+        String[] parametros = new String[1];
+        parametros[0] = String.valueOf(usuario.getId());
+
+        int id = feelingsDb.update(tabela, values, whereClause, parametros);
+
+        feelingsDb.close();
+        return id;
+    }
+
+    //Deleta o Usuário na Tabela Usuario
+    public int deletarUsuario(Usuario usuario){
+        String tabela = DataBase.TABELA_USUARIO;
+        String whereClause = DataBase.ID + " = ?";
+        String[] parametros = new String[1];
+        parametros[0] = String.valueOf(usuario.getId());
+
+        int id = feelingsDb.delete(tabela, whereClause , parametros);
+
+        feelingsDb.close();
+        
+        return id;
+    }
 }
