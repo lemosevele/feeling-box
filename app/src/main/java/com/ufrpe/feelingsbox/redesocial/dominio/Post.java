@@ -11,6 +11,7 @@ public class Post {
     private String dataHora;
 
     public Post(){
+
         dataHora = FormataData.formatarDataHora();
     }
 
@@ -39,7 +40,7 @@ public class Post {
         this.texto = novoTexto;
     }
 
-    public long getidUsuario(){
+    public long getIdUsuario(){
         return this.idUsuario;
     }
 

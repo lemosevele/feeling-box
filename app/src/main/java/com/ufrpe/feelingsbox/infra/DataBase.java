@@ -29,6 +29,7 @@ public class DataBase extends SQLiteOpenHelper {
     public static final String TABELA_POST = "post";
     public static final String POST_USER_ID = "usuario_id";
     public static final String POST_TEXTO = "texto";
+    public static final String POST_DATAHORA = "datahora";
 
     //TABELA TAG
     public static final String TABELA_TAG = "tag";
@@ -63,6 +64,7 @@ public class DataBase extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE " + TABELA_POST + " (" +
                 ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 POST_TEXTO + " TEXT NOT NULL, " +
+                POST_DATAHORA + " TEXT NOT NULL, " +
                 POST_USER_ID + " INTEGER);");
 
         db.execSQL("CREATE TABLE " + TABELA_TAG + " (" +
