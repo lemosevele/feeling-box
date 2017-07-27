@@ -25,6 +25,20 @@ public class DataBase extends SQLiteOpenHelper {
     public static final String PESSOA_SEXO = "sexo";
     public static final String PESSOA_DATANASC = "data_nasc";
 
+    //TABELA POST
+    public static final String TABELA_POST = "post";
+    public static final String POST_USER_ID = "usuario_id";
+    public static final String POST_TEXTO = "texto";
+
+    //TABELA TAG
+    public static final String TABELA_TAG = "tag";
+    public static final String TAG_TEXTO = "texto";
+
+    //TABELA DE RELACIONAMENTO ENTRE TAG E POST
+    public static final String TABELA_REL_TAG_POST = "relacionamento";
+    public static final String REL_ID_TAG = "tag_id";
+    public static final String REL_ID_POST = "post_id";
+
 
     public DataBase(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -45,6 +59,21 @@ public class DataBase extends SQLiteOpenHelper {
                 PESSOA_DATANASC + " TEXT NOT NULL, " +
                 PESSOA_SEXO + " TEXT NOT NULL, " +
                 PESSOA_USER_ID + " INTEGER);");
+
+        db.execSQL("CREATE TABLE " + TABELA_POST + " (" +
+                ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                POST_TEXTO + " TEXT NOT NULL, " +
+                POST_USER_ID + " INTEGER);");
+
+        db.execSQL("CREATE TABLE " + TABELA_TAG + " (" +
+                TAG_TEXTO + " TEXT NOT NULL, " +
+                ID + " INTEGER PRIMARY KEY AUTOINCREMENT);");
+
+        db.execSQL("CREATE TABLE " + TABELA_REL_TAG_POST + " (" +
+                REL_ID_TAG + " INTEGER, " +
+                REL_ID_POST + " INTEGER);");
+
+
     }
 
     //Atualização da tabela
