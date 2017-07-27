@@ -40,6 +40,11 @@ public class DataBase extends SQLiteOpenHelper {
     public static final String REL_ID_TAG = "tag_id";
     public static final String REL_ID_POST = "post_id";
 
+    //TABELA DE SESSAO DO USUARIO
+    // A Pessoa que estiver nessa tabela está logada, quando deslogar tirar da tabela
+    // Essa tabela só tem o ID da pessoa logada
+    public static final String TABELA_SESSAO = "sessao";
+    public static final String ID_PESSOA = "pessoa_id";
 
     public DataBase(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -75,6 +80,9 @@ public class DataBase extends SQLiteOpenHelper {
                 REL_ID_TAG + " INTEGER, " +
                 REL_ID_POST + " INTEGER);");
 
+        db.execSQL("CREATE TABLE " + TABELA_SESSAO+ " (" +
+                ID_PESSOA + " INTEGER);");
+
 
     }
 
@@ -102,3 +110,5 @@ public class DataBase extends SQLiteOpenHelper {
         return USUARIO_SENHA;
     }
 }
+
+
