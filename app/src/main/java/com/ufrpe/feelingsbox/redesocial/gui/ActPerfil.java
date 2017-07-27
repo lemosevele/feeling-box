@@ -45,12 +45,9 @@ public class ActPerfil extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.action_editar:
-                GuiUtil.myToast(this, "Botão editar está funcionando");
                 Intent it = new Intent(this, ActEditarPerfil.class);
                 startActivity(it);
 
-                break;
-            default:
                 break;
         }
         return super.onOptionsItemSelected(item);

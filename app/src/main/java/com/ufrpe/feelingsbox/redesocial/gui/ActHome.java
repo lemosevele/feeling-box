@@ -55,13 +55,14 @@ public class ActHome extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.action_perfil:
-                GuiUtil.myToast(this, "Botão perfil funcionou!!!");
                 Intent it = new Intent(this, ActPerfil.class);
                 startActivity(it);
 
                 break;
-            default:
+            case R.id.action_sair:
+                //Definir a ação do botão
                 break;
+            
         }
         return super.onOptionsItemSelected(item);
     }

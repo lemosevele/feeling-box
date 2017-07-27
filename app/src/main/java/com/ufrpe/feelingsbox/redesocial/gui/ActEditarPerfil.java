@@ -75,12 +75,9 @@ public class ActEditarPerfil extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.action_salvar:
-                GuiUtil.myToast(this, "Botão salvar foi precionado");
                 break;
             case R.id.action_cancelar:
                 finish();
-                break;
-            default:
                 break;
         }
         return super.onOptionsItemSelected(item);

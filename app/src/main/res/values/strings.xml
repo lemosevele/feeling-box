@@ -44,4 +44,5 @@
     <string name="title_menu_editar">Editar</string>
     <string name="title_menu_salvar">Salvar</string>
     <string name="title_menu_cancelar">Cancelar</string>
+    <string name="title_menu_sair">Sair</string>
 </resources>
