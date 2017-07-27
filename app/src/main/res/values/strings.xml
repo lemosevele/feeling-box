@@ -38,4 +38,10 @@
     <string name="title_activity_act_home">Home</string>
     <string name="dialogo_titulo_erro">Erro</string>
     <string name="dialogo_botao_ok">Ok</string>
+    <string name="title_menu_perfil">Perfil</string>
+    <string name="title_activity_act_perfil">Perfil</string>
+    <string name="title_activity_act_editar_perfil">Editar Perfil</string>
+    <string name="title_menu_editar">Editar</string>
+    <string name="title_menu_salvar">Salvar</string>
+    <string name="title_menu_cancelar">Cancelar</string>
 </resources>

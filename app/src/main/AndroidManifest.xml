@@ -14,7 +14,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/MyAppTheme">
-
         <activity
             android:name=".usuario.gui.ActLogin"
             android:configChanges="keyboardHidden|orientation|screenSize"
@@ -25,9 +24,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
-
         <activity
             android:name=".usuario.gui.ActSignUp"
             android:configChanges="keyboardHidden|orientation|screenSize"
@@ -35,14 +32,18 @@
             android:windowSoftInputMode="stateHidden"> <!-- Impede do teclado abrir automaticamente ao mudar Orientação e Tamanho da Tela -->
 
         </activity>
-
         <activity
             android:name=".usuario.gui.ActHome"
             android:label="@string/title_activity_act_home"
-            android:theme="@style/MyAppTheme.NoActionBar">
-
-        </activity>
-
+            android:theme="@style/MyAppTheme.NoActionBar" />
+        <activity
+            android:name=".usuario.gui.ActPerfil"
+            android:label="@string/title_activity_act_perfil"
+            android:theme="@style/MyAppTheme.NoActionBar" />
+        <activity
+            android:name=".usuario.gui.ActEditarPerfil"
+            android:label="@string/title_activity_act_editar_perfil"
+            android:theme="@style/MyAppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

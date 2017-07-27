@@ -15,38 +15,33 @@ import android.widget.TextView;
 import com.ufrpe.feelingsbox.R;
 import com.ufrpe.feelingsbox.infra.GuiUtil;
 
-public class ActHome extends AppCompatActivity {
-    private TextView lblHomeGreetings;
-    private FloatingActionButton fab;
+import static com.ufrpe.feelingsbox.R.id.fab;
+
+public class ActPerfil extends AppCompatActivity {
+    private TextView txtNome, txtNicK, txtNasc, txtSexo, txtEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.act_home);
+        setContentView(R.layout.act_perfil);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        //Encontrando Elemento da Tela(activity)
-        lblHomeGreetings = (TextView)findViewById(R.id.lblHomeGreetings);
+        txtNome = (TextView) findViewById(R.id.txtNome);
+        txtNicK = (TextView) findViewById(R.id.txtNick);
+        txtNasc = (TextView) findViewById(R.id.txtNasc);
+        txtSexo = (TextView) findViewById(R.id.txtSexo);
+        txtEmail = (TextView) findViewById(R.id.txtEmail);
 
-        // Set o Text no elemento TextView (Label)
-        lblHomeGreetings.setText("Olá, Isso é um teste.");
+        //TODO Setar o texto com os dados do Usuário das variáveis TextView acima.
 
-        //Botão Flutuante
-        fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_act_home, menu);
+        inflater.inflate(R.menu.menu_act_perfil, menu);
 
         return super.onCreateOptionsMenu(menu);
     }
@@ -54,9 +49,9 @@ public class ActHome extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
-            case R.id.action_perfil:
-                GuiUtil.myToast(this, "Botão perfil funcionou!!!");
-                Intent it = new Intent(this, ActPerfil.class);
+            case R.id.action_editar:
+                GuiUtil.myToast(this, "Botão editar está funcionando");
+                Intent it = new Intent(this, ActEditarPerfil.class);
                 startActivity(it);
 
                 break;
