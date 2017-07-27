@@ -28,6 +28,7 @@
     <string name="lbl_cadastro">Cadastro</string>
     <string name="edt_email">Email</string>
     <string name="lbl_datanasc">Nascimento</string>
+    <string name="edt_datanasc">Nascimento</string>
     <string name="edt_nick">Apelido</string>
     <string name="lbl_sexo">Sexo</string>
     <string name="rbt_male">Masculino</string>

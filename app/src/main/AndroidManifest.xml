@@ -18,7 +18,7 @@
             android:name=".usuario.gui.ActLogin"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:theme="@style/MyAppThemeFullscreen"
-            android:windowSoftInputMode="stateHidden"> <!-- Impede do teclado abrir automaticamente ao Entrar na Activity -->
+            android:windowSoftInputMode="stateHidden"> <!-- Impede do teclado abrir automaticamente ao Entrar na Activity e mudar Orientação e Tamanho da Tela -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -29,7 +29,7 @@
             android:name=".usuario.gui.ActSignUp"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:theme="@style/MyAppThemeFullscreen"
-            android:windowSoftInputMode="stateHidden"> <!-- Impede do teclado abrir automaticamente ao mudar Orientação e Tamanho da Tela -->
+            android:windowSoftInputMode="stateHidden"> <!-- Impede do teclado abrir automaticamente ao Entrar na Activity e mudar Orientação e Tamanho da Tela -->
 
         </activity>
         <activity
@@ -43,7 +43,9 @@
         <activity
             android:name=".redesocial.gui.ActEditarPerfil"
             android:label="@string/title_activity_act_editar_perfil"
-            android:theme="@style/MyAppTheme.NoActionBar"></activity>
+            android:theme="@style/MyAppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden"> <!-- Impede do teclado abrir automaticamente ao Entrar na Activity e mudar Orientação e Tamanho da Tela -->>
+        </activity>
     </application>
 
 </manifest>

@@ -4,12 +4,10 @@
 
     <item
         android:id="@+id/action_sair"
-        android:actionProviderClass="2"
         android:orderInCategory="10"
         android:title="@string/title_menu_sair" />
     <item
         android:id="@+id/action_perfil"
-        android:actionProviderClass="1"
         android:orderInCategory="1"
         android:title="@string/title_menu_perfil"
         app:showAsAction="never" />

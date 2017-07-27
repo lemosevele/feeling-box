@@ -23,7 +23,7 @@ import com.ufrpe.feelingsbox.usuario.persistencia.PessoaDAO;
 import static com.ufrpe.feelingsbox.usuario.dominio.SexoEnum.SexoEnumLista;
 
 public class ActEditarPerfil extends AppCompatActivity {
-    private EditText edtNomePerfil, edtNascPerfil;
+    private EditText edtNomePerfil, edtNickPerfil, edtEmailPerfil, edtNascPerfil, edtSenhaPerfil;
     private Spinner spnSexoPerfil;
 
     //Lista para por no Spinner
@@ -38,7 +38,10 @@ public class ActEditarPerfil extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         edtNomePerfil = (EditText) findViewById(R.id.edtNomePerfil);
+        edtNickPerfil = (EditText) findViewById(R.id.edtNickPerfil);
+        edtEmailPerfil = (EditText) findViewById(R.id.edtEmailPerfil);
         edtNascPerfil = (EditText) findViewById(R.id.edtNascPerfil);
+        edtSenhaPerfil = (EditText) findViewById(R.id.edtSenhaPerfil);
         edtNascPerfil.addTextChangedListener(Mask.insert("##/##/####", edtNascPerfil));
 
         //ArrayAdapter é usado preparar a lista da por no Spinner
