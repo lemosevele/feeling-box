@@ -14,6 +14,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.ufrpe.feelingsbox.R;
+import com.ufrpe.feelingsbox.infra.GuiUtil;
 import com.ufrpe.feelingsbox.infra.Mask;
 import com.ufrpe.feelingsbox.usuario.usuarioservices.UsuarioService;
 import com.ufrpe.feelingsbox.usuario.usuarioservices.ValidacaoService;
@@ -115,15 +116,12 @@ public class ActSignUp extends AppCompatActivity {
             UsuarioService service = new UsuarioService(getApplicationContext());
             try {
                 service.cadastrar(nome, sexoTexto, nasc, nick, email, senha);
-                Toast.makeText(this, "Cadastrado com Sucesso!",
-                        Toast.LENGTH_LONG).show();
+                GuiUtil.myToast(this, "Cadastrado com Sucesso!");
                 Intent intent = new Intent(ActSignUp.this, ActLogin.class);
                 startActivity(intent);
                 finish();
             } catch (Exception e) {
-                e.printStackTrace();
-                Toast.makeText(this, e.getMessage(),
-                        Toast.LENGTH_LONG).show();
+                GuiUtil.myToast(this, e);
             }
         }
     }

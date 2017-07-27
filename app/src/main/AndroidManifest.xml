@@ -33,15 +33,15 @@
 
         </activity>
         <activity
-            android:name=".usuario.gui.ActHome"
+            android:name=".redesocial.gui.ActHome"
             android:label="@string/title_activity_act_home"
             android:theme="@style/MyAppTheme.NoActionBar" />
         <activity
-            android:name=".usuario.gui.ActPerfil"
+            android:name=".redesocial.gui.ActPerfil"
             android:label="@string/title_activity_act_perfil"
             android:theme="@style/MyAppTheme.NoActionBar" />
         <activity
-            android:name=".usuario.gui.ActEditarPerfil"
+            android:name=".redesocial.gui.ActEditarPerfil"
             android:label="@string/title_activity_act_editar_perfil"
             android:theme="@style/MyAppTheme.NoActionBar"></activity>
     </application>

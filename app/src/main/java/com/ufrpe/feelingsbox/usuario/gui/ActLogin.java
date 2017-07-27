@@ -11,6 +11,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.ufrpe.feelingsbox.R;
+import com.ufrpe.feelingsbox.infra.GuiUtil;
+import com.ufrpe.feelingsbox.redesocial.gui.ActHome;
 import com.ufrpe.feelingsbox.usuario.usuarioservices.UsuarioService;
 import com.ufrpe.feelingsbox.usuario.usuarioservices.ValidacaoService;
 
@@ -68,8 +70,7 @@ public class ActLogin extends AppCompatActivity {
                     finish();
                 }
                 catch (Exception e) {
-                    e.printStackTrace();
-                    Toast.makeText(this, "Login ou senha incorretos.", Toast.LENGTH_LONG).show();
+                    GuiUtil.myToast(this, "Login ou senha incorretos.");
                 }
             }
             else {
@@ -81,8 +82,7 @@ public class ActLogin extends AppCompatActivity {
                     finish();
                 }
                 catch (Exception e) {
-                    e.printStackTrace();
-                    Toast.makeText(this, "Login ou senha incorretos.", Toast.LENGTH_LONG).show();
+                    GuiUtil.myToast(this, "Login ou senha incorretos.");
                 }
 
             }

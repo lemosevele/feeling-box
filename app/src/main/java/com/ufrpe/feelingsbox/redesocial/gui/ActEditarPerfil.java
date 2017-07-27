@@ -1,4 +1,4 @@
-package com.ufrpe.feelingsbox.usuario.gui;
+package com.ufrpe.feelingsbox.redesocial.gui;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

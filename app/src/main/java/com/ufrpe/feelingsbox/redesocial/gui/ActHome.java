@@ -1,4 +1,4 @@
-package com.ufrpe.feelingsbox.usuario.gui;
+package com.ufrpe.feelingsbox.redesocial.gui;
 
 import android.content.Intent;
 import android.os.Bundle;
