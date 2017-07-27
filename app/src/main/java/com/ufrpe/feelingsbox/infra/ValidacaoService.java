@@ -1,4 +1,4 @@
-package com.ufrpe.feelingsbox.usuario.usuarioservices;
+package com.ufrpe.feelingsbox.infra;
 
 import android.text.TextUtils;
 import android.util.Patterns;

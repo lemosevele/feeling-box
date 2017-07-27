@@ -12,7 +12,7 @@ public class Sessao {
 
     private Pessoa pessoaLogada = null;
 
-    private Sessao(){
+    public Sessao(){
 
     }
 

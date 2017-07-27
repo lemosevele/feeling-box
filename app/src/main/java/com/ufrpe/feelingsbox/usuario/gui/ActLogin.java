@@ -8,13 +8,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.ufrpe.feelingsbox.R;
 import com.ufrpe.feelingsbox.infra.GuiUtil;
 import com.ufrpe.feelingsbox.redesocial.gui.ActHome;
 import com.ufrpe.feelingsbox.usuario.usuarioservices.UsuarioService;
-import com.ufrpe.feelingsbox.usuario.usuarioservices.ValidacaoService;
+import com.ufrpe.feelingsbox.infra.ValidacaoService;
 
 public class ActLogin extends AppCompatActivity {
 

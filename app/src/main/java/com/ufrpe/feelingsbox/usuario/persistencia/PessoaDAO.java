@@ -156,9 +156,9 @@ public class PessoaDAO {
         String sexo = pessoa.getSexo();
         values.put(colunaSexo, sexo);
 
-        String colunaUserId = DataBase.PESSOA_USER_ID;
+        /*String colunaUserId = DataBase.PESSOA_USER_ID;
         long idUsuario = pessoa.getIdUsuario();
-        values.put(colunaUserId, idUsuario);
+        values.put(colunaUserId, idUsuario);*/
 
         String colunaDataNasc = DataBase.PESSOA_DATANASC;
         String dataNasc = pessoa.getDataNasc();
@@ -177,13 +177,13 @@ public class PessoaDAO {
         return id;
     }
     //Deleta o Pessoa na Tabela Pessoa
-    public int deletarPessoa(Pessoa pessoa){
+    public long deletarPessoa(Pessoa pessoa){
         String tabela = DataBase.TABELA_PESSOA;
         String whereClause = DataBase.ID + " = ?";
         String[] parametros = new String[1];
         parametros[0] = String.valueOf(pessoa.getId());
 
-        int id = feelingsDb.delete(tabela, whereClause , parametros);
+        long id = feelingsDb.delete(tabela, whereClause , parametros);
 
         feelingsDb.close();
 

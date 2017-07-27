@@ -15,6 +15,10 @@ import android.widget.Spinner;
 import com.ufrpe.feelingsbox.R;
 import com.ufrpe.feelingsbox.infra.GuiUtil;
 import com.ufrpe.feelingsbox.infra.Mask;
+import com.ufrpe.feelingsbox.infra.Sessao;
+import com.ufrpe.feelingsbox.infra.ValidacaoService;
+import com.ufrpe.feelingsbox.usuario.dominio.Pessoa;
+import com.ufrpe.feelingsbox.usuario.persistencia.PessoaDAO;
 
 import static com.ufrpe.feelingsbox.usuario.dominio.SexoEnum.SexoEnumLista;
 
@@ -75,6 +79,32 @@ public class ActEditarPerfil extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.action_salvar:
+                String nome = edtNomePerfil.getText().toString();
+                String nasc = edtNascPerfil.getText().toString();
+                String sexo = (String) spnSexoPerfil.getSelectedItem();
+                ValidacaoService validaEdt = new ValidacaoService();
+                boolean valid = true;
+                if (validaEdt.isNascValido(nasc)){
+                    edtNascPerfil.requestFocus();
+                    edtNascPerfil.setError("Data de nascimento inválida.");
+                    valid = false;
+                }
+                if (validaEdt.isCampoVazio(nome)){
+                    edtNomePerfil.requestFocus();
+                    edtNomePerfil.setError("Campo vazio.");
+                    valid = false;
+                }
+                if (valid){
+                    PessoaDAO pessoaDAO = new PessoaDAO(getApplicationContext());
+                    Sessao sessao = new Sessao();
+                    Pessoa pessoaLogada = sessao.getPessoaLogada();
+                    pessoaLogada.setNome(nome);
+                    pessoaLogada.setDataNasc(nasc);
+                    pessoaLogada.setSexo(sexo);
+                    pessoaDAO.atualizarPessoa(pessoaLogada);
+
+                }
+
                 break;
             case R.id.action_cancelar:
                 finish();
