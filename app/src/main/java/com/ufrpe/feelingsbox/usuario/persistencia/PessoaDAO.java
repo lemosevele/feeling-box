@@ -49,14 +49,13 @@ public class PessoaDAO {
         int indexColunaUsuarioId = cursor.getColumnIndex(colunaUsuarioId);
         long idUsuario = cursor.getInt(indexColunaUsuarioId);
 
-        Usuario usuario = usuarioDAO.getUsuarioId(idUsuario);
         Pessoa pessoa = new Pessoa();
 
         pessoa.setId(id);
         pessoa.setSexo(sexo);
         pessoa.setNome(nome);
         pessoa.setDataNasc(data);
-        pessoa.setUsuario(usuario);
+        pessoa.setIdUsuario(idUsuario);
 
         return pessoa;
     }
@@ -76,7 +75,7 @@ public class PessoaDAO {
         values.put(colunaSexo, sexo);
 
         String colunaUserId = DataBase.PESSOA_USER_ID;
-        long idUsuario = pessoa.getUsuario().getId();
+        long idUsuario = pessoa.getIdUsuario();
         values.put(colunaUserId, idUsuario);
 
         String colunaDataNasc = DataBase.PESSOA_DATANASC;
@@ -158,7 +157,7 @@ public class PessoaDAO {
         values.put(colunaSexo, sexo);
 
         String colunaUserId = DataBase.PESSOA_USER_ID;
-        long idUsuario = pessoa.getUsuario().getId();
+        long idUsuario = pessoa.getIdUsuario();
         values.put(colunaUserId, idUsuario);
 
         String colunaDataNasc = DataBase.PESSOA_DATANASC;

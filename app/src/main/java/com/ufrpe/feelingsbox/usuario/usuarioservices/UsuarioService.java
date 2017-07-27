@@ -3,17 +3,17 @@ package com.ufrpe.feelingsbox.usuario.usuarioservices;
 import android.content.Context;
 
 import com.ufrpe.feelingsbox.infra.Criptografia;
+import com.ufrpe.feelingsbox.infra.Sessao;
 import com.ufrpe.feelingsbox.usuario.persistencia.PessoaDAO;
 import com.ufrpe.feelingsbox.usuario.persistencia.UsuarioDAO;
 import com.ufrpe.feelingsbox.usuario.dominio.Usuario;
 import com.ufrpe.feelingsbox.usuario.dominio.Pessoa;
-import com.ufrpe.feelingsbox.infra.SessaoUsuario;
 
 // Classe faz comunicação com a classe UsuarioDAO e validações, faz pesquisas no banco
 //
 
 public class UsuarioService {
-    private SessaoUsuario sessao = SessaoUsuario.getInstancia();
+    private Sessao sessao = Sessao.getInstancia();
     private PessoaDAO pessoaDAO;
     private UsuarioDAO usuarioDAO;
     private Criptografia criptografia = new Criptografia();
@@ -43,12 +43,10 @@ public class UsuarioService {
             pessoa.setNome(nome);
             pessoa.setSexo(sexo);
             pessoa.setDataNasc(DataNasc);
-            pessoa.setUsuario(usuario);
+            pessoa.setIdUsuario(idUsuario);
             long idPessoa = pessoaDAO.inserirPessoa(pessoa);
             pessoa.setId(idPessoa);
 
-            sessao.setUsuarioLogado(usuario);
-            sessao.setPessoaLogada(pessoa);
         }
     }
 
@@ -59,7 +57,6 @@ public class UsuarioService {
             throw new Exception("Usuário ou senha inválidos");
         } else {
             Usuario usuario = usuarioDAO.getUsuarioNick(nick);
-            sessao.setUsuarioLogado(usuario);
             Pessoa pessoa = pessoaDAO.getPessoa(usuario);
             sessao.setPessoaLogada(pessoa);
         }
@@ -74,7 +71,6 @@ public class UsuarioService {
         }
         else {
             Usuario usuario = usuarioDAO.getUsuarioEmail(email);
-            sessao.setUsuarioLogado(usuario);
             Pessoa pessoa = pessoaDAO.getPessoa(usuario);
             sessao.setPessoaLogada(pessoa);
         }

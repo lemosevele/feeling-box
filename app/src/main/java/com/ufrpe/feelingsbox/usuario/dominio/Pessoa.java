@@ -6,7 +6,7 @@ public class Pessoa {
     private String sexo;
     private String dataNasc;
     private long id;
-    private Usuario usuario;
+    private long idUsuario;
 
     public void setNome(String novoNome){
 
@@ -48,14 +48,14 @@ public class Pessoa {
         this.id = novoId;
     }
 
-    public Usuario getUsuario(){
+    public long getIdUsuario(){
 
-        return this.usuario;
+        return this.idUsuario;
     }
 
-    public void setUsuario(Usuario novoUsuario){
+    public void setIdUsuario(long novoIdUsuario){
 
-        this.usuario = novoUsuario;
+        this.idUsuario = novoIdUsuario;
     }
 
 }
