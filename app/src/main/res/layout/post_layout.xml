@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/txtDonoPost"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:text="Fulano de Tal"
+        android:textColor="@color/colorUserFont"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/txtPostagem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:text="   Oi Fabiano, como faço para que ao clickar em um dos marcadores (ou tags), a página correspondente não abra com os posts completos, um atrás do outro (conforme o blogger faz), mas como uma página em que apareçam as miniaturas de cada um dos posts (apenas a imagem e o título do post) e que cada uma delas seja um link para o respectivo post? Obrigada pela ajuda de sempre, desde já."
+        android:textColor="@color/colorPostFont"
+        android:textSize="16sp" />
+</LinearLayout>

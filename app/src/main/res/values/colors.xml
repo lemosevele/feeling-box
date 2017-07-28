@@ -18,6 +18,9 @@
     <color name="colorBtnYellow">#ffc107</color>
     <color name="colorBtnRed">#d34836</color>
 
+    <color name="colorUserFont">#101010</color>
+    <color name="colorPostFont">#5a5959</color>
+
 
 
 </resources>

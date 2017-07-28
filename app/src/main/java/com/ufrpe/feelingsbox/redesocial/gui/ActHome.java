@@ -10,13 +10,19 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.ufrpe.feelingsbox.R;
 import com.ufrpe.feelingsbox.infra.GuiUtil;
+import com.ufrpe.feelingsbox.infra.PostAdapter;
+import com.ufrpe.feelingsbox.redesocial.dominio.Post;
+
+import java.util.ArrayList;
 
 public class ActHome extends AppCompatActivity {
-    private TextView lblHomeGreetings;
+    private ListView lvPost;
     private FloatingActionButton fab;
 
     @Override
@@ -27,10 +33,11 @@ public class ActHome extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         //Encontrando Elemento da Tela(activity)
-        lblHomeGreetings = (TextView)findViewById(R.id.lblHomeGreetings);
+        lvPost = (ListView) findViewById(R.id.lvPost);
 
-        // Set o Text no elemento TextView (Label)
-        lblHomeGreetings.setText("Olá, Isso é um teste.");
+        ArrayList<Post> listaPost = gerarPosts();
+        ArrayAdapter<Post> adapter = new PostAdapter(this, listaPost);
+        lvPost.setAdapter(adapter);
 
         //Botão Flutuante
         fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -41,6 +48,37 @@ public class ActHome extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+    }
+
+    private ArrayList<Post> gerarPosts(){
+        ArrayList<Post> listaPost = new ArrayList<Post>();
+
+        Post post = new Post();
+        post.setTexto("As melhores coisas da vida são gratuitas: abraços, sorrisos, amigos, beijos, família, dormir, amor, risos e boas lembranças.");
+        listaPost.add(post);
+
+        post = new Post();
+        post.setTexto("É pra frente que se anda, é pra cima que se olha e é lutando que se conquista.");
+        listaPost.add(post);
+
+        post = new Post();
+        post.setTexto("Treine sua mente para ver o lado bom de qualquer situação.");
+        listaPost.add(post);
+
+        post = new Post();
+        post.setTexto("Creio de coração que tudo nesta vida se renova. Tudo recomeça, tudo renasce, tudo avança. Creio no bem e na força maior que nos move. Creio em dias de paz e que a felicidade acontece quando nos colocamos a favor de todo o bem, em tudo e para todos.");
+        listaPost.add(post);
+
+        post = new Post();
+        post.setTexto("Um dia você ainda vai olhar para trás e ver que os problemas eram, na verdade, os degraus que te levaram à vitória.");
+        listaPost.add(post);
+
+        post = new Post();
+        post.setTexto("Cuidemos do nosso coração porque é de lá que sai o que é bom e ruim, o que constrói e destrói.");
+        listaPost.add(post);
+
+        return listaPost;
+
     }
 
     @Override
