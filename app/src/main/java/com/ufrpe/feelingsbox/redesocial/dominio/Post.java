@@ -10,50 +10,47 @@ public class Post {
     private long id;
     private String dataHora;
 
-    public Post(){
-
-        dataHora = FormataData.formatarDataHora();
+    public String getTexto() {
+        return texto;
     }
 
-    public String getDataHora(){
+    public void setTexto(String texto) {
+        this.texto = texto;
+    }
+
+    public ArrayList<Tag> getListaTags() {
+        return listaTags;
+    }
+
+    public void setListaTags(ArrayList<Tag> listaTags) {
+        this.listaTags = listaTags;
+    }
+
+    public long getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(long idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getDataHora() {
         return dataHora;
     }
 
-    public ArrayList<Tag> getListaTags(){
-        return this.listaTags;
+    public void setDataHora(String dataHora) {
+        this.dataHora = dataHora;
     }
 
-    public void addTag(Tag novaTag){
-        listaTags.add(novaTag);
+    public void setDataHora(){
+        dataHora = FormataData.formatarDataHora();
     }
-
-    public void removerTag(Tag tag){
-        listaTags.remove(tag);
-    }
-
-    public String getTexto(){
-
-        return this.texto;
-    }
-
-    public void setTexto(String novoTexto){
-        this.texto = novoTexto;
-    }
-
-    public long getIdUsuario(){
-        return this.idUsuario;
-    }
-
-    public void setIdUsuario(long novoId){
-        this.idUsuario = novoId;
-    }
-
-    public long getId(){
-        return this.id;
-    }
-
-    public void setId(long novoId){
-        this.id = novoId;
-    }
-
 }

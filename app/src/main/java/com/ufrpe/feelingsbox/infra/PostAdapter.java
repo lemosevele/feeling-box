@@ -37,13 +37,12 @@ public class PostAdapter extends ArrayAdapter<Post>{
         TextView txtDonoPost = (TextView)rowView.findViewById(R.id.txtDonoPost);
         TextView txtPostagem = (TextView)rowView.findViewById(R.id.txtPostagem);
 
-        //long idUsuário = listaPost.get(position).getIdUsuario();
-        //UsuarioDAO usuarioDAO = new UsuarioDAO(context);
+        long idUsuário = listaPost.get(position).getIdUsuario();
+        UsuarioDAO usuarioDAO = new UsuarioDAO(context);
 
-        //Usuario usuario = usuarioDAO.getUsuarioId(idUsuário);
+        Usuario usuario = usuarioDAO.getUsuarioId(idUsuário);
 
-        //txtDonoPost.setText(usuario.getNick());
-        txtDonoPost.setText("Dono do Post");
+        txtDonoPost.setText(usuario.getNick());
         txtPostagem.setText(listaPost.get(position).getTexto());
 
         return rowView;

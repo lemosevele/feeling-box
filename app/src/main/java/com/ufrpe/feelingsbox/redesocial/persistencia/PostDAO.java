@@ -5,6 +5,8 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.util.ArrayList;
+
 import com.ufrpe.feelingsbox.infra.DataBase;
 import com.ufrpe.feelingsbox.redesocial.dominio.Post;
 
@@ -34,7 +36,7 @@ public class PostDAO {
 
         if(cursor.moveToNext()){
 
-            post = criarPost(cursor); //FALTAR CRIAR O MÉTODO CRIAR POST
+            post = criarPost(cursor);
         }
 
         cursor.close();
@@ -67,6 +69,7 @@ public class PostDAO {
         post.setId(id);
         post.setTexto(texto);
         post.setIdUsuario(idUsuario);
+        post.setDataHora(datahora);
 
         return post;
     }
@@ -96,7 +99,22 @@ public class PostDAO {
         feelingsDb.close();
 
         return id;
+    }
 
+    //Retorna lista de posts, ordenados pelo id
+
+    public ArrayList<Post> getPostsByOrderId (){
+        feelingsDb = dbHelper.getReadableDatabase();
+        ArrayList<Post> listaPosts = new ArrayList<Post>();
+
+        String query = "SELECT * FROM " + DataBase.TABELA_POST + " ORDER BY " + DataBase.ID + " DESC";
+
+        Cursor cursor = feelingsDb.rawQuery(query, null);
+        while (cursor.moveToNext()){
+            Post post = criarPost(cursor);
+            listaPosts.add(post);
+        }
+        return listaPosts;
     }
 
 }

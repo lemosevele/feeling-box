@@ -29,8 +29,6 @@ public class ActCriarPost extends AppCompatActivity {
 
         edtTags = (TextView) findViewById(R.id.edtTags);
         edtTexto = (TextView) findViewById(R.id.edtTexto);
-
-
     }
 
     @Override
