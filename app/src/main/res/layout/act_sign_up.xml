@@ -70,7 +70,7 @@
                 android:id="@+id/edtNick"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="0dp"
+                android:layout_marginTop="8dp"
                 android:ems="10"
                 android:hint="@string/edt_nick"
                 android:inputType="textPersonName"
@@ -87,7 +87,8 @@
                 android:inputType="textEmailAddress"
                 app:layout_constraintLeft_toLeftOf="@+id/edtNick"
                 app:layout_constraintRight_toRightOf="@+id/edtNick"
-                app:layout_constraintTop_toBottomOf="@+id/edtNick" />
+                app:layout_constraintTop_toBottomOf="@+id/edtNick"
+                android:layout_marginTop="8dp" />
 
             <EditText
                 android:id="@+id/edtNasc"
@@ -98,7 +99,8 @@
                 android:inputType="date"
                 app:layout_constraintLeft_toLeftOf="@+id/edtEmail"
                 app:layout_constraintRight_toRightOf="@+id/edtEmail"
-                app:layout_constraintTop_toBottomOf="@+id/edtEmail" />
+                app:layout_constraintTop_toBottomOf="@+id/edtEmail"
+                android:layout_marginTop="8dp" />
 
             <EditText
                 android:id="@+id/edtSenha"
@@ -109,21 +111,23 @@
                 android:inputType="textPassword"
                 app:layout_constraintLeft_toLeftOf="@+id/edtNasc"
                 app:layout_constraintRight_toRightOf="@+id/edtNasc"
-                app:layout_constraintTop_toBottomOf="@+id/edtNasc" />
+                app:layout_constraintTop_toBottomOf="@+id/edtNasc"
+                android:layout_marginTop="8dp" />
 
             <TextView
                 android:id="@+id/lblSexo"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="4dp"
-                android:layout_marginTop="11dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="8dp"
                 android:layout_weight="1"
+                android:paddingTop="11dp"
                 android:text="@string/lbl_sexo"
                 android:textSize="18sp"
                 app:layout_constraintLeft_toLeftOf="@+id/edtSenha"
                 app:layout_constraintTop_toBottomOf="@+id/edtSenha"
-                tools:ignore="RtlHardcoded"
-                android:layout_marginStart="4dp" />
+                tools:ignore="RtlHardcoded" />
 
             <Spinner
                 android:id="@+id/spnSexo"
@@ -134,7 +138,8 @@
                 app:layout_constraintLeft_toRightOf="@+id/lblSexo"
                 app:layout_constraintRight_toRightOf="@+id/edtSenha"
                 app:layout_constraintTop_toBottomOf="@+id/edtSenha"
-                android:layout_marginStart="8dp" />
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp" />
 
             <Button
                 android:id="@+id/btnCancelar"

@@ -44,8 +44,13 @@
             android:name=".redesocial.gui.ActEditarPerfil"
             android:label="@string/title_activity_act_editar_perfil"
             android:theme="@style/MyAppTheme.NoActionBar"
-            android:windowSoftInputMode="stateHidden"> <!-- Impede do teclado abrir automaticamente ao Entrar na Activity e mudar Orientação e Tamanho da Tela -->>
+            android:windowSoftInputMode="stateHidden"> <!-- Impede do teclado abrir automaticamente ao Entrar na Activity e mudar Orientação e Tamanho da Tela -->
+            >
         </activity>
+        <activity
+            android:name=".redesocial.gui.ActCriarPost"
+            android:label="@string/title_activity_act_criar_post"
+            android:theme="@style/MyAppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
