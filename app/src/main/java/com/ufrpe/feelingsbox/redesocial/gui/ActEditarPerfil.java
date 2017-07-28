@@ -1,5 +1,6 @@
 package com.ufrpe.feelingsbox.redesocial.gui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -18,7 +19,11 @@ import com.ufrpe.feelingsbox.infra.Mask;
 import com.ufrpe.feelingsbox.infra.Sessao;
 import com.ufrpe.feelingsbox.infra.ValidacaoService;
 import com.ufrpe.feelingsbox.usuario.dominio.Pessoa;
+import com.ufrpe.feelingsbox.usuario.dominio.Usuario;
+import com.ufrpe.feelingsbox.usuario.gui.ActLogin;
+import com.ufrpe.feelingsbox.usuario.gui.ActSignUp;
 import com.ufrpe.feelingsbox.usuario.persistencia.PessoaDAO;
+import com.ufrpe.feelingsbox.usuario.persistencia.UsuarioDAO;
 
 import static com.ufrpe.feelingsbox.usuario.dominio.SexoEnum.SexoEnumLista;
 
@@ -80,32 +85,79 @@ public class ActEditarPerfil extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        String nome = edtNomePerfil.getText().toString();
+        String nick = edtNickPerfil.getText().toString();
+        String email = edtEmailPerfil.getText().toString();
+        String nasc = edtNascPerfil.getText().toString();
+        String senha = edtSenhaPerfil.getText().toString();
+        String sexo = (String) spnSexoPerfil.getSelectedItem();
+
         switch (item.getItemId()){
             case R.id.action_salvar:
-                String nome = edtNomePerfil.getText().toString();
-                String nasc = edtNascPerfil.getText().toString();
-                String sexo = (String) spnSexoPerfil.getSelectedItem();
+                PessoaDAO pessoaDAO = new PessoaDAO(getApplicationContext());
+                UsuarioDAO usuarioDAO = new UsuarioDAO(getApplicationContext());
+                Sessao sessao = Sessao.getInstancia();
+                Pessoa pessoaLogada = sessao.getPessoaLogada();
+                Usuario usuarioLogado = sessao.getUsuarioLogado();
                 ValidacaoService validaEdt = new ValidacaoService();
                 boolean valid = true;
-                if (validaEdt.isNascValido(nasc)){
-                    edtNascPerfil.requestFocus();
-                    edtNascPerfil.setError("Data de nascimento inválida.");
-                    valid = false;
+                boolean alteracao = false;
+                pessoaLogada.setSexo(sexo);
+                if (!validaEdt.isCampoVazio(senha)){
+                    if (validaEdt.isSenhaValida(senha)){
+                        usuarioLogado.setSenha(senha);
+                        alteracao = true;
+                    }
+                    else{
+                        edtSenhaPerfil.requestFocus();
+                        edtSenhaPerfil.setError("Senha inválida.");
+                        valid = false;
+                    }
                 }
-                if (validaEdt.isCampoVazio(nome)){
-                    edtNomePerfil.requestFocus();
-                    edtNomePerfil.setError("Campo vazio.");
-                    valid = false;
+                if (!validaEdt.isCampoVazio(nasc)){
+                    if (validaEdt.isNascValido(nasc)){
+                        pessoaLogada.setDataNasc(nasc);
+                        alteracao = true;
+                    }
+                    else{
+                        edtNascPerfil.requestFocus();
+                        edtNascPerfil.setError("Data inválida.");
+                        valid = false;
+                    }
                 }
-                if (valid){
-                    PessoaDAO pessoaDAO = new PessoaDAO(getApplicationContext());
-                    Sessao sessao = new Sessao();
-                    Pessoa pessoaLogada = sessao.getPessoaLogada();
+                if (!validaEdt.isCampoVazio(email)) {
+                    if (validaEdt.isEmailValido(email) && (usuarioDAO.getUsuarioEmail(email)==null)) {
+                        usuarioLogado.setEmail(email);
+                        alteracao = true;
+                    }
+                    else {
+                        edtEmailPerfil.requestFocus();
+                        edtEmailPerfil.setError("Email inválido.");
+                        valid = false;
+                    }
+                }
+                if (!validaEdt.isCampoVazio(nick)) {
+                    if (validaEdt.isNickValido(nick) && (usuarioDAO.getUsuarioNick(nick)==null)) {
+                        usuarioLogado.setNick(nick);
+                        alteracao = true;
+                    }
+                    else {
+                        edtNickPerfil.requestFocus();
+                        edtNickPerfil.setError("Nick inválido.");
+                        valid = false;
+                    }
+                }
+                if (!validaEdt.isCampoVazio(nome)){
                     pessoaLogada.setNome(nome);
-                    pessoaLogada.setDataNasc(nasc);
-                    pessoaLogada.setSexo(sexo);
-                    pessoaDAO.atualizarPessoa(pessoaLogada);
+                    alteracao = true;
+                }
 
+                if (valid && alteracao){
+                    usuarioDAO.atualizarUsuario(usuarioLogado);
+                    pessoaDAO.atualizarPessoa(pessoaLogada);
+                    GuiUtil.myToast(this, "Alterações salvas.");
+                    Intent intent = new Intent(ActEditarPerfil.this, ActPerfil.class);
+                    startActivity(intent);
                 }
 
                 break;

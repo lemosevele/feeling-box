@@ -9,12 +9,8 @@ import com.ufrpe.feelingsbox.usuario.dominio.Usuario;
 
 public class Sessao {
     private static Sessao instancia = new Sessao();
-
     private Pessoa pessoaLogada = null;
-
-    public Sessao(){
-
-    }
+    private Usuario usuarioLogado = null;
 
     public static Sessao getInstancia(){
 
@@ -29,7 +25,16 @@ public class Sessao {
         this.pessoaLogada = novaPessoa;
     }
 
+    public Usuario getUsuarioLogado() {
+        return usuarioLogado;
+    }
+
+    public void setUsuarioLogado(Usuario novoUsuario) {
+        this.usuarioLogado = novoUsuario;
+    }
+
     public void invalidarSessao() {
         pessoaLogada = null;
+        usuarioLogado = null;
     }
 }

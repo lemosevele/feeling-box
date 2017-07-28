@@ -59,6 +59,7 @@ public class UsuarioService {
             Usuario usuario = usuarioDAO.getUsuarioNick(nick);
             Pessoa pessoa = pessoaDAO.getPessoa(usuario);
             sessao.setPessoaLogada(pessoa);
+            sessao.setUsuarioLogado(usuario);
         }
     }
 
@@ -73,6 +74,7 @@ public class UsuarioService {
             Usuario usuario = usuarioDAO.getUsuarioEmail(email);
             Pessoa pessoa = pessoaDAO.getPessoa(usuario);
             sessao.setPessoaLogada(pessoa);
+            sessao.setUsuarioLogado(usuario);
         }
     }
 }

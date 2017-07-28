@@ -191,7 +191,7 @@ public class UsuarioDAO {
     }
 
     //Atualiza o Usuário na Tabela Usuario
-    public int atualizarUsuario(Usuario usuario){
+    public long atualizarUsuario(Usuario usuario){
         feelingsDb = dbHelper.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -214,7 +214,7 @@ public class UsuarioDAO {
         String[] parametros = new String[1];
         parametros[0] = String.valueOf(usuario.getId());
 
-        int id = feelingsDb.update(tabela, values, whereClause, parametros);
+        long id = feelingsDb.update(tabela, values, whereClause, parametros);
 
         feelingsDb.close();
         return id;

@@ -144,7 +144,7 @@ public class PessoaDAO {
 
     }
     //Atualiza o Pessoa na Tabela Pessoa
-    public int atualizarPessoa(Pessoa pessoa){
+    public long atualizarPessoa(Pessoa pessoa){
         feelingsDb = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
 
@@ -170,7 +170,7 @@ public class PessoaDAO {
         String[] parametros = new String[1];
         parametros[0] = String.valueOf(pessoa.getId());
 
-        int id = feelingsDb.update(tabela, values, whereClause , parametros);
+        long id = feelingsDb.update(tabela, values, whereClause , parametros);
 
         feelingsDb.close();
 

@@ -101,7 +101,7 @@ public class ActSignUp extends AppCompatActivity {
         }
         if (!validacaoCadastro.isNickValido(nick)){
             edtNick.requestFocus();
-            edtNick.setError("Apelido Inválido ou Inexistente.");
+            edtNick.setError("Apelido Inválido");
             valid = false;
         }
 
@@ -126,6 +126,7 @@ public class ActSignUp extends AppCompatActivity {
     }
 
     public void cancelarCadastro(View view){
+
         finish();
     }
 }
