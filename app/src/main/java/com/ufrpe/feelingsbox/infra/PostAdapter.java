@@ -40,9 +40,9 @@ public class PostAdapter extends ArrayAdapter<Post>{
         long idUsuário = listaPost.get(position).getIdUsuario();
         UsuarioDAO usuarioDAO = new UsuarioDAO(context);
 
-        Usuario usuario = usuarioDAO.getUsuarioId(idUsuário);
+       // Usuario usuario = usuarioDAO.getUsuarioId(idUsuário);
 
-        txtDonoPost.setText(usuario.getNick());
+        //txtDonoPost.setText(usuario.getNick());
         txtPostagem.setText(listaPost.get(position).getTexto());
 
         return rowView;

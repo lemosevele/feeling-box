@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.ufrpe.feelingsbox.R;
 import com.ufrpe.feelingsbox.infra.GuiUtil;
+import com.ufrpe.feelingsbox.infra.ValidacaoService;
 
 import java.util.zip.Inflater;
 
@@ -46,8 +47,27 @@ public class ActCriarPost extends AppCompatActivity {
 
                 break;
             case R.id.action_postar:
-                GuiUtil.myToast(this, "Postado com sucesso.");
-                finish();
+                String tags = edtTags.getText().toString();
+                String texto = edtTexto.getText().toString();
+
+                ValidacaoService validarPost = new ValidacaoService();
+                boolean postVazio = false;
+                if (validarPost.isCampoVazio(tags)){
+                    edtTags.requestFocus();
+                    edtTags.setError("Adicione tags para seu post.");
+                    postVazio = true;
+                }
+                if (validarPost.isCampoVazio(texto)){
+                    edtTexto.requestFocus();
+                    edtTexto.setError("Digite algo para publicar.");
+                    postVazio = true;
+                }
+
+                if (!postVazio){
+                    GuiUtil.myToast(this, "Postado com sucesso.");
+                    finish();
+                }
+
 
                 break;
 
