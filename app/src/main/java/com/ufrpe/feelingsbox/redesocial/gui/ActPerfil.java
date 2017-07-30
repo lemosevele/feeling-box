@@ -11,6 +11,9 @@ import android.widget.TextView;
 
 import com.ufrpe.feelingsbox.R;
 import com.ufrpe.feelingsbox.infra.GuiUtil;
+import com.ufrpe.feelingsbox.infra.Sessao;
+import com.ufrpe.feelingsbox.usuario.dominio.Pessoa;
+import com.ufrpe.feelingsbox.usuario.dominio.Usuario;
 
 public class ActPerfil extends AppCompatActivity {
     private TextView txtNome, txtNicK, txtNasc, txtSexo, txtEmail;
@@ -22,11 +25,22 @@ public class ActPerfil extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        Sessao sessao = Sessao.getInstancia();
+        Pessoa pessoaLogada = sessao.getPessoaLogada();
+        Usuario usuarioLogado = sessao.getUsuarioLogado();
+
         txtNome = (TextView) findViewById(R.id.txtNome);
         txtNicK = (TextView) findViewById(R.id.txtNick);
         txtNasc = (TextView) findViewById(R.id.txtNasc);
         txtSexo = (TextView) findViewById(R.id.txtSexo);
         txtEmail = (TextView) findViewById(R.id.txtEmail);
+
+        txtNome.setText(pessoaLogada.getNome());
+        txtNicK.setText(usuarioLogado.getNick());
+        txtNasc.setText(pessoaLogada.getDataNasc());
+        txtSexo.setText(pessoaLogada.getSexo());
+        txtEmail.setText(usuarioLogado.getEmail());
+
 
         //TODO Setar o texto com os dados do Usuário das variáveis TextView acima.
 
