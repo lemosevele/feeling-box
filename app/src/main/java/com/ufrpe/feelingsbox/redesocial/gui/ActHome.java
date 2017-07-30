@@ -46,7 +46,7 @@ public class ActHome extends AppCompatActivity {
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
-                Intent intent = new Intent(getApplicationContext(), ActCriarPost.class);
+                Intent intent = new Intent(ActHome.this, ActCriarPost.class);
                 startActivity(intent);
             }
         });
@@ -95,7 +95,7 @@ public class ActHome extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.action_perfil:
-                Intent it = new Intent(this, ActPerfil.class);
+                Intent it = new Intent(ActHome.this, ActPerfil.class);
                 startActivity(it);
 
                 break;

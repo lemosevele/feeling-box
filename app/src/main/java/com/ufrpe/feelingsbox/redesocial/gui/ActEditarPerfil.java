@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.ufrpe.feelingsbox.R;
+import com.ufrpe.feelingsbox.infra.Criptografia;
 import com.ufrpe.feelingsbox.infra.GuiUtil;
 import com.ufrpe.feelingsbox.infra.Mask;
 import com.ufrpe.feelingsbox.infra.Sessao;
@@ -24,6 +25,8 @@ import com.ufrpe.feelingsbox.usuario.gui.ActLogin;
 import com.ufrpe.feelingsbox.usuario.gui.ActSignUp;
 import com.ufrpe.feelingsbox.usuario.persistencia.PessoaDAO;
 import com.ufrpe.feelingsbox.usuario.persistencia.UsuarioDAO;
+
+import java.security.NoSuchAlgorithmException;
 
 import static com.ufrpe.feelingsbox.usuario.dominio.SexoEnum.SexoEnumLista;
 
@@ -105,7 +108,14 @@ public class ActEditarPerfil extends AppCompatActivity {
                 pessoaLogada.setSexo(sexo);
                 if (!validaEdt.isCampoVazio(senha)){
                     if (validaEdt.isSenhaValida(senha)){
-                        usuarioLogado.setSenha(senha);
+                        Criptografia criptografia = new Criptografia();
+                        String senhaCriptografada = null;
+                        try {
+                            senhaCriptografada = criptografia.criptografarSenha(senha);
+                        } catch (NoSuchAlgorithmException e) {
+                            e.printStackTrace();
+                        }
+                        usuarioLogado.setSenha(senhaCriptografada);
                         alteracao = true;
                     }
                     else{
