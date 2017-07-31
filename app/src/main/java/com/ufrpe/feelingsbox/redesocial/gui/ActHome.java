@@ -12,12 +12,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.ufrpe.feelingsbox.R;
-import com.ufrpe.feelingsbox.infra.GuiUtil;
 import com.ufrpe.feelingsbox.infra.PostAdapter;
+import com.ufrpe.feelingsbox.infra.Sessao;
 import com.ufrpe.feelingsbox.redesocial.dominio.Post;
+import com.ufrpe.feelingsbox.usuario.dominio.Usuario;
 
 import java.util.ArrayList;
 
@@ -30,7 +30,14 @@ public class ActHome extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_home);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        Sessao sessao = Sessao.getInstancia();
+        Usuario usuarioLogado = sessao.getUsuarioLogado();
+
+        toolbar.setTitle(usuarioLogado.getNick());
+
         setSupportActionBar(toolbar);
+
 
         //Encontrando Elemento da Tela(activity)
         lvPost = (ListView) findViewById(R.id.lvPost);
@@ -39,20 +46,20 @@ public class ActHome extends AppCompatActivity {
         ArrayAdapter<Post> adapter = new PostAdapter(this, listaPost);
         lvPost.setAdapter(adapter);
 
+
         //Botão Flutuante
         fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
                 Intent intent = new Intent(ActHome.this, ActCriarPost.class);
                 startActivity(intent);
             }
         });
+
     }
 
-    private ArrayList<Post> gerarPosts(){
+    public static ArrayList<Post> gerarPosts(){
         ArrayList<Post> listaPost = new ArrayList<Post>();
 
         Post post = new Post();

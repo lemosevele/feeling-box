@@ -27,6 +27,7 @@ public class ActCriarPost extends AppCompatActivity {
         setContentView(R.layout.act_criar_post);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         edtTags = (TextView) findViewById(R.id.edtTags);
         edtTexto = (TextView) findViewById(R.id.edtTexto);
@@ -69,6 +70,10 @@ public class ActCriarPost extends AppCompatActivity {
                 }
 
 
+                break;
+
+            case android.R.id.home:
+                finish();
                 break;
 
         }

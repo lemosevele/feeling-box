@@ -44,6 +44,7 @@ public class ActEditarPerfil extends AppCompatActivity {
         setContentView(R.layout.act_editar_perfil);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         edtNomePerfil = (EditText) findViewById(R.id.edtNomePerfil);
         edtNickPerfil = (EditText) findViewById(R.id.edtNickPerfil);
@@ -172,6 +173,9 @@ public class ActEditarPerfil extends AppCompatActivity {
 
                 break;
             case R.id.action_cancelar:
+                finish();
+                break;
+            case android.R.id.home:
                 finish();
                 break;
         }

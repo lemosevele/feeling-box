@@ -21,7 +21,7 @@ import java.util.ArrayList;
 public class PostAdapter extends ArrayAdapter<Post>{
 
     private final Context context;
-    private  final ArrayList<Post> listaPost;
+    private final ArrayList<Post> listaPost;
 
     public PostAdapter(Context context, ArrayList<Post> listaPost){
         super(context, R.layout.post_layout, listaPost);

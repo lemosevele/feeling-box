@@ -11,7 +11,7 @@
         android:paddingTop="8dp"
         android:text="Fulano de Tal"
         android:textColor="@color/colorUserFont"
-        android:textSize="18sp"
+        android:textSize="16sp"
         android:textStyle="bold" />
 
     <TextView
@@ -22,5 +22,13 @@
         android:paddingLeft="16dp"
         android:text="   Oi Fabiano, como faço para que ao clickar em um dos marcadores (ou tags), a página correspondente não abra com os posts completos, um atrás do outro (conforme o blogger faz), mas como uma página em que apareçam as miniaturas de cada um dos posts (apenas a imagem e o título do post) e que cada uma delas seja um link para o respectivo post? Obrigada pela ajuda de sempre, desde já."
         android:textColor="@color/colorPostFont"
-        android:textSize="16sp" />
+        android:textSize="14sp" />
+
+    <View
+        android:id="@+id/vw_divider"
+        android:layout_width="match_parent"
+        android:layout_height="0.8dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/colorBtnYellow" />
+
 </LinearLayout>

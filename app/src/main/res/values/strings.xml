@@ -46,7 +46,7 @@
     <string name="title_menu_salvar">Salvar</string>
     <string name="title_menu_cancelar">Cancelar</string>
     <string name="title_menu_sair">Sair</string>
-    <string name="title_activity_act_criar_post">ActCriarPost</string>
+    <string name="title_activity_act_criar_post">Criar Post</string>
     <string name="edt_texto_post">Digite sua mensagem aqui...</string>
     <string name="edt_texto_tags">Digite suas tags aqui...</string>
     <string name="title_menu_postar">Postar</string>

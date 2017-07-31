@@ -24,6 +24,7 @@ public class ActPerfil extends AppCompatActivity {
         setContentView(R.layout.act_perfil);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Sessao sessao = Sessao.getInstancia();
         Pessoa pessoaLogada = sessao.getPessoaLogada();
@@ -62,6 +63,9 @@ public class ActPerfil extends AppCompatActivity {
                 Intent it = new Intent(this, ActEditarPerfil.class);
                 startActivity(it);
 
+                break;
+            case android.R.id.home:
+                finish();
                 break;
         }
         return super.onOptionsItemSelected(item);
