@@ -115,7 +115,6 @@ public class ActHome extends AppCompatActivity {
 
                 break;
             case R.id.action_sair:
-                //Definir a ação do botão
                 finish();
                 break;
             
