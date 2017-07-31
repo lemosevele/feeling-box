@@ -9,14 +9,26 @@ import com.ufrpe.feelingsbox.R;
 //Classe retorna elementos de texto na Tela
 public class GuiUtil {
 
+    public static void myToast(Context context, String text, int time){
+        Toast.makeText(context, text, time).show();
+    }
+    public static void myToast(Context context, Exception e, int time){
+        GuiUtil.myToast(context, e.getMessage(), time);
+    }
     public static void myToast(Context context, String text){
-        Toast.makeText(context, text, Toast.LENGTH_LONG).show();
+        GuiUtil.myToast(context, text, Toast.LENGTH_LONG);
     }
     public static void myToast(Context context, Exception e){
-        GuiUtil.myToast(context, e.getMessage());
+        GuiUtil.myToast(context, e.getMessage(), Toast.LENGTH_LONG);
+    }
+    public static void myToastShort(Context context, String text){
+        GuiUtil.myToast(context, text, Toast.LENGTH_SHORT);
+    }
+    public static void myToastShot(Context context, Exception e){
+        GuiUtil.myToast(context, e.getMessage(), Toast.LENGTH_SHORT);
     }
 
-     public static void myAlertDialog(Context context, String text, String titulo){
+    public static void myAlertDialog(Context context, String text, String titulo){
         AlertDialog.Builder dialogo = new AlertDialog.Builder(context);
         dialogo.setTitle(titulo);
         dialogo.setMessage(text);

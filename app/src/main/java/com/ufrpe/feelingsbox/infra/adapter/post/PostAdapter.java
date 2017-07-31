@@ -1,4 +1,4 @@
-package com.ufrpe.feelingsbox.infra;
+package com.ufrpe.feelingsbox.infra.adapter.post;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import com.ufrpe.feelingsbox.R;
 import com.ufrpe.feelingsbox.redesocial.dominio.Post;
-import com.ufrpe.feelingsbox.usuario.dominio.Usuario;
 import com.ufrpe.feelingsbox.usuario.persistencia.UsuarioDAO;
 
 import java.util.ArrayList;
@@ -24,7 +23,7 @@ public class PostAdapter extends ArrayAdapter<Post>{
     private final ArrayList<Post> listaPost;
 
     public PostAdapter(Context context, ArrayList<Post> listaPost){
-        super(context, R.layout.post_layout, listaPost);
+        super(context, R.layout.post_layout_listview, listaPost);
 
         this.context = context;
         this.listaPost = listaPost;
@@ -32,7 +31,7 @@ public class PostAdapter extends ArrayAdapter<Post>{
 
     public View getView(int position, View convertView, ViewGroup parent){
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View rowView = inflater.inflate(R.layout.post_layout, parent, false);
+        View rowView = inflater.inflate(R.layout.post_layout_listview, parent, false);
 
         TextView txtDonoPost = (TextView)rowView.findViewById(R.id.txtDonoPost);
         TextView txtPostagem = (TextView)rowView.findViewById(R.id.txtPostagem);

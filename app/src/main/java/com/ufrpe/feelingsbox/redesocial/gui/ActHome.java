@@ -3,18 +3,17 @@ package com.ufrpe.feelingsbox.redesocial.gui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.ufrpe.feelingsbox.R;
-import com.ufrpe.feelingsbox.infra.PostAdapter;
+import com.ufrpe.feelingsbox.infra.adapter.post.PostFragment;
 import com.ufrpe.feelingsbox.infra.Sessao;
 import com.ufrpe.feelingsbox.redesocial.dominio.Post;
 import com.ufrpe.feelingsbox.usuario.dominio.Usuario;
@@ -40,11 +39,11 @@ public class ActHome extends AppCompatActivity {
 
 
         //Encontrando Elemento da Tela(activity)
-        lvPost = (ListView) findViewById(R.id.lvPost);
+        //lvPost = (ListView) findViewById(R.id.lvPost);
 
-        ArrayList<Post> listaPost = gerarPosts();
-        ArrayAdapter<Post> adapter = new PostAdapter(this, listaPost);
-        lvPost.setAdapter(adapter);
+        //ArrayList<Post> listaPost = gerarPosts();
+        //ArrayAdapter<Post> adapter = new PostAdapter(this, listaPost);
+        //lvPost.setAdapter(adapter);
 
 
         //Botão Flutuante
@@ -56,6 +55,15 @@ public class ActHome extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        //Fragment
+        PostFragment frag = (PostFragment) getSupportFragmentManager().findFragmentByTag("mainFrag");
+        if(frag == null) {
+            frag = new PostFragment();
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.rl_fragment_container, frag, "mainFrag");
+            ft.commit();
+        }
 
     }
 
@@ -108,6 +116,7 @@ public class ActHome extends AppCompatActivity {
                 break;
             case R.id.action_sair:
                 //Definir a ação do botão
+                finish();
                 break;
             
         }

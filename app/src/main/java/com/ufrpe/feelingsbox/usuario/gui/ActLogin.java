@@ -66,7 +66,7 @@ public class ActLogin extends AppCompatActivity {
                     //Trocando para a Tela de Home
                     Intent it = new Intent(ActLogin.this, ActHome.class);
                     startActivity(it);
-                    //finish();
+                    finish();
                 }
                 catch (Exception e) {
                     GuiUtil.myToast(this, "Login ou senha incorretos.");
@@ -78,7 +78,7 @@ public class ActLogin extends AppCompatActivity {
                     //Trocando para a Tela de Home
                     Intent it = new Intent(ActLogin.this, ActHome.class);
                     startActivity(it);
-                    //finish();
+                    finish();
                 }
                 catch (Exception e) {
                     GuiUtil.myToast(this, "Login ou senha incorretos.");
