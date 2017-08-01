@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.ufrpe.feelingsbox.R;
 import com.ufrpe.feelingsbox.infra.GuiUtil;
 import com.ufrpe.feelingsbox.infra.ValidacaoService;
+import com.ufrpe.feelingsbox.redesocial.redesocialservices.RedeServices;
 
 
 public class ActCriarPost extends AppCompatActivity {
@@ -53,6 +54,8 @@ public class ActCriarPost extends AppCompatActivity {
                 }
 
                 if (!postVazio){
+                    RedeServices redeServices = new RedeServices(getApplicationContext());
+                    redeServices.salvarPost(texto);
                     GuiUtil.myToast(this, "Postado com sucesso.");
                     finish();
                 }

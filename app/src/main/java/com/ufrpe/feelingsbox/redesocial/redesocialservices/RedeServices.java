@@ -17,6 +17,12 @@ public class RedeServices {
     }
 
     public void salvarPost(String texto){
-        //Falta continuar
+        post = new Post();
+        post.setTexto(texto);
+        post.setDataHora();
+        post.setIdUsuario(sessao.getUsuarioLogado().getId());
+        long idPost = postDAO.inserirPost(post);
+        post.setId(idPost);
+
     }
 }
