@@ -24,7 +24,6 @@ public class ActCriarPost extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        edtTags = (TextView) findViewById(R.id.edtTags);
         edtTexto = (TextView) findViewById(R.id.edtTexto);
     }
 
@@ -43,16 +42,10 @@ public class ActCriarPost extends AppCompatActivity {
 
                 break;
             case R.id.action_postar:
-                String tags = edtTags.getText().toString();
                 String texto = edtTexto.getText().toString();
 
                 ValidacaoService validarPost = new ValidacaoService();
                 boolean postVazio = false;
-                if (validarPost.isCampoVazio(tags)){
-                    edtTags.requestFocus();
-                    edtTags.setError("Adicione tags para seu post.");
-                    postVazio = true;
-                }
                 if (validarPost.isCampoVazio(texto)){
                     edtTexto.requestFocus();
                     edtTexto.setError("Digite algo para publicar.");

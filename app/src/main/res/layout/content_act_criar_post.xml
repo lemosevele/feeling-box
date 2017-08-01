@@ -9,24 +9,9 @@
     tools:showIn="@layout/act_criar_post">
 
     <EditText
-        android:id="@+id/edtTags"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:hint="@string/edt_texto_tags"
-        android:inputType="textPersonName"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHorizontal_bias="0.0" />
-
-    <EditText
         android:id="@+id/edtTexto"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="373dp"
+        android:layout_height="59dp"
         android:layout_marginLeft="0dp"
         android:layout_marginRight="0dp"
         android:layout_marginTop="16dp"
