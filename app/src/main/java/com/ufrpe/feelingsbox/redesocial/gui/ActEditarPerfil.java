@@ -21,14 +21,13 @@ import com.ufrpe.feelingsbox.infra.Sessao;
 import com.ufrpe.feelingsbox.infra.ValidacaoService;
 import com.ufrpe.feelingsbox.usuario.dominio.Pessoa;
 import com.ufrpe.feelingsbox.usuario.dominio.Usuario;
-import com.ufrpe.feelingsbox.usuario.gui.ActLogin;
-import com.ufrpe.feelingsbox.usuario.gui.ActSignUp;
 import com.ufrpe.feelingsbox.usuario.persistencia.PessoaDAO;
 import com.ufrpe.feelingsbox.usuario.persistencia.UsuarioDAO;
 
 import java.security.NoSuchAlgorithmException;
 
 import static com.ufrpe.feelingsbox.usuario.dominio.SexoEnum.SexoEnumLista;
+
 
 public class ActEditarPerfil extends AppCompatActivity {
     private EditText edtNomePerfil, edtNickPerfil, edtEmailPerfil, edtNascPerfil, edtSenhaPerfil;

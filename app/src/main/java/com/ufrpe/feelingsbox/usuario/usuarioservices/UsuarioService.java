@@ -10,7 +10,6 @@ import com.ufrpe.feelingsbox.usuario.dominio.Usuario;
 import com.ufrpe.feelingsbox.usuario.dominio.Pessoa;
 
 // Classe faz comunicação com a classe UsuarioDAO e validações, faz pesquisas no banco
-//
 
 public class UsuarioService {
     private Sessao sessao = Sessao.getInstancia();

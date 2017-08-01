@@ -25,22 +25,22 @@ public class FormataData {
         return formatoDataHora.format(dataFormatada);
     }
     public static boolean dataExtiste(String data){
-        SimpleDateFormat df = new SimpleDateFormat ("dd/MM/yyyy");
-        df.setLenient (false);
+        SimpleDateFormat dataFormatada = new SimpleDateFormat ("dd/MM/yyyy");
+        dataFormatada.setLenient (false);
 
         //Testa no formato dd/MM/yyyy
         try {
-            df.parse(data);
+            dataFormatada.parse(data);
             return true;
         } catch (Exception e) {
         }
 
-        df = new SimpleDateFormat ("yyyyMMdd");
-        df.setLenient (false);
+        dataFormatada = new SimpleDateFormat ("yyyyMMdd");
+        dataFormatada.setLenient (false);
 
         //Testa no formato yyyyMMdd
         try {
-            df.parse(data);
+            dataFormatada.parse(data);
             return true;
         } catch (Exception e) {
         }
@@ -49,13 +49,13 @@ public class FormataData {
 
     }
     public static boolean dataMenorOuIgualQueAtual(String data){
-        SimpleDateFormat df = new SimpleDateFormat ("dd/MM/yyyy");
-        df.setLenient (false);
+        SimpleDateFormat dataFormatada = new SimpleDateFormat ("dd/MM/yyyy");
+        dataFormatada.setLenient (false);
 
         //Testa no formato dd/MM/yyyy
         try {
             Date dataAtual = new Date();
-            Date dataCliente = df.parse(data);
+            Date dataCliente = dataFormatada.parse(data);
 
             if(dataAtual.compareTo(dataCliente) >= 0){
                 return true;
@@ -63,13 +63,13 @@ public class FormataData {
         } catch (Exception e) {
         }
 
-        df = new SimpleDateFormat ("yyyyMMdd");
-        df.setLenient (false);
+        dataFormatada = new SimpleDateFormat ("yyyyMMdd");
+        dataFormatada.setLenient (false);
 
         //Testa no formato yyyyMMdd
         try {
             Date dataAtual = new Date();
-            Date dataCliente = df.parse(data);
+            Date dataCliente = dataFormatada.parse(data);
 
             if(dataAtual.compareTo(dataCliente) >= 0){
                 return true;
@@ -78,7 +78,5 @@ public class FormataData {
         }
 
         return false;
-
     }
-
 }

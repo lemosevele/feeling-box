@@ -116,8 +116,4 @@ public class PostDAO {
         }
         return listaPosts;
     }
-
 }
-
-
-

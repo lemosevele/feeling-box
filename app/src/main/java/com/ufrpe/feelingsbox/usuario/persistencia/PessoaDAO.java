@@ -12,6 +12,7 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class PessoaDAO {
 
     private DataBase dbHelper;
@@ -228,7 +229,5 @@ public class PessoaDAO {
         }
 
         return listaPessoas;
-
     }
-
 }

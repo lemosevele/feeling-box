@@ -43,5 +43,4 @@ public class Usuario {
 
         this.id = novoId;
     }
-
 }

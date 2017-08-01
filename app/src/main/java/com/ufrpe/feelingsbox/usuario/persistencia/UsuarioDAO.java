@@ -87,7 +87,6 @@ public class UsuarioDAO {
         return usuario;
     }
 
-
     public Usuario getUsuarioId(long id){
         feelingsDb = dbHelper.getReadableDatabase();
 

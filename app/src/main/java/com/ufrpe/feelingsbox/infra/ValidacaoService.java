@@ -3,9 +3,6 @@ package com.ufrpe.feelingsbox.infra;
 import android.text.TextUtils;
 import android.util.Patterns;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class ValidacaoService {
 

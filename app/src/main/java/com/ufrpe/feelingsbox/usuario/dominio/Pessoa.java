@@ -57,5 +57,4 @@ public class Pessoa {
 
         this.idUsuario = novoIdUsuario;
     }
-
 }

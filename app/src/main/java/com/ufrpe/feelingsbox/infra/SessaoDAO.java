@@ -11,7 +11,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.content.Context;
 
 
-
 public class SessaoDAO {
     private DataBase dbHelper;
     private SQLiteDatabase feelingsDb;

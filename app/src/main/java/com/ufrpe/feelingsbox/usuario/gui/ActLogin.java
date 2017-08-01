@@ -83,10 +83,7 @@ public class ActLogin extends AppCompatActivity {
                 catch (Exception e) {
                     GuiUtil.myToast(this, "Login ou senha incorretos.");
                 }
-
             }
         }
-
     }
-
 }

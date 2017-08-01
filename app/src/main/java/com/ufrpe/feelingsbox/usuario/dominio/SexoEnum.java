@@ -1,8 +1,5 @@
 package com.ufrpe.feelingsbox.usuario.dominio;
 
-/**
- * Created by Faig-PC on 23/07/2017.
- */
 
 public enum SexoEnum {
     FEMININO('F'), MASCULINO('M'), OUTRO('O');
