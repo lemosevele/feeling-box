@@ -7,12 +7,12 @@ import com.ufrpe.feelingsbox.redesocial.dominio.Post;
 import com.ufrpe.feelingsbox.redesocial.persistencia.PostDAO;
 
 
-public class ValidacaoRedeServices {
+public class RedeServices {
     private Sessao sessao = Sessao.getInstancia();
     private Post post;
     private PostDAO postDAO;
 
-    public ValidacaoRedeServices(Context context){
+    public RedeServices(Context context){
         postDAO = new PostDAO(context);
     }
 

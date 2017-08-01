@@ -21,20 +21,12 @@ public class ValidacaoService {
     }
 
     public boolean isEmailValido(String email) {
+
         return (!isCampoVazio(email) && isEmail(email));
     }
 
     public boolean isNascValido(String nasc) {
-        SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");
-        try {
-
-            Date date = formatador.parse(nasc);
-            return true;
-
-        }
-        catch (ParseException e) {
-            return false;
-        }
+        return(FormataData.dataExtiste(nasc) && FormataData.dataMenorOuIgualQueAtual(nasc));
     }
 
     public boolean isSenhaValida(String senha){
