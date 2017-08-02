@@ -57,4 +57,8 @@ public class SessaoDAO {
         return idPessoa;
     }
 
+    public void removerPessoa() {
+        feelingsDb = dbHelper.getWritableDatabase();
+        feelingsDb.delete(DataBase.TABELA_SESSAO, null, null);
+    }
 }
