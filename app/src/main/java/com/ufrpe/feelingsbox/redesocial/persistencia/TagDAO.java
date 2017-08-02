@@ -42,9 +42,31 @@ public class TagDAO {
         int indexColunaTexto = cursor.getColumnIndex(colunaTexto);
         String texto = cursor.getString(indexColunaTexto);
 
-        Tag tag = new Tag();
+        Tag tag = new Tag(texto);
         tag.setId(id);
-        tag.setTexto(texto);
+
+        return tag;
+    }
+
+    public Tag getTagTexto(String texto) { //Retorna Tag se existe, se nao, retorna null
+        feelingsDb = dbHelper.getReadableDatabase();
+
+        String query = "SELECT * FROM " + DataBase.TABELA_TAG +
+                " WHERE " + DataBase.TAG_TEXTO + " LIKE ?";
+
+        String[] argumentos = {texto};
+
+        Cursor cursor = feelingsDb.rawQuery(query, argumentos);
+
+         Tag tag = null;
+
+        if (cursor.moveToNext()) {
+
+            tag = criarTag(cursor);
+        }
+
+        cursor.close();
+        feelingsDb.close();
 
         return tag;
     }
