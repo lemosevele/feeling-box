@@ -10,6 +10,8 @@ import com.ufrpe.feelingsbox.usuario.dominio.Usuario;
 import com.ufrpe.feelingsbox.usuario.persistencia.PessoaDAO;
 import com.ufrpe.feelingsbox.usuario.persistencia.UsuarioDAO;
 
+import java.util.ArrayList;
+
 
 public class RedeServices {
     private Sessao sessao = Sessao.getInstancia();
@@ -31,6 +33,11 @@ public class RedeServices {
         post.setIdUsuario(sessao.getUsuarioLogado().getId());
         long idPost = postDAO.inserirPost(post);
         post.setId(idPost);
-
     }
+
+    public ArrayList<Post> exibirPosts(){
+        return postDAO.getPostsByOrderId();
+    }
+
+
 }

@@ -30,6 +30,8 @@ public class DataBase extends SQLiteOpenHelper {
     public static final String POST_USER_ID = "usuario_id";
     public static final String POST_TEXTO = "texto";
     public static final String POST_DATAHORA = "datahora";
+    public static final String POST_STATUS = "status"; //Post excluido ou não
+    public static final String POST_VISIVEL = "visibilidade"; //Anônimo ou não
 
     //TABELA TAG
     public static final String TABELA_TAG = "tag";
@@ -70,6 +72,8 @@ public class DataBase extends SQLiteOpenHelper {
                 ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 POST_TEXTO + " TEXT NOT NULL, " +
                 POST_DATAHORA + " TEXT NOT NULL, " +
+                POST_VISIVEL + " TEXT NOT NULL, " +
+                POST_STATUS + " TEXT NOT NULL, " +
                 POST_USER_ID + " INTEGER);");
 
         db.execSQL("CREATE TABLE " + TABELA_TAG + " (" +
@@ -82,8 +86,6 @@ public class DataBase extends SQLiteOpenHelper {
 
         db.execSQL("CREATE TABLE " + TABELA_SESSAO+ " (" +
                 ID_PESSOA + " INTEGER);");
-
-
     }
 
     //Atualização da tabela
@@ -93,22 +95,4 @@ public class DataBase extends SQLiteOpenHelper {
         db.execSQL(query);
         this.onCreate(db);
     }
-
-    public static String getColumnEmail(){
-        return USUARIO_EMAIL;
-    }
-
-    public static String getColumnNick(){
-        return USUARIO_NICK;
-    }
-
-    public static String getColumnNome(){
-        return PESSOA_NOME;
-    }
-
-    public static String getColumnSenha(){
-        return USUARIO_SENHA;
-    }
 }
-
-
