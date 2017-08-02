@@ -13,10 +13,6 @@ import com.ufrpe.feelingsbox.usuario.persistencia.UsuarioDAO;
 
 import java.util.ArrayList;
 
-/**
- * Created by Faig-PC on 27/07/2017.
- */
-
 public class PostAdapter extends ArrayAdapter<Post>{
 
     private final Context context;

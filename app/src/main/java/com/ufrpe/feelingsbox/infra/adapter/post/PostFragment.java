@@ -18,10 +18,6 @@ import com.ufrpe.feelingsbox.redesocial.gui.ActHome;
 
 import java.util.List;
 
-/**
- * Created by Faig-PC on 31/07/2017.
- */
-
 public class PostFragment extends Fragment implements RecyclerViewOnClickListenerhack{
     private RecyclerView mRecyclerView;
     private List<Post> mList;

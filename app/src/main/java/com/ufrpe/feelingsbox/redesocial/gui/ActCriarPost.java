@@ -60,7 +60,6 @@ public class ActCriarPost extends AppCompatActivity {
                     finish();
                 }
 
-
                 break;
 
             case android.R.id.home:

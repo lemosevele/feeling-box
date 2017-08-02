@@ -157,10 +157,6 @@ public class PessoaDAO {
         String sexo = pessoa.getSexo();
         values.put(colunaSexo, sexo);
 
-        /*String colunaUserId = DataBase.PESSOA_USER_ID;
-        long idUsuario = pessoa.getIdUsuario();
-        values.put(colunaUserId, idUsuario);*/
-
         String colunaDataNasc = DataBase.PESSOA_DATANASC;
         String dataNasc = pessoa.getDataNasc();
         values.put(colunaDataNasc, dataNasc);
@@ -214,14 +210,6 @@ public class PessoaDAO {
                 Pessoa pessoa = new Pessoa();
 
                 pessoa = criarPessoa(resultado);
-
-                /*
-                pessoa.setId( resultado.getLong( resultado.getColumnIndexOrThrow( DataBase.ID ) ) );
-                pessoa.setNome( resultado.getString( resultado.getColumnIndexOrThrow( DataBase.PESSOA_NOME ) ) );
-                pessoa.setDataNasc( resultado.getString( resultado.getColumnIndexOrThrow( DataBase.PESSOA_DATANASC ) ) );
-                pessoa.setSexo( resultado.getString( resultado.getColumnIndexOrThrow( DataBase.PESSOA_SEXO ) ) );
-                //pessoa.setUsuario();
-                */
 
                 listaPessoas.add(pessoa);
 

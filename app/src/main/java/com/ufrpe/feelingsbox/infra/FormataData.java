@@ -24,6 +24,13 @@ public class FormataData {
         Date dataFormatada = new Date();
         return formatoDataHora.format(dataFormatada);
     }
+
+    public static String formatarDataHoraAtualParaPostDataBase(){
+        Date date = new Date();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+        return simpleDateFormat.format(date);
+    }
+
     public static boolean dataExtiste(String data){
         SimpleDateFormat dataFormatada = new SimpleDateFormat ("dd/MM/yyyy");
         dataFormatada.setLenient (false);

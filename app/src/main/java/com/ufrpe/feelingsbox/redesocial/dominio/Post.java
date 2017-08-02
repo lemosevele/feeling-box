@@ -51,6 +51,6 @@ public class Post {
     }
 
     public void setDataHora(){
-        dataHora = FormataData.formatarDataHora();
+        dataHora = FormataData.formatarDataHoraAtualParaPostDataBase();
     }
 }
