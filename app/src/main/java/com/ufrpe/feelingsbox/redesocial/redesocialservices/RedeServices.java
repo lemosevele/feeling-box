@@ -6,6 +6,8 @@ import com.ufrpe.feelingsbox.infra.Sessao;
 import com.ufrpe.feelingsbox.redesocial.dominio.Post;
 import com.ufrpe.feelingsbox.redesocial.persistencia.PostDAO;
 
+import java.util.ArrayList;
+
 
 public class RedeServices {
     private Sessao sessao = Sessao.getInstancia();
@@ -23,6 +25,11 @@ public class RedeServices {
         post.setIdUsuario(sessao.getUsuarioLogado().getId());
         long idPost = postDAO.inserirPost(post);
         post.setId(idPost);
-
     }
+
+    public ArrayList<Post> exibirPosts(){
+        return postDAO.getPostsByOrderId();
+    }
+
+
 }
