@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.ufrpe.feelingsbox.R;
 import com.ufrpe.feelingsbox.infra.GuiUtil;
 import com.ufrpe.feelingsbox.redesocial.gui.ActHome;
@@ -29,6 +31,16 @@ public class ActLogin extends AppCompatActivity {
         //Encontrando Elemento da Tela(activity)
         edtLogin = (EditText)findViewById(R.id.edtLogin);
         edtSenha = (EditText)findViewById(R.id.edtSenha);
+
+        //Animação
+        try {
+            YoYo.with(Techniques.FadeIn)
+                    .duration(1000)
+                    .repeat(0)
+                    .playOn(findViewById(R.id.mainLayoutLogin));
+        }catch (Exception e){
+
+        }
 
     }
 

@@ -5,6 +5,8 @@
     android:id="@+id/rl_fragment_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingBottom="8dp"
+    android:paddingTop="8dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".redesocial.gui.ActHome"
     tools:showIn="@layout/act_home">

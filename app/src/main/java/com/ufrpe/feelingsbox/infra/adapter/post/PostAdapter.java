@@ -23,7 +23,7 @@ public class PostAdapter extends ArrayAdapter<Post>{
     private final ArrayList<Post> listaPost;
 
     public PostAdapter(Context context, ArrayList<Post> listaPost){
-        super(context, R.layout.post_layout_listview, listaPost);
+        super(context, R.layout.item_post_listview, listaPost);
 
         this.context = context;
         this.listaPost = listaPost;
@@ -31,7 +31,7 @@ public class PostAdapter extends ArrayAdapter<Post>{
 
     public View getView(int position, View convertView, ViewGroup parent){
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View rowView = inflater.inflate(R.layout.post_layout_listview, parent, false);
+        View rowView = inflater.inflate(R.layout.item_post_listview, parent, false);
 
         TextView txtDonoPost = (TextView)rowView.findViewById(R.id.txtDonoPost);
         TextView txtPostagem = (TextView)rowView.findViewById(R.id.txtPostagem);

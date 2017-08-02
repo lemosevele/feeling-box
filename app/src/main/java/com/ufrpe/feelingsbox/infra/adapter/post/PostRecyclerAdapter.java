@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.ufrpe.feelingsbox.R;
 import com.ufrpe.feelingsbox.redesocial.dominio.Post;
 
@@ -22,14 +24,16 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
     private LayoutInflater mLayoutInflater;
     private RecyclerViewOnClickListenerhack mRecyclerViewOnClickListenerhack;
 
+    //Construtor
     public PostRecyclerAdapter(Context context, List<Post> lista) {
         mList = lista;
         mLayoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
+    //Cria os Itens da Lista (até alguns a mais do que a tela comporta)
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = mLayoutInflater.inflate(R.layout.item_post_recyclerview, parent, false);
+        View view = mLayoutInflater.inflate(R.layout.item_post_cardview, parent, false);
         MyViewHolder mvh = new MyViewHolder(view);
 
         return mvh;
@@ -54,14 +58,26 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
         notifyItemRemoved(position);
     }
 
+    //Autaliza os itens da lista (Os que não estão visíveis)
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         //holder.ivUser.setImageResource( mList.get(position).getFoto() );
-        holder.txtDonoPost.setText( "Fulano" );
-        holder.txtPostagem.setText( mList.get(position).getTexto() );
+        holder.txtDonoPost.setText("Fulano");
+        holder.txtPostagem.setText(mList.get(position).getTexto());
+
+        //Animação
+        try {
+            YoYo.with(Techniques.ZoomIn)
+                    .duration(1000)
+                    .repeat(0)
+                    .playOn(holder.itemView);
+        }catch (Exception e){
+
+        }
 
     }
 
+    //ViewHolder personalizada
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         public ImageView ivUser;
         public TextView txtDonoPost, txtPostagem;

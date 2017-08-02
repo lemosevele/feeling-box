@@ -50,4 +50,6 @@
     <string name="edt_texto_post">Digite sua mensagem aqui...</string>
     <string name="edt_texto_tags">Digite suas tags aqui...</string>
     <string name="title_menu_postar">Postar</string>
+    <string name="exemplo_hint_usuario">Nome do Usuário</string>
+    <string name="exemplo_hint_post">Aqui será escrito o post do usuário, onde ele poderá compartilhar as suas histórias. :^{D</string>
 </resources>
