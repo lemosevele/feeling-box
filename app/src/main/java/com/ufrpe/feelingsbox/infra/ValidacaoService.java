@@ -1,29 +1,37 @@
 package com.ufrpe.feelingsbox.infra;
 
+import android.content.Context;
 import android.text.TextUtils;
 import android.util.Patterns;
 
+import com.ufrpe.feelingsbox.usuario.persistencia.UsuarioDAO;
+
 
 public class ValidacaoService {
+    private UsuarioDAO usuarioDAO;
+
+    public ValidacaoService(Context context){
+        this.usuarioDAO = new UsuarioDAO(context);
+    }
 
     public boolean isCampoVazio(String campo) {
          return (TextUtils.isEmpty(campo) || campo.trim().isEmpty());
-        }
+    }
+
     public boolean isEmail(String campo){
         return (Patterns.EMAIL_ADDRESS.matcher(campo).matches());
     }
 
     public boolean isNickValido(String nick) {
-        return  (!isCampoVazio(nick) && !isEmail(nick));
+        return  (!isCampoVazio(nick) && !isEmail(nick) && (usuarioDAO.getUsuarioEmail(nick) == null));
     }
 
     public boolean isEmailValido(String email) {
-
-        return (!isCampoVazio(email) && isEmail(email));
+        return (!isCampoVazio(email) && isEmail(email) && (usuarioDAO.getUsuarioEmail(email) == null));
     }
 
     public boolean isNascValido(String nasc) {
-        return(FormataData.dataExtiste(nasc) && FormataData.dataMenorOuIgualQueAtual(nasc));
+        return(FormataData.dataExtiste(nasc) && FormataData.dataMenorOuIgualQueAtual(nasc) && nasc.length() == 10);
     }
 
     public boolean isSenhaValida(String senha){

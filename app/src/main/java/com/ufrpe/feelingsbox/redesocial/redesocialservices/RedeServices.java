@@ -5,18 +5,26 @@ import android.content.Context;
 import com.ufrpe.feelingsbox.infra.Sessao;
 import com.ufrpe.feelingsbox.redesocial.dominio.Post;
 import com.ufrpe.feelingsbox.redesocial.persistencia.PostDAO;
+import com.ufrpe.feelingsbox.usuario.dominio.Pessoa;
+import com.ufrpe.feelingsbox.usuario.dominio.Usuario;
+import com.ufrpe.feelingsbox.usuario.persistencia.PessoaDAO;
+import com.ufrpe.feelingsbox.usuario.persistencia.UsuarioDAO;
 
 
 public class RedeServices {
     private Sessao sessao = Sessao.getInstancia();
     private Post post;
     private PostDAO postDAO;
+    private Context context;
+    private PessoaDAO pessoaDAO;
+    private UsuarioDAO usuarioDAO;
 
     public RedeServices(Context context){
-        postDAO = new PostDAO(context);
+        this.context = context;
     }
 
     public void salvarPost(String texto){
+        postDAO = new PostDAO(context);
         post = new Post();
         post.setTexto(texto);
         post.setDataHora();

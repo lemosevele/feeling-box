@@ -17,16 +17,13 @@ import com.ufrpe.feelingsbox.infra.GuiUtil;
 import com.ufrpe.feelingsbox.infra.Mask;
 import com.ufrpe.feelingsbox.usuario.usuarioservices.UsuarioService;
 import com.ufrpe.feelingsbox.infra.ValidacaoService;
-import com.ufrpe.feelingsbox.usuario.persistencia.PessoaDAO;
-import com.ufrpe.feelingsbox.usuario.persistencia.UsuarioDAO;
+
 
 import static com.ufrpe.feelingsbox.usuario.dominio.SexoEnum.SexoEnumLista;
 
 public class ActSignUp extends AppCompatActivity {
 
     //Declarando os Elementos da Tela(activity)
-    private UsuarioDAO usuarioDAO;
-    private PessoaDAO pessoaDAO;
     private EditText edtNome, edtNick, edtEmail, edtNasc, edtSenha;
     Spinner spinner;
 
@@ -82,7 +79,7 @@ public class ActSignUp extends AppCompatActivity {
         //long sexoId = spinner.getSelectedItemId();                  //Retorna o ID do elemento selecionado do Spinner
         //int sexoPosicao = spinner.getSelectedItemPosition();        //Retorna a Posição do elemento selecionado do Spinner
 
-        ValidacaoService validacaoCadastro = new ValidacaoService();
+        ValidacaoService validacaoCadastro = new ValidacaoService(getApplicationContext());
         boolean valid = true;
         if (!validacaoCadastro.isSenhaValida(senha)){
             edtSenha.requestFocus();

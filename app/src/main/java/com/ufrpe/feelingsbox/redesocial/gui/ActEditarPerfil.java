@@ -21,10 +21,11 @@ import com.ufrpe.feelingsbox.infra.Sessao;
 import com.ufrpe.feelingsbox.infra.ValidacaoService;
 import com.ufrpe.feelingsbox.usuario.dominio.Pessoa;
 import com.ufrpe.feelingsbox.usuario.dominio.Usuario;
-import com.ufrpe.feelingsbox.usuario.persistencia.PessoaDAO;
 import com.ufrpe.feelingsbox.usuario.persistencia.UsuarioDAO;
+import com.ufrpe.feelingsbox.usuario.usuarioservices.UsuarioService;
 
 import java.security.NoSuchAlgorithmException;
+import java.util.Objects;
 
 import static com.ufrpe.feelingsbox.usuario.dominio.SexoEnum.SexoEnumLista;
 
@@ -97,15 +98,16 @@ public class ActEditarPerfil extends AppCompatActivity {
 
         switch (item.getItemId()){
             case R.id.action_salvar:
-                PessoaDAO pessoaDAO = new PessoaDAO(getApplicationContext());
-                UsuarioDAO usuarioDAO = new UsuarioDAO(getApplicationContext());
                 Sessao sessao = Sessao.getInstancia();
                 Pessoa pessoaLogada = sessao.getPessoaLogada();
                 Usuario usuarioLogado = sessao.getUsuarioLogado();
-                ValidacaoService validaEdt = new ValidacaoService();
+                ValidacaoService validaEdt = new ValidacaoService(getApplicationContext());
                 boolean valid = true;
                 boolean alteracao = false;
-                pessoaLogada.setSexo(sexo);
+                if (!Objects.equals(sexo, pessoaLogada.getSexo())){
+                    pessoaLogada.setSexo(sexo);
+                    alteracao = true;
+                }
                 if (!validaEdt.isCampoVazio(senha)){
                     if (validaEdt.isSenhaValida(senha)){
                         Criptografia criptografia = new Criptografia();
@@ -136,7 +138,7 @@ public class ActEditarPerfil extends AppCompatActivity {
                     }
                 }
                 if (!validaEdt.isCampoVazio(email)) {
-                    if (validaEdt.isEmailValido(email) && (usuarioDAO.getUsuarioEmail(email)==null)) {
+                    if (validaEdt.isEmailValido(email)) {
                         usuarioLogado.setEmail(email);
                         alteracao = true;
                     }
@@ -147,7 +149,7 @@ public class ActEditarPerfil extends AppCompatActivity {
                     }
                 }
                 if (!validaEdt.isCampoVazio(nick)) {
-                    if (validaEdt.isNickValido(nick) && (usuarioDAO.getUsuarioNick(nick)==null)) {
+                    if (validaEdt.isNickValido(nick)){
                         usuarioLogado.setNick(nick);
                         alteracao = true;
                     }
@@ -163,8 +165,8 @@ public class ActEditarPerfil extends AppCompatActivity {
                 }
 
                 if (valid && alteracao){
-                    usuarioDAO.atualizarUsuario(usuarioLogado);
-                    pessoaDAO.atualizarPessoa(pessoaLogada);
+                    UsuarioService usuarioService = new UsuarioService(getApplicationContext());
+                    usuarioService.editarPerfil(pessoaLogada, usuarioLogado);
                     GuiUtil.myToast(this, "Alterações salvas.");
                     Intent intent = new Intent(ActEditarPerfil.this, ActPerfil.class);
                     startActivity(intent);

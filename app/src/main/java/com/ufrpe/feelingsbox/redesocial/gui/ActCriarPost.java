@@ -15,7 +15,7 @@ import com.ufrpe.feelingsbox.redesocial.redesocialservices.RedeServices;
 
 
 public class ActCriarPost extends AppCompatActivity {
-    private TextView edtTags, edtTexto;
+    private TextView edtTexto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +45,7 @@ public class ActCriarPost extends AppCompatActivity {
             case R.id.action_postar:
                 String texto = edtTexto.getText().toString();
 
-                ValidacaoService validarPost = new ValidacaoService();
+                ValidacaoService validarPost = new ValidacaoService(getApplicationContext());
                 boolean postVazio = false;
                 if (validarPost.isCampoVazio(texto)){
                     edtTexto.requestFocus();

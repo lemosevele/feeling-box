@@ -24,7 +24,7 @@ public class UsuarioService {
         usuarioDAO = new UsuarioDAO(context);
     }
 
-    public void cadastrar(String nome, String sexo, String DataNasc, String nick, String email, String senha) throws Exception {
+    public void cadastrar(String nome, String sexo, String nasc, String nick, String email, String senha) throws Exception {
         Usuario verificarEmail = usuarioDAO.getUsuarioEmail(email);
         Usuario verificarNick = usuarioDAO.getUsuarioNick(nick);
         if (verificarEmail != null || verificarNick != null) {
@@ -41,7 +41,7 @@ public class UsuarioService {
             pessoa = new Pessoa();
             pessoa.setNome(nome);
             pessoa.setSexo(sexo);
-            pessoa.setDataNasc(DataNasc);
+            pessoa.setDataNasc(nasc);
             pessoa.setIdUsuario(idUsuario);
             long idPessoa = pessoaDAO.inserirPessoa(pessoa);
             pessoa.setId(idPessoa);
@@ -75,5 +75,10 @@ public class UsuarioService {
             sessao.setPessoaLogada(pessoa);
             sessao.setUsuarioLogado(usuario);
         }
+    }
+
+    public void editarPerfil(Pessoa pessoaLogada, Usuario usuarioLogado){
+        pessoaDAO.atualizarPessoa(pessoaLogada);
+        usuarioDAO.atualizarUsuario(usuarioLogado);
     }
 }

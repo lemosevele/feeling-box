@@ -57,7 +57,7 @@ public class ActLogin extends AppCompatActivity {
         String login = edtLogin.getText().toString();
         String senha = edtSenha.getText().toString();
 
-        ValidacaoService validacaoLogin = new ValidacaoService();
+        ValidacaoService validacaoLogin = new ValidacaoService(getApplicationContext());
         boolean vazio = false;
         if (validacaoLogin.isCampoVazio(senha)){
             edtSenha.requestFocus();
