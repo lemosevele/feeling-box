@@ -31,17 +31,6 @@ public class SessaoDAO {
         feelingsDb.insert(DataBase.TABELA_SESSAO, null, values);
     }
 
-    // Recebe id da pessoa a ser logada e insere na tabela
-    public void inserirIdPessoa(long id){
-        feelingsDb = dbHelper.getWritableDatabase();
-
-        ContentValues values = new ContentValues();
-
-        String colunaIdPessoa = DataBase.ID_PESSOA;
-        values.put(colunaIdPessoa, id);
-
-        feelingsDb.insert(DataBase.TABELA_SESSAO, null, values);
-    }
 
     // Pesquisa idPessoa, se pessoa estiver logada retorna True, se não, retorna False
     public boolean getIdPessoaLogada(long id){
@@ -67,4 +56,5 @@ public class SessaoDAO {
 
         return idPessoa;
     }
+
 }

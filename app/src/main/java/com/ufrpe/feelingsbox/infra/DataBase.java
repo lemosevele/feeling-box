@@ -17,7 +17,6 @@ public class DataBase extends SQLiteOpenHelper {
     public static final String USUARIO_SENHA = "senha";
     public static final String USUARIO_NICK = "nick";
 
-
     //TABELA PESSOA
     public static final String TABELA_PESSOA = "pessoa";
     public static final String PESSOA_USER_ID = "usuario_id";
@@ -47,6 +46,14 @@ public class DataBase extends SQLiteOpenHelper {
     // Essa tabela só tem o ID da pessoa logada
     public static final String TABELA_SESSAO = "sessao";
     public static final String ID_PESSOA = "pessoa_id";
+
+    //TABELA COMENTÁRIO, RELACIONAMENTO ENTRE COMENTÁRIO/POST/USUÁRIO
+    public static final String TABELA_COMENTARIO = "comentario";
+    public static final String COMENTARIO_TEXTO = "texto";
+    public static final String COMENTARIO_USER_ID = "usuario_id";
+    public static final String COMENTARIO_POST_ID = "post_id";
+    public static final String COMENTARIO_STATUS = "status"; //Comentario excluido ou não
+
 
     public DataBase(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -86,6 +93,13 @@ public class DataBase extends SQLiteOpenHelper {
 
         db.execSQL("CREATE TABLE " + TABELA_SESSAO+ " (" +
                 ID_PESSOA + " INTEGER);");
+
+        db.execSQL("CREATE TABLE " + TABELA_COMENTARIO +  " (" +
+                COMENTARIO_TEXTO + " TEXT NOT NULL, " +
+                COMENTARIO_USER_ID + " INTEGER, " +
+                COMENTARIO_POST_ID + " INTEGER, " +
+                COMENTARIO_STATUS + " TEXT NOT NULL);");
+
     }
 
     //Atualização da tabela

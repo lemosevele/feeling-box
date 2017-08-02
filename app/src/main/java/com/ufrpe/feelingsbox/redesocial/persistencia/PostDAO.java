@@ -92,6 +92,9 @@ public class PostDAO {
         String dataHora = post.getDataHora();
         values.put(colunaDataHora,dataHora);
 
+        String colunaStatus = DataBase.POST_STATUS;
+        values.put(colunaStatus,"visivel"); //Inicialmente o post não está excluído, está visível
+
         String tabela = DataBase.TABELA_POST;
 
         long id = feelingsDb.insert(tabela, null, values);

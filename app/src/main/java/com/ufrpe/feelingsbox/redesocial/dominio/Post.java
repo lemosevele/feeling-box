@@ -9,6 +9,7 @@ public class Post {
     private long idUsuario;
     private long id;
     private String dataHora;
+    private ArrayList<Comentario> listaComentarios = new ArrayList<Comentario>();
 
     public String getTexto() {
         return texto;
@@ -52,5 +53,13 @@ public class Post {
 
     public void setDataHora(){
         dataHora = FormataData.formatarDataHoraAtualParaPostDataBase();
+    }
+
+    public ArrayList<Comentario> getListaComentarios() {
+        return listaComentarios;
+    }
+
+    public void setListaComentarios(ArrayList<Comentario> listaComentarios) {
+        this.listaComentarios = listaComentarios;
     }
 }
