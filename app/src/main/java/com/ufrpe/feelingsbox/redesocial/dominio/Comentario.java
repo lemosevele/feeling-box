@@ -1,11 +1,15 @@
 package com.ufrpe.feelingsbox.redesocial.dominio;
 
 
+import com.ufrpe.feelingsbox.infra.FormataData;
+
 public class Comentario {
     private String texto;
     private long id;
     private long idUsuario;
     private long idPost;
+    private String dataHora;
+
 
     public String getTexto() {
         return texto;
@@ -37,5 +41,17 @@ public class Comentario {
 
     public void setIdPost(long idPost) {
         this.idPost = idPost;
+    }
+
+    public String getDataHora() {
+        return dataHora;
+    }
+
+    public void setDataHora(String dataHora) {
+        this.dataHora = dataHora;
+    }
+
+    public void setDataHora(){
+        dataHora = FormataData.formatarDataHoraAtualParaPostDataBase();
     }
 }

@@ -35,15 +35,16 @@ public class ComentarioDAO {
         int indexColunaTexto = cursor.getColumnIndex(colunaTexto);
         String texto = cursor.getString(indexColunaTexto);
 
-        //String colunaDataHora = DataBase.COMENTARIO_DATAHORA;
-        //int indexColunaDataHora = cursor.getColumnIndex(colunaDataHora);
-        //String datahora = cursor.getString(indexColunaDataHora);
+        String colunaDataHora = DataBase.COMENTARIO_DATAHORA;
+        int indexColunaDataHora = cursor.getColumnIndex(colunaDataHora);
+        String datahora = cursor.getString(indexColunaDataHora);
 
         Comentario comentario = new Comentario();
         comentario.setId(id);
         comentario.setIdUsuario(idUsuario);
         comentario.setIdPost(idPost);
         comentario.setTexto(texto);
+        comentario.setDataHora(datahora);
 
         return comentario;
     }
@@ -66,6 +67,10 @@ public class ComentarioDAO {
 
         String colunaStatus = DataBase.COMENTARIO_STATUS;
         values.put(colunaStatus,"visivel"); //Inicialmente o comentário não está excluído, está visível
+
+        String colunaDataHora = DataBase.POST_DATAHORA;
+        String dataHora = comentario.getDataHora();
+        values.put(colunaDataHora,dataHora);
 
         String tabela = DataBase.TABELA_POST;
 

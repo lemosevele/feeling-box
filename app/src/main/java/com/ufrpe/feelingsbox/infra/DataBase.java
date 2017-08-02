@@ -53,6 +53,7 @@ public class DataBase extends SQLiteOpenHelper {
     public static final String COMENTARIO_USER_ID = "usuario_id";
     public static final String COMENTARIO_POST_ID = "post_id";
     public static final String COMENTARIO_STATUS = "status"; //Comentario excluido ou não
+    public static final String COMENTARIO_DATAHORA = "datahora";
 
 
     public DataBase(Context context) {
@@ -98,6 +99,7 @@ public class DataBase extends SQLiteOpenHelper {
                 COMENTARIO_TEXTO + " TEXT NOT NULL, " +
                 COMENTARIO_USER_ID + " INTEGER, " +
                 COMENTARIO_POST_ID + " INTEGER, " +
+                COMENTARIO_DATAHORA + " TEXT NOT NULL, " +
                 COMENTARIO_STATUS + " TEXT NOT NULL);");
 
     }
