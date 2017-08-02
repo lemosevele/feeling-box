@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.ufrpe.feelingsbox.infra.Criptografia;
 import com.ufrpe.feelingsbox.infra.Sessao;
+import com.ufrpe.feelingsbox.infra.SessaoDAO;
 import com.ufrpe.feelingsbox.usuario.persistencia.PessoaDAO;
 import com.ufrpe.feelingsbox.usuario.persistencia.UsuarioDAO;
 import com.ufrpe.feelingsbox.usuario.dominio.Usuario;
@@ -18,10 +19,12 @@ public class UsuarioService {
     private Criptografia criptografia = new Criptografia();
     private Usuario usuario;
     private Pessoa pessoa;
+    private SessaoDAO sessaoDAO;
 
     public UsuarioService(Context context) {
         pessoaDAO = new PessoaDAO(context);
         usuarioDAO = new UsuarioDAO(context);
+        sessaoDAO = new SessaoDAO(context);
     }
 
     public void cadastrar(String nome, String sexo, String DataNasc, String nick, String email, String senha) throws Exception {
@@ -59,6 +62,7 @@ public class UsuarioService {
             Pessoa pessoa = pessoaDAO.getPessoa(usuario);
             sessao.setPessoaLogada(pessoa);
             sessao.setUsuarioLogado(usuario);
+            sessaoDAO.inserirIdPessoa(sessao);
         }
     }
 
@@ -74,6 +78,8 @@ public class UsuarioService {
             Pessoa pessoa = pessoaDAO.getPessoa(usuario);
             sessao.setPessoaLogada(pessoa);
             sessao.setUsuarioLogado(usuario);
+            sessaoDAO.inserirIdPessoa(sessao);
         }
     }
 }
+
