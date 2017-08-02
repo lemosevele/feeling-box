@@ -31,7 +31,7 @@ public class ValidacaoService {
     }
 
     public boolean isNascValido(String nasc) {
-        return(FormataData.dataExtiste(nasc) && FormataData.dataMenorOuIgualQueAtual(nasc) && nasc.length() == 10);
+        return(FormataData.dataExiste(nasc) && FormataData.dataMenorOuIgualQueAtual(nasc) && nasc.length() == 10);
     }
 
     public boolean isSenhaValida(String senha){

@@ -1,9 +1,5 @@
 package com.ufrpe.feelingsbox.infra;
 
-/**
- * Essa classe insere/remove do banco todos os idPessoa logados/deslogados
- */
-
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -57,6 +53,7 @@ public class SessaoDAO {
         return idPessoa;
     }
 
+    //Encerra a sessao
     public void removerPessoa() {
         feelingsDb = dbHelper.getWritableDatabase();
         feelingsDb.delete(DataBase.TABELA_SESSAO, null, null);

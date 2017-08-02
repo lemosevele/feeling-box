@@ -40,7 +40,6 @@ public class ActCriarPost extends AppCompatActivity {
         switch (item.getItemId()){
             case R.id.action_cancelar:
                 finish();
-
                 break;
             case R.id.action_postar:
                 String texto = edtTexto.getText().toString();
@@ -49,19 +48,17 @@ public class ActCriarPost extends AppCompatActivity {
                 boolean postVazio = false;
                 if (validarPost.isCampoVazio(texto)){
                     edtTexto.requestFocus();
-                    edtTexto.setError("Digite algo para publicar.");
+                    edtTexto.setError(getString(R.string.print_erro_validacao_post_campovazio));
                     postVazio = true;
                 }
 
                 if (!postVazio){
                     RedeServices redeServices = new RedeServices(getApplicationContext());
                     redeServices.salvarPost(texto);
-                    GuiUtil.myToast(this, "Postado com sucesso.");
+                    GuiUtil.myToast(this, getString(R.string.print_msg_postado));
                     finish();
                 }
-
                 break;
-
             case android.R.id.home:
                 finish();
                 break;

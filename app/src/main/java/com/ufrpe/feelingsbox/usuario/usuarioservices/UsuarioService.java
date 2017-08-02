@@ -55,6 +55,7 @@ public class UsuarioService {
     public void logarNick(String nick, String senha) throws Exception {
         String senhaCriptografada = criptografia.criptografarSenha(senha);
         Usuario nickValido = usuarioDAO.getUsuarioNickSenha(nick, senhaCriptografada);
+
         if (nickValido == null) {
             throw new Exception("Usuário ou senha inválidos");
         } else {

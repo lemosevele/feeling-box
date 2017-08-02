@@ -25,13 +25,29 @@ public class FormataData {
         return formatoDataHora.format(dataFormatada);
     }
 
+    //Recebe uma string no formato que esta no banco e Retorna no formato para exibicao.
+    public static String formatarDataHoraPostDataBaseParaExibicao (String stringData){
+        SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("yyyyMMddHHmmss");
+        SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        simpleDateFormat1.setLenient(false);
+
+        try{
+            Date date = simpleDateFormat1.parse(stringData);
+            return simpleDateFormat2.format(date);
+        }catch (Exception e){
+            return e.getMessage();
+        }
+
+    }
+
+    //Retorna uma string data atual no formato para guardar no banco
     public static String formatarDataHoraAtualParaPostDataBase(){
         Date date = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
         return simpleDateFormat.format(date);
     }
 
-    public static boolean dataExtiste(String data){
+    public static boolean dataExiste(String data){
         SimpleDateFormat dataFormatada = new SimpleDateFormat ("dd/MM/yyyy");
         dataFormatada.setLenient (false);
 
@@ -55,10 +71,10 @@ public class FormataData {
         return false;
 
     }
+
     public static boolean dataMenorOuIgualQueAtual(String data){
         SimpleDateFormat dataFormatada = new SimpleDateFormat ("dd/MM/yyyy");
         dataFormatada.setLenient (false);
-
         //Testa no formato dd/MM/yyyy
         try {
             Date dataAtual = new Date();
@@ -72,7 +88,6 @@ public class FormataData {
 
         dataFormatada = new SimpleDateFormat ("yyyyMMdd");
         dataFormatada.setLenient (false);
-
         //Testa no formato yyyyMMdd
         try {
             Date dataAtual = new Date();

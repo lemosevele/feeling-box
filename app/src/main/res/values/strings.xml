@@ -52,4 +52,11 @@
     <string name="title_menu_postar">Postar</string>
     <string name="exemplo_hint_usuario">Nome do Usuário</string>
     <string name="exemplo_hint_post">Aqui será escrito o post do usuário, onde ele poderá compartilhar as suas histórias. :^{D</string>
+    <string name="print_erro_validacao_post_campovazio">Digite algo para publicar.</string>
+    <string name="print_msg_postado">Postado com sucesso.</string>
+    <string name="print_erro_validacao_edt_senha_invalida">Senha inválida.</string>
+    <string name="print_erro_validacao_edt_data_invalida">Data inválida.</string>
+    <string name="print_erro_validacao_edt_email_invalido">Email inválido.</string>
+    <string name="print_erro_validacao_edt_nick_invalido">Nick inválido.</string>
+    <string name="print_msg_alteracoes_salva">Alterações salvas.</string>
 </resources>

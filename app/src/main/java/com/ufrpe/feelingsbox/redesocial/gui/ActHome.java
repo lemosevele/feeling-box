@@ -10,19 +10,18 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ListView;
 
 import com.ufrpe.feelingsbox.R;
-import com.ufrpe.feelingsbox.infra.adapter.post.PostFragment;
 import com.ufrpe.feelingsbox.infra.Sessao;
+import com.ufrpe.feelingsbox.infra.adapter.post.PostFragment;
 import com.ufrpe.feelingsbox.redesocial.dominio.Post;
 import com.ufrpe.feelingsbox.usuario.dominio.Usuario;
 
 import java.util.ArrayList;
 
 public class ActHome extends AppCompatActivity {
-    private ListView lvPost;
     private FloatingActionButton fab;
+    private Sessao sessao = Sessao.getInstancia();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,21 +29,9 @@ public class ActHome extends AppCompatActivity {
         setContentView(R.layout.act_home);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
-        Sessao sessao = Sessao.getInstancia();
         Usuario usuarioLogado = sessao.getUsuarioLogado();
-
         toolbar.setTitle(usuarioLogado.getNick());
-
         setSupportActionBar(toolbar);
-
-
-        //Encontrando Elemento da Tela(activity)
-        //lvPost = (ListView) findViewById(R.id.lvPost);
-
-        //ArrayList<Post> listaPost = gerarPosts();
-        //ArrayAdapter<Post> adapter = new PostAdapter(this, listaPost);
-        //lvPost.setAdapter(adapter);
-
 
         //Botão Flutuante
         fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -115,6 +102,7 @@ public class ActHome extends AppCompatActivity {
 
                 break;
             case R.id.action_sair:
+                //TODO Apagar a sessao do banco antes de finalizar a tela
                 finish();
                 break;
             

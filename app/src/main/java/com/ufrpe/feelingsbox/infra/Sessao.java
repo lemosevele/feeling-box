@@ -3,10 +3,6 @@ package com.ufrpe.feelingsbox.infra;
 import com.ufrpe.feelingsbox.usuario.dominio.Pessoa;
 import com.ufrpe.feelingsbox.usuario.dominio.Usuario;
 
-/**
- * Criada para manter o status do usuário
- */
-
 public class Sessao {
     private static Sessao instancia = new Sessao();
     private Pessoa pessoaLogada = null;
@@ -25,9 +21,7 @@ public class Sessao {
         this.pessoaLogada = novaPessoa;
     }
 
-    public Usuario getUsuarioLogado() {
-        return usuarioLogado;
-    }
+    public Usuario getUsuarioLogado() { return usuarioLogado; }
 
     public void setUsuarioLogado(Usuario novoUsuario) {
         this.usuarioLogado = novoUsuario;

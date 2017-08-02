@@ -21,7 +21,6 @@ import com.ufrpe.feelingsbox.infra.Sessao;
 import com.ufrpe.feelingsbox.infra.ValidacaoService;
 import com.ufrpe.feelingsbox.usuario.dominio.Pessoa;
 import com.ufrpe.feelingsbox.usuario.dominio.Usuario;
-import com.ufrpe.feelingsbox.usuario.persistencia.UsuarioDAO;
 import com.ufrpe.feelingsbox.usuario.usuarioservices.UsuarioService;
 
 import java.security.NoSuchAlgorithmException;
@@ -33,6 +32,7 @@ import static com.ufrpe.feelingsbox.usuario.dominio.SexoEnum.SexoEnumLista;
 public class ActEditarPerfil extends AppCompatActivity {
     private EditText edtNomePerfil, edtNickPerfil, edtEmailPerfil, edtNascPerfil, edtSenhaPerfil;
     private Spinner spnSexoPerfil;
+    private Sessao sessao = Sessao.getInstancia();
 
     //Lista para por no Spinner
     private String[] listaSexo = SexoEnumLista();
@@ -61,7 +61,8 @@ public class ActEditarPerfil extends AppCompatActivity {
         spnSexoPerfil = (Spinner)findViewById(R.id.spnSexoPerfil);
         spnSexoPerfil.setAdapter(adapter);
         //Setando o valor inicial do Spinner
-        spnSexoPerfil.setSelection(adapter.getPosition("Masculino"));
+        String stringSexo = sessao.getPessoaLogada().getSexo();
+        spnSexoPerfil.setSelection(adapter.getPosition(stringSexo));
 
         //Metodo para quando um elemento do Spinner é selecionado()
         spnSexoPerfil.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
@@ -98,7 +99,6 @@ public class ActEditarPerfil extends AppCompatActivity {
 
         switch (item.getItemId()){
             case R.id.action_salvar:
-                Sessao sessao = Sessao.getInstancia();
                 Pessoa pessoaLogada = sessao.getPessoaLogada();
                 Usuario usuarioLogado = sessao.getUsuarioLogado();
                 ValidacaoService validaEdt = new ValidacaoService(getApplicationContext());
@@ -122,7 +122,7 @@ public class ActEditarPerfil extends AppCompatActivity {
                     }
                     else{
                         edtSenhaPerfil.requestFocus();
-                        edtSenhaPerfil.setError("Senha inválida.");
+                        edtSenhaPerfil.setError(getString(R.string.print_erro_validacao_edt_senha_invalida));
                         valid = false;
                     }
                 }
@@ -133,7 +133,7 @@ public class ActEditarPerfil extends AppCompatActivity {
                     }
                     else{
                         edtNascPerfil.requestFocus();
-                        edtNascPerfil.setError("Data inválida.");
+                        edtNascPerfil.setError(getString(R.string.print_erro_validacao_edt_data_invalida));
                         valid = false;
                     }
                 }
@@ -144,7 +144,7 @@ public class ActEditarPerfil extends AppCompatActivity {
                     }
                     else {
                         edtEmailPerfil.requestFocus();
-                        edtEmailPerfil.setError("Email inválido.");
+                        edtEmailPerfil.setError(getString(R.string.print_erro_validacao_edt_email_invalido));
                         valid = false;
                     }
                 }
@@ -155,7 +155,7 @@ public class ActEditarPerfil extends AppCompatActivity {
                     }
                     else {
                         edtNickPerfil.requestFocus();
-                        edtNickPerfil.setError("Nick inválido.");
+                        edtNickPerfil.setError(getString(R.string.print_erro_validacao_edt_nick_invalido));
                         valid = false;
                     }
                 }
@@ -167,7 +167,7 @@ public class ActEditarPerfil extends AppCompatActivity {
                 if (valid && alteracao){
                     UsuarioService usuarioService = new UsuarioService(getApplicationContext());
                     usuarioService.editarPerfil(pessoaLogada, usuarioLogado);
-                    GuiUtil.myToast(this, "Alterações salvas.");
+                    GuiUtil.myToast(this, getString(R.string.print_msg_alteracoes_salva));
                     Intent intent = new Intent(ActEditarPerfil.this, ActPerfil.class);
                     startActivity(intent);
                 }

@@ -16,6 +16,7 @@ import com.ufrpe.feelingsbox.usuario.dominio.Usuario;
 
 public class ActPerfil extends AppCompatActivity {
     private TextView txtNome, txtNicK, txtNasc, txtSexo, txtEmail;
+    private Sessao sessao = Sessao.getInstancia();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +26,6 @@ public class ActPerfil extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        Sessao sessao = Sessao.getInstancia();
         Pessoa pessoaLogada = sessao.getPessoaLogada();
         Usuario usuarioLogado = sessao.getUsuarioLogado();
 
@@ -40,10 +40,6 @@ public class ActPerfil extends AppCompatActivity {
         txtNasc.setText(pessoaLogada.getDataNasc());
         txtSexo.setText(pessoaLogada.getSexo());
         txtEmail.setText(usuarioLogado.getEmail());
-
-
-        //TODO Setar o texto com os dados do Usuário das variáveis TextView acima.
-
 
     }
 
