@@ -7,13 +7,9 @@ import com.ufrpe.feelingsbox.redesocial.dominio.Post;
 import com.ufrpe.feelingsbox.redesocial.dominio.Tag;
 import com.ufrpe.feelingsbox.redesocial.persistencia.PostDAO;
 import com.ufrpe.feelingsbox.redesocial.persistencia.TagDAO;
-import com.ufrpe.feelingsbox.usuario.dominio.Pessoa;
-import com.ufrpe.feelingsbox.usuario.dominio.Usuario;
-import com.ufrpe.feelingsbox.usuario.persistencia.PessoaDAO;
-import com.ufrpe.feelingsbox.usuario.persistencia.UsuarioDAO;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -23,14 +19,12 @@ public class RedeServices {
     private Post post;
     private PostDAO postDAO;
     private Context context;
-    private PessoaDAO pessoaDAO;
-    private UsuarioDAO usuarioDAO;
 
-    public RedeServices(Context context){
+    public RedeServices(Context context) {
         this.context = context;
     }
 
-    public void salvarPost(String texto){
+    public void salvarPost(String texto) {
         postDAO = new PostDAO(context);
         post = new Post();
         post.setTexto(texto);
@@ -49,7 +43,7 @@ public class RedeServices {
             String hashTagStr = matcher.group(1);
             Tag tag = new Tag(hashTagStr);
             listaTags.add(tag);
-            if (tagDAO.getTagTexto(texto) == null){
+            if (tagDAO.getTagTexto(texto) == null) {
                 tagDAO.inserirTag(tag);
             }
             //ToDo chamar a função de setar a relação post-tag que ainda n existe
@@ -58,9 +52,8 @@ public class RedeServices {
 
     }
 
-    public ArrayList<Post> exibirPosts(){
+    public List<Post> exibirPosts() {
+        postDAO = new PostDAO(context);
         return postDAO.getPostsByOrderId();
     }
-
-
 }

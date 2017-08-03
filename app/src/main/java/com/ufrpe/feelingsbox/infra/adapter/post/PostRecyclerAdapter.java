@@ -12,6 +12,8 @@ import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.ufrpe.feelingsbox.R;
 import com.ufrpe.feelingsbox.redesocial.dominio.Post;
+import com.ufrpe.feelingsbox.redesocial.redesocialservices.RedeServices;
+import com.ufrpe.feelingsbox.usuario.usuarioservices.UsuarioService;
 
 import java.util.List;
 
@@ -23,6 +25,7 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
     private List<Post> mList;
     private LayoutInflater mLayoutInflater;
     private RecyclerViewOnClickListenerhack mRecyclerViewOnClickListenerhack;
+    private UsuarioService usuarioService;
 
     //Construtor
     public PostRecyclerAdapter(Context context, List<Post> lista) {
@@ -62,7 +65,10 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         //holder.ivUser.setImageResource( mList.get(position).getFoto() );
-        holder.txtDonoPost.setText("Fulano");
+        usuarioService = new UsuarioService(mLayoutInflater.getContext());
+        long idUsuario = mList.get(position).getIdUsuario();
+        String nickUsuario = usuarioService.buscarNick(idUsuario) ;
+        holder.txtDonoPost.setText(nickUsuario);
         holder.txtPostagem.setText(mList.get(position).getTexto());
 
         //Animação

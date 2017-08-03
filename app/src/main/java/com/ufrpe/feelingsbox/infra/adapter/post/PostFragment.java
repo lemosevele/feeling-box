@@ -15,12 +15,14 @@ import com.ufrpe.feelingsbox.R;
 import com.ufrpe.feelingsbox.infra.GuiUtil;
 import com.ufrpe.feelingsbox.redesocial.dominio.Post;
 import com.ufrpe.feelingsbox.redesocial.gui.ActHome;
+import com.ufrpe.feelingsbox.redesocial.redesocialservices.RedeServices;
 
 import java.util.List;
 
 public class PostFragment extends Fragment implements RecyclerViewOnClickListenerhack{
     private RecyclerView mRecyclerView;
     private List<Post> mList;
+    private RedeServices redeServices;
 
     //Setando o RecyclerView
     @Override
@@ -43,10 +45,10 @@ public class PostFragment extends Fragment implements RecyclerViewOnClickListene
                 PostRecyclerAdapter adapter = (PostRecyclerAdapter) mRecyclerView.getAdapter();
 
                 if(mList.size() == llm.findLastCompletelyVisibleItemPosition() + 1){
-                        List<Post> listaAux = ActHome.gerarPosts();
+                    List<Post> listaAux = redeServices.exibirPosts();
 
                     for (int i = 0; i < listaAux.size(); i++){
-                        adapter.addListItem( listaAux.get(i), mList.size() );
+                        adapter.addListItem(listaAux.get(i), mList.size() );
 
                     }
 
@@ -60,7 +62,8 @@ public class PostFragment extends Fragment implements RecyclerViewOnClickListene
         //llm.setReverseLayout(true);
         mRecyclerView.setLayoutManager(llm);
 
-        mList = ActHome.gerarPosts();
+        redeServices = new RedeServices(getActivity());
+        mList = redeServices.exibirPosts();
         PostRecyclerAdapter adapter = new PostRecyclerAdapter(getActivity(), mList);
         //adapter.setRecyclerViewOnClickListenerhack(this);
         mRecyclerView.setAdapter(adapter);

@@ -87,6 +87,9 @@ public class UsuarioService {
         pessoaDAO.atualizarPessoa(pessoaLogada);
         usuarioDAO.atualizarUsuario(usuarioLogado);
     }
+
+    public String buscarNick(long id){
+       usuario = usuarioDAO.getUsuarioNick(id);
+        return usuario.getNick();
+    }
 }
-
-

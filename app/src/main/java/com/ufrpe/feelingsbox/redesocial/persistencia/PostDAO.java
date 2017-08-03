@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.ufrpe.feelingsbox.infra.DataBase;
 import com.ufrpe.feelingsbox.redesocial.dominio.Post;
@@ -106,9 +107,9 @@ public class PostDAO {
 
     //Retorna lista de posts, ordenados pelo id
 
-    public ArrayList<Post> getPostsByOrderId (){
+    public List<Post> getPostsByOrderId (){
         feelingsDb = dbHelper.getReadableDatabase();
-        ArrayList<Post> listaPosts = new ArrayList<Post>();
+        List<Post> listaPosts = new ArrayList<Post>();
 
         String query = "SELECT * FROM " + DataBase.TABELA_POST + " ORDER BY " + DataBase.ID + " DESC";
 

@@ -87,6 +87,30 @@ public class UsuarioDAO {
         return usuario;
     }
 
+    public Usuario getUsuarioNick(long id){
+        feelingsDb = dbHelper.getReadableDatabase();
+
+        String query = "SELECT * FROM " + DataBase.TABELA_USUARIO +
+                " WHERE " + DataBase.ID + " LIKE ?";
+
+        String idString = Long.toString(id);
+        String[] argumentos = {idString};
+
+        Cursor cursor = feelingsDb.rawQuery(query, argumentos);
+
+        Usuario usuario = null;
+
+        if(cursor.moveToNext()){
+
+            usuario = criarUsuario(cursor);
+        }
+
+        cursor.close();
+        feelingsDb.close();
+
+        return usuario;
+    }
+
     public Usuario getUsuarioId(long id){
         feelingsDb = dbHelper.getReadableDatabase();
 
