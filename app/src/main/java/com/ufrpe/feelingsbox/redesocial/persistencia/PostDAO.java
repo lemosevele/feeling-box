@@ -117,6 +117,7 @@ public class PostDAO {
             Post post = criarPost(cursor);
             listaPosts.add(post);
         }
+        feelingsDb.close();
         return listaPosts;
     }
 }
