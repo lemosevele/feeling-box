@@ -59,4 +59,6 @@
     <string name="print_erro_validacao_edt_email_invalido">Email inválido.</string>
     <string name="print_erro_validacao_edt_nick_invalido">Nick inválido.</string>
     <string name="print_msg_alteracoes_salva">Alterações salvas.</string>
+    <string name="btn_comentar">Comentar</string>
+    <string name="exemplo_hint_comentario">A vida é como uma câmera. Foque no que é importante, capture bons momentos, desenvolva a vida a partir de negativos. E, se as coisas não derem certo, tire outra foto.</string>
 </resources>

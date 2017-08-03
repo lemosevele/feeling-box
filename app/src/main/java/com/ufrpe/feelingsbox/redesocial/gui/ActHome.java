@@ -102,7 +102,7 @@ public class ActHome extends AppCompatActivity {
 
                 break;
             case R.id.action_sair:
-                //TODO Apagar a sessao do banco antes de finalizar a tela
+
                 finish();
                 break;
             

@@ -93,6 +93,10 @@ public class PostDAO {
         String dataHora = post.getDataHora();
         values.put(colunaDataHora,dataHora);
 
+        String colunaVisibilidade = DataBase.POST_VISIVEL;
+        String visibilidade = "publico";
+        values.put(colunaVisibilidade,visibilidade);
+
         String colunaStatus = DataBase.POST_STATUS;
         values.put(colunaStatus,"visivel"); //Inicialmente o post não está excluído, está visível
 
