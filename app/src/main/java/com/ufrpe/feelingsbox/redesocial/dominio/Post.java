@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class Post {
     private String texto;
-    private ArrayList<Tag> listaTags = new ArrayList<Tag>();
+    private ArrayList<String> listaTags = new ArrayList<String>();
     private long idUsuario;
     private long id;
     private String dataHora;
@@ -19,11 +19,11 @@ public class Post {
         this.texto = texto;
     }
 
-    public ArrayList<Tag> getListaTags() {
+    public ArrayList<String> getListaTags() {
         return listaTags;
     }
 
-    public void setListaTags(ArrayList<Tag> listaTags) {
+    public void setListaTags(ArrayList<String> listaTags) {
         this.listaTags = listaTags;
     }
 
@@ -51,15 +51,11 @@ public class Post {
         this.dataHora = dataHora;
     }
 
-    public void setDataHora(){
+    public void setDataHora() {
         dataHora = FormataData.formatarDataHoraAtualParaPostDataBase();
     }
 
     public ArrayList<Comentario> getListaComentarios() {
         return listaComentarios;
-    }
-
-    public void setListaComentarios(ArrayList<Comentario> listaComentarios) {
-        this.listaComentarios = listaComentarios;
     }
 }

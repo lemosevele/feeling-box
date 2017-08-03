@@ -5,7 +5,6 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.ufrpe.feelingsbox.redesocial.dominio.Tag;
 import com.ufrpe.feelingsbox.infra.DataBase;
 
 public class TagDAO {
@@ -17,13 +16,12 @@ public class TagDAO {
         dbHelper = new DataBase(context);
     }
 
-    public long inserirTag(Tag tag){
+    public long inserirTag(String tag){
         feelingsDb = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
 
         String colunaTexto =  DataBase.TAG_TEXTO;
-        String texto = tag.getTexto();
-        values.put(colunaTexto, texto);
+        values.put(colunaTexto, tag);
 
         String tabela = DataBase.TABELA_TAG;
         long id = feelingsDb.insert(tabela, null, values);
@@ -33,22 +31,13 @@ public class TagDAO {
         return id;
     }
 
-    public Tag criarTag(Cursor cursor){
-        String colunaId = DataBase.ID;
-        int indexColunaId= cursor.getColumnIndex(colunaId);
-        long id = cursor.getInt(indexColunaId);
-
+    public String criarTag(Cursor cursor){
         String colunaTexto = DataBase.TAG_TEXTO;
         int indexColunaTexto = cursor.getColumnIndex(colunaTexto);
-        String texto = cursor.getString(indexColunaTexto);
-
-        Tag tag = new Tag(texto);
-        tag.setId(id);
-
-        return tag;
+        return cursor.getString(indexColunaTexto);
     }
 
-    public Tag getTagTexto(String texto) { //Retorna Tag se existe, se nao, retorna null
+    public String getTagTexto(String texto) {        //Retorna Tag se existe, se nao, retorna null
         feelingsDb = dbHelper.getReadableDatabase();
 
         String query = "SELECT * FROM " + DataBase.TABELA_TAG +
@@ -58,7 +47,7 @@ public class TagDAO {
 
         Cursor cursor = feelingsDb.rawQuery(query, argumentos);
 
-         Tag tag = null;
+        String tag = null;
 
         if (cursor.moveToNext()) {
 

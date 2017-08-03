@@ -4,11 +4,10 @@ import android.content.Context;
 
 import com.ufrpe.feelingsbox.infra.Sessao;
 import com.ufrpe.feelingsbox.redesocial.dominio.Post;
-import com.ufrpe.feelingsbox.redesocial.dominio.Tag;
+import com.ufrpe.feelingsbox.redesocial.persistencia.PosTagDAO;
 import com.ufrpe.feelingsbox.redesocial.persistencia.PostDAO;
 import com.ufrpe.feelingsbox.redesocial.persistencia.TagDAO;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -34,20 +33,17 @@ public class RedeServices {
         post.setId(idPost);
 
         TagDAO tagDAO = new TagDAO(context);
-        ArrayList<Tag> listaTags = new ArrayList<Tag>();
+        PosTagDAO posTagDAO = new PosTagDAO(context);
         String regexHashTag = "(#\\w+)";
 
         Pattern pattern = Pattern.compile(regexHashTag);
         Matcher matcher = pattern.matcher(texto);
         while (matcher.find()) {
             String hashTagStr = matcher.group(1);
-            Tag tag = new Tag(hashTagStr);
-            listaTags.add(tag);
-            if (tagDAO.getTagTexto(texto) == null) {
-                tagDAO.inserirTag(tag);
+            if (tagDAO.getTagTexto(hashTagStr) == null) {
+                tagDAO.inserirTag(hashTagStr);
             }
-            //ToDo chamar a função de setar a relação post-tag que ainda n existe
-
+            posTagDAO.inserirTagIdPost(hashTagStr, idPost);
         }
 
     }

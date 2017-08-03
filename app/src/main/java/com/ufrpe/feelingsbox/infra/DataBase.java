@@ -38,7 +38,7 @@ public class DataBase extends SQLiteOpenHelper {
 
     //TABELA DE RELACIONAMENTO ENTRE TAG E POST
     public static final String TABELA_REL_TAG_POST = "relacionamento";
-    public static final String REL_ID_TAG = "tag_id";
+    public static final String REL_TEXTO_TAG = "tag_texto";
     public static final String REL_ID_POST = "post_id";
 
     //TABELA DE SESSAO DO USUARIO
@@ -89,7 +89,7 @@ public class DataBase extends SQLiteOpenHelper {
                 ID + " INTEGER PRIMARY KEY AUTOINCREMENT);");
 
         db.execSQL("CREATE TABLE " + TABELA_REL_TAG_POST + " (" +
-                REL_ID_TAG + " INTEGER, " +
+                REL_TEXTO_TAG + " TEXT NOT NULL, " +
                 REL_ID_POST + " INTEGER);");
 
         db.execSQL("CREATE TABLE " + TABELA_SESSAO+ " (" +
