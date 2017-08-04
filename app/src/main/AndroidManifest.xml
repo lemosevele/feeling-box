@@ -50,7 +50,11 @@
         <activity
             android:name=".redesocial.gui.ActCriarPost"
             android:label="@string/title_activity_act_criar_post"
-            android:theme="@style/MyAppTheme.NoActionBar"></activity>
+            android:theme="@style/MyAppTheme.NoActionBar" />
+        <activity
+            android:name=".redesocial.gui.ActCriarComentario"
+            android:label="@string/title_activity_act_criar_comentario"
+            android:theme="@style/MyAppTheme"></activity>
     </application>
 
 </manifest>

@@ -168,18 +168,30 @@ public class ActEditarPerfil extends AppCompatActivity {
                     UsuarioService usuarioService = new UsuarioService(getApplicationContext());
                     usuarioService.editarPerfil(pessoaLogada, usuarioLogado);
                     GuiUtil.myToast(this, getString(R.string.print_msg_alteracoes_salva));
-                    Intent intent = new Intent(ActEditarPerfil.this, ActPerfil.class);
-                    startActivity(intent);
+                    retornaPerfil();
                 }
 
                 break;
             case R.id.action_cancelar:
-                finish();
+                retornaPerfil();
                 break;
             case android.R.id.home:
-                finish();
+                retornaPerfil();
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        retornaPerfil();
+        super.onBackPressed();
+    }
+
+    private void retornaPerfil(){
+        Intent intent = new Intent(this, ActPerfil.class);
+        startActivity(intent);
+        finish();
+
     }
 }

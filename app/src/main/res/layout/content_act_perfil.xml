@@ -18,7 +18,8 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@color/colorItemBackground"
             android:orientation="vertical">
 
             <LinearLayout
@@ -81,6 +82,12 @@
 
             </LinearLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="12dp"
+                android:background="@color/colorBtnYellow" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -94,7 +101,7 @@
                     android:layout_weight="1"
                     android:paddingLeft="16dp"
                     android:paddingTop="8dp"
-                    android:text="Nome:"
+                    android:text="Nome"
                     android:textSize="18sp" />
 
                 <TextView
@@ -107,6 +114,12 @@
                     android:text="Nome do Usuário"
                     android:textSize="18sp" />
             </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="12dp"
+                android:background="@color/colorBtnYellow" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -135,6 +148,12 @@
                     android:textSize="18sp" />
             </LinearLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="12dp"
+                android:background="@color/colorBtnYellow" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -161,6 +180,12 @@
                     android:text="12/12/2017"
                     android:textSize="18sp" />
             </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="12dp"
+                android:background="@color/colorBtnYellow" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -190,6 +215,12 @@
 
             </LinearLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="12dp"
+                android:background="@color/colorBtnYellow" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -217,6 +248,12 @@
                     android:text="Email@Email.com"
                     android:textSize="18sp" />
             </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="12dp"
+                android:background="@color/colorBtnYellow" />
 
         </LinearLayout>
     </ScrollView>

@@ -21,7 +21,9 @@
     <color name="colorUserFont">#101010</color>
     <color name="colorPostFont">#363636</color>
 
-    <color name="colorBoxBackground">#d7d7d7</color>
+    <color name="colorBoxBackground">#e1e1e1</color>
+    <color name="colorItemBackground">#ffffff</color>
+
 
 
 

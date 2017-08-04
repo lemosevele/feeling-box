@@ -1,5 +1,6 @@
 package com.ufrpe.feelingsbox.redesocial.gui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -39,7 +40,7 @@ public class ActCriarPost extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.action_cancelar:
-                finish();
+                retornaHome();
                 break;
             case R.id.action_postar:
                 String texto = edtTexto.getText().toString();
@@ -56,14 +57,27 @@ public class ActCriarPost extends AppCompatActivity {
                     RedeServices redeServices = new RedeServices(getApplicationContext());
                     redeServices.salvarPost(texto);
                     GuiUtil.myToast(this, getString(R.string.print_msg_postado));
-                    finish();
+                    retornaHome();
                 }
                 break;
             case android.R.id.home:
-                finish();
+                retornaHome();
                 break;
 
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        retornaHome();
+        super.onBackPressed();
+    }
+
+    private void retornaHome(){
+        Intent intent = new Intent(this, ActHome.class);
+        startActivity(intent);
+        finish();
+
     }
 }

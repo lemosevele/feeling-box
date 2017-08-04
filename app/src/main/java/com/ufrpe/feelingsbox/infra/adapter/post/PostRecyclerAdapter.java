@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -12,14 +13,9 @@ import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.ufrpe.feelingsbox.R;
 import com.ufrpe.feelingsbox.redesocial.dominio.Post;
-import com.ufrpe.feelingsbox.redesocial.redesocialservices.RedeServices;
 import com.ufrpe.feelingsbox.usuario.usuarioservices.UsuarioService;
 
 import java.util.List;
-
-/**
- * Created by Faig-PC on 31/07/2017.
- */
 
 public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapter.MyViewHolder> {
     private List<Post> mList;
@@ -37,9 +33,9 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = mLayoutInflater.inflate(R.layout.item_post_cardview, parent, false);
-        MyViewHolder mvh = new MyViewHolder(view);
+        MyViewHolder myViewHolder = new MyViewHolder(view);
 
-        return mvh;
+        return myViewHolder;
     }
 
     @Override
@@ -87,16 +83,20 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         public ImageView ivUser;
         public TextView txtDonoPost, txtPostagem;
+        public Button btnComentar;
 
 
-        public MyViewHolder(View itemView) {
+        public MyViewHolder(final View itemView) {
             super(itemView);
 
             ivUser      = (ImageView) itemView.findViewById(R.id.ivUser);
             txtDonoPost = (TextView) itemView.findViewById(R.id.txtDonoPost);
             txtPostagem = (TextView) itemView.findViewById(R.id.txtPostagem);
+            btnComentar = (Button) itemView.findViewById(R.id.btnComentar);
 
+            btnComentar.setOnClickListener(this);
             itemView.setOnClickListener(this);
+
         }
 
         @Override

@@ -7,46 +7,37 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.TextView;
+import android.widget.EditText;
 
 import com.ufrpe.feelingsbox.R;
-import com.ufrpe.feelingsbox.infra.Sessao;
-import com.ufrpe.feelingsbox.usuario.dominio.Pessoa;
-import com.ufrpe.feelingsbox.usuario.dominio.Usuario;
+import com.ufrpe.feelingsbox.infra.GuiUtil;
 
-public class ActPerfil extends AppCompatActivity {
-    private TextView txtNome, txtNicK, txtNasc, txtSexo, txtEmail;
-    private Sessao sessao = Sessao.getInstancia();
+public class ActCriarComentario extends AppCompatActivity {
+    private EditText edtComentario;
+    private Long idPost;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.act_perfil);
+        setContentView(R.layout.act_criar_comentario);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        Pessoa pessoaLogada = sessao.getPessoaLogada();
-        Usuario usuarioLogado = sessao.getUsuarioLogado();
-
-        txtNome = (TextView) findViewById(R.id.txtNome);
-        txtNicK = (TextView) findViewById(R.id.txtNick);
-        txtNasc = (TextView) findViewById(R.id.txtNasc);
-        txtSexo = (TextView) findViewById(R.id.txtSexo);
-        txtEmail = (TextView) findViewById(R.id.txtEmail);
-
-        txtNome.setText(pessoaLogada.getNome());
-        txtNicK.setText(usuarioLogado.getNick());
-        txtNasc.setText(pessoaLogada.getDataNasc());
-        txtSexo.setText(pessoaLogada.getSexo());
-        txtEmail.setText(usuarioLogado.getEmail());
+        //Encontrando elementos
+        edtComentario = (EditText) findViewById(R.id.edtComentario);
 
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_act_perfil, menu);
+        inflater.inflate(R.menu.menu_act_criar_comentario, menu);
+
+        Bundle extras = getIntent().getExtras();
+        if(extras != null){
+            idPost = extras.getLong("idPost");
+        }
 
         return super.onCreateOptionsMenu(menu);
     }
@@ -54,11 +45,11 @@ public class ActPerfil extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
-            case R.id.action_editar:
-                Intent intent = new Intent(this, ActEditarPerfil.class);
-                startActivity(intent);
-                finish();
-
+            case R.id.action_comentar:
+                GuiUtil.myToastShort(this, idPost.toString());
+                break;
+            case R.id.action_cancelar:
+                retornarHome();
                 break;
             case android.R.id.home:
                 retornarHome();
@@ -72,7 +63,6 @@ public class ActPerfil extends AppCompatActivity {
         retornarHome();
         super.onBackPressed();
     }
-
     private void retornarHome(){
         Intent intent = new Intent(this, ActHome.class);
         startActivity(intent);

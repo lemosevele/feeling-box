@@ -1,6 +1,7 @@
 package com.ufrpe.feelingsbox.infra.adapter.post;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,9 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.ufrpe.feelingsbox.R;
-import com.ufrpe.feelingsbox.infra.GuiUtil;
 import com.ufrpe.feelingsbox.redesocial.dominio.Post;
-import com.ufrpe.feelingsbox.redesocial.gui.ActHome;
+import com.ufrpe.feelingsbox.redesocial.gui.ActCriarComentario;
 import com.ufrpe.feelingsbox.redesocial.redesocialservices.RedeServices;
 
 import java.util.List;
@@ -37,14 +37,14 @@ public class PostFragment extends Fragment implements RecyclerViewOnClickListene
                 super.onScrollStateChanged(recyclerView, newState);
             }
 
-            @Override
+            /*@Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
 
-                LinearLayoutManager llm = (LinearLayoutManager) mRecyclerView.getLayoutManager();
+                LinearLayoutManager mLinearLayoutManager = (LinearLayoutManager) mRecyclerView.getLayoutManager();
                 PostRecyclerAdapter adapter = (PostRecyclerAdapter) mRecyclerView.getAdapter();
 
-                if(mList.size() == llm.findLastCompletelyVisibleItemPosition() + 1){
+                if(mList.size() == mLinearLayoutManager.findLastCompletelyVisibleItemPosition() + 1){
                     List<Post> listaAux = redeServices.exibirPosts();
 
                     for (int i = 0; i < listaAux.size(); i++){
@@ -53,19 +53,19 @@ public class PostFragment extends Fragment implements RecyclerViewOnClickListene
                     }
 
                 }
-            }
+            }*/
         });
-        mRecyclerView.addOnItemTouchListener(new RecyclerViewTouchListener(getActivity(), mRecyclerView, this));
 
-        LinearLayoutManager llm = new LinearLayoutManager(getActivity());
-        llm.setOrientation(LinearLayoutManager.VERTICAL);
-        //llm.setReverseLayout(true);
-        mRecyclerView.setLayoutManager(llm);
+        //mRecyclerView.addOnItemTouchListener(new RecyclerViewTouchListener(getActivity(), mRecyclerView, this));
+
+        LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(getActivity());
+        mLinearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        mRecyclerView.setLayoutManager(mLinearLayoutManager);
 
         redeServices = new RedeServices(getActivity());
         mList = redeServices.exibirPosts();
         PostRecyclerAdapter adapter = new PostRecyclerAdapter(getActivity(), mList);
-        //adapter.setRecyclerViewOnClickListenerhack(this);
+        adapter.setRecyclerViewOnClickListenerhack(this);
         mRecyclerView.setAdapter(adapter);
 
         return view;
@@ -74,14 +74,21 @@ public class PostFragment extends Fragment implements RecyclerViewOnClickListene
     //Click Normal
     @Override
     public void onClickListener(View view, int position) {
-        GuiUtil.myToastShort(getActivity(), "onClickListener " + "Posição " + position);
+        switch (view.getId()){
+            case R.id.btnComentar:
+                Intent intent = new Intent(view.getContext(), ActCriarComentario.class);
+                intent.putExtra("idPost", mList.get(position).getId());
+                startActivity(intent);
+
+                break;
+            case -1:
+                break;
+        }
 
     }
     //Click longo
     @Override
     public void onLongPressClickListener(View view, int position) {
-        GuiUtil.myToastShort(getActivity(), "onLongPressClickListener " + "Posição " + position);
-
         PostRecyclerAdapter adapter = (PostRecyclerAdapter) mRecyclerView.getAdapter();
         adapter.removeListItem(position);
     }
@@ -92,12 +99,14 @@ public class PostFragment extends Fragment implements RecyclerViewOnClickListene
         private GestureDetector mGestureDetector;
         private RecyclerViewOnClickListenerhack mRecyclerViewOnClickListenerhack;
 
+
+
         //Construtor
         public RecyclerViewTouchListener(Context mContext, final RecyclerView recyclerView, final RecyclerViewOnClickListenerhack mRecyclerViewOnClickListenerhack) {
             this.mContext = mContext;
             this.mRecyclerViewOnClickListenerhack = mRecyclerViewOnClickListenerhack;
 
-            mGestureDetector = new GestureDetector(mContext, new GestureDetector.SimpleOnGestureListener(){
+                    mGestureDetector = new GestureDetector(mContext, new GestureDetector.SimpleOnGestureListener(){
                 @Override
                 public void onLongPress(MotionEvent e) {
                     super.onLongPress(e);

@@ -40,6 +40,7 @@ public class ActHome extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(ActHome.this, ActCriarPost.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -99,10 +100,9 @@ public class ActHome extends AppCompatActivity {
             case R.id.action_perfil:
                 Intent it = new Intent(ActHome.this, ActPerfil.class);
                 startActivity(it);
-
+                finish();
                 break;
             case R.id.action_sair:
-
                 finish();
                 break;
             

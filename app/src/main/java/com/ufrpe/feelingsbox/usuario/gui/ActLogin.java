@@ -4,8 +4,8 @@ package com.ufrpe.feelingsbox.usuario.gui;
  */
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 
@@ -13,9 +13,9 @@ import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.ufrpe.feelingsbox.R;
 import com.ufrpe.feelingsbox.infra.GuiUtil;
+import com.ufrpe.feelingsbox.infra.ValidacaoService;
 import com.ufrpe.feelingsbox.redesocial.gui.ActHome;
 import com.ufrpe.feelingsbox.usuario.usuarioservices.UsuarioService;
-import com.ufrpe.feelingsbox.infra.ValidacaoService;
 
 public class ActLogin extends AppCompatActivity {
 
