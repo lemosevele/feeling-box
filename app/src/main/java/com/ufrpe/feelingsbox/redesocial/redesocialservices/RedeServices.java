@@ -2,8 +2,8 @@ package com.ufrpe.feelingsbox.redesocial.redesocialservices;
 
 import android.content.Context;
 
-import com.ufrpe.feelingsbox.infra.Sessao;
 import com.ufrpe.feelingsbox.redesocial.dominio.Post;
+import com.ufrpe.feelingsbox.redesocial.dominio.Sessao;
 import com.ufrpe.feelingsbox.redesocial.persistencia.PosTagDAO;
 import com.ufrpe.feelingsbox.redesocial.persistencia.PostDAO;
 import com.ufrpe.feelingsbox.redesocial.persistencia.TagDAO;

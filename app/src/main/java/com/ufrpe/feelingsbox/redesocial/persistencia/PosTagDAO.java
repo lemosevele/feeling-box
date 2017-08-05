@@ -7,13 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.ufrpe.feelingsbox.infra.DataBase;
 import com.ufrpe.feelingsbox.redesocial.dominio.Post;
-import com.ufrpe.feelingsbox.usuario.dominio.Usuario;
 
 import java.util.ArrayList;
-
-/**
- * Created by Everton on 03/08/2017.
- */
 
 public class PosTagDAO {
     private DataBase dbHelper;
@@ -37,7 +32,7 @@ public class PosTagDAO {
 
         Cursor cursor = feelingsDb.rawQuery(query, argumentos);
 
-        String tag = null;
+        String tag;
         ArrayList<String> listaTags = new ArrayList<String>();
 
         while (cursor.moveToNext()){

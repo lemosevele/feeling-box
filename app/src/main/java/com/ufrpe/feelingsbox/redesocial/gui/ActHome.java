@@ -12,15 +12,14 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.ufrpe.feelingsbox.R;
-import com.ufrpe.feelingsbox.infra.Sessao;
 import com.ufrpe.feelingsbox.infra.adapter.post.PostFragment;
 import com.ufrpe.feelingsbox.redesocial.dominio.Post;
+import com.ufrpe.feelingsbox.redesocial.dominio.Sessao;
 import com.ufrpe.feelingsbox.usuario.dominio.Usuario;
 
 import java.util.ArrayList;
 
 public class ActHome extends AppCompatActivity {
-    private FloatingActionButton fab;
     private Sessao sessao = Sessao.getInstancia();
 
     @Override
@@ -34,7 +33,7 @@ public class ActHome extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         //Botão Flutuante
-        fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

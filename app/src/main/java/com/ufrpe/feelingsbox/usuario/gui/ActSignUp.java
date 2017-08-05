@@ -25,7 +25,7 @@ public class ActSignUp extends AppCompatActivity {
 
     //Declarando os Elementos da Tela(activity)
     private EditText edtNome, edtNick, edtEmail, edtNasc, edtSenha;
-    Spinner spinner;
+    private Spinner spinner;
 
     //Lista para por no Spinner
     private String[] listaSexo = SexoEnumLista();

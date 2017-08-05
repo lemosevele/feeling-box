@@ -7,6 +7,10 @@ import java.util.TimeZone;
 
 
 public class FormataData {
+    private static final String DATA_POST_BANCO = "yyyyMMddHHmmss";
+    private static final String DATA_POST_GUI = "dd/MM/yyyy HH:mm:ss";
+    private static final String DATA_COMUM_GUI = "dd/MM/yyyy";
+    private static final String DATA_COMUM_BANCO = "yyyyMMdd";
 
     //Recebe data no formato 01/10/2000 -> 20001001
     public static String americano(String data){
@@ -19,7 +23,7 @@ public class FormataData {
     }
 
     public static String formatarDataHora(){
-        SimpleDateFormat formatoDataHora = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        SimpleDateFormat formatoDataHora = new SimpleDateFormat(DATA_POST_GUI);
         formatoDataHora.setTimeZone(TimeZone.getTimeZone("GMT-03:00"));
         Date dataFormatada = new Date();
         return formatoDataHora.format(dataFormatada);
@@ -27,8 +31,8 @@ public class FormataData {
 
     //Recebe uma string no formato que esta no banco e Retorna no formato para exibicao.
     public static String formatarDataHoraPostDataBaseParaExibicao (String stringData){
-        SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("yyyyMMddHHmmss");
-        SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat(DATA_POST_BANCO);
+        SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat(DATA_POST_GUI);
         simpleDateFormat1.setLenient(false);
 
         try{
@@ -43,12 +47,12 @@ public class FormataData {
     //Retorna uma string data atual no formato para guardar no banco
     public static String formatarDataHoraAtualParaPostDataBase(){
         Date date = new Date();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DATA_POST_BANCO);
         return simpleDateFormat.format(date);
     }
 
     public static boolean dataExiste(String data){
-        SimpleDateFormat dataFormatada = new SimpleDateFormat ("dd/MM/yyyy");
+        SimpleDateFormat dataFormatada = new SimpleDateFormat (DATA_COMUM_GUI);
         dataFormatada.setLenient (false);
 
         //Testa no formato dd/MM/yyyy
@@ -58,7 +62,7 @@ public class FormataData {
         } catch (Exception e) {
         }
 
-        dataFormatada = new SimpleDateFormat ("yyyyMMdd");
+        dataFormatada = new SimpleDateFormat (DATA_COMUM_BANCO);
         dataFormatada.setLenient (false);
 
         //Testa no formato yyyyMMdd
@@ -73,7 +77,7 @@ public class FormataData {
     }
 
     public static boolean dataMenorOuIgualQueAtual(String data){
-        SimpleDateFormat dataFormatada = new SimpleDateFormat ("dd/MM/yyyy");
+        SimpleDateFormat dataFormatada = new SimpleDateFormat (DATA_COMUM_GUI);
         dataFormatada.setLenient (false);
         //Testa no formato dd/MM/yyyy
         try {
@@ -86,7 +90,7 @@ public class FormataData {
         } catch (Exception e) {
         }
 
-        dataFormatada = new SimpleDateFormat ("yyyyMMdd");
+        dataFormatada = new SimpleDateFormat (DATA_COMUM_BANCO);
         dataFormatada.setLenient (false);
         //Testa no formato yyyyMMdd
         try {

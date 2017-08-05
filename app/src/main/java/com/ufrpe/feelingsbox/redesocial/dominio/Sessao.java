@@ -1,4 +1,4 @@
-package com.ufrpe.feelingsbox.infra;
+package com.ufrpe.feelingsbox.redesocial.dominio;
 
 import com.ufrpe.feelingsbox.usuario.dominio.Pessoa;
 import com.ufrpe.feelingsbox.usuario.dominio.Usuario;

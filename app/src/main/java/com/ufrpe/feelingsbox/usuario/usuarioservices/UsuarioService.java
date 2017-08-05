@@ -3,8 +3,8 @@ package com.ufrpe.feelingsbox.usuario.usuarioservices;
 import android.content.Context;
 
 import com.ufrpe.feelingsbox.infra.Criptografia;
-import com.ufrpe.feelingsbox.infra.Sessao;
-import com.ufrpe.feelingsbox.infra.SessaoDAO;
+import com.ufrpe.feelingsbox.redesocial.dominio.Sessao;
+import com.ufrpe.feelingsbox.redesocial.persistencia.SessaoDAO;
 import com.ufrpe.feelingsbox.usuario.persistencia.PessoaDAO;
 import com.ufrpe.feelingsbox.usuario.persistencia.UsuarioDAO;
 import com.ufrpe.feelingsbox.usuario.dominio.Usuario;

@@ -1,4 +1,4 @@
-package com.ufrpe.feelingsbox.infra;
+package com.ufrpe.feelingsbox.redesocial.persistencia;
 
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -6,6 +6,8 @@ import android.database.sqlite.SQLiteDatabase;
 
 import android.content.Context;
 
+import com.ufrpe.feelingsbox.infra.DataBase;
+import com.ufrpe.feelingsbox.redesocial.dominio.Sessao;
 
 public class SessaoDAO {
     private DataBase dbHelper;
