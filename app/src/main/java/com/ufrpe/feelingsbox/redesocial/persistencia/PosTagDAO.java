@@ -19,6 +19,7 @@ public class PosTagDAO {
     public PosTagDAO(Context context){
         this.tagDAO = new TagDAO(context);
         this.postDAO = new PostDAO(context);
+        this.dbHelper = new DataBase(context);
     }
 
     public ArrayList<String> getTagsPost(long idPost) {

@@ -13,11 +13,8 @@ import android.view.View;
 
 import com.ufrpe.feelingsbox.R;
 import com.ufrpe.feelingsbox.infra.adapter.post.PostFragment;
-import com.ufrpe.feelingsbox.redesocial.dominio.Post;
 import com.ufrpe.feelingsbox.redesocial.dominio.Sessao;
 import com.ufrpe.feelingsbox.usuario.dominio.Usuario;
-
-import java.util.ArrayList;
 
 public class ActHome extends AppCompatActivity {
     private Sessao sessao = Sessao.getInstancia();
@@ -51,37 +48,6 @@ public class ActHome extends AppCompatActivity {
             ft.replace(R.id.rl_fragment_container, frag, "mainFrag");
             ft.commit();
         }
-
-    }
-
-    public static ArrayList<Post> gerarPosts(){
-        ArrayList<Post> listaPost = new ArrayList<Post>();
-
-        Post post = new Post();
-        post.setTexto("As melhores coisas da vida são gratuitas: abraços, sorrisos, amigos, beijos, família, dormir, amor, risos e boas lembranças.");
-        listaPost.add(post);
-
-        post = new Post();
-        post.setTexto("É pra frente que se anda, é pra cima que se olha e é lutando que se conquista.");
-        listaPost.add(post);
-
-        post = new Post();
-        post.setTexto("Treine sua mente para ver o lado bom de qualquer situação.");
-        listaPost.add(post);
-
-        post = new Post();
-        post.setTexto("Creio de coração que tudo nesta vida se renova. Tudo recomeça, tudo renasce, tudo avança. Creio no bem e na força maior que nos move. Creio em dias de paz e que a felicidade acontece quando nos colocamos a favor de todo o bem, em tudo e para todos.");
-        listaPost.add(post);
-
-        post = new Post();
-        post.setTexto("Um dia você ainda vai olhar para trás e ver que os problemas eram, na verdade, os degraus que te levaram à vitória.");
-        listaPost.add(post);
-
-        post = new Post();
-        post.setTexto("Cuidemos do nosso coração porque é de lá que sai o que é bom e ruim, o que constrói e destrói.");
-        listaPost.add(post);
-
-        return listaPost;
 
     }
 
