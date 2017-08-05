@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.ufrpe.feelingsbox.R;
+import com.ufrpe.feelingsbox.infra.FormataData;
 import com.ufrpe.feelingsbox.redesocial.dominio.Post;
 import com.ufrpe.feelingsbox.usuario.usuarioservices.UsuarioService;
 
@@ -66,6 +67,8 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
         String nickUsuario = usuarioService.buscarNick(idUsuario) ;
         holder.txtDonoPost.setText(nickUsuario);
         holder.txtPostagem.setText(mList.get(position).getTexto());
+        String data = FormataData.tempoParaMostrarEmPost(mList.get(position).getDataHora());
+        holder.txtData.setText(data);
 
         //Animação
         try {
@@ -82,7 +85,7 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
     //ViewHolder personalizada
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         public ImageView ivUser;
-        public TextView txtDonoPost, txtPostagem;
+        public TextView txtDonoPost, txtPostagem, txtData;
         public Button btnComentar;
 
 
@@ -92,6 +95,7 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
             ivUser      = (ImageView) itemView.findViewById(R.id.ivUser);
             txtDonoPost = (TextView) itemView.findViewById(R.id.txtDonoPost);
             txtPostagem = (TextView) itemView.findViewById(R.id.txtPostagem);
+            txtData     = (TextView) itemView.findViewById(R.id.txtData);
             btnComentar = (Button) itemView.findViewById(R.id.btnComentar);
 
             btnComentar.setOnClickListener(this);

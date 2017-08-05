@@ -44,25 +44,34 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="16dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="10dp"
             android:layout_toRightOf="@+id/ivUser"
             android:hint="@string/exemplo_hint_usuario"
             android:textColor="@color/colorUserFont"
-            android:textSize="16sp"
+            android:textSize="18sp"
             android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txtData"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtDonoPost"
+            android:layout_toRightOf="@+id/ivUser"
+            android:hint="@string/exemplo_hint_data"
+            android:textColor="@color/colorPostDataFont"
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/txtPostagem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/txtDonoPost"
-            android:layout_marginBottom="8dp"
+            android:layout_below="@+id/txtData"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="8dp"
             android:hint="@string/exemplo_hint_post"
             android:textColor="@color/colorPostFont"
-            android:textSize="12sp" />
+            android:textSize="14sp" />
 
         <Button
             android:id="@+id/btnComentar"

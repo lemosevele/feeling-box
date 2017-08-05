@@ -63,4 +63,5 @@
     <string name="exemplo_hint_comentario">A vida é como uma câmera. Foque no que é importante, capture bons momentos, desenvolva a vida a partir de negativos. E, se as coisas não derem certo, tire outra foto.</string>
     <string name="title_activity_act_criar_comentario">Criar Comentário</string>
     <string name="title_menu_comentar">Comentar</string>
+    <string name="exemplo_hint_data">01/01/2017 às 12:12:00</string>
 </resources>

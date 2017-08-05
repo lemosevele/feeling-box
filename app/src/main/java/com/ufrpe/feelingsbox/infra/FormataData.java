@@ -1,16 +1,28 @@
 package com.ufrpe.feelingsbox.infra;
 
 
+import android.util.Log;
+
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
 
 
 public class FormataData {
-    private static final String DATA_POST_BANCO = "yyyyMMddHHmmss";
-    private static final String DATA_POST_GUI = "dd/MM/yyyy HH:mm:ss";
-    private static final String DATA_COMUM_GUI = "dd/MM/yyyy";
+    private static final String DATA_POST_BANCO  = "yyyyMMddHHmmss";
+    private static final String DATA_POST_GUI    = "dd/MM/yyyy HH:mm:ss";
+    private static final String DATA_COMUM_GUI   = "dd/MM/yyyy";
     private static final String DATA_COMUM_BANCO = "yyyyMMdd";
+
+    private static final int SEGUNDO = 1000;
+    private static final int MINUTO = 60000;
+    private static final int HORA = 3600000;
+    private static final int DIA = 86400000;
+    private static final int SEMANA = 604800000;
+    private static final long MES = 2592000000l;
+    private static final long ANO = 31536000000l;
+
 
     //Recebe data no formato 01/10/2000 -> 20001001
     public static String americano(String data){
@@ -104,5 +116,44 @@ public class FormataData {
         }
 
         return false;
+    }
+    public static String tempoParaMostrarEmPost(String data){
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat (DATA_POST_BANCO);
+        Date datainicio = new Date();
+        Date datafim = new Date();
+        try {
+            datainicio = simpleDateFormat.parse(data);
+        } catch (ParseException e) {
+            Log.d("tempoParaMostrarEmPost", e.getMessage());
+        }
+
+        long diferenca = datafim.getTime() - datainicio.getTime();
+        String tempo;
+
+        if(diferenca < MINUTO){
+            tempo = Long.toString(diferenca/ SEGUNDO);
+            tempo = "Há " + tempo + (tempo.equals("1") ? " segundo":" segundos");
+        } else if(diferenca < HORA){
+            tempo = Long.toString(diferenca/ MINUTO);
+            tempo = "Há " + tempo + (tempo.equals("1") ? " minuto":" minutos");
+        } else if(diferenca < DIA){
+            tempo = Long.toString(diferenca/ HORA);
+            tempo = "Há " + tempo + (tempo.equals("1") ? " hora":" horas");
+        } else if(diferenca < SEMANA){
+            tempo = Long.toString(diferenca/ DIA);
+            tempo = "Há " + tempo + (tempo.equals("1") ? " dia":" dias");
+        } else if(diferenca < MES){
+            tempo = Long.toString(diferenca/ SEMANA);
+            tempo = "Há " + tempo + (tempo.equals("1") ? " semana":" semanas");
+        } else if(diferenca < ANO){
+            tempo = Long.toString(diferenca/ MES);
+            tempo = "Há " + tempo + (tempo.equals("1") ? " mês":" meses");
+        } else {
+            simpleDateFormat = new SimpleDateFormat(DATA_POST_GUI);
+            tempo = "em " + simpleDateFormat.format(datainicio);
+
+        }
+        return tempo;
     }
 }

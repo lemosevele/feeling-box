@@ -10,7 +10,7 @@
     <color name="colorToolBarDark2">#e5ad06</color>       <!-- Amarelo Sombra (Talvez não seja necessário) -->
 
     <color name="colorFontLogo">#03a9f4</color>
-    <color name="colorFontSubtitle">#c0c0C0</color>
+    <color name="colorFontSubtitle">#c0c0c0</color>
     <color name="colorFontNormalLight">#ffffff</color>
     <color name="colorFontNormalDark">#000000</color>
 
@@ -20,6 +20,7 @@
 
     <color name="colorUserFont">#101010</color>
     <color name="colorPostFont">#363636</color>
+    <color name="colorPostDataFont">#808080</color>
 
     <color name="colorBoxBackground">#e1e1e1</color>
     <color name="colorItemBackground">#ffffff</color>
