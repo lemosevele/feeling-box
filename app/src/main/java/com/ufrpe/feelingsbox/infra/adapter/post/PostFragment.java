@@ -79,6 +79,7 @@ public class PostFragment extends Fragment implements RecyclerViewOnClickListene
                 Intent intent = new Intent(view.getContext(), ActCriarComentario.class);
                 intent.putExtra("idPost", mList.get(position).getId());
                 startActivity(intent);
+                getActivity().finish();
 
                 break;
             case -1:
