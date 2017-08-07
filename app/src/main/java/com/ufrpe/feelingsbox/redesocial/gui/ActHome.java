@@ -12,9 +12,11 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.ufrpe.feelingsbox.R;
-import com.ufrpe.feelingsbox.infra.adapter.post.PostFragment;
 import com.ufrpe.feelingsbox.redesocial.dominio.Sessao;
+import com.ufrpe.feelingsbox.infra.adapter.post.PostFragment;
+import com.ufrpe.feelingsbox.redesocial.redesocialservices.RedeServices;
 import com.ufrpe.feelingsbox.usuario.dominio.Usuario;
+
 
 public class ActHome extends AppCompatActivity {
     private Sessao sessao = Sessao.getInstancia();
@@ -68,6 +70,8 @@ public class ActHome extends AppCompatActivity {
                 finish();
                 break;
             case R.id.action_sair:
+                RedeServices redeServices = new RedeServices(getApplicationContext());
+                redeServices.finalizarSessao();
                 finish();
                 break;
             

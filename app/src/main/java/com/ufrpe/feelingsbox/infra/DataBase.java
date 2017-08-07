@@ -37,7 +37,7 @@ public class DataBase extends SQLiteOpenHelper {
     public static final String TAG_TEXTO = "texto";
 
     //TABELA DE RELACIONAMENTO ENTRE TAG E POST
-    public static final String TABELA_REL_TAG_POST = "relacionamento";
+    public static final String TABELA_REL_TAG_POST = "tag_post";
     public static final String REL_TEXTO_TAG = "tag_texto";
     public static final String REL_ID_POST = "post_id";
 

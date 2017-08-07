@@ -2,10 +2,11 @@ package com.ufrpe.feelingsbox.redesocial.redesocialservices;
 
 import android.content.Context;
 
-import com.ufrpe.feelingsbox.redesocial.dominio.Post;
 import com.ufrpe.feelingsbox.redesocial.dominio.Sessao;
+import com.ufrpe.feelingsbox.redesocial.dominio.Post;
 import com.ufrpe.feelingsbox.redesocial.persistencia.PosTagDAO;
 import com.ufrpe.feelingsbox.redesocial.persistencia.PostDAO;
+import com.ufrpe.feelingsbox.redesocial.persistencia.SessaoDAO;
 import com.ufrpe.feelingsbox.redesocial.persistencia.TagDAO;
 
 import java.util.List;
@@ -41,9 +42,9 @@ public class RedeServices {
         while (matcher.find()) {
             String hashTagStr = matcher.group(1);
             if (tagDAO.getTagTexto(hashTagStr) == null) {
-                tagDAO.inserirTag(hashTagStr);
+                tagDAO.inserirTag(hashTagStr.toLowerCase());
             }
-            posTagDAO.inserirTagIdPost(hashTagStr, idPost);
+            posTagDAO.inserirTagIdPost(hashTagStr.toLowerCase(), idPost);
         }
 
     }
@@ -51,5 +52,10 @@ public class RedeServices {
     public List<Post> exibirPosts() {
         postDAO = new PostDAO(context);
         return postDAO.getPostsByOrderId();
+    }
+
+    public void finalizarSessao(){
+        SessaoDAO sessaoDAO = new SessaoDAO(context);
+        sessaoDAO.removerPessoa();
     }
 }

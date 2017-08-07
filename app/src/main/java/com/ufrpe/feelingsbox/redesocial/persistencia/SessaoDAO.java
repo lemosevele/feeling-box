@@ -9,6 +9,7 @@ import android.content.Context;
 import com.ufrpe.feelingsbox.infra.DataBase;
 import com.ufrpe.feelingsbox.redesocial.dominio.Sessao;
 
+
 public class SessaoDAO {
     private DataBase dbHelper;
     private SQLiteDatabase feelingsDb;
