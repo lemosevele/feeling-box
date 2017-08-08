@@ -79,4 +79,3 @@ public class ActHome extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 }
-//

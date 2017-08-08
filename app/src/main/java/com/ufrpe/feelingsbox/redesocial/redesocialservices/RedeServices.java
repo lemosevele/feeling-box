@@ -58,5 +58,9 @@ public class RedeServices {
         SessaoDAO sessaoDAO = new SessaoDAO(context);
         sessaoDAO.removerPessoa();
     }
+
+    public List<Post> buscarPosts(String tag){
+        PosTagDAO posTagDAO = new PosTagDAO(context);
+       return posTagDAO.getPostByTag(tag);
+    }
 }
-//

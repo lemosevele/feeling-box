@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper; // Cria banco de dados
 //Classe responsável por criar o banco de dados
 public class DataBase extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 3;
     private static final String DATABASE_NAME = "dbfeelingsbox";
 
     // TABELA USUÁRIO
@@ -84,10 +84,10 @@ public class DataBase extends SQLiteOpenHelper {
                 POST_USER_ID + " INTEGER);");
 
         db.execSQL("CREATE TABLE " + TABELA_TAG + " (" +
-                TAG_TEXTO + " TEXT NOT NULL, " +
-                ID + " INTEGER PRIMARY KEY AUTOINCREMENT);");
+                TAG_TEXTO + " TEXT NOT NULL);");
 
         db.execSQL("CREATE TABLE " + TABELA_REL_TAG_POST + " (" +
+                ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 REL_TEXTO_TAG + " TEXT NOT NULL, " +
                 REL_ID_POST + " INTEGER);");
 
