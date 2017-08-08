@@ -20,32 +20,6 @@ public class PostDAO {
         dbHelper = new DataBase(context);
     }
 
-    // Passa o id do post e retorna o post
-
-    public Post getPostId(long id){
-        feelingsDb = dbHelper.getReadableDatabase();
-
-        String query = "SELECT * FROM " + DataBase.TABELA_POST +
-                " WHERE " + DataBase.ID + " LIKE ?";
-
-        String idString = Long.toString(id);
-        String[] argumentos = {idString};
-
-        Cursor cursor = feelingsDb.rawQuery(query, argumentos);
-
-        Post post = null;
-
-        if(cursor.moveToNext()){
-
-            post = criarPost(cursor);
-        }
-
-        cursor.close();
-        feelingsDb.close();
-
-        return post;
-    }
-
     // Cria objeto post passando o cursor, retorna objeto post criado
 
     public Post criarPost(Cursor cursor){

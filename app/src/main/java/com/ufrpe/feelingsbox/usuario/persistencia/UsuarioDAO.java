@@ -111,30 +111,6 @@ public class UsuarioDAO {
         return usuario;
     }
 
-    public Usuario getUsuarioId(long id){
-        feelingsDb = dbHelper.getReadableDatabase();
-
-        String query = "SELECT * FROM " + DataBase.TABELA_USUARIO +
-                " WHERE " + DataBase.ID + " LIKE ?";
-
-        String idString = Long.toString(id);
-        String[] argumentos = {idString};
-
-        Cursor cursor = feelingsDb.rawQuery(query, argumentos);
-
-        Usuario usuario = null;
-
-        if(cursor.moveToNext()){
-
-            usuario = criarUsuario(cursor);
-        }
-
-        cursor.close();
-        feelingsDb.close();
-
-        return usuario;
-    }
-
     public Usuario getUsuarioEmail(String email) {
         feelingsDb = dbHelper.getReadableDatabase();
 
@@ -243,17 +219,4 @@ public class UsuarioDAO {
         return id;
     }
 
-    //Deleta o Usuário na Tabela Usuario
-    public int deletarUsuario(Usuario usuario){
-        String tabela = DataBase.TABELA_USUARIO;
-        String whereClause = DataBase.ID + " = ?";
-        String[] parametros = new String[1];
-        parametros[0] = String.valueOf(usuario.getId());
-
-        int id = feelingsDb.delete(tabela, whereClause , parametros);
-
-        feelingsDb.close();
-
-        return id;
-    }
 }

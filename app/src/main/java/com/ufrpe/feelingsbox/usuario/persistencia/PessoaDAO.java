@@ -9,10 +9,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import java.util.ArrayList;
-import java.util.List;
-
-
 public class PessoaDAO {
 
     private DataBase dbHelper;
@@ -118,32 +114,6 @@ public class PessoaDAO {
         return pessoa;
     }
 
-    // Busca obj Pessoa na TABELA_PESSOA passando o Id
-
-    public Pessoa getPessoa(long id){
-        feelingsDb = dbHelper.getReadableDatabase();
-
-        String query = "SELECT * FROM " + DataBase.TABELA_PESSOA +
-                " WHERE " + DataBase.ID + " LIKE ?";
-
-        String idString = Long.toString(id);
-        String[] argumentos = {idString};
-
-        Cursor cursor = feelingsDb.rawQuery(query, argumentos);
-
-        Pessoa pessoa = null;
-
-        if (cursor.moveToNext()) {
-
-            pessoa = criarPessoa(cursor);
-
-        }
-        cursor.close();
-        feelingsDb.close();
-
-        return pessoa;
-
-    }
     //Atualiza o Pessoa na Tabela Pessoa
     public long atualizarPessoa(Pessoa pessoa){
         feelingsDb = dbHelper.getWritableDatabase();
@@ -172,50 +142,5 @@ public class PessoaDAO {
         feelingsDb.close();
 
         return id;
-    }
-    //Deleta o Pessoa na Tabela Pessoa
-    public long deletarPessoa(Pessoa pessoa){
-        String tabela = DataBase.TABELA_PESSOA;
-        String whereClause = DataBase.ID + " = ?";
-        String[] parametros = new String[1];
-        parametros[0] = String.valueOf(pessoa.getId());
-
-        long id = feelingsDb.delete(tabela, whereClause , parametros);
-
-        feelingsDb.close();
-
-        return id;
-    }
-    public List<Pessoa> buscarTodosPessoa(){
-        feelingsDb = dbHelper.getReadableDatabase();
-
-        List<Pessoa>  listaPessoas = new ArrayList<Pessoa>();
-
-        StringBuilder sql = new StringBuilder();
-        sql.append(" SELECT ");
-        sql.append(DataBase.ID + ", ");
-        sql.append(DataBase.PESSOA_NOME + ", ");
-        sql.append(DataBase.PESSOA_DATANASC + ", ");
-        sql.append(DataBase.PESSOA_SEXO + ", ");
-        sql.append(DataBase.PESSOA_USER_ID + " ");
-        sql.append("  FROM ");
-        sql.append(DataBase.TABELA_PESSOA + " ");
-
-        Cursor resultado = feelingsDb.rawQuery(sql.toString(), null);
-
-        if(resultado.getCount() > 0){
-            resultado.moveToFirst();
-
-            do{
-                Pessoa pessoa = new Pessoa();
-
-                pessoa = criarPessoa(resultado);
-
-                listaPessoas.add(pessoa);
-
-            }while(resultado.moveToNext());
-        }
-
-        return listaPessoas;
     }
 }

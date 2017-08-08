@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper; // Cria banco de dados
 //Classe responsável por criar o banco de dados
 public class DataBase extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
     private static final String DATABASE_NAME = "dbfeelingsbox";
 
     // TABELA USUÁRIO
@@ -60,7 +60,6 @@ public class DataBase extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
-    //Criação da tabela
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE " + TABELA_USUARIO + " (" +
@@ -109,6 +108,29 @@ public class DataBase extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){
         String query = "DROP TABLE IF EXISTS " + TABELA_USUARIO;
         db.execSQL(query);
+
+        String query1 = "DROP TABLE IF EXISTS " + TABELA_COMENTARIO;
+        db.execSQL(query1);
+
+        String query2 = "DROP TABLE IF EXISTS " + TABELA_POST;
+        db.execSQL(query2);
+
+        String query3 = "DROP TABLE IF EXISTS " + TABELA_PESSOA;
+        db.execSQL(query3);
+
+        String query4 = "DROP TABLE IF EXISTS " + TABELA_TAG;
+        db.execSQL(query4);
+
+        String query5 = "DROP TABLE IF EXISTS " + TABELA_REL_TAG_POST;
+        db.execSQL(query5);
+
+        String query6 = "DROP TABLE IF EXISTS " + TABELA_SESSAO;
+        db.execSQL(query6);
+
         this.onCreate(db);
+
+
     }
+
+
 }
