@@ -12,14 +12,12 @@ import android.database.sqlite.SQLiteDatabase;
 public class PessoaDAO {
 
     private DataBase dbHelper;
-    private UsuarioDAO usuarioDAO;
     private SQLiteDatabase feelingsDb;
 
 
     public PessoaDAO(Context context){
 
         dbHelper = new DataBase(context);
-        usuarioDAO = new UsuarioDAO(context);
     }
 
     // Cursor percorre as colunas da TABELA_PESSOA e cria Objeto Pessoa
