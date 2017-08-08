@@ -17,6 +17,8 @@ import java.util.regex.Pattern;
 public class RedeServices {
     private Sessao sessao = Sessao.getInstancia();
     private Post post;
+    private PosTagDAO posTagDAO;
+    private SessaoDAO sessaoDAO;
     private PostDAO postDAO;
     private Context context;
 
@@ -55,12 +57,17 @@ public class RedeServices {
     }
 
     public void finalizarSessao(){
-        SessaoDAO sessaoDAO = new SessaoDAO(context);
+        sessaoDAO = new SessaoDAO(context);
         sessaoDAO.removerPessoa();
     }
 
     public List<Post> buscarPosts(String tag){
-        PosTagDAO posTagDAO = new PosTagDAO(context);
-       return posTagDAO.getPostByTag(tag);
+        posTagDAO = new PosTagDAO(context);
+        return posTagDAO.getPostByTag(tag);
+    }
+
+    public List<Post> exibirPosts(long id){
+        postDAO = new PostDAO(context);
+        return postDAO.getPostByUser(id);
     }
 }

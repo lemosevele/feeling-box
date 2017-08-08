@@ -51,7 +51,8 @@ public class PosTagDAO {
         feelingsDb = dbHelper.getReadableDatabase();
 
         String query = "SELECT * FROM " + DataBase.TABELA_REL_TAG_POST +
-                " WHERE " + DataBase.REL_TEXTO_TAG + " LIKE ?";
+            " ORDER BY " + DataBase.ID + " DESC" +
+            " WHERE " + DataBase.REL_TEXTO_TAG + " LIKE ?";
 
         String[] argumentos = {tag};
 

@@ -20,8 +20,8 @@ public class FormataData {
     private static final int HORA = 3600000;
     private static final int DIA = 86400000;
     private static final int SEMANA = 604800000;
-    private static final long MES = 2592000000l;
-    private static final long ANO = 31536000000l;
+    private static final long MES = 2592000000L;
+    private static final long ANO = 31536000000L;
 
 
     //Recebe data no formato 01/10/2000 -> 20001001
