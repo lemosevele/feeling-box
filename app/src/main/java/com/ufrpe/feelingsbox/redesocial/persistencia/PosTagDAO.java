@@ -24,6 +24,7 @@ public class PosTagDAO {
 
     public ArrayList<Post> getPostByTag(String tag) {
         feelingsDb = dbHelper.getReadableDatabase();
+        ArrayList<Post> listaPost = new ArrayList<>();
 
         String query = "SELECT * FROM " + DataBase.TABELA_REL_TAG_POST +
             " WHERE " + DataBase.REL_TEXTO_TAG + " LIKE ?" +
@@ -32,8 +33,6 @@ public class PosTagDAO {
         String[] argumentos = {tag};
 
         Cursor cursor = feelingsDb.rawQuery(query, argumentos);
-
-        ArrayList<Post> listaPost = new ArrayList<>();
 
         while (cursor.moveToNext()){
             long idPost = cursor.getColumnIndex("post_id");

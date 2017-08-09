@@ -89,9 +89,11 @@ public class PostDAO {
         feelingsDb = dbHelper.getReadableDatabase();
         List<Post> listaPosts = new ArrayList<>();
 
-        String query = "SELECT * FROM " + DataBase.TABELA_POST + " ORDER BY " + DataBase.ID + " DESC";
+        String query = "SELECT * FROM " + DataBase.TABELA_POST +
+                " ORDER BY " + DataBase.ID + " DESC";
 
         Cursor cursor = feelingsDb.rawQuery(query, null);
+
         while (cursor.moveToNext()){
             Post post = criarPost(cursor);
             listaPosts.add(post);
@@ -128,6 +130,7 @@ public class PostDAO {
 
     public List<Post> getPostByUser(long id){
         feelingsDb = dbHelper.getReadableDatabase();
+        ArrayList<Post> postUser = new ArrayList<>();
 
         String query = "SELECT * FROM " + DataBase.TABELA_POST +
                 " WHERE " + DataBase.POST_USER_ID + " LIKE ?" +
@@ -137,8 +140,6 @@ public class PostDAO {
         String[] argumentos = {idString};
 
         Cursor cursor = feelingsDb.rawQuery(query, argumentos);
-
-        ArrayList<Post> postUser = new ArrayList<>();
 
         while (cursor.moveToNext()){
             Post post = criarPost(cursor);

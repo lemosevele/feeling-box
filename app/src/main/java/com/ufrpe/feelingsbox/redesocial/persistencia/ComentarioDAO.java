@@ -8,6 +8,9 @@ import android.database.sqlite.SQLiteDatabase;
 import com.ufrpe.feelingsbox.infra.DataBase;
 import com.ufrpe.feelingsbox.redesocial.dominio.Comentario;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class ComentarioDAO {
     private DataBase dbHelper;
@@ -80,5 +83,21 @@ public class ComentarioDAO {
 
         return id;
     }
-}
 
+    public List<Comentario> getComentariorioByUser(){
+        feelingsDb = dbHelper.getReadableDatabase();
+        ArrayList<Comentario> comentarioUser = new ArrayList<>();
+
+        String query = "SELECT * FROM " + DataBase.TABELA_COMENTARIO +
+                " ORDER BY " + DataBase.ID + " DESC";
+
+        Cursor cursor = feelingsDb.rawQuery(query, null);
+
+        while (cursor.moveToNext()){
+            Comentario comentario = criarComentario(cursor);
+            comentarioUser.add(comentario);
+        }
+        feelingsDb.close();
+        return comentarioUser;
+    }
+}

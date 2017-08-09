@@ -2,8 +2,10 @@ package com.ufrpe.feelingsbox.redesocial.redesocialservices;
 
 import android.content.Context;
 
+import com.ufrpe.feelingsbox.redesocial.dominio.Comentario;
 import com.ufrpe.feelingsbox.redesocial.dominio.Sessao;
 import com.ufrpe.feelingsbox.redesocial.dominio.Post;
+import com.ufrpe.feelingsbox.redesocial.persistencia.ComentarioDAO;
 import com.ufrpe.feelingsbox.redesocial.persistencia.PosTagDAO;
 import com.ufrpe.feelingsbox.redesocial.persistencia.PostDAO;
 import com.ufrpe.feelingsbox.redesocial.persistencia.SessaoDAO;
@@ -20,6 +22,7 @@ public class RedeServices {
     private PosTagDAO posTagDAO;
     private SessaoDAO sessaoDAO;
     private PostDAO postDAO;
+    private ComentarioDAO comentarioDAO;
     private Context context;
 
     public RedeServices(Context context) {
@@ -69,5 +72,10 @@ public class RedeServices {
     public List<Post> exibirPosts(long id){
         postDAO = new PostDAO(context);
         return postDAO.getPostByUser(id);
+    }
+
+    public List<Comentario> exibirComentarios(){
+        comentarioDAO = new ComentarioDAO(context);
+        return comentarioDAO.getComentariorioByUser();
     }
 }
