@@ -130,8 +130,8 @@ public class PostDAO {
         feelingsDb = dbHelper.getReadableDatabase();
 
         String query = "SELECT * FROM " + DataBase.TABELA_POST +
-                " ORDER BY " + DataBase.ID + " DESC" +
-                " WHERE " + DataBase.POST_USER_ID + " LIKE ?";
+                " WHERE " + DataBase.POST_USER_ID + " LIKE ?" +
+                " ORDER BY " + DataBase.ID + " DESC";
 
         String idString = Long.toString(id);
         String[] argumentos = {idString};

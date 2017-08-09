@@ -21,38 +21,13 @@ public class PosTagDAO {
         this.postDAO = new PostDAO(context);
         this.dbHelper = new DataBase(context);
     }
-    /*
-    public ArrayList<String> getTagsPost(long idPost) {
-        feelingsDb = dbHelper.getReadableDatabase();
 
-        String query = "SELECT * FROM " + DataBase.TABELA_REL_TAG_POST +
-                " WHERE " + DataBase.REL_ID_POST + " LIKE ?";
-
-        String idString = Long.toString(idPost);
-        String[] argumentos = {idString};
-
-        Cursor cursor = feelingsDb.rawQuery(query, argumentos);
-
-        String tag;
-        ArrayList<String> listaTags = new ArrayList<String>();
-
-        while (cursor.moveToNext()){
-            tag = tagDAO.criarTag(cursor);
-            listaTags.add(tag);
-        }
-
-        cursor.close();
-        feelingsDb.close();
-
-        return listaTags;
-    }
-    */
     public ArrayList<Post> getPostByTag(String tag) {
         feelingsDb = dbHelper.getReadableDatabase();
 
         String query = "SELECT * FROM " + DataBase.TABELA_REL_TAG_POST +
-            " ORDER BY " + DataBase.ID + " DESC" +
-            " WHERE " + DataBase.REL_TEXTO_TAG + " LIKE ?";
+            " WHERE " + DataBase.REL_TEXTO_TAG + " LIKE ?" +
+            " ORDER BY " + DataBase.ID + " DESC";
 
         String[] argumentos = {tag};
 

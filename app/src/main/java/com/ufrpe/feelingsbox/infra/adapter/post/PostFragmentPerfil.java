@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 
 import com.ufrpe.feelingsbox.R;
 import com.ufrpe.feelingsbox.redesocial.dominio.Post;
+import com.ufrpe.feelingsbox.redesocial.dominio.Sessao;
 import com.ufrpe.feelingsbox.redesocial.gui.ActCriarComentario;
 import com.ufrpe.feelingsbox.redesocial.redesocialservices.RedeServices;
 
@@ -23,6 +24,7 @@ public class PostFragmentPerfil extends Fragment implements RecyclerViewOnClickL
     private RecyclerView mRecyclerView;
     private List<Post> mList;
     private RedeServices redeServices;
+    private Sessao sessao = Sessao.getInstancia();
 
     //Setando o RecyclerView
     @Override
@@ -63,7 +65,7 @@ public class PostFragmentPerfil extends Fragment implements RecyclerViewOnClickL
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
 
         redeServices = new RedeServices(getActivity());
-        mList = redeServices.exibirPosts();
+        mList = redeServices.exibirPosts(sessao.getUsuarioLogado().getId());
         PostRecyclerAdapter adapter = new PostRecyclerAdapter(getActivity(), mList);
         adapter.setRecyclerViewOnClickListenerhack(this);
         mRecyclerView.setAdapter(adapter);
