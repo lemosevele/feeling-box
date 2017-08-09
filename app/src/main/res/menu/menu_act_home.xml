@@ -3,13 +3,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/app_bar_search"
+        android:actionViewClass="android.widget.SearchView"
+        android:icon="@android:drawable/ic_menu_search"
+        android:orderInCategory="1"
+        android:title="Search"
+        app:showAsAction="always" />
+    <item
         android:id="@+id/action_sair"
         android:orderInCategory="10"
         android:title="@string/title_menu_sair" />
     <item
         android:id="@+id/action_perfil"
-        android:orderInCategory="1"
+        android:orderInCategory="2"
         android:title="@string/title_menu_perfil"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/action_meus_post"
+        android:orderInCategory="3"
+        android:title="Meus Posts" />
 
 </menu>

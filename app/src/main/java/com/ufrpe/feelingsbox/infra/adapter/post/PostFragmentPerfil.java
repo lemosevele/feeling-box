@@ -19,7 +19,7 @@ import com.ufrpe.feelingsbox.redesocial.redesocialservices.RedeServices;
 
 import java.util.List;
 
-public class PostFragment extends Fragment implements RecyclerViewOnClickListenerhack{
+public class PostFragmentPerfil extends Fragment implements RecyclerViewOnClickListenerhack{
     private RecyclerView mRecyclerView;
     private List<Post> mList;
     private RedeServices redeServices;

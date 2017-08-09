@@ -65,9 +65,10 @@ public class ActHome extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.action_perfil:
-                Intent it = new Intent(ActHome.this, ActPerfil.class);
-                startActivity(it);
-                finish();
+                mudarTela(ActPerfil.class);
+                break;
+            case R.id.action_meus_post:
+                mudarTela(ActPerfilPost.class);
                 break;
             case R.id.action_sair:
                 RedeServices redeServices = new RedeServices(getApplicationContext());
@@ -77,5 +78,10 @@ public class ActHome extends AppCompatActivity {
             
         }
         return super.onOptionsItemSelected(item);
+    }
+    private void mudarTela(Class novaTela){
+        Intent it = new Intent(ActHome.this, novaTela);
+        startActivity(it);
+        finish();
     }
 }

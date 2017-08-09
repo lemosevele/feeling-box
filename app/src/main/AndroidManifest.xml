@@ -54,6 +54,10 @@
         <activity
             android:name=".redesocial.gui.ActCriarComentario"
             android:label="@string/title_activity_act_criar_comentario"
+            android:theme="@style/MyAppTheme" />
+        <activity
+            android:name=".redesocial.gui.ActPerfilPost"
+            android:label="@string/title_activity_act_perfil_post"
             android:theme="@style/MyAppTheme"></activity>
     </application>
 
