@@ -4,7 +4,6 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.provider.SearchRecentSuggestions;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -32,7 +31,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ActSearchable extends AppCompatActivity implements RecyclerViewOnClickListenerhack{
-    private ArrayList<? extends Post> mList;
     private ArrayList mListAux;
     private RecyclerView mRecyclerView;
     private PostRecyclerAdapter adapter;
@@ -40,33 +38,33 @@ public class ActSearchable extends AppCompatActivity implements RecyclerViewOnCl
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        try{super.onCreate(savedInstanceState);
-        setContentView(R.layout.act_searchable);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        try{
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.act_searchable);
+            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+            setSupportActionBar(toolbar);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        if(savedInstanceState != null){
-            mList    = savedInstanceState.getParcelableArrayList("mList");
-            mListAux = savedInstanceState.getParcelableArrayList("mListAux");
-        } else {
-            mListAux = new ArrayList<>();
-        }
+            if(savedInstanceState != null){
+                mListAux = savedInstanceState.getParcelableArrayList("mListAux");
+            } else {
+                mListAux = new ArrayList<>();
+            }
 
-        clContainer = (CoordinatorLayout) findViewById(R.id.cl_container);
+            clContainer = (CoordinatorLayout) findViewById(R.id.cl_container);
 
             mRecyclerView = (RecyclerView) findViewById(R.id.rv_list);
-        //mRecyclerView.setHasFixedSize(true);
+            mRecyclerView.setHasFixedSize(true);
 
-        LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(this);
-        mLinearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        mRecyclerView.setLayoutManager(mLinearLayoutManager);
+            LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(this);
+            mLinearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+            mRecyclerView.setLayoutManager(mLinearLayoutManager);
 
-        adapter = new PostRecyclerAdapter(this, (List<Post>) mListAux);
-        adapter.setRecyclerViewOnClickListenerhack(this);
-        mRecyclerView.setAdapter(adapter);
+            adapter = new PostRecyclerAdapter(this, (List<Post>) mListAux);
+            adapter.setRecyclerViewOnClickListenerhack(this);
+            mRecyclerView.setAdapter(adapter);
 
-        handleSearch(getIntent());
+            handleSearch(getIntent());
         } catch (Exception e){
             GuiUtil.myToast(this, e);
         }
@@ -84,12 +82,6 @@ public class ActSearchable extends AppCompatActivity implements RecyclerViewOnCl
             String stringBusca = intent.getStringExtra(SearchManager.QUERY);
 
             buscarPosts(stringBusca);
-
-            SearchRecentSuggestions searchRecentSuggestions = new SearchRecentSuggestions(this,
-                    SearchableProvider.AUTHORITY,
-                    SearchableProvider.MODE);
-            searchRecentSuggestions.saveRecentQuery(stringBusca, null);
-
         }
     }
 
@@ -97,9 +89,8 @@ public class ActSearchable extends AppCompatActivity implements RecyclerViewOnCl
         mListAux.clear();
         RedeServices redeServices = new RedeServices(this);
 
-        mList = (ArrayList<? extends Post>) redeServices.buscarPosts(stringBusca);
+        ArrayList<? extends Post> mList = (ArrayList<? extends Post>) redeServices.buscarPosts(stringBusca);
 
-        Post post;
         for(int i = 0; i < mList.size(); i++){
             mListAux.add(mList.get(i));
         }
@@ -116,25 +107,17 @@ public class ActSearchable extends AppCompatActivity implements RecyclerViewOnCl
             clContainer.addView(textView);
         } else if(clContainer.findViewById(1) != null){
             clContainer.removeView(clContainer.findViewById(1));
-
         }
-
-        for(int i = 0; i < mListAux.size(); i++){
-            post = (Post) mListAux.get(i);
-            GuiUtil.myToast(this, post.getTexto());
-        }
-        GuiUtil.myToast(this, "Lista tamanho " + mListAux.size());
         adapter.notifyDataSetChanged();
     }
 
-    @Override
+    /*@Override
     public void onSaveInstanceState(Bundle outState){
-        outState.putParcelableArrayList("mList", (ArrayList<? extends Parcelable>) mList);
-        outState.putParcelableArrayList("mListAux", (ArrayList<? extends Parcelable>) mListAux);
+        outState.putParcelableArrayList("mListAux", (ArrayList<Post>) mListAux);
 
         super.onSaveInstanceState(outState);
 
-    }
+    }*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
@@ -147,7 +130,6 @@ public class ActSearchable extends AppCompatActivity implements RecyclerViewOnCl
 
         searchView = (SearchView) item.getActionView();
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-        //searchView.setQueryHint("Pesquisar post");
 
         return super.onCreateOptionsMenu(menu);
     }
@@ -158,17 +140,16 @@ public class ActSearchable extends AppCompatActivity implements RecyclerViewOnCl
             case android.R.id.home:
                 finish();
                 break;
-            case R.id.action_delete:
+            /*case R.id.action_delete:
                 SearchRecentSuggestions searchRecentSuggestions = new SearchRecentSuggestions(this,
                         SearchableProvider.AUTHORITY,
                         SearchableProvider.MODE);
                 searchRecentSuggestions.clearHistory();
                 GuiUtil.myToastShort(this, getString(R.string.print_histórico_apagado));
-                break;
+                break;*/
         }
         return super.onOptionsItemSelected(item);
     }
-
 
     @Override
     public void onClickListener(View view, int position) {

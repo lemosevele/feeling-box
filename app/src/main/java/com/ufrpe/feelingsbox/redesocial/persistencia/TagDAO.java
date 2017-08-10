@@ -1,19 +1,21 @@
 package com.ufrpe.feelingsbox.redesocial.persistencia;
 
-import android.content.Context;
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.ufrpe.feelingsbox.infra.DataBase;
+import com.ufrpe.feelingsbox.infra.provider.SearchableProvider;
 
 public class TagDAO {
     private DataBase dbHelper;
     private SQLiteDatabase feelingsDb;
+    private Context context;
 
     public TagDAO(Context context){
-
         dbHelper = new DataBase(context);
+        this.context = context;
     }
 
     public long inserirTag(String tag){
@@ -26,6 +28,7 @@ public class TagDAO {
         String tabela = DataBase.TABELA_TAG;
         long id = feelingsDb.insert(tabela, null, values);
 
+        SearchableProvider.salvarSugestao(context, tag);
         feelingsDb.close();
 
         return id;
