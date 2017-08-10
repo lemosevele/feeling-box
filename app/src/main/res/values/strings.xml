@@ -65,4 +65,9 @@
     <string name="title_menu_comentar">Comentar</string>
     <string name="exemplo_hint_data">01/01/2017 às 12:12:00</string>
     <string name="title_activity_act_perfil_post">ActPerfilPost</string>
+    <string name="search_hint">Pesquisar Posts</string>
+    <string name="title_activity_act_searchable">pesquisa</string>
+    <string name="title_menu_limpar_historico">Limpar histórico</string>
+    <string name="print_histórico_apagado">Histórico apagado</string>
+    <string name="lbl_nehum_post_encontrado">Nenhum post encontrado.</string>
 </resources>

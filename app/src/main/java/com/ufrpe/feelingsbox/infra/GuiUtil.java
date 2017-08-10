@@ -24,7 +24,7 @@ public class GuiUtil {
     public static void myToastShort(Context context, String text){
         GuiUtil.myToast(context, text, Toast.LENGTH_SHORT);
     }
-    public static void myToastShot(Context context, Exception e){
+    public static void myToastShort(Context context, Exception e){
         GuiUtil.myToast(context, e.getMessage(), Toast.LENGTH_SHORT);
     }
 
