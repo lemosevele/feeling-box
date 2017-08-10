@@ -36,8 +36,8 @@ public class PosTagDAO {
 
         while (cursor.moveToNext()){
             String colunaTagPostId = DataBase.REL_ID_POST;
-            int indexTagPostId = cursor.getColumnIndex(colunaTagPostId);
-            long idPost = cursor.getInt(indexTagPostId);
+            int indexColunaTagPostId = cursor.getColumnIndex(colunaTagPostId);
+            long idPost = cursor.getInt(indexColunaTagPostId);
             listaPost.add(postDAO.getPostId(idPost));
         }
 
