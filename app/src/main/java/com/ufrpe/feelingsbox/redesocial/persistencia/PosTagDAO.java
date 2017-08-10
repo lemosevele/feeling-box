@@ -35,7 +35,9 @@ public class PosTagDAO {
         Cursor cursor = feelingsDb.rawQuery(query, argumentos);
 
         while (cursor.moveToNext()){
-            long idPost = cursor.getColumnIndex("post_id");
+            String colunaTagPostId = DataBase.REL_ID_POST;
+            int indexTagPostId = cursor.getColumnIndex(colunaTagPostId);
+            long idPost = cursor.getInt(indexTagPostId);
             listaPost.add(postDAO.getPostId(idPost));
         }
 
