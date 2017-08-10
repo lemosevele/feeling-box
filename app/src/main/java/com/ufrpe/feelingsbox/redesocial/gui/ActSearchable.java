@@ -26,13 +26,14 @@ import com.ufrpe.feelingsbox.infra.adapter.post.PostRecyclerAdapter;
 import com.ufrpe.feelingsbox.infra.adapter.post.RecyclerViewOnClickListenerhack;
 import com.ufrpe.feelingsbox.infra.provider.SearchableProvider;
 import com.ufrpe.feelingsbox.redesocial.dominio.Post;
+import com.ufrpe.feelingsbox.redesocial.redesocialservices.RedeServices;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ActSearchable extends AppCompatActivity implements RecyclerViewOnClickListenerhack{
     private ArrayList<? extends Post> mList;
-    private ArrayList<? extends Post> mListAux;
+    private ArrayList mListAux;
     private RecyclerView mRecyclerView;
     private PostRecyclerAdapter adapter;
     private CoordinatorLayout clContainer;
@@ -94,7 +95,14 @@ public class ActSearchable extends AppCompatActivity implements RecyclerViewOnCl
 
     public void buscarPosts(String stringBusca){
         mListAux.clear();
-        //mListAux = Inserir a busca baseada na stringBusca!!!
+        RedeServices redeServices = new RedeServices(this);
+
+        mList = (ArrayList<? extends Post>) redeServices.buscarPosts(stringBusca);
+
+        Post post;
+        for(int i = 0; i < mList.size(); i++){
+            mListAux.add(mList.get(i));
+        }
 
         mRecyclerView.setVisibility(mListAux.isEmpty() ? View.GONE : View.VISIBLE);
         if(mListAux.isEmpty()){
@@ -110,6 +118,13 @@ public class ActSearchable extends AppCompatActivity implements RecyclerViewOnCl
             clContainer.removeView(clContainer.findViewById(1));
 
         }
+
+        for(int i = 0; i < mListAux.size(); i++){
+            post = (Post) mListAux.get(i);
+            GuiUtil.myToast(this, post.getTexto());
+        }
+        GuiUtil.myToast(this, "Lista tamanho " + mListAux.size());
+        adapter.notifyDataSetChanged();
     }
 
     @Override
