@@ -16,6 +16,7 @@ public class DataBase extends SQLiteOpenHelper {
     public static final String USUARIO_EMAIL = "email";
     public static final String USUARIO_SENHA = "senha";
     public static final String USUARIO_NICK = "nick";
+    public static final String USUARIO_FOTO = "foto";
 
     //TABELA PESSOA
     public static final String TABELA_PESSOA = "pessoa";
@@ -55,6 +56,10 @@ public class DataBase extends SQLiteOpenHelper {
     public static final String COMENTARIO_STATUS = "status"; //Comentario excluido ou não
     public static final String COMENTARIO_DATAHORA = "datahora";
 
+    public static final String TABELA_REL_SEGUIDORES = "seguidores_seguindo";
+    public static final String SEGUIDOR_ID = "seguidor_id"; //id de quem segue
+    public static final String SEGUIDO_ID = "seguido_id"; //id de quem é seguido
+
 
     public DataBase(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -66,7 +71,8 @@ public class DataBase extends SQLiteOpenHelper {
                 ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 USUARIO_EMAIL + " TEXT NOT NULL, " +
                 USUARIO_SENHA + " TEXT NOT NULL, " +
-                USUARIO_NICK + " TEXT NOT NULL);");
+                USUARIO_NICK + " TEXT NOT NULL, " +
+                USUARIO_FOTO + "BLOB);");
 
         db.execSQL("CREATE TABLE " + TABELA_PESSOA + " (" +
                 ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -100,6 +106,11 @@ public class DataBase extends SQLiteOpenHelper {
                 COMENTARIO_POST_ID + " INTEGER, " +
                 COMENTARIO_DATAHORA + " TEXT NOT NULL, " +
                 COMENTARIO_STATUS + " TEXT NOT NULL);");
+
+        db.execSQL("CREATE TABLE " + TABELA_REL_SEGUIDORES +  " (" +
+                ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                SEGUIDOR_ID  + " INTEGER, " +
+                SEGUIDO_ID + " INTEGER);");
 
     }
 

@@ -20,7 +20,6 @@ public class Criptografia {
             }
 
         }
-        String criptografado = hexString.toString();
-        return criptografado;
+        return hexString.toString();
     }
 }

@@ -13,11 +13,9 @@ import java.util.ArrayList;
 public class PosTagDAO {
     private DataBase dbHelper;
     private SQLiteDatabase feelingsDb;
-    private TagDAO tagDAO;
     private PostDAO postDAO;
 
     public PosTagDAO(Context context){
-        this.tagDAO = new TagDAO(context);
         this.postDAO = new PostDAO(context);
         this.dbHelper = new DataBase(context);
     }
