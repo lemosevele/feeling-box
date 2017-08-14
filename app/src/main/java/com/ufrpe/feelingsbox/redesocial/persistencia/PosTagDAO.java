@@ -26,7 +26,7 @@ public class PosTagDAO {
 
         String query = "SELECT * FROM " + DataBase.TABELA_REL_TAG_POST +
             " WHERE " + DataBase.REL_TEXTO_TAG + " LIKE ?" +
-            " ORDER BY " + DataBase.ID + " DESC";
+                " ORDER BY " + DataBase.ID + " DESC";
 
         String[] argumentos = {tag};
 

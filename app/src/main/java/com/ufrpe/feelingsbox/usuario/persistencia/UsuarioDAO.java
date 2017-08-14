@@ -87,7 +87,7 @@ public class UsuarioDAO {
         return usuario;
     }
 
-    public Usuario getUsuarioNick(long id){
+    public Usuario getUsuarioId(long id){
         feelingsDb = dbHelper.getReadableDatabase();
 
         String query = "SELECT * FROM " + DataBase.TABELA_USUARIO +

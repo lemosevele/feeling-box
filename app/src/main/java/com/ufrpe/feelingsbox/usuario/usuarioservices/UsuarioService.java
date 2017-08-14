@@ -3,6 +3,7 @@ package com.ufrpe.feelingsbox.usuario.usuarioservices;
 import android.content.Context;
 
 import com.ufrpe.feelingsbox.infra.Criptografia;
+import com.ufrpe.feelingsbox.infra.FormataData;
 import com.ufrpe.feelingsbox.redesocial.dominio.Sessao;
 import com.ufrpe.feelingsbox.redesocial.persistencia.SessaoDAO;
 import com.ufrpe.feelingsbox.usuario.persistencia.PessoaDAO;
@@ -44,7 +45,7 @@ public class UsuarioService {
             pessoa = new Pessoa();
             pessoa.setNome(nome);
             pessoa.setSexo(sexo);
-            pessoa.setDataNasc(nasc);
+            pessoa.setDataNasc(FormataData.americano(nasc));
             pessoa.setIdUsuario(idUsuario);
             long idPessoa = pessoaDAO.inserirPessoa(pessoa);
             pessoa.setId(idPessoa);
@@ -89,7 +90,7 @@ public class UsuarioService {
     }
 
     public String buscarNick(long id){
-       usuario = usuarioDAO.getUsuarioNick(id);
+       usuario = usuarioDAO.getUsuarioId(id);
         return usuario.getNick();
     }
 }

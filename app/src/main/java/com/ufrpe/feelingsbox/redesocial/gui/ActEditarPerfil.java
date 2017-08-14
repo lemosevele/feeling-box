@@ -15,6 +15,7 @@ import android.widget.Spinner;
 
 import com.ufrpe.feelingsbox.R;
 import com.ufrpe.feelingsbox.infra.Criptografia;
+import com.ufrpe.feelingsbox.infra.FormataData;
 import com.ufrpe.feelingsbox.infra.GuiUtil;
 import com.ufrpe.feelingsbox.infra.Mask;
 import com.ufrpe.feelingsbox.infra.ValidacaoService;
@@ -128,7 +129,7 @@ public class ActEditarPerfil extends AppCompatActivity {
                 }
                 if (!validaEdt.isCampoVazio(nasc)){
                     if (validaEdt.isNascValido(nasc)){
-                        pessoaLogada.setDataNasc(nasc);
+                        pessoaLogada.setDataNasc(FormataData.americano(nasc));
                         alteracao = true;
                     }
                     else{

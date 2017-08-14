@@ -23,13 +23,19 @@ public class FormataData {
     private static final long MES = 2592000000L;
     private static final long ANO = 31536000000L;
 
+    private static final int NUMDATA1 = 6;
+    private static final int NUMDATA2 = 3;
+    private static final int NUMDATA3 = 5;
+    private static final int NUMDATA4 = 0;
+    private static final int NUMDATA5 = 2;
+
 
     //Recebe data no formato 01/10/2000 -> 20001001
     public static String americano(String data){
         StringBuilder novaData = new StringBuilder();
-        novaData.append(data.substring(6));
-        novaData.append(data.substring(3, 5));
-        novaData.append(data.substring(0, 2));
+        novaData.append(data.substring(NUMDATA1));
+        novaData.append(data.substring(NUMDATA2, NUMDATA3));
+        novaData.append(data.substring(NUMDATA4, NUMDATA5));
 
         return novaData.toString();
     }
