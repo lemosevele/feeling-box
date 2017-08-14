@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper; // Cria banco de dados
 //Classe responsável por criar o banco de dados
 public class DataBase extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 4;
     private static final String DATABASE_NAME = "dbfeelingsbox";
 
     // TABELA USUÁRIO
