@@ -19,12 +19,24 @@ public class PerfilPublico {
         return seguidores;
     }
 
+    public void setSeguidores(ArrayList<Usuario> seguidores) {
+        if(this.seguidores == null){
+            this.seguidores = seguidores;
+        }
+    }
+
     public void addSeguidor(Usuario usuario) {
         this.seguidores.add(usuario);
     }
 
     public ArrayList<Usuario> getSeguidos() {
         return seguidos;
+    }
+
+    public void setSeguidos(ArrayList<Usuario> seguidos) {
+        if(this.seguidos == null){
+            this.seguidos = seguidos;
+        }
     }
 
     public void addSeguido(Usuario usuario) {

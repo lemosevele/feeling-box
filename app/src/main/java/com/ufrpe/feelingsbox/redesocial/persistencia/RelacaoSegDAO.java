@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.ufrpe.feelingsbox.infra.DataBase;
+import com.ufrpe.feelingsbox.usuario.dominio.PerfilPublico;
 import com.ufrpe.feelingsbox.usuario.dominio.Usuario;
 import com.ufrpe.feelingsbox.usuario.persistencia.UsuarioDAO;
 
@@ -93,5 +94,12 @@ public class RelacaoSegDAO {
         feelingsDb.close();
 
         return id;
+    }
+
+    public PerfilPublico criarPerfil(long id){
+        PerfilPublico perfilPublico = new PerfilPublico();
+        perfilPublico.setSeguidores(getSeguidoresUser(id));
+        perfilPublico.setSeguidos(getSeguidosUser(id));
+        return perfilPublico;
     }
 }
