@@ -29,6 +29,10 @@ public class PerfilPublico {
         this.seguidores.add(usuario);
     }
 
+    public void deleteSeguidor(Usuario seguidor){
+        this.seguidores.remove(seguidor);
+    }
+
     public ArrayList<Usuario> getSeguidos() {
         return seguidos;
     }
@@ -43,7 +47,7 @@ public class PerfilPublico {
         this.seguidos.add(usuario);
     }
 
-    public void deleteSeguido(Usuario usuario){
-        this.seguidos.remove(usuario);
+    public void deleteSeguido(Usuario seguido){
+        this.seguidos.remove(seguido);
     }
 }

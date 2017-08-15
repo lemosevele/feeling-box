@@ -93,4 +93,8 @@ public class UsuarioService {
        usuario = usuarioDAO.getUsuarioId(id);
         return usuario.getNick();
     }
+
+    public boolean verificarSessao(){
+        return sessao.getUsuarioLogado() != null;
+    }
 }

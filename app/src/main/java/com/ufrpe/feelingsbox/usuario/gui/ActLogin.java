@@ -21,11 +21,18 @@ public class ActLogin extends AppCompatActivity {
 
     //Declarando os Elementos da Tela(activity)
     private EditText edtLogin, edtSenha;
+    private UsuarioService usuarioService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        usuarioService = new UsuarioService(getApplicationContext());
+        if (usuarioService.verificarSessao()) {
+            Intent it = new Intent(ActLogin.this, ActHome.class);
+            startActivity(it);
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_login);
+
 
 
         //Encontrando Elemento da Tela(activity)
@@ -71,10 +78,10 @@ public class ActLogin extends AppCompatActivity {
         }
 
         if (!vazio) {
-            UsuarioService buscarValidar = new UsuarioService(getApplicationContext());
+            usuarioService = new UsuarioService(getApplicationContext());
             if (!validacaoLogin.isEmail(login)) {
                 try {
-                    buscarValidar.logarNick(login, senha);
+                    usuarioService.logarNick(login, senha);
                     //Trocando para a Tela de Home
                     Intent it = new Intent(ActLogin.this, ActHome.class);
                     startActivity(it);
@@ -86,7 +93,8 @@ public class ActLogin extends AppCompatActivity {
             }
             else {
                 try {
-                    buscarValidar.logarEmail(login, senha);
+
+                    usuarioService.logarEmail(login, senha);
                     //Trocando para a Tela de Home
                     Intent it = new Intent(ActLogin.this, ActHome.class);
                     startActivity(it);
