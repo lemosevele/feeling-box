@@ -6,7 +6,6 @@ import android.util.Log;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.TimeZone;
 
 
 public class FormataData {
@@ -14,6 +13,7 @@ public class FormataData {
     private static final String DATA_POST_GUI    = "dd/MM/yyyy HH:mm:ss";
     private static final String DATA_COMUM_GUI   = "dd/MM/yyyy";
     private static final String DATA_COMUM_BANCO = "yyyyMMdd";
+    private static final String DATA_NASC_BANCO  = "yyyyMMdd";
 
     private static final int SEGUNDO = 1000;
     private static final int MINUTO = 60000;
@@ -40,17 +40,24 @@ public class FormataData {
         return novaData.toString();
     }
 
-    public static String formatarDataHora(){
-        SimpleDateFormat formatoDataHora = new SimpleDateFormat(DATA_POST_GUI);
-        formatoDataHora.setTimeZone(TimeZone.getTimeZone("GMT-03:00"));
-        Date dataFormatada = new Date();
-        return formatoDataHora.format(dataFormatada);
-    }
-
     //Recebe uma string no formato que esta no banco e Retorna no formato para exibicao.
     public static String formatarDataHoraPostDataBaseParaExibicao (String stringData){
         SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat(DATA_POST_BANCO);
         SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat(DATA_POST_GUI);
+        simpleDateFormat1.setLenient(false);
+
+        try{
+            Date date = simpleDateFormat1.parse(stringData);
+            return simpleDateFormat2.format(date);
+        }catch (Exception e){
+            return e.getMessage();
+        }
+
+    }
+
+    public static String formatarDataHoraNasDataBaseParaExibicao (String stringData){
+        SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat(DATA_NASC_BANCO);
+        SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat(DATA_COMUM_GUI);
         simpleDateFormat1.setLenient(false);
 
         try{
@@ -69,7 +76,7 @@ public class FormataData {
         return simpleDateFormat.format(date);
     }
 
-    public static boolean dataExiste(String data){
+    static boolean dataExiste(String data){
         SimpleDateFormat dataFormatada = new SimpleDateFormat (DATA_COMUM_GUI);
         dataFormatada.setLenient (false);
 
@@ -94,7 +101,7 @@ public class FormataData {
 
     }
 
-    public static boolean dataMenorOuIgualQueAtual(String data){
+    static boolean dataMenorOuIgualQueAtual(String data){
         SimpleDateFormat dataFormatada = new SimpleDateFormat (DATA_COMUM_GUI);
         dataFormatada.setLenient (false);
         //Testa no formato dd/MM/yyyy

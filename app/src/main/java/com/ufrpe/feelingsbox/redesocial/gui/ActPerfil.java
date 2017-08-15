@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.ufrpe.feelingsbox.R;
+import com.ufrpe.feelingsbox.infra.FormataData;
 import com.ufrpe.feelingsbox.redesocial.dominio.Sessao;
 import com.ufrpe.feelingsbox.usuario.dominio.Pessoa;
 import com.ufrpe.feelingsbox.usuario.dominio.Usuario;
@@ -37,7 +38,7 @@ public class ActPerfil extends AppCompatActivity {
 
         txtNome.setText(pessoaLogada.getNome());
         txtNicK.setText(usuarioLogado.getNick());
-        txtNasc.setText(pessoaLogada.getDataNasc());
+        txtNasc.setText(FormataData.formatarDataHoraNasDataBaseParaExibicao(pessoaLogada.getDataNasc()));
         txtSexo.setText(pessoaLogada.getSexo());
         txtEmail.setText(usuarioLogado.getEmail());
 

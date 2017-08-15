@@ -25,11 +25,6 @@ public class ActLogin extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        usuarioService = new UsuarioService(getApplicationContext());
-        if (usuarioService.verificarSessao()) {
-            Intent it = new Intent(ActLogin.this, ActHome.class);
-            startActivity(it);
-        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_login);
 
