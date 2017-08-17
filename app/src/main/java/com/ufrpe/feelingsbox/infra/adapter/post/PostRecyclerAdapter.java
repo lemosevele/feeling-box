@@ -98,6 +98,7 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
             txtData     = (TextView) itemView.findViewById(R.id.txtData);
             btnComentar = (Button) itemView.findViewById(R.id.btnComentar);
 
+            ivUser.setOnClickListener(this);
             btnComentar.setOnClickListener(this);
             itemView.setOnClickListener(this);
 

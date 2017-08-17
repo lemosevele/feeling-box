@@ -4,6 +4,8 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper; // Cria banco de dados
 
+import com.ufrpe.feelingsbox.infra.provider.SearchableProvider;
+
 //Classe responsável por criar o banco de dados
 public class DataBase extends SQLiteOpenHelper {
 
@@ -60,9 +62,11 @@ public class DataBase extends SQLiteOpenHelper {
     public static final String SEGUIDOR_ID = "seguidor_id"; //id de quem segue
     public static final String SEGUIDO_ID = "seguido_id"; //id de quem é seguido
 
+    private Context context;
 
     public DataBase(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        this.context = context;
     }
 
     @Override
@@ -97,7 +101,7 @@ public class DataBase extends SQLiteOpenHelper {
                 REL_TEXTO_TAG + " TEXT NOT NULL, " +
                 REL_ID_POST + " INTEGER);");
 
-        db.execSQL("CREATE TABLE " + TABELA_SESSAO+ " (" +
+        db.execSQL("CREATE TABLE " + TABELA_SESSAO + " (" +
                 ID_PESSOA + " INTEGER);");
 
         db.execSQL("CREATE TABLE " + TABELA_COMENTARIO +  " (" +
@@ -117,16 +121,15 @@ public class DataBase extends SQLiteOpenHelper {
     //Atualização da tabela
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){
-        String query = "DROP TABLE IF EXISTS " + TABELA_USUARIO;
-        db.execSQL(query);
+        SearchableProvider.limparHistorico(context);
 
-        String query1 = "DROP TABLE IF EXISTS " + TABELA_COMENTARIO;
+        String query1 = "DROP TABLE IF EXISTS " + TABELA_USUARIO;
         db.execSQL(query1);
 
-        String query2 = "DROP TABLE IF EXISTS " + TABELA_POST;
+        String query2 = "DROP TABLE IF EXISTS " + TABELA_PESSOA;
         db.execSQL(query2);
 
-        String query3 = "DROP TABLE IF EXISTS " + TABELA_PESSOA;
+        String query3 = "DROP TABLE IF EXISTS " + TABELA_POST;
         db.execSQL(query3);
 
         String query4 = "DROP TABLE IF EXISTS " + TABELA_TAG;
@@ -137,6 +140,12 @@ public class DataBase extends SQLiteOpenHelper {
 
         String query6 = "DROP TABLE IF EXISTS " + TABELA_SESSAO;
         db.execSQL(query6);
+
+        String query7 = "DROP TABLE IF EXISTS " + TABELA_COMENTARIO;
+        db.execSQL(query7);
+
+        String query8 = "DROP TABLE IF EXISTS " + TABELA_REL_SEGUIDORES;
+        db.execSQL(query8);
 
         this.onCreate(db);
 

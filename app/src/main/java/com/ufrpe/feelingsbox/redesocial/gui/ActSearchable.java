@@ -4,7 +4,6 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.SearchRecentSuggestions;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -96,7 +95,7 @@ public class ActSearchable extends AppCompatActivity implements RecyclerViewOnCl
         }
 
         mRecyclerView.setVisibility(mListAux.isEmpty() ? View.GONE : View.VISIBLE);
-        if(mListAux.isEmpty()){
+        if(mListAux.isEmpty() && clContainer.findViewById(1) == null){
             TextView textView = new TextView(this);
             textView.setText(R.string.lbl_nehum_post_encontrado);
             textView.setTextColor(getResources().getColor(R.color.colorUserFont));
@@ -105,9 +104,14 @@ public class ActSearchable extends AppCompatActivity implements RecyclerViewOnCl
             textView.setGravity(Gravity.CENTER);
 
             clContainer.addView(textView);
-        } else if(clContainer.findViewById(1) != null){
+        } else if(!mListAux.isEmpty() && clContainer.findViewById(1) != null){
             clContainer.removeView(clContainer.findViewById(1));
         }
+
+        if(!mListAux.isEmpty()){
+            SearchableProvider.salvarSugestao(getApplicationContext(), stringBusca);
+        }
+        
         adapter.notifyDataSetChanged();
     }
 

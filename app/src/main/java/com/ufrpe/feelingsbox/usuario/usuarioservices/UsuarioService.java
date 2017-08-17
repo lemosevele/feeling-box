@@ -94,6 +94,8 @@ public class UsuarioService {
         return usuario.getNick();
     }
 
+    public Usuario buscarUsuario(long id){ return usuarioDAO.getUsuarioId(id); }
+
     public boolean verificarSessao(){
         return sessao.getUsuarioLogado() != null;
     }

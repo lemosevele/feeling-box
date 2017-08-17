@@ -16,6 +16,7 @@ import com.ufrpe.feelingsbox.R;
 import com.ufrpe.feelingsbox.redesocial.dominio.Post;
 import com.ufrpe.feelingsbox.redesocial.dominio.Sessao;
 import com.ufrpe.feelingsbox.redesocial.gui.ActCriarComentario;
+import com.ufrpe.feelingsbox.redesocial.gui.ActPerfilPost;
 import com.ufrpe.feelingsbox.redesocial.redesocialservices.RedeServices;
 
 import java.util.List;
@@ -64,8 +65,14 @@ public class PostFragmentPerfil extends Fragment implements RecyclerViewOnClickL
         mLinearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
 
+
         redeServices = new RedeServices(getActivity());
-        mList = redeServices.exibirPosts(sessao.getUsuarioLogado().getId());
+        Bundle bundle = this.getArguments();
+        if(bundle != null){
+            mList = redeServices.exibirPosts(bundle.getLong("idUsuario"));
+        } else {
+            mList = redeServices.exibirPosts(sessao.getUsuarioLogado().getId());
+        }
         PostRecyclerAdapter adapter = new PostRecyclerAdapter(getActivity(), mList);
         adapter.setRecyclerViewOnClickListenerhack(this);
         mRecyclerView.setAdapter(adapter);
@@ -76,13 +83,19 @@ public class PostFragmentPerfil extends Fragment implements RecyclerViewOnClickL
     //Click Normal
     @Override
     public void onClickListener(View view, int position) {
+        Intent intent;
         switch (view.getId()){
+            case R.id.ivUser:
+                intent = new Intent(view.getContext(), ActPerfilPost.class);
+                intent.putExtra("idUsuario", mList.get(position).getIdUsuario());
+                startActivity(intent);
+                getActivity().finish();
+                break;
             case R.id.btnComentar:
-                Intent intent = new Intent(view.getContext(), ActCriarComentario.class);
+                intent = new Intent(view.getContext(), ActCriarComentario.class);
                 intent.putExtra("idPost", mList.get(position).getId());
                 startActivity(intent);
                 getActivity().finish();
-
                 break;
             case -1:
                 break;

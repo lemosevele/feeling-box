@@ -13,8 +13,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.ufrpe.feelingsbox.R;
+import com.ufrpe.feelingsbox.infra.GuiUtil;
 import com.ufrpe.feelingsbox.redesocial.dominio.Post;
 import com.ufrpe.feelingsbox.redesocial.gui.ActCriarComentario;
+import com.ufrpe.feelingsbox.redesocial.gui.ActPerfilPost;
 import com.ufrpe.feelingsbox.redesocial.redesocialservices.RedeServices;
 
 import java.util.List;
@@ -74,13 +76,19 @@ public class PostFragment extends Fragment implements RecyclerViewOnClickListene
     //Click Normal
     @Override
     public void onClickListener(View view, int position) {
+        Intent intent;
         switch (view.getId()){
+            case R.id.ivUser:
+                intent = new Intent(view.getContext(), ActPerfilPost.class);
+                intent.putExtra("idUsuario", mList.get(position).getIdUsuario());
+                startActivity(intent);
+                getActivity().finish();
+                break;
             case R.id.btnComentar:
-                Intent intent = new Intent(view.getContext(), ActCriarComentario.class);
+                intent = new Intent(view.getContext(), ActCriarComentario.class);
                 intent.putExtra("idPost", mList.get(position).getId());
                 startActivity(intent);
                 getActivity().finish();
-
                 break;
             case -1:
                 break;

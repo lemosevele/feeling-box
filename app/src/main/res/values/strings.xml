@@ -70,4 +70,6 @@
     <string name="title_menu_limpar_historico">Limpar histórico</string>
     <string name="print_histórico_apagado">Histórico apagado</string>
     <string name="lbl_nehum_post_encontrado">Nenhum post encontrado.</string>
+    <string name="title_menu_follow">Seguir</string>
+    <string name="title_menu_unfollow">Deixar de Seguir</string>
 </resources>

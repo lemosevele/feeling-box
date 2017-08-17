@@ -17,6 +17,11 @@ public class SearchableProvider extends SearchRecentSuggestionsProvider {
                 SearchableProvider.AUTHORITY,
                 SearchableProvider.MODE);
         searchRecentSuggestions.saveRecentQuery(tag, null);
-
+    }
+    public static void limparHistorico(Context context){
+        SearchRecentSuggestions searchRecentSuggestions = new SearchRecentSuggestions(context,
+                SearchableProvider.AUTHORITY,
+                SearchableProvider.MODE);
+        searchRecentSuggestions.clearHistory();
     }
 }
