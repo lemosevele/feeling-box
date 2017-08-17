@@ -76,7 +76,7 @@ public class ComentarioDAO {
         String dataHora = comentario.getDataHora();
         values.put(colunaDataHora,dataHora);
 
-        String tabela = DataBase.TABELA_POST;
+        String tabela = DataBase.TABELA_COMENTARIO;
 
         long id = feelingsDb.insert(tabela, null, values);
 

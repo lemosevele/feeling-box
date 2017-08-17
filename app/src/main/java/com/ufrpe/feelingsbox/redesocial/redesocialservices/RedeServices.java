@@ -24,6 +24,9 @@ public class RedeServices {
     private PostDAO postDAO;
     private ComentarioDAO comentarioDAO;
     private Context context;
+    private Comentario comentario;
+
+    private static final int UM = 1;
 
     public RedeServices(Context context) {
         this.context = context;
@@ -45,13 +48,24 @@ public class RedeServices {
         Pattern pattern = Pattern.compile(regexHashTag);
         Matcher matcher = pattern.matcher(texto);
         while (matcher.find()) {
-            String hashTagStr = matcher.group(1);
+            String hashTagStr = matcher.group(UM);
             if (tagDAO.getTagTexto(hashTagStr) == null) {
                 tagDAO.inserirTag(hashTagStr.toLowerCase());
             }
             posTagDAO.inserirTagIdPost(hashTagStr.toLowerCase(), idPost);
         }
 
+    }
+
+    public void salvarComentario(String texto, long idPost){
+        comentarioDAO = new ComentarioDAO(context);
+        comentario = new Comentario();
+        comentario.setTexto(texto);
+        comentario.setDataHora();
+        comentario.setIdUsuario(sessao.getUsuarioLogado().getId());
+        comentario.setIdPost(idPost);
+        long idComentario = comentarioDAO.inserirComentario(comentario);
+        comentario.setId(idComentario);
     }
 
     public List<Post> exibirPosts() {

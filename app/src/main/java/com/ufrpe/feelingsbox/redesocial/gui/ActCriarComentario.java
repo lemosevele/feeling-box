@@ -11,6 +11,8 @@ import android.widget.EditText;
 
 import com.ufrpe.feelingsbox.R;
 import com.ufrpe.feelingsbox.infra.GuiUtil;
+import com.ufrpe.feelingsbox.infra.ValidacaoService;
+import com.ufrpe.feelingsbox.redesocial.redesocialservices.RedeServices;
 
 public class ActCriarComentario extends AppCompatActivity {
     private EditText edtComentario;
@@ -46,7 +48,23 @@ public class ActCriarComentario extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.action_comentar:
-                GuiUtil.myToastShort(this, idPost.toString());
+                String texto = edtComentario.getText().toString();
+                long idpost = idPost;
+
+                ValidacaoService validarComentario = new ValidacaoService(getApplicationContext());
+                boolean comentarioVazio = false;
+                if (validarComentario.isCampoVazio(texto)){
+                    edtComentario.requestFocus();
+                    edtComentario.setError(getString(R.string.print_erro_validacao_post_campovazio));
+                    comentarioVazio = true;
+                }
+
+                if (!comentarioVazio){
+                    RedeServices redeServices = new RedeServices(getApplicationContext());
+                    redeServices.salvarComentario(texto, idpost);
+                    GuiUtil.myToast(this, getString(R.string.print_msg_postado));
+                    retornarHome();
+                }
                 break;
             case R.id.action_cancelar:
                 retornarHome();
