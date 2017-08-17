@@ -38,7 +38,7 @@ public class ActPerfil extends AppCompatActivity {
 
         txtNome.setText(pessoaLogada.getNome());
         txtNicK.setText(usuarioLogado.getNick());
-        txtNasc.setText(FormataData.formatarDataHoraNasDataBaseParaExibicao(pessoaLogada.getDataNasc()));
+        txtNasc.setText(FormataData.formatarDataHoraDataBaseParaExibicao(pessoaLogada.getDataNasc()));
         txtSexo.setText(pessoaLogada.getSexo());
         txtEmail.setText(usuarioLogado.getEmail());
 

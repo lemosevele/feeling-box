@@ -58,15 +58,15 @@ public class ActLogin extends AppCompatActivity {
 
         String login = edtLogin.getText().toString();
         String senha = edtSenha.getText().toString();
+        ValidacaoService validacaoService = new ValidacaoService(getApplicationContext());
 
-        ValidacaoService validacaoLogin = new ValidacaoService(getApplicationContext());
         boolean vazio = false;
-        if (validacaoLogin.isCampoVazio(senha)){
+        if (validacaoService.isCampoVazio(senha)){
             edtSenha.requestFocus();
             edtSenha.setError("O campo senha está vazio.");
             vazio = true;
         }
-        if (validacaoLogin.isCampoVazio(login)){
+        if (validacaoService.isCampoVazio(login)){
             edtLogin.requestFocus();
             edtLogin.setError("O campo login está vazio.");
             vazio = true;
@@ -74,7 +74,7 @@ public class ActLogin extends AppCompatActivity {
 
         if (!vazio) {
             usuarioService = new UsuarioService(getApplicationContext());
-            if (!validacaoLogin.isEmail(login)) {
+            if (!validacaoService.isEmail(login)) {
                 try {
                     usuarioService.logarNick(login, senha);
                     //Trocando para a Tela de Home
@@ -101,4 +101,26 @@ public class ActLogin extends AppCompatActivity {
             }
         }
     }
+
+    /*public boolean validaCampoSenha(String senha){
+        if (validacaoService.isCampoVazio(senha)) {
+            edtSenha.requestFocus();
+            edtSenha.setError("O campo senha está vazio.");
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+
+    public boolean validaCampoLogin(String login){
+        if (validacaoService.isCampoVazio(login)){
+            edtLogin.requestFocus();
+            edtLogin.setError("O campo login está vazio.");
+            return false;
+        }
+        else{
+            return true;
+        }
+    }*/
 }

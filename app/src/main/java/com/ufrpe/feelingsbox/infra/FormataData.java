@@ -40,22 +40,7 @@ public class FormataData {
         return novaData.toString();
     }
 
-    //Recebe uma string no formato que esta no banco e Retorna no formato para exibicao.
-    public static String formatarDataHoraPostDataBaseParaExibicao (String stringData){
-        SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat(DATA_POST_BANCO);
-        SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat(DATA_POST_GUI);
-        simpleDateFormat1.setLenient(false);
-
-        try{
-            Date date = simpleDateFormat1.parse(stringData);
-            return simpleDateFormat2.format(date);
-        }catch (Exception e){
-            return e.getMessage();
-        }
-
-    }
-
-    public static String formatarDataHoraNasDataBaseParaExibicao (String stringData){
+    public static String formatarDataHoraDataBaseParaExibicao (String stringData){
         SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat(DATA_NASC_BANCO);
         SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat(DATA_COMUM_GUI);
         simpleDateFormat1.setLenient(false);

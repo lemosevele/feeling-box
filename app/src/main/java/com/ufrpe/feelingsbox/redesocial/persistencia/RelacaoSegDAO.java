@@ -5,6 +5,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.provider.ContactsContract;
 
 import com.ufrpe.feelingsbox.infra.DataBase;
 import com.ufrpe.feelingsbox.redesocial.dominio.PerfilPublico;
@@ -94,6 +95,16 @@ public class RelacaoSegDAO {
         feelingsDb.close();
 
         return id;
+    }
+
+    public void deletarRelSeguidores(long idSeguidor, long idSeguido){
+        feelingsDb = dbHelper.getWritableDatabase();
+
+        String idSeguidorStr = Long.toString(idSeguidor);
+        String idSeguidoStr = Long.toString(idSeguido);
+
+        feelingsDb.delete(DataBase.TABELA_REL_SEGUIDORES, DataBase.SEGUIDOR_ID + "=? AND " +
+                DataBase.SEGUIDO_ID + "=?", new String[] {idSeguidorStr,idSeguidoStr});
     }
 
 
