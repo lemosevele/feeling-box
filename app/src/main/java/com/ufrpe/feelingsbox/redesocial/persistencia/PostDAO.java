@@ -90,7 +90,7 @@ public class PostDAO {
         List<Post> listaPosts = new ArrayList<>();
 
         String query = "SELECT * FROM " + DataBase.TABELA_POST +
-                " ORDER BY " + DataBase.ID + " DESC";
+                " ORDER BY " + DataBase.POST_DATAHORA + " DESC";
 
         Cursor cursor = feelingsDb.rawQuery(query, null);
 
@@ -108,7 +108,7 @@ public class PostDAO {
         feelingsDb = dbHelper.getReadableDatabase();
 
         String query = "SELECT * FROM " + DataBase.TABELA_POST +
-                " WHERE " + DataBase.ID + " LIKE ?";
+                " WHERE " + DataBase.POST_DATAHORA + " LIKE ?";
 
         String idString = Long.toString(id);
         String[] argumentos = {idString};

@@ -1,4 +1,6 @@
-package com.ufrpe.feelingsbox.usuario.dominio;
+package com.ufrpe.feelingsbox.redesocial.dominio;
+
+import com.ufrpe.feelingsbox.usuario.dominio.Usuario;
 
 import java.util.ArrayList;
 
