@@ -73,17 +73,18 @@ public class ActPerfilPost extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        RedeServices redeServices = new RedeServices(getApplicationContext());
         switch (item.getItemId()){
             case android.R.id.home:
-                RedeServices redeServices = new RedeServices(getApplicationContext());
-                redeServices.seguiUser(sessao.getUsuarioLogado().getId(), usuarioPost.getId());
                 retornarHome();
                 break;
             case R.id.action_follow:
+                redeServices.seguirUser(sessao.getUsuarioLogado().getId(), usuarioPost.getId());
                 actionFollow.setVisible(false);
                 actionUnfollow.setVisible(true);
                 break;
             case R.id.action_unfollow:
+                redeServices.deletarUser(sessao.getUsuarioLogado().getId(), usuarioPost.getId());
                 actionFollow.setVisible(true);
                 actionUnfollow.setVisible(false);
                 break;

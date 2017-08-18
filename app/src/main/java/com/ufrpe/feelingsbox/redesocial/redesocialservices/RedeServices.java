@@ -95,8 +95,13 @@ public class RedeServices {
         return comentarioDAO.getComentariorioByUser();
     }
 
-    public void seguiUser(long idUser, long idSeguir){
+    public void seguirUser(long idUser, long idSeguir){
         relacaoSegDAO = new RelacaoSegDAO(context);
         relacaoSegDAO.inserirRelSeguidores(idUser, idSeguir);
+    }
+
+    public void deletarUser(long idSeguidor, long idSeguido){
+        relacaoSegDAO = new RelacaoSegDAO(context);
+        relacaoSegDAO.deletarRelSeguidores(idSeguidor, idSeguido);
     }
 }
