@@ -100,78 +100,7 @@ public class ActEditarPerfil extends AppCompatActivity {
 
         switch (item.getItemId()){
             case R.id.action_salvar:
-                Pessoa pessoaLogada = sessao.getPessoaLogada();
-                Usuario usuarioLogado = sessao.getUsuarioLogado();
-                ValidacaoService validaEdt = new ValidacaoService(getApplicationContext());
-                boolean valid = true;
-                boolean alteracao = false;
-                if (!Objects.equals(sexo, pessoaLogada.getSexo())){
-                    pessoaLogada.setSexo(sexo);
-                    alteracao = true;
-                }
-                if (!validaEdt.isCampoVazio(senha)){
-                    if (validaEdt.isSenhaValida(senha)){
-                        Criptografia criptografia = new Criptografia();
-                        String senhaCriptografada = null;
-                        try {
-                            senhaCriptografada = criptografia.criptografarSenha(senha);
-                        } catch (NoSuchAlgorithmException e) {
-                            e.printStackTrace();
-                        }
-                        usuarioLogado.setSenha(senhaCriptografada);
-                        alteracao = true;
-                    }
-                    else{
-                        edtSenhaPerfil.requestFocus();
-                        edtSenhaPerfil.setError(getString(R.string.print_erro_validacao_edt_senha_invalida));
-                        valid = false;
-                    }
-                }
-                if (!validaEdt.isCampoVazio(nasc)){
-                    if (validaEdt.isNascValido(nasc)){
-                        pessoaLogada.setDataNasc(FormataData.americano(nasc));
-                        alteracao = true;
-                    }
-                    else{
-                        edtNascPerfil.requestFocus();
-                        edtNascPerfil.setError(getString(R.string.print_erro_validacao_edt_data_invalida));
-                        valid = false;
-                    }
-                }
-                if (!validaEdt.isCampoVazio(email)) {
-                    if (validaEdt.isEmailValido(email)) {
-                        usuarioLogado.setEmail(email);
-                        alteracao = true;
-                    }
-                    else {
-                        edtEmailPerfil.requestFocus();
-                        edtEmailPerfil.setError(getString(R.string.print_erro_validacao_edt_email_invalido));
-                        valid = false;
-                    }
-                }
-                if (!validaEdt.isCampoVazio(nick)) {
-                    if (validaEdt.isNickValido(nick)){
-                        usuarioLogado.setNick(nick);
-                        alteracao = true;
-                    }
-                    else {
-                        edtNickPerfil.requestFocus();
-                        edtNickPerfil.setError(getString(R.string.print_erro_validacao_edt_nick_invalido));
-                        valid = false;
-                    }
-                }
-                if (!validaEdt.isCampoVazio(nome)){
-                    pessoaLogada.setNome(nome);
-                    alteracao = true;
-                }
-
-                if (valid && alteracao){
-                    UsuarioService usuarioService = new UsuarioService(getApplicationContext());
-                    usuarioService.editarPerfil(pessoaLogada, usuarioLogado);
-                    GuiUtil.myToast(this, getString(R.string.print_msg_alteracoes_salva));
-                    retornaPerfil();
-                }
-
+                editaPerfil(nome, nick, email, nasc, senha, sexo);
                 break;
             case R.id.action_cancelar:
                 retornaPerfil();
@@ -195,4 +124,93 @@ public class ActEditarPerfil extends AppCompatActivity {
         finish();
 
     }
+
+    private void editaPerfil(String nome, String nick, String email, String nasc, String senha, String sexo){
+        Pessoa pessoaLogada = sessao.getPessoaLogada();
+        Usuario usuarioLogado = sessao.getUsuarioLogado();
+        ValidacaoService validaEdt = new ValidacaoService(getApplicationContext());
+        boolean alteracao = false;
+        if (!Objects.equals(sexo, pessoaLogada.getSexo())){
+            pessoaLogada.setSexo(sexo);
+            alteracao = true;
+        }
+        if (!validaEdt.isCampoVazio(senha)){
+            alteracao = validaSenha(senha, usuarioLogado, validaEdt);
+        }
+        if (!validaEdt.isCampoVazio(nasc)){
+            alteracao = validaNasc(nasc, pessoaLogada, validaEdt);
+        }
+        if (!validaEdt.isCampoVazio(email)) {
+            alteracao = validaEmail(email, usuarioLogado, validaEdt);
+        }
+        if (!validaEdt.isCampoVazio(nick)) {
+            alteracao = validaNick(nick, usuarioLogado, validaEdt);
+        }
+        if (!validaEdt.isCampoVazio(nome)){
+            pessoaLogada.setNome(nome);
+            alteracao = true;
+        }
+
+        if (alteracao){
+            UsuarioService usuarioService = new UsuarioService(getApplicationContext());
+            usuarioService.editarPerfil(pessoaLogada, usuarioLogado);
+            GuiUtil.myToast(this, getString(R.string.print_msg_alteracoes_salva));
+            retornaPerfil();
+        }
+    }
+
+    private boolean validaSenha(String senha,Usuario usuarioLogado, ValidacaoService validaEdt){
+        if (validaEdt.isSenhaValida(senha)){
+            Criptografia criptografia = new Criptografia();
+            String senhaCriptografada = null;
+            try {
+                senhaCriptografada = criptografia.criptografarSenha(senha);
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+            }
+            usuarioLogado.setSenha(senhaCriptografada);
+            return true;
+        }
+        else{
+            edtSenhaPerfil.requestFocus();
+            edtSenhaPerfil.setError(getString(R.string.print_erro_validacao_edt_senha_invalida));
+            return false;
+        }
+    }
+
+    private boolean validaNasc(String nasc, Pessoa pessoaLogada, ValidacaoService validaEdt) {
+        if (validaEdt.isNascValido(nasc)) {
+            pessoaLogada.setDataNasc(FormataData.americano(nasc));
+            return true;
+        } else {
+            edtNascPerfil.requestFocus();
+            edtNascPerfil.setError(getString(R.string.print_erro_validacao_edt_data_invalida));
+            return false;
+        }
+    }
+
+    private boolean validaEmail(String email, Usuario usuarioLogado, ValidacaoService validaEdt){
+        if (validaEdt.isEmailValido(email)) {
+            usuarioLogado.setEmail(email);
+            return true;
+        }
+        else {
+            edtEmailPerfil.requestFocus();
+            edtEmailPerfil.setError(getString(R.string.print_erro_validacao_edt_email_invalido));
+            return false;
+        }
+    }
+
+    private boolean validaNick(String nick, Usuario usuarioLogado, ValidacaoService validaEdt){
+        if (validaEdt.isNickValido(nick)){
+            usuarioLogado.setNick(nick);
+            return true;
+        }
+        else {
+            edtNickPerfil.requestFocus();
+            edtNickPerfil.setError(getString(R.string.print_erro_validacao_edt_nick_invalido));
+            return false;
+        }
+    }
+
 }
