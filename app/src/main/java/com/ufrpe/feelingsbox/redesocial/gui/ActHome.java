@@ -19,6 +19,7 @@ import com.ufrpe.feelingsbox.infra.adapter.post.PostFragment;
 import com.ufrpe.feelingsbox.redesocial.dominio.Sessao;
 import com.ufrpe.feelingsbox.redesocial.redesocialservices.RedeServices;
 import com.ufrpe.feelingsbox.usuario.dominio.Usuario;
+import com.ufrpe.feelingsbox.usuario.gui.ActLogin;
 
 import static com.ufrpe.feelingsbox.redesocial.dominio.BundleEnum.MAIN_FRAG;
 
@@ -46,8 +47,10 @@ public class ActHome extends AppCompatActivity {
                 finish();
             }
         });
+        this.iniciarFragment();
+    }
 
-        //Fragment
+    private void iniciarFragment(){
         PostFragment frag = (PostFragment) getSupportFragmentManager().findFragmentByTag(MAIN_FRAG.getValor());
         if(frag == null) {
             frag = new PostFragment();
@@ -55,7 +58,6 @@ public class ActHome extends AppCompatActivity {
             ft.replace(R.id.rl_fragment_container, frag, MAIN_FRAG.getValor());
             ft.commit();
         }
-
     }
 
     @Override
@@ -86,6 +88,7 @@ public class ActHome extends AppCompatActivity {
             case R.id.action_sair:
                 RedeServices redeServices = new RedeServices(getApplicationContext());
                 redeServices.finalizarSessao();
+                mudarTela(ActLogin.class);
                 finish();
                 break;
             

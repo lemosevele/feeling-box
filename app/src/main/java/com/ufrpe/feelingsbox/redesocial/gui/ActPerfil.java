@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.ufrpe.feelingsbox.R;
 import com.ufrpe.feelingsbox.infra.FormataData;
 import com.ufrpe.feelingsbox.redesocial.dominio.Sessao;
+import com.ufrpe.feelingsbox.redesocial.redesocialservices.RedeServices;
 import com.ufrpe.feelingsbox.usuario.dominio.Pessoa;
 import com.ufrpe.feelingsbox.usuario.dominio.Usuario;
 
@@ -24,8 +25,10 @@ import static com.ufrpe.feelingsbox.redesocial.dominio.BundleEnum.SEGUIDORES;
 import static com.ufrpe.feelingsbox.redesocial.dominio.BundleEnum.SEGUIDOS;
 
 public class ActPerfil extends AppCompatActivity {
-    private TextView txtNome, txtNicK, txtNasc, txtSexo, txtEmail;
+    private TextView txtNome, txtNicK, txtNasc, txtSexo, txtEmail, numSeguidos, numSeguidores;
     private Sessao sessao = Sessao.getInstancia();
+    private Pessoa pessoaLogada;
+    private Usuario usuarioLogado;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,21 +38,35 @@ public class ActPerfil extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        Pessoa pessoaLogada = sessao.getPessoaLogada();
-        Usuario usuarioLogado = sessao.getUsuarioLogado();
+        pessoaLogada = sessao.getPessoaLogada();
+        usuarioLogado = sessao.getUsuarioLogado();
 
+        this.encontrandoItens();
+        this.atualizarDados();
+    }
+    private void encontrandoItens(){
         txtNome = (TextView) findViewById(R.id.txtNome);
         txtNicK = (TextView) findViewById(R.id.txtNick);
         txtNasc = (TextView) findViewById(R.id.txtNasc);
         txtSexo = (TextView) findViewById(R.id.txtSexo);
         txtEmail = (TextView) findViewById(R.id.txtEmail);
+        numSeguidos = (TextView) findViewById(R.id.txtSeguidosValor);
+        numSeguidores = (TextView) findViewById(R.id.txtSeguidoresValor);
+    }
 
+    private void atualizarDados(){
         txtNome.setText(pessoaLogada.getNome());
         txtNicK.setText(usuarioLogado.getNick());
         txtNasc.setText(FormataData.formatarDataHoraDataBaseParaExibicao(pessoaLogada.getDataNasc()));
         txtSexo.setText(pessoaLogada.getSexo());
         txtEmail.setText(usuarioLogado.getEmail());
 
+        RedeServices redeServices = new RedeServices(getApplicationContext());
+        long longSeguidos = redeServices.qtdSeguidos(usuarioLogado.getId());
+        numSeguidos.setText(Long.toString(longSeguidos));
+
+        long longSeguidores = redeServices.qtdSeguidores(usuarioLogado.getId());
+        numSeguidores.setText(Long.toString(longSeguidores));
     }
 
     @Override

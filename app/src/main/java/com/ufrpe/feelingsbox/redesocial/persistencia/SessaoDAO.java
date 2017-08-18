@@ -8,14 +8,18 @@ import android.content.Context;
 
 import com.ufrpe.feelingsbox.infra.DataBase;
 import com.ufrpe.feelingsbox.redesocial.dominio.Sessao;
+import com.ufrpe.feelingsbox.usuario.dominio.Pessoa;
+import com.ufrpe.feelingsbox.usuario.persistencia.PessoaDAO;
 
 
 public class SessaoDAO {
     private DataBase dbHelper;
     private SQLiteDatabase feelingsDb;
+    private PessoaDAO pessoaDAO;
 
     public SessaoDAO (Context context){
         dbHelper = new DataBase(context);
+        pessoaDAO = new PessoaDAO(context);
     }
 
     // Recebe a Sessao da pessoa a logar e insere na tabela
@@ -54,6 +58,27 @@ public class SessaoDAO {
         feelingsDb.close();
 
         return idPessoa;
+    }
+
+    public Pessoa getPessoaLogada(){
+        feelingsDb = dbHelper.getReadableDatabase();
+
+        String query = "SELECT * FROM " + DataBase.TABELA_SESSAO;
+
+        Cursor cursor = feelingsDb.rawQuery(query, null);
+
+        Pessoa pessoa = null;
+
+        if(cursor.moveToNext()){
+            String colunaPessoaId = DataBase.ID_PESSOA;
+            int indexColunaPessoatId = cursor.getColumnIndex(colunaPessoaId);
+            long idPessoa = cursor.getInt(indexColunaPessoatId);
+            pessoa = pessoaDAO.getPessoa(idPessoa);
+        }
+        cursor.close();
+        feelingsDb.close();
+
+        return pessoa;
     }
 
     //Encerra a sessao

@@ -80,7 +80,8 @@
             android:layout_toRightOf="@+id/ivUser"
             android:text="@string/txtseguidores2"
             android:textColor="@color/colorPostDataFont"
-            android:textSize="@dimen/post_text" />
+            android:textSize="@dimen/post_text"
+            android:layout_marginBottom="16dp"/>
 
         <TextView
             android:id="@+id/numSeguidores"
@@ -93,21 +94,25 @@
             android:textSize="@dimen/post_text"
             android:paddingLeft="4dp"/>
 
-        <ImageButton
+        <ImageView
             android:id="@+id/btnFollow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_below="@+id/txtUser"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            android:clickable="true"
             android:visibility="invisible"
             app:srcCompat="@android:drawable/btn_star_big_off" />
 
-        <ImageButton
+        <ImageView
             android:id="@+id/btnUnfollow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_below="@+id/txtUser"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            android:clickable="true"
             android:visibility="invisible"
             app:srcCompat="@android:drawable/btn_star_big_on" />
 

@@ -141,4 +141,29 @@ public class PessoaDAO {
 
         return id;
     }
+
+    public Pessoa getPessoa(long id){
+        feelingsDb = dbHelper.getReadableDatabase();
+
+        String query = "SELECT * FROM " + DataBase.TABELA_PESSOA +
+                " WHERE " + DataBase.ID + " LIKE ?";
+
+        String idString = Long.toString(id);
+        String[] argumentos = {idString};
+
+        Cursor cursor = feelingsDb.rawQuery(query, argumentos);
+
+        Pessoa pessoa = null;
+
+        if (cursor.moveToNext()) {
+
+            pessoa = criarPessoa(cursor);
+
+        }
+        cursor.close();
+        feelingsDb.close();
+
+        return pessoa;
+
+    }
 }

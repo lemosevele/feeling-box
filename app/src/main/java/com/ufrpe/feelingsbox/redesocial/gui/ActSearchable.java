@@ -144,13 +144,7 @@ public class ActSearchable extends AppCompatActivity implements RecyclerViewOnCl
             case android.R.id.home:
                 finish();
                 break;
-            /*case R.id.action_delete:
-                SearchRecentSuggestions searchRecentSuggestions = new SearchRecentSuggestions(this,
-                        SearchableProvider.AUTHORITY,
-                        SearchableProvider.MODE);
-                searchRecentSuggestions.clearHistory();
-                GuiUtil.myToastShort(this, getString(R.string.print_histórico_apagado));
-                break;*/
+
         }
         return super.onOptionsItemSelected(item);
     }

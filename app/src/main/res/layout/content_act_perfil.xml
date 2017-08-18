@@ -45,7 +45,7 @@
                         android:textSize="18sp" />
 
                     <TextView
-                        android:id="@+id/txtSeguindoValor"
+                        android:id="@+id/txtSeguidosValor"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"

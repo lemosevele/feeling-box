@@ -15,8 +15,7 @@ import android.view.ViewGroup;
 import com.ufrpe.feelingsbox.R;
 import com.ufrpe.feelingsbox.infra.adapter.post.PostRecyclerAdapter;
 import com.ufrpe.feelingsbox.infra.adapter.post.RecyclerViewOnClickListenerhack;
-import com.ufrpe.feelingsbox.redesocial.dominio.Post;
-import com.ufrpe.feelingsbox.redesocial.gui.ActCriarComentario;
+import com.ufrpe.feelingsbox.redesocial.dominio.Sessao;
 import com.ufrpe.feelingsbox.redesocial.gui.ActPerfilPost;
 import com.ufrpe.feelingsbox.redesocial.redesocialservices.RedeServices;
 import com.ufrpe.feelingsbox.usuario.dominio.Usuario;
@@ -34,6 +33,8 @@ public class UserFragment extends Fragment implements RecyclerViewOnClickListene
     private RedeServices redeServices;
     private String modo = "";
     private Bundle bundle;
+    private Sessao sessao = Sessao.getInstancia();
+    private UserRecyclerAdapter adapter;
 
     //Setando o RecyclerView
     @Override
@@ -82,14 +83,14 @@ public class UserFragment extends Fragment implements RecyclerViewOnClickListene
         }
 
         if(modo.equals(SEGUIDOS.getValor()) && idUser != null) {
-            mList = redeServices.listarSeguidos(idUser); //Inserir Lista de Usuarios Seguidos
+            mList = redeServices.listarSeguidos(idUser);
         } else if (idUser != null){
-            mList = redeServices.listarSeguidores(idUser); //Inserir Lista de Usuarios Seguidores
+            mList = redeServices.listarSeguidores(idUser);
         } else {
             mList = new ArrayList<>();
         }
 
-        UserRecyclerAdapter adapter = new UserRecyclerAdapter(getActivity(), mList);
+        adapter = new UserRecyclerAdapter(getActivity(), mList);
         adapter.setRecyclerViewOnClickListenerhack(this);
         mRecyclerView.setAdapter(adapter);
 
@@ -100,6 +101,7 @@ public class UserFragment extends Fragment implements RecyclerViewOnClickListene
     @Override
     public void onClickListener(View view, int position) {
         Intent intent;
+        Usuario usuario = mList.get(position);
         switch (view.getId()){
             case R.id.ivUser:
                 intent = new Intent(view.getContext(), ActPerfilPost.class);
@@ -108,10 +110,21 @@ public class UserFragment extends Fragment implements RecyclerViewOnClickListene
                 startActivity(intent);
                 getActivity().finish();
                 break;
+            case R.id.btnFollow:
+                redeServices.seguirUser(sessao.getUsuarioLogado().getId(), usuario.getId());
+                adapter.atualizarSeguir(position);
+                break;
+            case R.id.btnUnfollow:
+                redeServices.deletarUser(sessao.getUsuarioLogado().getId(), usuario.getId());
+                if(sessao.getUsuarioLogado().getId() == bundle.getLong(ID_USUARIO.getValor())) {
+                    adapter.removeListItem(position);
+                } else {
+                    adapter.atualizarSeguir(position);
+                }
+                break;
             case -1:
                 break;
         }
-
     }
     //Click longo
     @Override
@@ -125,8 +138,6 @@ public class UserFragment extends Fragment implements RecyclerViewOnClickListene
         private Context mContext;
         private GestureDetector mGestureDetector;
         private RecyclerViewOnClickListenerhack mRecyclerViewOnClickListenerhack;
-
-
 
         //Construtor
         public RecyclerViewTouchListener(Context mContext, final RecyclerView recyclerView, final RecyclerViewOnClickListenerhack mRecyclerViewOnClickListenerhack) {

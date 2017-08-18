@@ -4,6 +4,7 @@ package com.ufrpe.feelingsbox.redesocial.persistencia;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.provider.ContactsContract;
 
@@ -50,6 +51,28 @@ public class RelacaoSegDAO {
         cursor.close();
         feelingsDb.close();
         return listaSeguidores;
+    }
+
+    public long getQtdSeguidoresUser(long id) {
+        feelingsDb = dbHelper.getReadableDatabase();
+        String idString = Long.toString(id);
+        String[] argumentos = {idString};
+
+        Long resultado = DatabaseUtils.queryNumEntries(feelingsDb, DataBase.TABELA_REL_SEGUIDORES,
+                DataBase.SEGUIDO_ID + "= ?", argumentos);
+        feelingsDb.close();
+        return resultado;
+    }
+
+    public long getQtdSeguidosUser(long id) {
+        feelingsDb = dbHelper.getReadableDatabase();
+        String idString = Long.toString(id);
+        String[] argumentos = {idString};
+
+        Long resultado = DatabaseUtils.queryNumEntries(feelingsDb, DataBase.TABELA_REL_SEGUIDORES,
+                DataBase.SEGUIDOR_ID + "= ?", argumentos);
+        feelingsDb.close();
+        return resultado;
     }
 
     public ArrayList<Usuario> getSeguidosUser(long id) {

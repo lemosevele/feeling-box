@@ -1,4 +1,3 @@
-//<<<<<<< HEAD
 package com.ufrpe.feelingsbox.redesocial.gui;
 
 import android.content.Intent;
@@ -18,9 +17,7 @@ import com.ufrpe.feelingsbox.redesocial.dominio.Sessao;
 import com.ufrpe.feelingsbox.redesocial.redesocialservices.RedeServices;
 import com.ufrpe.feelingsbox.usuario.dominio.Usuario;
 import com.ufrpe.feelingsbox.usuario.usuarioservices.UsuarioService;
-import com.ufrpe.feelingsbox.redesocial.persistencia.RelacaoSegDAO;
 
-import static android.R.attr.action;
 import static com.ufrpe.feelingsbox.redesocial.dominio.ActEnum.ACT_PERFIL_POST;
 import static com.ufrpe.feelingsbox.redesocial.dominio.BundleEnum.ID_USUARIO;
 import static com.ufrpe.feelingsbox.redesocial.dominio.BundleEnum.MAIN_FRAG;
@@ -34,7 +31,6 @@ public class ActPerfilPost extends AppCompatActivity {
     private MenuItem actionFollow;
     private MenuItem actionUnfollow;
     private Usuario usuarioPost;
-    private RelacaoSegDAO relacaoSegDAO;
     private TextView numSeguidos, numSeguidores;
     private RedeServices redeServices;
     private Bundle bundle;
@@ -64,18 +60,18 @@ public class ActPerfilPost extends AppCompatActivity {
     }
 
     private void encontrandoItens(){
-        numSeguidos = (TextView) findViewById(R.id.txtSeguindoValor);
+        numSeguidos = (TextView) findViewById(R.id.txtSeguidosValor);
         numSeguidores = (TextView) findViewById(R.id.txtSeguidoresValor);
     }
 
     private void atualizarNumSeguidos(){
-        int intSeguidos = redeServices.listarSeguidos(usuarioPost.getId()).size();
-        numSeguidos.setText(Integer.toString(intSeguidos));
+        long longSeguidos = redeServices.qtdSeguidos(usuarioPost.getId());
+        numSeguidos.setText(Long.toString(longSeguidos));
     }
 
     private void atualizarNumSeguidores(){
-        int intSeguidores = redeServices.listarSeguidores(usuarioPost.getId()).size();
-        numSeguidores.setText(Integer.toString(intSeguidores));
+        long longSeguidores = redeServices.qtdSeguidores(usuarioPost.getId());
+        numSeguidores.setText(Long.toString(longSeguidores));
     }
 
     private void iniciarFragment(){
@@ -95,7 +91,6 @@ public class ActPerfilPost extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_act_perfil_post, menu);
-        relacaoSegDAO = new RelacaoSegDAO(this);
 
         actionFollow = menu.findItem(R.id.action_follow);
         actionUnfollow = menu.findItem(R.id.action_unfollow);
@@ -103,7 +98,7 @@ public class ActPerfilPost extends AppCompatActivity {
         if(usuarioPost.getNick().equals(sessao.getUsuarioLogado().getNick())){
             actionFollow.setVisible(false);
             actionUnfollow.setVisible(false);
-        } else if(relacaoSegDAO.verificaSeguidor(sessao.getUsuarioLogado().getId(), usuarioPost.getId())){
+        } else if(redeServices.verificacaoSeguidor(sessao.getUsuarioLogado().getId(), usuarioPost.getId())){
             actionFollow.setVisible(false);
             actionUnfollow.setVisible(true);
         }

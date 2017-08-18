@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Feelings Box</string>
+    <string name="app_name">FeelingBox</string>
     <string name="title_activity_act_login">Sign in</string>
 
     <!-- Strings related to login -->
@@ -14,9 +14,9 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
-    <string name="lbl_logo1">FEELINGS</string>
+    <string name="lbl_logo1">FEELING</string>
     <string name="lbl_logo2">BOX</string>
-    <string name="lbl_subtitle">Good feelins, create life</string>
+    <string name="lbl_subtitle">Good feelings, create life</string>
     <string name="lbl_cadastrar">Cadastrar</string>
     <string name="lbl_login">Login</string>
     <string name="lbl_senha">Senha</string>

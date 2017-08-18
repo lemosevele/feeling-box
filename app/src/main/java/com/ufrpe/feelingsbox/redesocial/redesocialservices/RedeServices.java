@@ -3,15 +3,15 @@ package com.ufrpe.feelingsbox.redesocial.redesocialservices;
 import android.content.Context;
 
 import com.ufrpe.feelingsbox.redesocial.dominio.Comentario;
-import com.ufrpe.feelingsbox.redesocial.dominio.PerfilPublico;
-import com.ufrpe.feelingsbox.redesocial.dominio.Sessao;
 import com.ufrpe.feelingsbox.redesocial.dominio.Post;
+import com.ufrpe.feelingsbox.redesocial.dominio.Sessao;
 import com.ufrpe.feelingsbox.redesocial.persistencia.ComentarioDAO;
 import com.ufrpe.feelingsbox.redesocial.persistencia.PosTagDAO;
 import com.ufrpe.feelingsbox.redesocial.persistencia.PostDAO;
 import com.ufrpe.feelingsbox.redesocial.persistencia.RelacaoSegDAO;
 import com.ufrpe.feelingsbox.redesocial.persistencia.SessaoDAO;
 import com.ufrpe.feelingsbox.redesocial.persistencia.TagDAO;
+import com.ufrpe.feelingsbox.usuario.dominio.Pessoa;
 import com.ufrpe.feelingsbox.usuario.dominio.Usuario;
 
 import java.util.List;
@@ -115,5 +115,24 @@ public class RedeServices {
     public List<Usuario> listarSeguidos(long id){
         relacaoSegDAO = new RelacaoSegDAO(context);
         return relacaoSegDAO.getSeguidosUser(id);
+    }
+
+    public long qtdSeguidores(long id){
+        relacaoSegDAO = new RelacaoSegDAO(context);
+        return relacaoSegDAO.getQtdSeguidoresUser(id);
+    }
+
+    public long qtdSeguidos(long id){
+        relacaoSegDAO = new RelacaoSegDAO(context);
+        return relacaoSegDAO.getQtdSeguidosUser(id);
+    }
+
+    public boolean verificacaoSeguidor(long idSeguidor, long idSeguido){
+        relacaoSegDAO = new RelacaoSegDAO(context);
+        return relacaoSegDAO.verificaSeguidor(idSeguidor, idSeguido);
+    }
+    public Pessoa verificarSessao(){
+        sessaoDAO = new SessaoDAO(context);
+        return sessaoDAO.getPessoaLogada();
     }
 }

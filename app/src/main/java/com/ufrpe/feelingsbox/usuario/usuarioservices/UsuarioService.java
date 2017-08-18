@@ -68,6 +68,14 @@ public class UsuarioService {
         }
     }
 
+    public void autoLogarNick(String nick, String senha) throws Exception {
+        Usuario usuario = usuarioDAO.getUsuarioNick(nick);
+        Pessoa pessoa = pessoaDAO.getPessoa(usuario);
+        sessao.setPessoaLogada(pessoa);
+        sessao.setUsuarioLogado(usuario);
+        sessaoDAO.inserirIdPessoa(sessao);
+        }
+
     public void logarEmail(String email, String senha) throws Exception {
         String senhaCriptografada = criptografia.criptografarSenha(senha);
         Usuario emailValido = usuarioDAO.getUsuarioEmailSenha(email, senhaCriptografada);
@@ -95,8 +103,4 @@ public class UsuarioService {
     }
 
     public Usuario buscarUsuario(long id){ return usuarioDAO.getUsuarioId(id); }
-
-    public boolean verificarSessao(){
-        return sessao.getUsuarioLogado() != null;
-    }
 }
