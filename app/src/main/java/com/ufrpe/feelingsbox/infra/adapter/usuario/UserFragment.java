@@ -74,17 +74,19 @@ public class UserFragment extends Fragment implements RecyclerViewOnClickListene
 
         redeServices = new RedeServices(getActivity());
         bundle = this.getArguments();
-        Long idUser;
+        Long idUser = null;
 
         if(bundle != null){
             modo = bundle.getString(MODO.getValor());
             idUser = bundle.getLong(ID_USUARIO.getValor());
         }
 
-        if(modo.equals(SEGUIDOS.getValor())){
-            mList = new ArrayList<>(); //Inserir Lista de Usuarios Seguidos
+        if(modo.equals(SEGUIDOS.getValor()) && idUser != null) {
+            mList = redeServices.listarSeguidos(idUser); //Inserir Lista de Usuarios Seguidos
+        } else if (idUser != null){
+            mList = redeServices.listarSeguidores(idUser); //Inserir Lista de Usuarios Seguidores
         } else {
-            mList = new ArrayList<>(); //Inserir Lista de Usuarios Seguidores
+            mList = new ArrayList<>();
         }
 
         UserRecyclerAdapter adapter = new UserRecyclerAdapter(getActivity(), mList);

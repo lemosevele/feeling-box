@@ -47,7 +47,7 @@
             android:layout_toRightOf="@+id/ivUser"
             android:hint="@string/exemplo_hint_usuario"
             android:textColor="@color/colorUserFont"
-            android:textSize="18sp"
+            android:textSize="@dimen/user_name"
             android:textStyle="bold" />
 
         <TextView
@@ -58,7 +58,7 @@
             android:layout_toRightOf="@+id/ivUser"
             android:hint="@string/exemplo_hint_data"
             android:textColor="@color/colorPostDataFont"
-            android:textSize="12sp" />
+            android:textSize="@dimen/post_date" />
 
         <TextView
             android:id="@+id/txtPostagem"
@@ -70,7 +70,7 @@
             android:layout_marginTop="8dp"
             android:hint="@string/exemplo_hint_post"
             android:textColor="@color/colorPostFont"
-            android:textSize="14sp" />
+            android:textSize="@dimen/post_text" />
 
         <Button
             android:id="@+id/btnComentar"

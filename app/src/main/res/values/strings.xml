@@ -39,7 +39,7 @@
     <string name="title_activity_act_home">Home</string>
     <string name="dialogo_titulo_erro">Erro</string>
     <string name="dialogo_botao_ok">Ok</string>
-    <string name="title_menu_perfil">Perfil</string>
+    <string name="title_menu_conta">Conta</string>
     <string name="title_activity_act_perfil">Perfil</string>
     <string name="title_activity_act_editar_perfil">Editar Perfil</string>
     <string name="title_menu_editar">Editar</string>
@@ -77,4 +77,6 @@
     <string name="txtseguidos2">Seguidos:</string>
     <string name="txtseguidores2">Seguidores:</string>
     <string name="title_activity_act_seguidos_seguidores">ActSeguidosSeguidores</string>
+    <string name="title_menu_perfil">Perfil</string>
+    <string name="tilte_menu_pesquisar">Pesquisar</string>
 </resources>

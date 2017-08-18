@@ -114,4 +114,22 @@ public class RelacaoSegDAO {
         perfilPublico.setSeguidos(getSeguidosUser(id));
         return perfilPublico;
     }
+
+    public boolean verificaSeguidor (long idSeguidor, long idSeguido){
+        feelingsDb = dbHelper.getReadableDatabase();
+
+        String query = "SELECT * FROM " + DataBase.TABELA_REL_SEGUIDORES +
+                " WHERE " + DataBase.SEGUIDOR_ID + " LIKE ?" +
+                " AND " + DataBase.SEGUIDO_ID  + " LIKE ?";
+
+        String idString = Long.toString(idSeguidor);
+        String idString1 = Long.toString(idSeguido);
+
+        String[] argumentos = {idString, idString1};
+
+        Cursor cursor = feelingsDb.rawQuery(query, argumentos);
+
+        return (cursor.moveToNext());
+
+    }
 }

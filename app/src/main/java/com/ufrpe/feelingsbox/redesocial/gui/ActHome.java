@@ -77,10 +77,10 @@ public class ActHome extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
-            case R.id.action_perfil:
+            case R.id.action_conta:
                 mudarTela(ActPerfil.class);
                 break;
-            case R.id.action_meus_post:
+            case R.id.action_perfil:
                 mudarTela(ActPerfilPost.class);
                 break;
             case R.id.action_sair:

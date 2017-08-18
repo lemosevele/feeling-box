@@ -1,11 +1,10 @@
 package com.ufrpe.feelingsbox.usuario.gui;
-/*
- * Tela de Login
- */
+
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
@@ -18,47 +17,43 @@ import com.ufrpe.feelingsbox.redesocial.gui.ActHome;
 import com.ufrpe.feelingsbox.usuario.usuarioservices.UsuarioService;
 
 public class ActLogin extends AppCompatActivity {
-
-    //Declarando os Elementos da Tela(activity)
     private EditText edtLogin, edtSenha;
     private UsuarioService usuarioService;
+    private ValidacaoService validacaoService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_login);
+        this.encontrandoItens();
+        this.animacaoTela();
+    }
 
-
-
-        //Encontrando Elemento da Tela(activity)
+    private void encontrandoItens(){
         edtLogin = (EditText)findViewById(R.id.edtLogin);
         edtSenha = (EditText)findViewById(R.id.edtSenha);
+    }
 
-        //Animação
+    private void animacaoTela(){
         try {
             YoYo.with(Techniques.FadeIn)
                     .duration(1000)
                     .repeat(0)
                     .playOn(findViewById(R.id.mainLayoutLogin));
         }catch (Exception e){
-
+            Log.d("animacaoTela()", "Erro na animação na tela de login.");
         }
-
     }
 
-    //Ação ao Clicar no botão Cadastrar
     public void cadastrarUsuario(View view){
-        //Trocando para a Tela de Cadastro
         Intent it = new Intent(ActLogin.this, ActSignUp.class);
         startActivity(it);
     }
 
-    //Ação ao Clicar no botão Entrar
     public void efetuarLogin(View view){
-
         String login = edtLogin.getText().toString();
         String senha = edtSenha.getText().toString();
-        ValidacaoService validacaoService = new ValidacaoService(getApplicationContext());
+        validacaoService = new ValidacaoService(getApplicationContext());
 
         boolean vazio = false;
         if (validacaoService.isCampoVazio(senha)){
@@ -73,54 +68,34 @@ public class ActLogin extends AppCompatActivity {
         }
 
         if (!vazio) {
-            usuarioService = new UsuarioService(getApplicationContext());
-            if (!validacaoService.isEmail(login)) {
-                try {
-                    usuarioService.logarNick(login, senha);
-                    //Trocando para a Tela de Home
-                    Intent it = new Intent(ActLogin.this, ActHome.class);
-                    startActivity(it);
-                    finish();
-                }
-                catch (Exception e) {
-                    GuiUtil.myToast(this, "Login ou senha incorretos.");
-                }
-            }
-            else {
-                try {
-
-                    usuarioService.logarEmail(login, senha);
-                    //Trocando para a Tela de Home
-                    Intent it = new Intent(ActLogin.this, ActHome.class);
-                    startActivity(it);
-                    finish();
-                }
-                catch (Exception e) {
-                    GuiUtil.myToast(this, "Login ou senha incorretos.");
-                }
-            }
+            this.chamarValidacao(login, senha);
         }
     }
 
-    /*public boolean validaCampoSenha(String senha){
-        if (validacaoService.isCampoVazio(senha)) {
-            edtSenha.requestFocus();
-            edtSenha.setError("O campo senha está vazio.");
-            return false;
+    private void chamarValidacao(String login, String senha){
+        usuarioService = new UsuarioService(getApplicationContext());
+        if (!validacaoService.isEmail(login)) {
+            try {
+                usuarioService.logarNick(login, senha);
+                Intent it = new Intent(ActLogin.this, ActHome.class);
+                startActivity(it);
+                finish();
+            }
+            catch (Exception e) {
+                GuiUtil.myToast(this, "Login ou senha incorretos.");
+            }
         }
-        else{
-            return true;
+
+        else {
+            try {
+                usuarioService.logarEmail(login, senha);
+                Intent it = new Intent(ActLogin.this, ActHome.class);
+                startActivity(it);
+                finish();
+            }
+            catch (Exception e) {
+                GuiUtil.myToast(this, "Login ou senha incorretos.");
+            }
         }
     }
-
-    public boolean validaCampoLogin(String login){
-        if (validacaoService.isCampoVazio(login)){
-            edtLogin.requestFocus();
-            edtLogin.setError("O campo login está vazio.");
-            return false;
-        }
-        else{
-            return true;
-        }
-    }*/
 }

@@ -3,6 +3,7 @@ package com.ufrpe.feelingsbox.redesocial.redesocialservices;
 import android.content.Context;
 
 import com.ufrpe.feelingsbox.redesocial.dominio.Comentario;
+import com.ufrpe.feelingsbox.redesocial.dominio.PerfilPublico;
 import com.ufrpe.feelingsbox.redesocial.dominio.Sessao;
 import com.ufrpe.feelingsbox.redesocial.dominio.Post;
 import com.ufrpe.feelingsbox.redesocial.persistencia.ComentarioDAO;
@@ -11,6 +12,7 @@ import com.ufrpe.feelingsbox.redesocial.persistencia.PostDAO;
 import com.ufrpe.feelingsbox.redesocial.persistencia.RelacaoSegDAO;
 import com.ufrpe.feelingsbox.redesocial.persistencia.SessaoDAO;
 import com.ufrpe.feelingsbox.redesocial.persistencia.TagDAO;
+import com.ufrpe.feelingsbox.usuario.dominio.Usuario;
 
 import java.util.List;
 import java.util.regex.Matcher;
@@ -103,5 +105,15 @@ public class RedeServices {
     public void deletarUser(long idSeguidor, long idSeguido){
         relacaoSegDAO = new RelacaoSegDAO(context);
         relacaoSegDAO.deletarRelSeguidores(idSeguidor, idSeguido);
+    }
+
+    public List<Usuario> listarSeguidores(long id){
+        relacaoSegDAO = new RelacaoSegDAO(context);
+        return relacaoSegDAO.getSeguidoresUser(id);
+    }
+
+    public List<Usuario> listarSeguidos(long id){
+        relacaoSegDAO = new RelacaoSegDAO(context);
+        return relacaoSegDAO.getSeguidosUser(id);
     }
 }

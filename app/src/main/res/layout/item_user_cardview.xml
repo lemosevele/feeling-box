@@ -48,7 +48,7 @@
             android:layout_toRightOf="@+id/ivUser"
             android:hint="@string/exemplo_hint_usuario"
             android:textColor="@color/colorUserFont"
-            android:textSize="18sp"
+            android:textSize="@dimen/user_name"
             android:textStyle="bold" />
 
         <TextView
@@ -59,7 +59,7 @@
             android:layout_toRightOf="@+id/ivUser"
             android:text="@string/txtseguidos2"
             android:textColor="@color/colorPostDataFont"
-            android:textSize="12sp" />
+            android:textSize="@dimen/post_text" />
 
         <TextView
             android:id="@+id/numSeguidos"
@@ -70,7 +70,7 @@
             android:paddingLeft="4dp"
             android:text="0"
             android:textColor="@color/colorPostDataFont"
-            android:textSize="12sp" />
+            android:textSize="@dimen/post_text" />
 
         <TextView
             android:id="@+id/lblSeguidores"
@@ -80,7 +80,7 @@
             android:layout_toRightOf="@+id/ivUser"
             android:text="@string/txtseguidores2"
             android:textColor="@color/colorPostDataFont"
-            android:textSize="12sp" />
+            android:textSize="@dimen/post_text" />
 
         <TextView
             android:id="@+id/numSeguidores"
@@ -90,7 +90,7 @@
             android:layout_toRightOf="@+id/lblSeguidores"
             android:text="0"
             android:textColor="@color/colorPostDataFont"
-            android:textSize="12sp"
+            android:textSize="@dimen/post_text"
             android:paddingLeft="4dp"/>
 
         <ImageButton

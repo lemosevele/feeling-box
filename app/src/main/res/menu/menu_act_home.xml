@@ -7,20 +7,20 @@
         app:actionViewClass="android.support.v7.widget.SearchView"
         android:icon="@android:drawable/ic_menu_search"
         android:orderInCategory="1"
-        android:title="Pesquisar"
+        android:title="@string/tilte_menu_pesquisar"
         app:showAsAction="ifRoom|collapseActionView" />
-    <item
-        android:id="@+id/action_sair"
-        android:orderInCategory="10"
-        android:title="@string/title_menu_sair" />
     <item
         android:id="@+id/action_perfil"
         android:orderInCategory="2"
-        android:title="@string/title_menu_perfil"
+        android:title="@string/title_menu_perfil" />
+    <item
+        android:id="@+id/action_conta"
+        android:orderInCategory="3"
+        android:title="@string/title_menu_conta"
         app:showAsAction="never" />
     <item
-        android:id="@+id/action_meus_post"
-        android:orderInCategory="3"
-        android:title="Meus Posts" />
+    android:id="@+id/action_sair"
+    android:orderInCategory="10"
+    android:title="@string/title_menu_sair" />
 
 </menu>
