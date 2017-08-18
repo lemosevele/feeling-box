@@ -8,14 +8,24 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.ufrpe.feelingsbox.R;
 import com.ufrpe.feelingsbox.infra.adapter.post.PostFragmentPerfil;
 import com.ufrpe.feelingsbox.redesocial.dominio.Sessao;
 import com.ufrpe.feelingsbox.usuario.dominio.Usuario;
+import com.ufrpe.feelingsbox.usuario.gui.ActLogin;
+import com.ufrpe.feelingsbox.usuario.gui.ActSignUp;
 import com.ufrpe.feelingsbox.usuario.usuarioservices.UsuarioService;
 
 import static android.R.attr.action;
+import static com.ufrpe.feelingsbox.redesocial.dominio.ActEnum.ACT_PERFIL_POST;
+import static com.ufrpe.feelingsbox.redesocial.dominio.BundleEnum.ID_USUARIO;
+import static com.ufrpe.feelingsbox.redesocial.dominio.BundleEnum.MAIN_FRAG;
+import static com.ufrpe.feelingsbox.redesocial.dominio.BundleEnum.MODO;
+import static com.ufrpe.feelingsbox.redesocial.dominio.BundleEnum.RETORNO;
+import static com.ufrpe.feelingsbox.redesocial.dominio.BundleEnum.SEGUIDORES;
+import static com.ufrpe.feelingsbox.redesocial.dominio.BundleEnum.SEGUIDOS;
 
 public class ActPerfilPost extends AppCompatActivity {
     private Sessao sessao = Sessao.getInstancia();
@@ -32,7 +42,7 @@ public class ActPerfilPost extends AppCompatActivity {
 
         if(bundle != null){
             UsuarioService usuarioService = new UsuarioService(this);
-            usuarioPost = usuarioService.buscarUsuario(bundle.getLong("idUsuario"));
+            usuarioPost = usuarioService.buscarUsuario(bundle.getLong(ID_USUARIO.getValor()));
         } else {
             usuarioPost = sessao.getUsuarioLogado();
         }
@@ -41,14 +51,14 @@ public class ActPerfilPost extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //Fragment
-        PostFragmentPerfil frag = (PostFragmentPerfil) getSupportFragmentManager().findFragmentByTag("mainFrag");
+        PostFragmentPerfil frag = (PostFragmentPerfil) getSupportFragmentManager().findFragmentByTag(MAIN_FRAG.getValor());
         if(frag == null) {
             frag = new PostFragmentPerfil();
             if(bundle != null){
                 frag.setArguments(bundle);
             }
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.rl_fragment_container, frag, "mainFrag");
+            ft.replace(R.id.rl_fragment_container, frag, MAIN_FRAG.getValor());
             ft.commit();
         }
 
@@ -96,6 +106,24 @@ public class ActPerfilPost extends AppCompatActivity {
 
     private void retornarHome(){
         Intent intent = new Intent(this, ActHome.class);
+        startActivity(intent);
+        finish();
+    }
+
+    public void onClickSeguidos(View view){
+        Intent intent = new Intent(this, ActSeguidosSeguidores.class);
+        intent.putExtra(ID_USUARIO.getValor(), usuarioPost.getId());
+        intent.putExtra(RETORNO.getValor(), ACT_PERFIL_POST.getValor());
+        intent.putExtra(MODO.getValor(), SEGUIDOS.getValor());
+        startActivity(intent);
+        finish();
+    }
+
+    public void onClickSeguidores(View view){
+        Intent intent = new Intent(this, ActSeguidosSeguidores.class);
+        intent.putExtra(ID_USUARIO.getValor(), usuarioPost.getId());
+        intent.putExtra(RETORNO.getValor(), ACT_PERFIL_POST.getValor());
+        intent.putExtra(MODO.getValor(), SEGUIDORES.getValor());
         startActivity(intent);
         finish();
     }

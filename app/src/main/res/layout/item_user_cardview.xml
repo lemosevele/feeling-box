@@ -23,6 +23,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
             android:src="@drawable/perfil"
             app:civ_border_color="#FF000000"
             app:civ_border_width="0dp" />
@@ -39,11 +40,11 @@
             android:src="@drawable/perfil" /-->
 
         <TextView
-            android:id="@+id/txtDonoPost"
+            android:id="@+id/txtUser"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="16dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="8dp"
             android:layout_toRightOf="@+id/ivUser"
             android:hint="@string/exemplo_hint_usuario"
             android:textColor="@color/colorUserFont"
@@ -54,35 +55,61 @@
             android:id="@+id/lblSeguindo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/txtDonoPost"
+            android:layout_below="@+id/txtUser"
             android:layout_toRightOf="@+id/ivUser"
-            android:hint="@string/exemplo_hint_data"
+            android:text="@string/txtseguidos2"
             android:textColor="@color/colorPostDataFont"
             android:textSize="12sp" />
 
         <TextView
-            android:id="@+id/txtPostagem"
+            android:id="@+id/numSeguidos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtUser"
+            android:layout_toRightOf="@+id/lblSeguindo"
+            android:paddingLeft="4dp"
+            android:text="0"
+            android:textColor="@color/colorPostDataFont"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/lblSeguidores"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/lblSeguindo"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="8dp"
-            android:hint="@string/exemplo_hint_post"
-            android:textColor="@color/colorPostFont"
-            android:textSize="14sp" />
+            android:layout_toRightOf="@+id/ivUser"
+            android:text="@string/txtseguidores2"
+            android:textColor="@color/colorPostDataFont"
+            android:textSize="12sp" />
 
-        <Button
-            android:id="@+id/btnComentar"
-            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        <TextView
+            android:id="@+id/numSeguidores"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/txtPostagem"
-            android:layout_marginBottom="8dp"
-            android:layout_marginLeft="5dp"
-            android:text="@string/btn_comentar"
-            android:textColor="@color/colorFontLogo" />
+            android:layout_below="@+id/lblSeguindo"
+            android:layout_toRightOf="@+id/lblSeguidores"
+            android:text="0"
+            android:textColor="@color/colorPostDataFont"
+            android:textSize="12sp"
+            android:paddingLeft="4dp"/>
 
+        <ImageButton
+            android:id="@+id/btnFollow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/txtUser"
+            android:visibility="invisible"
+            app:srcCompat="@android:drawable/btn_star_big_off" />
+
+        <ImageButton
+            android:id="@+id/btnUnfollow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/txtUser"
+            android:visibility="invisible"
+            app:srcCompat="@android:drawable/btn_star_big_on" />
 
 
     </RelativeLayout>

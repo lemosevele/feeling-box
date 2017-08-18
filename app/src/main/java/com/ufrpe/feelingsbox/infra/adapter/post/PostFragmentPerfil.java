@@ -21,6 +21,9 @@ import com.ufrpe.feelingsbox.redesocial.redesocialservices.RedeServices;
 
 import java.util.List;
 
+import static com.ufrpe.feelingsbox.redesocial.dominio.BundleEnum.ID_POST;
+import static com.ufrpe.feelingsbox.redesocial.dominio.BundleEnum.ID_USUARIO;
+
 public class PostFragmentPerfil extends Fragment implements RecyclerViewOnClickListenerhack{
     private RecyclerView mRecyclerView;
     private List<Post> mList;
@@ -69,7 +72,7 @@ public class PostFragmentPerfil extends Fragment implements RecyclerViewOnClickL
         redeServices = new RedeServices(getActivity());
         Bundle bundle = this.getArguments();
         if(bundle != null){
-            mList = redeServices.exibirPosts(bundle.getLong("idUsuario"));
+            mList = redeServices.exibirPosts(bundle.getLong(ID_USUARIO.getValor()));
         } else {
             mList = redeServices.exibirPosts(sessao.getUsuarioLogado().getId());
         }
@@ -87,13 +90,13 @@ public class PostFragmentPerfil extends Fragment implements RecyclerViewOnClickL
         switch (view.getId()){
             case R.id.ivUser:
                 intent = new Intent(view.getContext(), ActPerfilPost.class);
-                intent.putExtra("idUsuario", mList.get(position).getIdUsuario());
+                intent.putExtra(ID_USUARIO.getValor(), mList.get(position).getIdUsuario());
                 startActivity(intent);
                 getActivity().finish();
                 break;
             case R.id.btnComentar:
                 intent = new Intent(view.getContext(), ActCriarComentario.class);
-                intent.putExtra("idPost", mList.get(position).getId());
+                intent.putExtra(ID_POST.getValor(), mList.get(position).getId());
                 startActivity(intent);
                 getActivity().finish();
                 break;

@@ -1,4 +1,4 @@
-package com.ufrpe.feelingsbox.infra.adapter.post;
+package com.ufrpe.feelingsbox.infra.adapter.usuario;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,21 +13,27 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.ufrpe.feelingsbox.R;
-import com.ufrpe.feelingsbox.infra.GuiUtil;
+import com.ufrpe.feelingsbox.infra.adapter.post.PostRecyclerAdapter;
+import com.ufrpe.feelingsbox.infra.adapter.post.RecyclerViewOnClickListenerhack;
 import com.ufrpe.feelingsbox.redesocial.dominio.Post;
 import com.ufrpe.feelingsbox.redesocial.gui.ActCriarComentario;
 import com.ufrpe.feelingsbox.redesocial.gui.ActPerfilPost;
 import com.ufrpe.feelingsbox.redesocial.redesocialservices.RedeServices;
+import com.ufrpe.feelingsbox.usuario.dominio.Usuario;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import static com.ufrpe.feelingsbox.redesocial.dominio.BundleEnum.ID_POST;
 import static com.ufrpe.feelingsbox.redesocial.dominio.BundleEnum.ID_USUARIO;
+import static com.ufrpe.feelingsbox.redesocial.dominio.BundleEnum.MODO;
+import static com.ufrpe.feelingsbox.redesocial.dominio.BundleEnum.SEGUIDOS;
 
-public class PostFragment extends Fragment implements RecyclerViewOnClickListenerhack{
+public class UserFragment extends Fragment implements RecyclerViewOnClickListenerhack {
     private RecyclerView mRecyclerView;
-    private List<Post> mList;
+    private List<Usuario> mList;
     private RedeServices redeServices;
+    private String modo = "";
+    private Bundle bundle;
 
     //Setando o RecyclerView
     @Override
@@ -61,15 +67,27 @@ public class PostFragment extends Fragment implements RecyclerViewOnClickListene
             }*/
         });
 
-        //mRecyclerView.addOnItemTouchListener(new RecyclerViewTouchListener(getActivity(), mRecyclerView, this));
 
         LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(getActivity());
         mLinearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
 
         redeServices = new RedeServices(getActivity());
-        mList = redeServices.exibirPosts();
-        PostRecyclerAdapter adapter = new PostRecyclerAdapter(getActivity(), mList);
+        bundle = this.getArguments();
+        Long idUser;
+
+        if(bundle != null){
+            modo = bundle.getString(MODO.getValor());
+            idUser = bundle.getLong(ID_USUARIO.getValor());
+        }
+
+        if(modo.equals(SEGUIDOS.getValor())){
+            mList = new ArrayList<>(); //Inserir Lista de Usuarios Seguidos
+        } else {
+            mList = new ArrayList<>(); //Inserir Lista de Usuarios Seguidores
+        }
+
+        UserRecyclerAdapter adapter = new UserRecyclerAdapter(getActivity(), mList);
         adapter.setRecyclerViewOnClickListenerhack(this);
         mRecyclerView.setAdapter(adapter);
 
@@ -83,13 +101,8 @@ public class PostFragment extends Fragment implements RecyclerViewOnClickListene
         switch (view.getId()){
             case R.id.ivUser:
                 intent = new Intent(view.getContext(), ActPerfilPost.class);
-                intent.putExtra(ID_USUARIO.getValor(), mList.get(position).getIdUsuario());
-                startActivity(intent);
-                getActivity().finish();
-                break;
-            case R.id.btnComentar:
-                intent = new Intent(view.getContext(), ActCriarComentario.class);
-                intent.putExtra(ID_POST.getValor(), mList.get(position).getId());
+                intent.putExtra(ID_USUARIO.getValor(), mList.get(position).getId());
+                intent.putExtra(MODO.getValor(), bundle.getString(MODO.getValor()));
                 startActivity(intent);
                 getActivity().finish();
                 break;

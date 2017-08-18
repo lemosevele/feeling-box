@@ -32,6 +32,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:onClick="onClickSeguidos"
                     android:orientation="vertical">
 
                     <TextView
@@ -40,7 +41,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:paddingStart="16dp"
-                        android:text="Seguindo"
+                        android:text="@string/txtseguidos"
                         android:textSize="18sp" />
 
                     <TextView
@@ -58,6 +59,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:onClick="onClickSeguidores"
                     android:orientation="vertical">
 
                     <TextView
@@ -66,7 +68,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:paddingStart="16dp"
-                        android:text="Seguidores"
+                        android:text="@string/txtseguidores"
                         android:textSize="18sp" />
 
                     <TextView

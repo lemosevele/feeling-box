@@ -14,13 +14,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/MyAppTheme">
-
-        <meta-data android:name="android.app.default_searchable"
-            android:value="com.ufrpe.feelingsbox.redesocial.gui.ActSearchable"/>
+        <meta-data
+            android:name="android.app.default_searchable"
+            android:value="com.ufrpe.feelingsbox.redesocial.gui.ActSearchable" />
 
         <provider
-            android:authorities="com.ufrpe.feelingsbox.infra.provider.SearchableProvider"
-            android:name="com.ufrpe.feelingsbox.infra.provider.SearchableProvider"/>
+            android:name=".infra.provider.SearchableProvider"
+            android:authorities="com.ufrpe.feelingsbox.infra.provider.SearchableProvider" />
 
         <activity
             android:name=".usuario.gui.ActLogin"
@@ -33,7 +33,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".usuario.gui.ActSignUp"
             android:configChanges="keyboardHidden|orientation|screenSize"
@@ -41,17 +40,14 @@
             android:windowSoftInputMode="stateHidden"> <!-- Impede do teclado abrir automaticamente ao Entrar na Activity e mudar Orientação e Tamanho da Tela -->
 
         </activity>
-
         <activity
             android:name=".redesocial.gui.ActHome"
             android:label="@string/title_activity_act_home"
             android:theme="@style/MyAppTheme.NoActionBar" />
-
         <activity
             android:name=".redesocial.gui.ActPerfil"
             android:label="@string/title_activity_act_perfil"
             android:theme="@style/MyAppTheme.NoActionBar" />
-
         <activity
             android:name=".redesocial.gui.ActEditarPerfil"
             android:label="@string/title_activity_act_editar_perfil"
@@ -59,37 +55,36 @@
             android:windowSoftInputMode="stateHidden"> <!-- Impede do teclado abrir automaticamente ao Entrar na Activity e mudar Orientação e Tamanho da Tela -->
             >
         </activity>
-
         <activity
             android:name=".redesocial.gui.ActCriarPost"
             android:label="@string/title_activity_act_criar_post"
             android:theme="@style/MyAppTheme.NoActionBar" />
-
         <activity
             android:name=".redesocial.gui.ActCriarComentario"
             android:label="@string/title_activity_act_criar_comentario"
             android:theme="@style/MyAppTheme" />
-
         <activity
             android:name=".redesocial.gui.ActPerfilPost"
             android:label="@string/title_activity_act_perfil_post"
             android:theme="@style/MyAppTheme" />
-
         <activity
-            android:windowSoftInputMode="adjustPan|adjustNothing"
             android:name=".redesocial.gui.ActSearchable"
             android:label="@string/title_activity_act_searchable"
+            android:launchMode="singleTop"
             android:theme="@style/MyAppTheme"
-            android:launchMode="singleTop">
-
+            android:windowSoftInputMode="adjustPan|adjustNothing">
             <intent-filter>
-                <action android:name="android.intent.action.SEARCH"/>
+                <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
 
-            <meta-data android:name="android.app.searchable"
-                android:resource="@xml/searchable"/>
-
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
         </activity>
+        <activity
+            android:name=".redesocial.gui.ActSeguidosSeguidores"
+            android:label="@string/title_activity_act_seguidos_seguidores"
+            android:theme="@style/MyAppTheme"></activity>
     </application>
 
 </manifest>

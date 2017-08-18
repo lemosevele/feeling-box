@@ -1,31 +1,31 @@
-package com.ufrpe.feelingsbox.infra.adapter.post;
+package com.ufrpe.feelingsbox.infra.adapter.usuario;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.ufrpe.feelingsbox.R;
-import com.ufrpe.feelingsbox.infra.FormataData;
-import com.ufrpe.feelingsbox.redesocial.dominio.Post;
+import com.ufrpe.feelingsbox.infra.adapter.post.RecyclerViewOnClickListenerhack;
+import com.ufrpe.feelingsbox.usuario.dominio.Usuario;
 import com.ufrpe.feelingsbox.usuario.usuarioservices.UsuarioService;
 
 import java.util.List;
 
-public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapter.MyViewHolder> {
-    private List<Post> mList;
+public class UserRecyclerAdapter extends RecyclerView.Adapter<UserRecyclerAdapter.MyViewHolder> {
+    private List<Usuario> mList;
     private LayoutInflater mLayoutInflater;
     private RecyclerViewOnClickListenerhack mRecyclerViewOnClickListenerhack;
     private UsuarioService usuarioService;
 
     //Construtor
-    public PostRecyclerAdapter(Context context, List<Post> lista) {
+    public UserRecyclerAdapter(Context context, List<Usuario> lista) {
         mList = lista;
         mLayoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
@@ -33,7 +33,7 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
     //Cria os Itens da Lista (até alguns a mais do que a tela comporta)
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = mLayoutInflater.inflate(R.layout.item_post_cardview, parent, false);
+        View view = mLayoutInflater.inflate(R.layout.item_user_cardview, parent, false);
         MyViewHolder myViewHolder = new MyViewHolder(view);
 
         return myViewHolder;
@@ -48,8 +48,8 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
         mRecyclerViewOnClickListenerhack = r;
     }
 
-    public void addListItem(Post post, int position){
-        mList.add(post);
+    public void addListItem(Usuario usuario, int position){
+        mList.add(usuario);
         notifyItemInserted(position);
     }
 
@@ -62,13 +62,9 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         //holder.ivUser.setImageResource( mList.get(position).getFoto() );
-        usuarioService = new UsuarioService(mLayoutInflater.getContext());
-        long idUsuario = mList.get(position).getIdUsuario();
-        String nickUsuario = usuarioService.buscarNick(idUsuario) ;
-        holder.txtDonoPost.setText(nickUsuario);
-        holder.txtPostagem.setText(mList.get(position).getTexto());
-        String data = FormataData.tempoParaMostrarEmPost(mList.get(position).getDataHora());
-        holder.txtData.setText(data);
+        holder.txtUser.setText(mList.get(position).getNick());
+        //holder.numSeguidos.setText();
+        //holder.numSeguidos.setText();
 
         //Animação
         try {
@@ -85,21 +81,21 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
     //ViewHolder personalizada
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         public ImageView ivUser;
-        public TextView txtDonoPost, txtPostagem, txtData;
-        public Button btnComentar;
+        public TextView txtUser, numSeguidos, numSeguidores;
+        public ImageButton btnFollow, btnUnfollow;
 
 
         public MyViewHolder(final View itemView) {
             super(itemView);
 
-            ivUser      = (ImageView) itemView.findViewById(R.id.ivUser);
-            txtDonoPost = (TextView) itemView.findViewById(R.id.txtDonoPost);
-            txtPostagem = (TextView) itemView.findViewById(R.id.txtPostagem);
-            txtData     = (TextView) itemView.findViewById(R.id.lblSeguindo);
-            btnComentar = (Button) itemView.findViewById(R.id.btnComentar);
+            ivUser          = (ImageView) itemView.findViewById(R.id.ivUser);
+            txtUser         = (TextView) itemView.findViewById(R.id.txtUser);
+            numSeguidos     = (TextView) itemView.findViewById(R.id.numSeguidos);
+            numSeguidores   = (TextView) itemView.findViewById(R.id.numSeguidores);
+            btnFollow       = (ImageButton) itemView.findViewById(R.id.btnFollow);
+            btnUnfollow     = (ImageButton) itemView.findViewById(R.id.btnUnfollow);
 
             ivUser.setOnClickListener(this);
-            btnComentar.setOnClickListener(this);
             itemView.setOnClickListener(this);
 
         }

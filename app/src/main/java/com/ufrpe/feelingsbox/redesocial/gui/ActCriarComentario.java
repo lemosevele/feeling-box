@@ -12,6 +12,8 @@ import android.widget.EditText;
 import com.ufrpe.feelingsbox.R;
 import com.ufrpe.feelingsbox.infra.GuiUtil;
 
+import static com.ufrpe.feelingsbox.redesocial.dominio.BundleEnum.ID_POST;
+
 public class ActCriarComentario extends AppCompatActivity {
     private EditText edtComentario;
     private Long idPost;
@@ -36,7 +38,7 @@ public class ActCriarComentario extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         if(extras != null){
-            idPost = extras.getLong("idPost");
+            idPost = extras.getLong(ID_POST.getValor());
         }
 
         return super.onCreateOptionsMenu(menu);
