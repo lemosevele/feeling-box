@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import com.ufrpe.feelingsbox.R;
@@ -14,6 +15,13 @@ import com.ufrpe.feelingsbox.infra.FormataData;
 import com.ufrpe.feelingsbox.redesocial.dominio.Sessao;
 import com.ufrpe.feelingsbox.usuario.dominio.Pessoa;
 import com.ufrpe.feelingsbox.usuario.dominio.Usuario;
+
+import static com.ufrpe.feelingsbox.redesocial.dominio.ActEnum.ACT_PERFIL;
+import static com.ufrpe.feelingsbox.redesocial.dominio.BundleEnum.ID_USUARIO;
+import static com.ufrpe.feelingsbox.redesocial.dominio.BundleEnum.MODO;
+import static com.ufrpe.feelingsbox.redesocial.dominio.BundleEnum.RETORNO;
+import static com.ufrpe.feelingsbox.redesocial.dominio.BundleEnum.SEGUIDORES;
+import static com.ufrpe.feelingsbox.redesocial.dominio.BundleEnum.SEGUIDOS;
 
 public class ActPerfil extends AppCompatActivity {
     private TextView txtNome, txtNicK, txtNasc, txtSexo, txtEmail;
@@ -76,6 +84,24 @@ public class ActPerfil extends AppCompatActivity {
 
     private void retornarHome(){
         Intent intent = new Intent(this, ActHome.class);
+        startActivity(intent);
+        finish();
+    }
+
+    public void onClickSeguidos(View view){
+        Intent intent = new Intent(this, ActSeguidosSeguidores.class);
+        intent.putExtra(ID_USUARIO.getValor(), sessao.getUsuarioLogado().getId());
+        intent.putExtra(RETORNO.getValor(), ACT_PERFIL.getValor());
+        intent.putExtra(MODO.getValor(), SEGUIDOS.getValor());
+        startActivity(intent);
+        finish();
+    }
+
+    public void onClickSeguidores(View view){
+        Intent intent = new Intent(this, ActSeguidosSeguidores.class);
+        intent.putExtra(ID_USUARIO.getValor(), sessao.getUsuarioLogado().getId());
+        intent.putExtra(RETORNO.getValor(), ACT_PERFIL.getValor());
+        intent.putExtra(MODO.getValor(), SEGUIDORES.getValor());
         startActivity(intent);
         finish();
     }

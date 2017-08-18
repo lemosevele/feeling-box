@@ -20,6 +20,8 @@ import com.ufrpe.feelingsbox.redesocial.dominio.Sessao;
 import com.ufrpe.feelingsbox.redesocial.redesocialservices.RedeServices;
 import com.ufrpe.feelingsbox.usuario.dominio.Usuario;
 
+import static com.ufrpe.feelingsbox.redesocial.dominio.BundleEnum.MAIN_FRAG;
+
 
 public class ActHome extends AppCompatActivity {
     private Sessao sessao = Sessao.getInstancia();
@@ -46,11 +48,11 @@ public class ActHome extends AppCompatActivity {
         });
 
         //Fragment
-        PostFragment frag = (PostFragment) getSupportFragmentManager().findFragmentByTag("mainFrag");
+        PostFragment frag = (PostFragment) getSupportFragmentManager().findFragmentByTag(MAIN_FRAG.getValor());
         if(frag == null) {
             frag = new PostFragment();
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.rl_fragment_container, frag, "mainFrag");
+            ft.replace(R.id.rl_fragment_container, frag, MAIN_FRAG.getValor());
             ft.commit();
         }
 
