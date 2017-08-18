@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import com.ufrpe.feelingsbox.R;
 import com.ufrpe.feelingsbox.infra.adapter.post.PostFragmentPerfil;
 import com.ufrpe.feelingsbox.redesocial.dominio.Sessao;
+import com.ufrpe.feelingsbox.redesocial.redesocialservices.RedeServices;
 import com.ufrpe.feelingsbox.usuario.dominio.Usuario;
 import com.ufrpe.feelingsbox.usuario.usuarioservices.UsuarioService;
 
@@ -74,6 +75,8 @@ public class ActPerfilPost extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case android.R.id.home:
+                RedeServices redeServices = new RedeServices(getApplicationContext());
+                redeServices.seguiUser(sessao.getUsuarioLogado().getId(), usuarioPost.getId());
                 retornarHome();
                 break;
             case R.id.action_follow:

@@ -8,6 +8,7 @@ import com.ufrpe.feelingsbox.redesocial.dominio.Post;
 import com.ufrpe.feelingsbox.redesocial.persistencia.ComentarioDAO;
 import com.ufrpe.feelingsbox.redesocial.persistencia.PosTagDAO;
 import com.ufrpe.feelingsbox.redesocial.persistencia.PostDAO;
+import com.ufrpe.feelingsbox.redesocial.persistencia.RelacaoSegDAO;
 import com.ufrpe.feelingsbox.redesocial.persistencia.SessaoDAO;
 import com.ufrpe.feelingsbox.redesocial.persistencia.TagDAO;
 
@@ -25,6 +26,7 @@ public class RedeServices {
     private ComentarioDAO comentarioDAO;
     private Context context;
     private Comentario comentario;
+    private RelacaoSegDAO relacaoSegDAO;
 
     private static final int UM = 1;
 
@@ -91,5 +93,10 @@ public class RedeServices {
     public List<Comentario> exibirComentarios(){
         comentarioDAO = new ComentarioDAO(context);
         return comentarioDAO.getComentariorioByUser();
+    }
+
+    public void seguiUser(long idUser, long idSeguir){
+        relacaoSegDAO = new RelacaoSegDAO(context);
+        relacaoSegDAO.inserirRelSeguidores(idUser, idSeguir);
     }
 }
