@@ -1,0 +1,55 @@
+Activity Resolver Table:
+  Non-Data Actions:
+      android.intent.action.MAIN:
+        3b21b4 com.ufrpe.feelingsbox.feelingsbox/com.ufrpe.feelingsbox.usuario.gui.ActLogin
+      android.intent.action.SEARCH:
+        2aa61dd com.ufrpe.feelingsbox.feelingsbox/com.ufrpe.feelingsbox.redesocial.gui.ActSearchable
+
+Registered ContentProviders:
+  com.ufrpe.feelingsbox.feelingsbox/com.android.tools.fd.runtime.InstantRunContentProvider:
+    Provider{a4b3152 com.ufrpe.feelingsbox.feelingsbox/com.android.tools.fd.runtime.InstantRunContentProvider}
+  com.ufrpe.feelingsbox.feelingsbox/com.ufrpe.feelingsbox.infra.provider.SearchableProvider:
+    Provider{2772c23 com.ufrpe.feelingsbox.feelingsbox/com.ufrpe.feelingsbox.infra.provider.SearchableProvider}
+
+ContentProvider Authorities:
+  [com.ufrpe.feelingsbox.feelingsbox.com.android.tools.fd.runtime.InstantRunContentProvider]:
+    Provider{a4b3152 com.ufrpe.feelingsbox.feelingsbox/com.android.tools.fd.runtime.InstantRunContentProvider}
+      applicationInfo=ApplicationInfo{242a520 com.ufrpe.feelingsbox.feelingsbox}
+  [com.ufrpe.feelingsbox.infra.provider.SearchableProvider]:
+    Provider{2772c23 com.ufrpe.feelingsbox.feelingsbox/com.ufrpe.feelingsbox.infra.provider.SearchableProvider}
+      applicationInfo=ApplicationInfo{242a520 com.ufrpe.feelingsbox.feelingsbox}
+
+Key Set Manager:
+  [com.ufrpe.feelingsbox.feelingsbox]
+      Signing KeySets: 86
+
+Packages:
+  Package [com.ufrpe.feelingsbox.feelingsbox] (2f6b760):
+    userId=10171
+    pkg=Package{b703ed9 com.ufrpe.feelingsbox.feelingsbox}
+    codePath=/data/app/com.ufrpe.feelingsbox.feelingsbox-1
+    resourcePath=/data/app/com.ufrpe.feelingsbox.feelingsbox-1
+    legacyNativeLibraryDir=/data/app/com.ufrpe.feelingsbox.feelingsbox-1/lib
+    primaryCpuAbi=null
+    secondaryCpuAbi=null
+    versionCode=1 targetSdk=25
+    versionName=1.0
+    splits=[base, lib_dependencies_apk, lib_slice_0_apk, lib_slice_1_apk, lib_slice_2_apk, lib_slice_3_apk, lib_slice_4_apk, lib_slice_5_apk, lib_slice_6_apk, lib_slice_7_apk, lib_slice_8_apk, lib_slice_9_apk]
+    applicationInfo=ApplicationInfo{242a520 com.ufrpe.feelingsbox.feelingsbox}
+    flags=[ DEBUGGABLE HAS_CODE ALLOW_CLEAR_USER_DATA ALLOW_BACKUP ]
+    dataDir=/data/user/0/com.ufrpe.feelingsbox.feelingsbox
+    supportsScreens=[small, medium, large, xlarge, resizeable, anyDensity]
+    timeStamp=2017-08-19 10:52:13
+    firstInstallTime=2017-08-19 08:14:48
+    lastUpdateTime=2017-08-19 10:52:22
+    signatures=PackageSignatures{1d0cde [6c7109e]}
+    installPermissionsFixed=true installStatus=1
+    pkgFlags=[ DEBUGGABLE HAS_CODE ALLOW_CLEAR_USER_DATA ALLOW_BACKUP ]
+    requested permissions:
+      android.permission.GET_ACCOUNTS
+      android.permission.READ_PROFILE
+      android.permission.READ_CONTACTS
+    install permissions:
+      android.permission.READ_PROFILE: granted=true
+    User 0:  installed=true hidden=false stopped=false notLaunched=false enabled=0
+      runtime permissions:

@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import com.ufrpe.feelingsbox.R;
 import com.ufrpe.feelingsbox.infra.adapter.post.PostRecyclerAdapter;
 import com.ufrpe.feelingsbox.infra.adapter.post.RecyclerViewOnClickListenerhack;
+import com.ufrpe.feelingsbox.redesocial.dominio.BundleEnum;
 import com.ufrpe.feelingsbox.redesocial.dominio.Sessao;
 import com.ufrpe.feelingsbox.redesocial.gui.ActPerfilPost;
 import com.ufrpe.feelingsbox.redesocial.redesocialservices.RedeServices;
@@ -23,18 +24,16 @@ import com.ufrpe.feelingsbox.usuario.dominio.Usuario;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.ufrpe.feelingsbox.redesocial.dominio.BundleEnum.ID_USUARIO;
-import static com.ufrpe.feelingsbox.redesocial.dominio.BundleEnum.MODO;
 import static com.ufrpe.feelingsbox.redesocial.dominio.BundleEnum.SEGUIDOS;
 
 public class UserFragment extends Fragment implements RecyclerViewOnClickListenerhack {
     private RecyclerView mRecyclerView;
-    private List<Usuario> mList;
+    private List<Usuario> mList = new ArrayList<>();
     private RedeServices redeServices;
-    private String modo = "";
-    private Bundle bundle;
     private Sessao sessao = Sessao.getInstancia();
     private UserRecyclerAdapter adapter;
+    private Usuario usuarioDonoTela;
+    private BundleEnum modo;
 
     //Setando o RecyclerView
     @Override
@@ -74,20 +73,13 @@ public class UserFragment extends Fragment implements RecyclerViewOnClickListene
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
 
         redeServices = new RedeServices(getActivity());
-        bundle = this.getArguments();
-        Long idUser = null;
+        usuarioDonoTela = sessao.getUltimoUsuario();
+        modo = sessao.getUltimoModo();
 
-        if(bundle != null){
-            modo = bundle.getString(MODO.getValor());
-            idUser = bundle.getLong(ID_USUARIO.getValor());
-        }
-
-        if(modo.equals(SEGUIDOS.getValor()) && idUser != null) {
-            mList = redeServices.listarSeguidos(idUser);
-        } else if (idUser != null){
-            mList = redeServices.listarSeguidores(idUser);
-        } else {
-            mList = new ArrayList<>();
+        if(modo == SEGUIDOS && usuarioDonoTela != null) {
+            mList = redeServices.listarSeguidos(usuarioDonoTela.getId());
+        } else if (usuarioDonoTela != null){
+            mList = redeServices.listarSeguidores(usuarioDonoTela.getId());
         }
 
         adapter = new UserRecyclerAdapter(getActivity(), mList);
@@ -105,8 +97,7 @@ public class UserFragment extends Fragment implements RecyclerViewOnClickListene
         switch (view.getId()){
             case R.id.ivUser:
                 intent = new Intent(view.getContext(), ActPerfilPost.class);
-                intent.putExtra(ID_USUARIO.getValor(), mList.get(position).getId());
-                intent.putExtra(MODO.getValor(), bundle.getString(MODO.getValor()));
+                sessao.addUsuario(usuario);
                 startActivity(intent);
                 getActivity().finish();
                 break;
@@ -116,7 +107,7 @@ public class UserFragment extends Fragment implements RecyclerViewOnClickListene
                 break;
             case R.id.btnUnfollow:
                 redeServices.deletarUser(sessao.getUsuarioLogado().getId(), usuario.getId());
-                if(sessao.getUsuarioLogado().getId() == bundle.getLong(ID_USUARIO.getValor())) {
+                if(sessao.getUsuarioLogado().getId() == usuarioDonoTela.getId() && modo == SEGUIDOS) {
                     adapter.removeListItem(position);
                 } else {
                     adapter.atualizarSeguir(position);

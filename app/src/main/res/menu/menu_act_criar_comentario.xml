@@ -8,7 +8,7 @@
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_comentar"
-        android:icon="@android:drawable/ic_menu_send"
+        android:icon="@drawable/ic_send_white_48dp"
         android:title="@string/title_menu_comentar"
         app:showAsAction="ifRoom" />
 

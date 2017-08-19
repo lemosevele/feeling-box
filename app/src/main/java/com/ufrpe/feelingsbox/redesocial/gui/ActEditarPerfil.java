@@ -47,38 +47,39 @@ public class ActEditarPerfil extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        encontrandoItens();
+        encontrandoSpinner();
+    }
+
+    private void encontrandoItens(){
         edtNomePerfil = (EditText) findViewById(R.id.edtNomePerfil);
         edtNickPerfil = (EditText) findViewById(R.id.edtNickPerfil);
         edtEmailPerfil = (EditText) findViewById(R.id.edtEmailPerfil);
         edtNascPerfil = (EditText) findViewById(R.id.edtNascPerfil);
         edtSenhaPerfil = (EditText) findViewById(R.id.edtSenhaPerfil);
         edtNascPerfil.addTextChangedListener(Mask.insert("##/##/####", edtNascPerfil));
+    }
 
+    private void encontrandoSpinner(){
         //ArrayAdapter é usado preparar a lista da por no Spinner
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, listaSexo);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
         //Encontrando o Spinner e colocando a lista adaptada
         spnSexoPerfil = (Spinner)findViewById(R.id.spnSexoPerfil);
         spnSexoPerfil.setAdapter(adapter);
         //Setando o valor inicial do Spinner
         String stringSexo = sessao.getPessoaLogada().getSexo();
         spnSexoPerfil.setSelection(adapter.getPosition(stringSexo));
-
         //Metodo para quando um elemento do Spinner é selecionado()
         spnSexoPerfil.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
 
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
-
     }
 
     @Override
@@ -212,5 +213,4 @@ public class ActEditarPerfil extends AppCompatActivity {
             return false;
         }
     }
-
 }

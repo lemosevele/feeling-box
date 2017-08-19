@@ -14,9 +14,6 @@ import com.ufrpe.feelingsbox.R;
 import com.ufrpe.feelingsbox.infra.GuiUtil;
 import com.ufrpe.feelingsbox.infra.ValidacaoService;
 import com.ufrpe.feelingsbox.redesocial.gui.ActHome;
-import com.ufrpe.feelingsbox.redesocial.redesocialservices.RedeServices;
-import com.ufrpe.feelingsbox.usuario.dominio.Pessoa;
-import com.ufrpe.feelingsbox.usuario.dominio.Usuario;
 import com.ufrpe.feelingsbox.usuario.usuarioservices.UsuarioService;
 
 public class ActLogin extends AppCompatActivity {
@@ -30,14 +27,6 @@ public class ActLogin extends AppCompatActivity {
         setContentView(R.layout.act_login);
         this.encontrandoItens();
         this.animacaoTela();
-
-        RedeServices redeServices = new RedeServices(getApplicationContext());
-        Pessoa pessoa = redeServices.verificarSessao();
-        if (pessoa != null){
-            usuarioService = new UsuarioService(this);
-            Usuario usuario = usuarioService.buscarUsuario(pessoa.getIdUsuario());
-            this.chamarValidacao(usuario);
-        }
     }
 
     private void encontrandoItens(){
@@ -88,9 +77,7 @@ public class ActLogin extends AppCompatActivity {
         if (!validacaoService.isEmail(login)) {
             try {
                 usuarioService.logarNick(login, senha);
-                Intent it = new Intent(ActLogin.this, ActHome.class);
-                startActivity(it);
-                finish();
+                irTelaHome();
             }
             catch (Exception e) {
                 GuiUtil.myToast(this, "Login ou senha incorretos.");
@@ -100,28 +87,17 @@ public class ActLogin extends AppCompatActivity {
         else {
             try {
                 usuarioService.logarEmail(login, senha);
-                Intent it = new Intent(ActLogin.this, ActHome.class);
-                startActivity(it);
-                finish();
+                irTelaHome();
             }
             catch (Exception e) {
                 GuiUtil.myToast(this, "Login ou senha incorretos.");
             }
         }
     }
-    private void chamarValidacao(Usuario usuario){
-        usuarioService = new UsuarioService(getApplicationContext());
-        String login = usuario.getNick();
-        String senha = usuario.getSenha();
 
-        try {
-           usuarioService.autoLogarNick(login, senha);
-            Intent it = new Intent(ActLogin.this, ActHome.class);
-            startActivity(it);
-            finish();
-        }
-        catch (Exception e) {
-            GuiUtil.myToast(this, "Login ou senha incorretos.");
-        }
+    private void irTelaHome(){
+        Intent it = new Intent(ActLogin.this, ActHome.class);
+        startActivity(it);
+        finish();
     }
 }

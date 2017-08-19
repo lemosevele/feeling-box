@@ -12,17 +12,13 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.ufrpe.feelingsbox.R;
-import com.ufrpe.feelingsbox.infra.adapter.post.PostFragmentPerfil;
+import com.ufrpe.feelingsbox.infra.adapter.post.PostFragment;
 import com.ufrpe.feelingsbox.redesocial.dominio.Sessao;
 import com.ufrpe.feelingsbox.redesocial.redesocialservices.RedeServices;
 import com.ufrpe.feelingsbox.usuario.dominio.Usuario;
-import com.ufrpe.feelingsbox.usuario.usuarioservices.UsuarioService;
 
 import static com.ufrpe.feelingsbox.redesocial.dominio.ActEnum.ACT_PERFIL_POST;
-import static com.ufrpe.feelingsbox.redesocial.dominio.BundleEnum.ID_USUARIO;
 import static com.ufrpe.feelingsbox.redesocial.dominio.BundleEnum.MAIN_FRAG;
-import static com.ufrpe.feelingsbox.redesocial.dominio.BundleEnum.MODO;
-import static com.ufrpe.feelingsbox.redesocial.dominio.BundleEnum.RETORNO;
 import static com.ufrpe.feelingsbox.redesocial.dominio.BundleEnum.SEGUIDORES;
 import static com.ufrpe.feelingsbox.redesocial.dominio.BundleEnum.SEGUIDOS;
 
@@ -30,25 +26,24 @@ public class ActPerfilPost extends AppCompatActivity {
     private Sessao sessao = Sessao.getInstancia();
     private MenuItem actionFollow;
     private MenuItem actionUnfollow;
-    private Usuario usuarioPost;
+    private Usuario usuarioDonoTela;
     private TextView numSeguidos, numSeguidores;
     private RedeServices redeServices;
-    private Bundle bundle;
+    private long longSeguidos, longSeguidores;
+
+    public ActPerfilPost() {
+        super();
+        sessao.addHistorico(ACT_PERFIL_POST);
+        usuarioDonoTela = sessao.getUltimoUsuario();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_perfil_post);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        bundle = getIntent().getExtras();
 
-        if(bundle != null){
-            UsuarioService usuarioService = new UsuarioService(this);
-            usuarioPost = usuarioService.buscarUsuario(bundle.getLong(ID_USUARIO.getValor()));
-        } else {
-            usuarioPost = sessao.getUsuarioLogado();
-        }
-        toolbar.setTitle(usuarioPost.getNick());
+        toolbar.setTitle(usuarioDonoTela.getNick());
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -65,22 +60,19 @@ public class ActPerfilPost extends AppCompatActivity {
     }
 
     private void atualizarNumSeguidos(){
-        long longSeguidos = redeServices.qtdSeguidos(usuarioPost.getId());
+        longSeguidos = redeServices.qtdSeguidos(usuarioDonoTela.getId());
         numSeguidos.setText(Long.toString(longSeguidos));
     }
 
     private void atualizarNumSeguidores(){
-        long longSeguidores = redeServices.qtdSeguidores(usuarioPost.getId());
+        longSeguidores = redeServices.qtdSeguidores(usuarioDonoTela.getId());
         numSeguidores.setText(Long.toString(longSeguidores));
     }
 
     private void iniciarFragment(){
-        PostFragmentPerfil frag = (PostFragmentPerfil) getSupportFragmentManager().findFragmentByTag(MAIN_FRAG.getValor());
+        PostFragment frag = (PostFragment) getSupportFragmentManager().findFragmentByTag(MAIN_FRAG.getValor());
         if(frag == null) {
-            frag = new PostFragmentPerfil();
-            if(bundle != null){
-                frag.setArguments(bundle);
-            }
+            frag = new PostFragment();
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.rl_fragment_container, frag, MAIN_FRAG.getValor());
             ft.commit();
@@ -95,10 +87,10 @@ public class ActPerfilPost extends AppCompatActivity {
         actionFollow = menu.findItem(R.id.action_follow);
         actionUnfollow = menu.findItem(R.id.action_unfollow);
 
-        if(usuarioPost.getNick().equals(sessao.getUsuarioLogado().getNick())){
+        if(usuarioDonoTela.getNick().equals(sessao.getUsuarioLogado().getNick())){
             actionFollow.setVisible(false);
             actionUnfollow.setVisible(false);
-        } else if(redeServices.verificacaoSeguidor(sessao.getUsuarioLogado().getId(), usuarioPost.getId())){
+        } else if(redeServices.verificacaoSeguidor(sessao.getUsuarioLogado().getId(), usuarioDonoTela.getId())){
             actionFollow.setVisible(false);
             actionUnfollow.setVisible(true);
         }
@@ -111,18 +103,24 @@ public class ActPerfilPost extends AppCompatActivity {
         RedeServices redeServices = new RedeServices(getApplicationContext());
         switch (item.getItemId()){
             case android.R.id.home:
-                retornarHome();
+                retornarTela();
+                break;
+            case R.id.action_home:
+                Intent intent = new Intent(this, ActHome.class);
+                startActivity(intent);
+                finish();
                 break;
             case R.id.action_follow:
-                redeServices.seguirUser(sessao.getUsuarioLogado().getId(), usuarioPost.getId());
+                redeServices.seguirUser(sessao.getUsuarioLogado().getId(), usuarioDonoTela.getId());
                 actionFollow.setVisible(false);
                 actionUnfollow.setVisible(true);
                 break;
             case R.id.action_unfollow:
-                redeServices.deletarUser(sessao.getUsuarioLogado().getId(), usuarioPost.getId());
+                redeServices.deletarUser(sessao.getUsuarioLogado().getId(), usuarioDonoTela.getId());
                 actionFollow.setVisible(true);
                 actionUnfollow.setVisible(false);
                 break;
+
         }
         this.atualizarNumSeguidores();
         return super.onOptionsItemSelected(item);
@@ -130,30 +128,28 @@ public class ActPerfilPost extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        retornarHome();
+        retornarTela();
         super.onBackPressed();
     }
 
-    private void retornarHome(){
-        Intent intent = new Intent(this, ActHome.class);
+    private void retornarTela(){
+        sessao.popHistorico();
+        sessao.popUsuario();
+        Intent intent = new Intent(this, sessao.popHistorico().getValor());
         startActivity(intent);
         finish();
     }
 
     public void onClickSeguidos(View view){
         Intent intent = new Intent(this, ActSeguidosSeguidores.class);
-        intent.putExtra(ID_USUARIO.getValor(), usuarioPost.getId());
-        intent.putExtra(RETORNO.getValor(), ACT_PERFIL_POST.getValor());
-        intent.putExtra(MODO.getValor(), SEGUIDOS.getValor());
+        sessao.addModo(SEGUIDOS);
         startActivity(intent);
         finish();
     }
 
     public void onClickSeguidores(View view){
         Intent intent = new Intent(this, ActSeguidosSeguidores.class);
-        intent.putExtra(ID_USUARIO.getValor(), usuarioPost.getId());
-        intent.putExtra(RETORNO.getValor(), ACT_PERFIL_POST.getValor());
-        intent.putExtra(MODO.getValor(), SEGUIDORES.getValor());
+        sessao.addModo(SEGUIDORES);
         startActivity(intent);
         finish();
     }

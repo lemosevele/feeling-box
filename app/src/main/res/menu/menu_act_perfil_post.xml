@@ -13,4 +13,9 @@
         android:title="@string/title_menu_unfollow"
         android:visible="false"
         app:showAsAction="always" />
+    <item
+        android:id="@+id/action_home"
+        android:icon="@drawable/ic_home_white_48dp"
+        android:title="@string/title_menu_home"
+        app:showAsAction="ifRoom" />
 </menu>

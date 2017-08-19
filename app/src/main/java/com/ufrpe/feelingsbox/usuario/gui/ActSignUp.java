@@ -1,9 +1,6 @@
 package com.ufrpe.feelingsbox.usuario.gui;
-/*
- * Tela de Cadastro
- */
 
-import android.content.Intent;
+
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -15,9 +12,8 @@ import android.widget.Spinner;
 import com.ufrpe.feelingsbox.R;
 import com.ufrpe.feelingsbox.infra.GuiUtil;
 import com.ufrpe.feelingsbox.infra.Mask;
-import com.ufrpe.feelingsbox.usuario.usuarioservices.UsuarioService;
 import com.ufrpe.feelingsbox.infra.ValidacaoService;
-
+import com.ufrpe.feelingsbox.usuario.usuarioservices.UsuarioService;
 
 import static com.ufrpe.feelingsbox.usuario.dominio.SexoEnum.SexoEnumLista;
 
@@ -113,8 +109,6 @@ public class ActSignUp extends AppCompatActivity {
             try {
                 service.cadastrar(nome, sexoTexto, nasc, nick, email, senha);
                 GuiUtil.myToast(this, "Cadastrado com Sucesso!");
-                Intent intent = new Intent(ActSignUp.this, ActLogin.class);
-                startActivity(intent);
                 finish();
             } catch (Exception e) {
                 GuiUtil.myToast(this, e);

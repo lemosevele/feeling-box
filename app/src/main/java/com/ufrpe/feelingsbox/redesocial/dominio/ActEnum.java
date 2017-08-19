@@ -1,12 +1,17 @@
 package com.ufrpe.feelingsbox.redesocial.dominio;
 
+import com.ufrpe.feelingsbox.redesocial.gui.ActHome;
+import com.ufrpe.feelingsbox.redesocial.gui.ActPerfil;
+import com.ufrpe.feelingsbox.redesocial.gui.ActPerfilPost;
+import com.ufrpe.feelingsbox.redesocial.gui.ActSeguidosSeguidores;
+
 public enum ActEnum {
-    ACT_HOME("ActHome"), ACT_PERFIL("ActPerfil"), ACT_PERFIL_POST("ActPerfilPost"),
-    ACT_SEGUIDOS_SEGUIDORES("ActSeguidosSeguidores");
+    ACT_HOME(ActHome.class), ACT_PERFIL(ActPerfil.class), ACT_PERFIL_POST(ActPerfilPost.class),
+    ACT_SEGUIDOS_SEGUIDORES(ActSeguidosSeguidores.class);
 
-    private String valor;
+    private Class valor;
 
-    ActEnum(String valor) { this.valor = valor; }
+    ActEnum(Class valor) { this.valor = valor; }
 
-    public String getValor() { return valor; }
+    public Class getValor() { return valor; }
 }

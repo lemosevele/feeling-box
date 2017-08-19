@@ -56,7 +56,7 @@ public class UserRecyclerAdapter extends RecyclerView.Adapter<UserRecyclerAdapte
         notifyItemInserted(position);
     }
     public void atualizarSeguir(int position){
-        notifyDataSetChanged();
+        notifyItemChanged(position);
     }
 
     public void removeListItem(int position){

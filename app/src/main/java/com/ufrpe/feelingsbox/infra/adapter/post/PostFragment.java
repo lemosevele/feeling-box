@@ -13,21 +13,24 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.ufrpe.feelingsbox.R;
-import com.ufrpe.feelingsbox.infra.GuiUtil;
+import com.ufrpe.feelingsbox.redesocial.dominio.ActEnum;
 import com.ufrpe.feelingsbox.redesocial.dominio.Post;
+import com.ufrpe.feelingsbox.redesocial.dominio.Sessao;
 import com.ufrpe.feelingsbox.redesocial.gui.ActCriarComentario;
 import com.ufrpe.feelingsbox.redesocial.gui.ActPerfilPost;
 import com.ufrpe.feelingsbox.redesocial.redesocialservices.RedeServices;
+import com.ufrpe.feelingsbox.usuario.dominio.Usuario;
+import com.ufrpe.feelingsbox.usuario.usuarioservices.UsuarioService;
 
 import java.util.List;
 
 import static com.ufrpe.feelingsbox.redesocial.dominio.BundleEnum.ID_POST;
-import static com.ufrpe.feelingsbox.redesocial.dominio.BundleEnum.ID_USUARIO;
 
 public class PostFragment extends Fragment implements RecyclerViewOnClickListenerhack{
     private RecyclerView mRecyclerView;
     private List<Post> mList;
-    private RedeServices redeServices;
+    private Sessao sessao = Sessao.getInstancia();
+    private Usuario usuarioDonoTela;
 
     //Setando o RecyclerView
     @Override
@@ -67,8 +70,15 @@ public class PostFragment extends Fragment implements RecyclerViewOnClickListene
         mLinearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
 
-        redeServices = new RedeServices(getActivity());
-        mList = redeServices.exibirPosts();
+        RedeServices redeServices = new RedeServices(getActivity());
+        usuarioDonoTela = sessao.getUltimoUsuario();
+
+        if(usuarioDonoTela != null){
+            mList = redeServices.exibirPosts(usuarioDonoTela.getId());
+        } else {
+            mList = redeServices.exibirPosts();
+        }
+
         PostRecyclerAdapter adapter = new PostRecyclerAdapter(getActivity(), mList);
         adapter.setRecyclerViewOnClickListenerhack(this);
         mRecyclerView.setAdapter(adapter);
@@ -80,10 +90,15 @@ public class PostFragment extends Fragment implements RecyclerViewOnClickListene
     @Override
     public void onClickListener(View view, int position) {
         Intent intent;
+        UsuarioService usuarioService = new UsuarioService(view.getContext());
         switch (view.getId()){
             case R.id.ivUser:
+                Usuario usuarioSelecionado = usuarioService.buscarUsuario(mList.get(position).getIdUsuario());
+                if(sessao.getUltimoHistorico() == ActEnum.ACT_PERFIL_POST && usuarioDonoTela.getId() == usuarioSelecionado.getId()){
+                    break;
+                }
+                sessao.addUsuario(usuarioSelecionado);
                 intent = new Intent(view.getContext(), ActPerfilPost.class);
-                intent.putExtra(ID_USUARIO.getValor(), mList.get(position).getIdUsuario());
                 startActivity(intent);
                 getActivity().finish();
                 break;

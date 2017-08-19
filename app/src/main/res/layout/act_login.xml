@@ -44,7 +44,7 @@
                 android:elegantTextHeight="false"
                 android:fontFamily="sans-serif"
                 android:gravity="center"
-                android:text="@string/lbl_logo1"
+                android:text="@string/lbl_logo"
                 android:textAllCaps="false"
                 android:textColor="@color/colorFontLogo"
                 android:textIsSelectable="false"
@@ -55,19 +55,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
             <TextView
-                android:id="@+id/txtLogo2"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@string/lbl_logo2"
-                android:textColor="@color/colorFontLogo"
-                android:textSize="36sp"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintLeft_toLeftOf="@+id/txtLogo1"
-                app:layout_constraintRight_toRightOf="@+id/txtLogo1"
-                app:layout_constraintTop_toBottomOf="@+id/txtLogo1" />
-
-            <TextView
                 android:id="@+id/txtSubtitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -76,9 +63,13 @@
                 android:includeFontPadding="false"
                 android:text="@string/lbl_subtitle"
                 android:textColor="@color/colorFontSubtitle"
-                app:layout_constraintLeft_toLeftOf="@+id/txtLogo2"
-                app:layout_constraintRight_toRightOf="@+id/txtLogo2"
-                app:layout_constraintTop_toBottomOf="@+id/txtLogo2" />
+                android:layout_marginRight="8dp"
+                app:layout_constraintRight_toRightOf="@+id/txtLogo1"
+                android:layout_marginLeft="8dp"
+                app:layout_constraintLeft_toLeftOf="@+id/txtLogo1"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/txtLogo1"
+                app:layout_constraintHorizontal_bias="0.0" />
 
             <EditText
                 android:id="@+id/edtLogin"
@@ -91,7 +82,8 @@
                 android:selectAllOnFocus="false"
                 app:layout_constraintLeft_toLeftOf="@+id/txtSubtitle"
                 app:layout_constraintRight_toRightOf="@+id/txtSubtitle"
-                app:layout_constraintTop_toBottomOf="@+id/txtSubtitle" />
+                app:layout_constraintTop_toBottomOf="@+id/txtSubtitle"
+                app:layout_constraintHorizontal_bias="0.0" />
 
             <EditText
                 android:id="@+id/edtSenha"

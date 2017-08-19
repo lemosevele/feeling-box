@@ -21,11 +21,22 @@ import com.ufrpe.feelingsbox.redesocial.redesocialservices.RedeServices;
 import com.ufrpe.feelingsbox.usuario.dominio.Usuario;
 import com.ufrpe.feelingsbox.usuario.gui.ActLogin;
 
+import static com.ufrpe.feelingsbox.redesocial.dominio.ActEnum.ACT_HOME;
 import static com.ufrpe.feelingsbox.redesocial.dominio.BundleEnum.MAIN_FRAG;
 
 
 public class ActHome extends AppCompatActivity {
     private Sessao sessao = Sessao.getInstancia();
+    private Usuario usuarioLogado;
+
+
+    public ActHome() {
+        super();
+        sessao.limparHistoricoEUsuarios();
+        sessao.addHistorico(ACT_HOME);
+        usuarioLogado = sessao.getUsuarioLogado();
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +44,6 @@ public class ActHome extends AppCompatActivity {
         setContentView(R.layout.act_home);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
-        Usuario usuarioLogado = sessao.getUsuarioLogado();
         toolbar.setTitle(usuarioLogado.getNick());
         setSupportActionBar(toolbar);
 
@@ -71,7 +81,6 @@ public class ActHome extends AppCompatActivity {
 
         searchView = (SearchView) item.getActionView();
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-        //searchView.setQueryHint("Pesquisar post");
 
         return super.onCreateOptionsMenu(menu);
     }
@@ -80,9 +89,11 @@ public class ActHome extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.action_conta:
+                sessao.addUsuario(usuarioLogado);
                 mudarTela(ActPerfil.class);
                 break;
             case R.id.action_perfil:
+                sessao.addUsuario(usuarioLogado);
                 mudarTela(ActPerfilPost.class);
                 break;
             case R.id.action_sair:
@@ -96,7 +107,7 @@ public class ActHome extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
     private void mudarTela(Class novaTela){
-        Intent it = new Intent(ActHome.this, novaTela);
+        Intent it = new Intent(this, novaTela);
         startActivity(it);
         finish();
     }

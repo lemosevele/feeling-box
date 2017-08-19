@@ -18,9 +18,6 @@ import com.ufrpe.feelingsbox.usuario.dominio.Pessoa;
 import com.ufrpe.feelingsbox.usuario.dominio.Usuario;
 
 import static com.ufrpe.feelingsbox.redesocial.dominio.ActEnum.ACT_PERFIL;
-import static com.ufrpe.feelingsbox.redesocial.dominio.BundleEnum.ID_USUARIO;
-import static com.ufrpe.feelingsbox.redesocial.dominio.BundleEnum.MODO;
-import static com.ufrpe.feelingsbox.redesocial.dominio.BundleEnum.RETORNO;
 import static com.ufrpe.feelingsbox.redesocial.dominio.BundleEnum.SEGUIDORES;
 import static com.ufrpe.feelingsbox.redesocial.dominio.BundleEnum.SEGUIDOS;
 
@@ -30,6 +27,13 @@ public class ActPerfil extends AppCompatActivity {
     private Pessoa pessoaLogada;
     private Usuario usuarioLogado;
 
+    public ActPerfil() {
+        super();
+        sessao.addHistorico(ACT_PERFIL);
+        pessoaLogada = sessao.getPessoaLogada();
+        usuarioLogado = sessao.getUsuarioLogado();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,9 +41,6 @@ public class ActPerfil extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        pessoaLogada = sessao.getPessoaLogada();
-        usuarioLogado = sessao.getUsuarioLogado();
 
         this.encontrandoItens();
         this.atualizarDados();
@@ -84,7 +85,6 @@ public class ActPerfil extends AppCompatActivity {
                 Intent intent = new Intent(this, ActEditarPerfil.class);
                 startActivity(intent);
                 finish();
-
                 break;
             case android.R.id.home:
                 retornarHome();
@@ -107,18 +107,14 @@ public class ActPerfil extends AppCompatActivity {
 
     public void onClickSeguidos(View view){
         Intent intent = new Intent(this, ActSeguidosSeguidores.class);
-        intent.putExtra(ID_USUARIO.getValor(), sessao.getUsuarioLogado().getId());
-        intent.putExtra(RETORNO.getValor(), ACT_PERFIL.getValor());
-        intent.putExtra(MODO.getValor(), SEGUIDOS.getValor());
+        sessao.addModo(SEGUIDOS);
         startActivity(intent);
         finish();
     }
 
     public void onClickSeguidores(View view){
         Intent intent = new Intent(this, ActSeguidosSeguidores.class);
-        intent.putExtra(ID_USUARIO.getValor(), sessao.getUsuarioLogado().getId());
-        intent.putExtra(RETORNO.getValor(), ACT_PERFIL.getValor());
-        intent.putExtra(MODO.getValor(), SEGUIDORES.getValor());
+        sessao.addModo(SEGUIDORES);
         startActivity(intent);
         finish();
     }

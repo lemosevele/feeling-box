@@ -14,8 +14,7 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
-    <string name="lbl_logo1">FEELING</string>
-    <string name="lbl_logo2">BOX</string>
+    <string name="lbl_logo">FEELINGBOX</string>
     <string name="lbl_subtitle">Good feelings, create life</string>
     <string name="lbl_cadastrar">Cadastrar</string>
     <string name="lbl_login">Login</string>
@@ -79,4 +78,6 @@
     <string name="title_activity_act_seguidos_seguidores">ActSeguidosSeguidores</string>
     <string name="title_menu_perfil">Perfil</string>
     <string name="tilte_menu_pesquisar">Pesquisar</string>
+    <string name="title_menu_home">Home</string>
+    <string name="lbl_bem_vindo">BEM-VINDO</string>
 </resources>
