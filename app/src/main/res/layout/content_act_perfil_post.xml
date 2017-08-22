@@ -1,135 +1,131 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.ufrpe.feelingsbox.redesocial.gui.ActPerfilPost"
-    tools:showIn="@layout/act_perfil_post"
-    tools:layout_editor_absoluteY="81dp"
-    tools:layout_editor_absoluteX="0dp">
+    tools:context=".redesocial.gui.ActPost">
 
-    <ScrollView
-        android:layout_width="0dp"
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        android:id="@+id/scrollView2">
+        android:fitsSystemWindows="true">
 
-        <LinearLayout
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/collapsing_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="322dp">
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/circleImageView"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_alignParentLeft="true"
-                android:layout_marginBottom="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_weight="1"
-                android:src="@drawable/perfil"
-                app:civ_border_color="#FF000000"
-                app:civ_border_width="0dp" />
+            android:layout_height="match_parent"
+            app:contentScrim="@color/colorToolBarBase1"
+            app:expandedTitleMarginEnd="64dp"
+            app:expandedTitleMarginStart="48dp"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="2"
-                android:background="@color/colorItemBackground"
-                android:orientation="horizontal">
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                tools:layout_editor_absoluteX="8dp"
+                tools:layout_editor_absoluteY="322dp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/circleImageView"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/perfil"
+                    app:civ_border_color="#FF000000"
+                    app:civ_border_width="0dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:onClick="onClickSeguidos"
-                    android:orientation="vertical">
+                    android:layout_weight="2"
+                    android:background="@color/colorItemBackground"
+                    android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/lblSeguindo"
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:paddingStart="16dp"
-                        android:paddingTop="8dp"
-                        android:text="@string/txtseguidos"
-                        android:textSize="18sp" />
+                        android:onClick="onClickSeguidos"
+                        android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/txtSeguidosValor"
+                        <TextView
+                            android:id="@+id/lblSeguindo"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingStart="16dp"
+                            android:paddingTop="8dp"
+                            android:text="@string/txtseguidos"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/txtSeguidosValor"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingBottom="8dp"
+                            android:paddingLeft="16dp"
+                            android:paddingTop="8dp"
+                            android:text="0"
+                            android:textSize="18sp" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:id="@+id/view"
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0"
+                        android:background="@color/colorBtnYellow" />
+
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:paddingBottom="8dp"
-                        android:paddingLeft="16dp"
-                        android:paddingTop="8dp"
-                        android:text="0"
-                        android:textSize="18sp" />
+                        android:onClick="onClickSeguidores"
+                        android:orientation="vertical">
 
+                        <TextView
+                            android:id="@+id/lblSeguidores"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingStart="16dp"
+                            android:paddingTop="8dp"
+                            android:text="@string/txtseguidores"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/txtSeguidoresValor"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingBottom="8dp"
+                            android:paddingLeft="16dp"
+                            android:paddingTop="8dp"
+                            android:text="0"
+                            android:textSize="18sp" />
+                    </LinearLayout>
                 </LinearLayout>
-
-                <View
-                    android:id="@+id/view"
-                    android:layout_width="1dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0"
-                    android:background="@color/colorBtnYellow" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:onClick="onClickSeguidores"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/lblSeguidores"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:paddingStart="16dp"
-                        android:paddingTop="8dp"
-                        android:text="@string/txtseguidores"
-                        android:textSize="18sp" />
-
-                    <TextView
-                        android:id="@+id/txtSeguidoresValor"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:paddingBottom="8dp"
-                        android:paddingLeft="16dp"
-                        android:paddingTop="8dp"
-                        android:text="0"
-                        android:textSize="18sp" />
-                </LinearLayout>
-
             </LinearLayout>
-
-
-        </LinearLayout>
-    </ScrollView>
+        </android.support.design.widget.CollapsingToolbarLayout>
+    </android.support.design.widget.AppBarLayout>
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/rl_fragment_container"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scrollView2"
-        android:layout_width="0dp"
-        android:layout_height="0dp">
-
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:paddingTop="8dp"
+        android:paddingBottom="16dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
     </android.support.constraint.ConstraintLayout>
 
-</android.support.constraint.ConstraintLayout>
+</android.support.design.widget.CoordinatorLayout>
