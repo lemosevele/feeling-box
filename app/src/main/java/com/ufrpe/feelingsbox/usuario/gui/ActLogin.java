@@ -20,6 +20,7 @@ public class ActLogin extends AppCompatActivity {
     private EditText edtLogin, edtSenha;
     private UsuarioService usuarioService;
     private ValidacaoService validacaoService;
+    private static final int DURACAO = 1000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +38,7 @@ public class ActLogin extends AppCompatActivity {
     private void animacaoTela(){
         try {
             YoYo.with(Techniques.FadeIn)
-                    .duration(1000)
+                    .duration(DURACAO)
                     .repeat(0)
                     .playOn(findViewById(R.id.mainLayoutLogin));
         }catch (Exception e){

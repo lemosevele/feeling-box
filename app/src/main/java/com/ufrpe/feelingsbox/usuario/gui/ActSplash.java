@@ -15,9 +15,7 @@ import com.ufrpe.feelingsbox.usuario.usuarioservices.UsuarioService;
 
 public class ActSplash extends AppCompatActivity {
     private UsuarioService usuarioService;
-    private ValidacaoService validacaoService;
-
-
+    private static final int SLEEP = 1000;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,7 +25,7 @@ public class ActSplash extends AppCompatActivity {
             @Override
             public void run() {
                 try{
-                    sleep(2000);
+                    sleep(SLEEP);
                 } catch (InterruptedException e){
                     e.printStackTrace();
                 } finally {

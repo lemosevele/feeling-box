@@ -8,7 +8,6 @@ import android.database.sqlite.SQLiteDatabase;
 import com.ufrpe.feelingsbox.infra.DataBase;
 import com.ufrpe.feelingsbox.infra.GuiUtil;
 import com.ufrpe.feelingsbox.redesocial.dominio.Comentario;
-import com.ufrpe.feelingsbox.redesocial.dominio.Post;
 
 import java.util.ArrayList;
 import java.util.List;

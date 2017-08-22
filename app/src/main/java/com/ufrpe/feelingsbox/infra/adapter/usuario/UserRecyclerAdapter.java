@@ -25,6 +25,7 @@ public class UserRecyclerAdapter extends RecyclerView.Adapter<UserRecyclerAdapte
     private RecyclerViewOnClickListenerhack mRecyclerViewOnClickListenerhack;
     private RedeServices redeServices;
     private Sessao sessao = Sessao.getInstancia();
+    private static final int DURACAO = 1000;
 
     //Construtor
     public UserRecyclerAdapter(Context context, List<Usuario> lista) {
@@ -100,7 +101,7 @@ public class UserRecyclerAdapter extends RecyclerView.Adapter<UserRecyclerAdapte
     private void animacaoCard(MyViewHolder holder){
         try {
             YoYo.with(Techniques.ZoomIn)
-                    .duration(1000)
+                    .duration(DURACAO)
                     .repeat(0)
                     .playOn(holder.itemView);
         }catch (Exception e){

@@ -23,6 +23,7 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
     private LayoutInflater mLayoutInflater;
     private RecyclerViewOnClickListenerhack mRecyclerViewOnClickListenerhack;
     private UsuarioService usuarioService;
+    private static final int DURACAO = 1000;
 
     //Construtor
     public PostRecyclerAdapter(Context context, List<Post> lista) {
@@ -73,7 +74,7 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
         //Animação
         try {
             YoYo.with(Techniques.ZoomIn)
-                    .duration(1000)
+                    .duration(DURACAO)
                     .repeat(0)
                     .playOn(holder.itemView);
         }catch (Exception e){

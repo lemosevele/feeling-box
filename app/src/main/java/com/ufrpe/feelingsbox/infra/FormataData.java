@@ -14,6 +14,7 @@ public class FormataData {
     private static final String DATA_COMUM_GUI   = "dd/MM/yyyy";
     private static final String DATA_COMUM_BANCO = "yyyyMMdd";
     private static final String DATA_NASC_BANCO  = "yyyyMMdd";
+    private static final String DATA_HOJE = "yyyyMMdd000000";
 
     private static final int SEGUNDO = 1000;
     private static final int MINUTO = 60000;
@@ -58,6 +59,12 @@ public class FormataData {
     public static String formatarDataHoraAtualParaPostDataBase(){
         Date date = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DATA_POST_BANCO);
+        return simpleDateFormat.format(date);
+    }
+
+    public static String formataDataHoraHoje(){
+        Date date = new Date();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DATA_HOJE);
         return simpleDateFormat.format(date);
     }
 

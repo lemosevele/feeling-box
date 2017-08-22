@@ -15,7 +15,7 @@ public enum SexoEnum {
     public String capitalize(){
         return this.toString().substring(0, 1) + this.toString().substring(1).toLowerCase();
     }
-    public static String[] SexoEnumLista(){
+    public static String[] sexoEnumLista(){
         SexoEnum[] listaSexo = SexoEnum.values();
         String[] lista = new String[listaSexo.length];
 

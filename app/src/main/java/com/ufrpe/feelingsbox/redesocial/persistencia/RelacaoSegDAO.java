@@ -6,7 +6,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
-import android.provider.ContactsContract;
 
 import com.ufrpe.feelingsbox.infra.DataBase;
 import com.ufrpe.feelingsbox.redesocial.dominio.PerfilPublico;

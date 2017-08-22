@@ -15,7 +15,7 @@ import com.ufrpe.feelingsbox.infra.Mask;
 import com.ufrpe.feelingsbox.infra.ValidacaoService;
 import com.ufrpe.feelingsbox.usuario.usuarioservices.UsuarioService;
 
-import static com.ufrpe.feelingsbox.usuario.dominio.SexoEnum.SexoEnumLista;
+import static com.ufrpe.feelingsbox.usuario.dominio.SexoEnum.sexoEnumLista;
 
 public class ActSignUp extends AppCompatActivity {
 
@@ -24,7 +24,7 @@ public class ActSignUp extends AppCompatActivity {
     private Spinner spinner;
 
     //Lista para por no Spinner
-    private String[] listaSexo = SexoEnumLista();
+    private String[] listaSexo = sexoEnumLista();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

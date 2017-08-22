@@ -27,7 +27,7 @@ import com.ufrpe.feelingsbox.usuario.usuarioservices.UsuarioService;
 import java.security.NoSuchAlgorithmException;
 import java.util.Objects;
 
-import static com.ufrpe.feelingsbox.usuario.dominio.SexoEnum.SexoEnumLista;
+import static com.ufrpe.feelingsbox.usuario.dominio.SexoEnum.sexoEnumLista;
 
 
 public class ActEditarPerfil extends AppCompatActivity {
@@ -36,7 +36,7 @@ public class ActEditarPerfil extends AppCompatActivity {
     private Sessao sessao = Sessao.getInstancia();
 
     //Lista para por no Spinner
-    private String[] listaSexo = SexoEnumLista();
+    private String[] listaSexo = sexoEnumLista();
 
 
     @Override

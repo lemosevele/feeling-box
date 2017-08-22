@@ -5,7 +5,6 @@ public class Usuario {
     private String senha;
     private String nick;
     private long id;
-    private byte[] foto;
 
     public String getEmail(){
 
@@ -43,13 +42,5 @@ public class Usuario {
     public void setId(long novoId){
 
         this.id = novoId;
-    }
-
-    public byte[] getFoto() {
-        return foto;
-    }
-
-    public void setFoto(byte[] foto) {
-        this.foto = foto;
     }
 }

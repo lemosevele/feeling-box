@@ -108,7 +108,7 @@ public class PostDAO {
         feelingsDb = dbHelper.getReadableDatabase();
 
         String query = "SELECT * FROM " + DataBase.TABELA_POST +
-                " WHERE " + DataBase.POST_DATAHORA + " LIKE ?";
+                " WHERE " + DataBase.ID + " LIKE ?";
 
         String idString = Long.toString(id);
         String[] argumentos = {idString};
@@ -118,7 +118,6 @@ public class PostDAO {
         Post post = null;
 
         if(cursor.moveToNext()){
-
             post = criarPost(cursor);
         }
 
@@ -134,7 +133,7 @@ public class PostDAO {
 
         String query = "SELECT * FROM " + DataBase.TABELA_POST +
                 " WHERE " + DataBase.POST_USER_ID + " LIKE ?" +
-                " ORDER BY " + DataBase.ID + " DESC";
+                " ORDER BY " + DataBase.POST_DATAHORA + " DESC";
 
         String idString = Long.toString(id);
         String[] argumentos = {idString};

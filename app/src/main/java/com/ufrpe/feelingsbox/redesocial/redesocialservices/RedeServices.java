@@ -10,6 +10,7 @@ import com.ufrpe.feelingsbox.redesocial.persistencia.PosTagDAO;
 import com.ufrpe.feelingsbox.redesocial.persistencia.PostDAO;
 import com.ufrpe.feelingsbox.redesocial.persistencia.RelacaoSegDAO;
 import com.ufrpe.feelingsbox.redesocial.persistencia.SessaoDAO;
+import com.ufrpe.feelingsbox.redesocial.persistencia.SugestaoDAO;
 import com.ufrpe.feelingsbox.redesocial.persistencia.TagDAO;
 import com.ufrpe.feelingsbox.usuario.dominio.Pessoa;
 import com.ufrpe.feelingsbox.usuario.dominio.Usuario;
@@ -29,6 +30,7 @@ public class RedeServices {
     private Context context;
     private Comentario comentario;
     private RelacaoSegDAO relacaoSegDAO;
+    private SugestaoDAO sugestaoDAO;
 
     private static final int UM = 1;
 
@@ -134,5 +136,10 @@ public class RedeServices {
     public Pessoa verificarSessao(){
         sessaoDAO = new SessaoDAO(context);
         return sessaoDAO.getPessoaLogada();
+    }
+
+    public List<Post> postsEmAlta(){
+        sugestaoDAO = new SugestaoDAO(context);
+        return sugestaoDAO.getPostsMaisComentadosHoje();
     }
 }
