@@ -105,6 +105,7 @@ public class DataBase extends SQLiteOpenHelper {
                 ID_PESSOA + " INTEGER);");
 
         db.execSQL("CREATE TABLE " + TABELA_COMENTARIO +  " (" +
+                ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 COMENTARIO_TEXTO + " TEXT NOT NULL, " +
                 COMENTARIO_USER_ID + " INTEGER, " +
                 COMENTARIO_POST_ID + " INTEGER, " +

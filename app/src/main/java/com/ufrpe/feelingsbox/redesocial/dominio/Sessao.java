@@ -10,7 +10,6 @@ public class Sessao {
     private static Sessao instancia = new Sessao();
     private Pessoa pessoaLogada = null;
     private Usuario usuarioLogado = null;
-    private PerfilPublico perfillogado = null;
     private List<Usuario> listaUsuarios = new ArrayList<>();
     private List<ActEnum> historicoDeTelas = new ArrayList<>();
     private List<BundleEnum> listaModos = new ArrayList<>();
@@ -35,18 +34,9 @@ public class Sessao {
         this.usuarioLogado = novoUsuario;
     }
 
-    public PerfilPublico getPerfillogado() {
-        return perfillogado;
-    }
-
-    public void setPerfillogado(PerfilPublico perfillogado) {
-        this.perfillogado = perfillogado;
-    }
-
     public void invalidarSessao() {
         pessoaLogada = null;
         usuarioLogado = null;
-        perfillogado = null;
     }
 
     public void addUsuario(Usuario usuario){ listaUsuarios.add(usuario); }

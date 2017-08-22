@@ -24,6 +24,7 @@ public class ComentarioRecyclerAdapter extends RecyclerView.Adapter<ComentarioRe
     private LayoutInflater mLayoutInflater;
     private RecyclerViewOnClickListenerhack mRecyclerViewOnClickListenerhack;
     private UsuarioService usuarioService;
+    private static final int DURACAO = 1000;
 
     //Construtor
     public ComentarioRecyclerAdapter(Context context, List<Comentario> lista) {
@@ -74,7 +75,7 @@ public class ComentarioRecyclerAdapter extends RecyclerView.Adapter<ComentarioRe
         //Animação
         try {
             YoYo.with(Techniques.ZoomIn)
-                    .duration(1000)
+                    .duration(DURACAO)
                     .repeat(0)
                     .playOn(holder.itemView);
         }catch (Exception e){
