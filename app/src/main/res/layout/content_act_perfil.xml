@@ -55,6 +55,12 @@
                         android:textSize="18sp" />
                 </LinearLayout>
 
+                <View
+                    android:id="@+id/view"
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorBtnYellow"/>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -88,6 +94,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="12dp"
+                android:layout_marginLeft="@dimen/divider_left_and_right"
+                android:layout_marginRight="@dimen/divider_left_and_right"
                 android:background="@color/colorBtnYellow" />
 
             <LinearLayout
@@ -121,6 +129,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="12dp"
+                android:layout_marginLeft="@dimen/divider_left_and_right"
+                android:layout_marginRight="@dimen/divider_left_and_right"
                 android:background="@color/colorBtnYellow" />
 
             <LinearLayout
@@ -154,6 +164,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="12dp"
+                android:layout_marginLeft="@dimen/divider_left_and_right"
+                android:layout_marginRight="@dimen/divider_left_and_right"
                 android:background="@color/colorBtnYellow" />
 
             <LinearLayout
@@ -187,6 +199,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="12dp"
+                android:layout_marginLeft="@dimen/divider_left_and_right"
+                android:layout_marginRight="@dimen/divider_left_and_right"
                 android:background="@color/colorBtnYellow" />
 
             <LinearLayout
@@ -221,6 +235,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="12dp"
+                android:layout_marginLeft="@dimen/divider_left_and_right"
+                android:layout_marginRight="@dimen/divider_left_and_right"
                 android:background="@color/colorBtnYellow" />
 
             <LinearLayout
@@ -255,6 +271,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="12dp"
+                android:layout_marginLeft="@dimen/divider_left_and_right"
+                android:layout_marginRight="@dimen/divider_left_and_right"
                 android:background="@color/colorBtnYellow" />
 
         </LinearLayout>

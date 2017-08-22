@@ -6,4 +6,5 @@
     <dimen name="user_name">20sp</dimen>
     <dimen name="post_date">14sp</dimen>
     <dimen name="post_text">18sp</dimen>
+    <dimen name="divider_left_and_right">8dp</dimen>
 </resources>

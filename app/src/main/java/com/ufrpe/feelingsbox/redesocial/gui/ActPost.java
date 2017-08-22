@@ -13,7 +13,7 @@ import com.ufrpe.feelingsbox.infra.FormataData;
 import com.ufrpe.feelingsbox.infra.adapter.comentario.ComentarioFragment;
 import com.ufrpe.feelingsbox.redesocial.dominio.Post;
 import com.ufrpe.feelingsbox.redesocial.dominio.Sessao;
-import com.ufrpe.feelingsbox.usuario.usuarioservices.UsuarioService;
+import com.ufrpe.feelingsbox.usuario.dominio.Usuario;
 
 import static com.ufrpe.feelingsbox.redesocial.dominio.ActEnum.ACT_POST;
 import static com.ufrpe.feelingsbox.redesocial.dominio.BundleEnum.MAIN_FRAG;
@@ -22,11 +22,13 @@ public class ActPost extends AppCompatActivity {
     private Sessao sessao = Sessao.getInstancia();
     private TextView txtDonoPost, txtData, txtPostagem;
     private Post postDonoTela;
+    private Usuario usuarioDonoTela;
 
     public ActPost() {
         super();
         sessao.addHistorico(ACT_POST);
         postDonoTela = sessao.getUltimoPost();
+        usuarioDonoTela = sessao.getUltimoUsuario();
     }
 
     @Override
@@ -50,8 +52,7 @@ public class ActPost extends AppCompatActivity {
     }
 
     private void atualizarPostagem(){
-        UsuarioService usuarioService = new UsuarioService(this);
-        txtDonoPost.setText(usuarioService.buscarNick(postDonoTela.getIdUsuario()));
+        txtDonoPost.setText(usuarioDonoTela.getNick());
         txtData.setText(FormataData.tempoParaMostrarEmPost(postDonoTela.getDataHora()));
         txtPostagem.setText(postDonoTela.getTexto());
     }
@@ -85,7 +86,7 @@ public class ActPost extends AppCompatActivity {
     private void retornarTela(){
         sessao.popHistorico();
         sessao.popPost();
-        //sessao.popUsuario();
+        sessao.popUsuario();
         Intent intent = new Intent(this, sessao.popHistorico().getValor());
         startActivity(intent);
         finish();

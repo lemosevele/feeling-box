@@ -92,9 +92,10 @@ public class PostFragment extends Fragment implements RecyclerViewOnClickListene
     public void onClickListener(View view, int position) {
         Intent intent;
         UsuarioService usuarioService = new UsuarioService(view.getContext());
+        Usuario usuarioSelecionado;
         switch (view.getId()){
             case R.id.ivUser:
-                Usuario usuarioSelecionado = usuarioService.buscarUsuario(mList.get(position).getIdUsuario());
+                usuarioSelecionado = usuarioService.buscarUsuario(mList.get(position).getIdUsuario());
                 if(sessao.getUltimoHistorico() == ActEnum.ACT_PERFIL_POST && usuarioDonoTela.getId() == usuarioSelecionado.getId()){
                     break;
                 }
@@ -110,7 +111,9 @@ public class PostFragment extends Fragment implements RecyclerViewOnClickListene
                 getActivity().finish();
                 break;
             case -1:
+                usuarioSelecionado = usuarioService.buscarUsuario(mList.get(position).getIdUsuario());
                 sessao.addPost(mList.get(position));
+                sessao.addUsuario(usuarioSelecionado);
                 intent = new Intent(view.getContext(), ActPost.class);
                 startActivity(intent);
                 getActivity().finish();

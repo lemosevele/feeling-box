@@ -64,8 +64,6 @@ public class ComentarioFragment extends Fragment implements RecyclerViewOnClickL
             }*/
         });
 
-        //mRecyclerView.addOnItemTouchListener(new RecyclerViewTouchListener(getActivity(), mRecyclerView, this));
-
         LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(getActivity());
         mLinearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
