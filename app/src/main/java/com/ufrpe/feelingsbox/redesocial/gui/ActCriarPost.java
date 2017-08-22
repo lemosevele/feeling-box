@@ -7,16 +7,19 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.TextView;
+import android.widget.ArrayAdapter;
+import android.widget.MultiAutoCompleteTextView;
 
 import com.ufrpe.feelingsbox.R;
 import com.ufrpe.feelingsbox.infra.GuiUtil;
 import com.ufrpe.feelingsbox.infra.ValidacaoService;
 import com.ufrpe.feelingsbox.redesocial.redesocialservices.RedeServices;
 
+import java.util.ArrayList;
+
 
 public class ActCriarPost extends AppCompatActivity {
-    private TextView edtTexto;
+    private MultiAutoCompleteTextView edtTexto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +29,20 @@ public class ActCriarPost extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        edtTexto = (TextView) findViewById(R.id.edtTexto);
+        ArrayList listaTags = new ArrayList<String>();
+        listaTags.add("#mpoo");
+        listaTags.add("#duvida");
+        listaTags.add("#prazo");
+        listaTags.add("#peperone");
+        listaTags.add("#profilaxia");
+        listaTags.add("#cansado");
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_dropdown_item_1line, listaTags);
+        edtTexto = (MultiAutoCompleteTextView) findViewById(R.id.edtTexto);
+        edtTexto.setAdapter(adapter);
+        edtTexto.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
+
     }
 
     @Override

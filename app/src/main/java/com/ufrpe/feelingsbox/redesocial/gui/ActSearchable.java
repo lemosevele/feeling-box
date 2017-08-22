@@ -4,18 +4,15 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.ufrpe.feelingsbox.R;
@@ -24,16 +21,21 @@ import com.ufrpe.feelingsbox.infra.adapter.post.PostRecyclerAdapter;
 import com.ufrpe.feelingsbox.infra.adapter.post.RecyclerViewOnClickListenerhack;
 import com.ufrpe.feelingsbox.infra.provider.SearchableProvider;
 import com.ufrpe.feelingsbox.redesocial.dominio.Post;
+import com.ufrpe.feelingsbox.redesocial.dominio.Sessao;
 import com.ufrpe.feelingsbox.redesocial.redesocialservices.RedeServices;
+import com.ufrpe.feelingsbox.usuario.dominio.Usuario;
+import com.ufrpe.feelingsbox.usuario.usuarioservices.UsuarioService;
 
 import java.util.ArrayList;
-import java.util.List;
+
+import static com.ufrpe.feelingsbox.redesocial.dominio.BundleEnum.ID_POST;
 
 public class ActSearchable extends AppCompatActivity implements RecyclerViewOnClickListenerhack{
-    private ArrayList mListAux;
+    private ArrayList<Post> mListAux;
     private RecyclerView mRecyclerView;
     private PostRecyclerAdapter adapter;
-    private CoordinatorLayout clContainer;
+    private TextView txtMsgNaoEncontrado;
+    private Sessao sessao = Sessao.getInstancia();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,14 +45,13 @@ public class ActSearchable extends AppCompatActivity implements RecyclerViewOnCl
             Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            txtMsgNaoEncontrado = (TextView) findViewById(R.id.txtMsg);
 
             if(savedInstanceState != null){
                 mListAux = savedInstanceState.getParcelableArrayList("mListAux");
             } else {
                 mListAux = new ArrayList<>();
             }
-
-            clContainer = (CoordinatorLayout) findViewById(R.id.cl_container);
 
             mRecyclerView = (RecyclerView) findViewById(R.id.rv_list);
             mRecyclerView.setHasFixedSize(true);
@@ -59,7 +60,7 @@ public class ActSearchable extends AppCompatActivity implements RecyclerViewOnCl
             mLinearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
             mRecyclerView.setLayoutManager(mLinearLayoutManager);
 
-            adapter = new PostRecyclerAdapter(this, (List<Post>) mListAux);
+            adapter = new PostRecyclerAdapter(this, mListAux);
             adapter.setRecyclerViewOnClickListenerhack(this);
             mRecyclerView.setAdapter(adapter);
 
@@ -88,40 +89,30 @@ public class ActSearchable extends AppCompatActivity implements RecyclerViewOnCl
         mListAux.clear();
         RedeServices redeServices = new RedeServices(this);
 
-        ArrayList<? extends Post> mList = (ArrayList<? extends Post>) redeServices.buscarPosts(stringBusca);
+        ArrayList<Post> mList = (ArrayList<Post>) redeServices.buscarPosts(stringBusca);
 
         for(int i = 0; i < mList.size(); i++){
             mListAux.add(mList.get(i));
         }
 
         mRecyclerView.setVisibility(mListAux.isEmpty() ? View.GONE : View.VISIBLE);
-        if(mListAux.isEmpty() && clContainer.findViewById(1) == null){
-            TextView textView = new TextView(this);
-            textView.setText(R.string.lbl_nehum_post_encontrado);
-            textView.setTextColor(getResources().getColor(R.color.colorUserFont));
-            textView.setId(1);
-            textView.setLayoutParams(new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT));
-            textView.setGravity(Gravity.CENTER);
-
-            clContainer.addView(textView);
-        } else if(!mListAux.isEmpty() && clContainer.findViewById(1) != null){
-            clContainer.removeView(clContainer.findViewById(1));
-        }
-
-        if(!mListAux.isEmpty()){
+        if(mListAux.isEmpty()){
+            txtMsgNaoEncontrado.setVisibility(View.VISIBLE);
+        } else if(!mListAux.isEmpty()){
+            txtMsgNaoEncontrado.setVisibility(View.INVISIBLE);
             SearchableProvider.salvarSugestao(getApplicationContext(), stringBusca);
         }
-        
+
         adapter.notifyDataSetChanged();
     }
 
-    /*@Override
+    @Override
     public void onSaveInstanceState(Bundle outState){
-        outState.putParcelableArrayList("mListAux", (ArrayList<Post>) mListAux);
+        outState.putParcelableArrayList("mListAux", mListAux);
 
         super.onSaveInstanceState(outState);
 
-    }*/
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
@@ -149,9 +140,35 @@ public class ActSearchable extends AppCompatActivity implements RecyclerViewOnCl
         return super.onOptionsItemSelected(item);
     }
 
+    //Click Normal
     @Override
     public void onClickListener(View view, int position) {
-
+        Intent intent;
+        UsuarioService usuarioService = new UsuarioService(view.getContext());
+        Usuario usuarioSelecionado;
+        switch (view.getId()){
+            case R.id.ivUser:
+                usuarioSelecionado = usuarioService.buscarUsuario(mListAux.get(position).getIdUsuario());
+                sessao.addUsuario(usuarioSelecionado);
+                intent = new Intent(view.getContext(), ActPerfilPost.class);
+                startActivity(intent);
+                finish();
+                break;
+            case R.id.btnComentar:
+                intent = new Intent(view.getContext(), ActCriarComentario.class);
+                intent.putExtra(ID_POST.getValor(), mListAux.get(position).getId());
+                startActivity(intent);
+                finish();
+                break;
+            case -1:
+                usuarioSelecionado = usuarioService.buscarUsuario(mListAux.get(position).getIdUsuario());
+                sessao.addPost(mListAux.get(position));
+                sessao.addUsuario(usuarioSelecionado);
+                intent = new Intent(view.getContext(), ActPost.class);
+                startActivity(intent);
+                finish();
+                break;
+        }
     }
 
     @Override

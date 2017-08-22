@@ -1,9 +1,12 @@
 package com.ufrpe.feelingsbox.redesocial.dominio;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.ufrpe.feelingsbox.infra.FormataData;
 import java.util.ArrayList;
 
-public class Post {
+public class Post implements Parcelable{
     private String texto;
     private ArrayList<String> listaTags = new ArrayList<String>();
     private long idUsuario;
@@ -58,4 +61,39 @@ public class Post {
     public ArrayList<Comentario> getListaComentarios() {
         return listaComentarios;
     }
+
+    public Post() {}
+
+    public Post (Parcel parcel){
+        setTexto(parcel.readString());
+        setIdUsuario(parcel.readLong());
+        setId(parcel.readLong());
+        setDataHora(parcel.readString());
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(texto);
+        dest.writeStringList(listaTags);
+        dest.writeLong(idUsuario);
+        dest.writeLong(id);
+        dest.writeString(dataHora);
+    }
+
+    public static final Parcelable.Creator<Post> CREATOR = new Creator<Post>() {
+        @Override
+        public Post createFromParcel(Parcel in) {
+            return new Post(in);
+        }
+
+        @Override
+        public Post[] newArray(int size) {
+            return new Post[size];
+        }
+    };
 }

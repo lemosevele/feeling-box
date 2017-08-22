@@ -8,6 +8,15 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".redesocial.gui.ActHome">
 
+    <TextView
+        android:id="@+id/txtMsg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="@string/lbl_nehum_post_encontrado"
+        android:textColor="@color/colorUserFont"
+        android:visibility="visible"/>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_list"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
