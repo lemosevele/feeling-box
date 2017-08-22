@@ -51,7 +51,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/lblSeguindo"
+            android:id="@+id/txtData"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/txtDonoPost"
@@ -64,7 +64,7 @@
             android:id="@+id/txtPostagem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/lblSeguindo"
+            android:layout_below="@+id/txtData"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginTop="8dp"

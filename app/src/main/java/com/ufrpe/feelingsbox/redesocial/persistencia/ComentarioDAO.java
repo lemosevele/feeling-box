@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.ufrpe.feelingsbox.infra.DataBase;
+import com.ufrpe.feelingsbox.infra.GuiUtil;
 import com.ufrpe.feelingsbox.redesocial.dominio.Comentario;
 import com.ufrpe.feelingsbox.redesocial.dominio.Post;
 
@@ -16,10 +17,12 @@ import java.util.List;
 public class ComentarioDAO {
     private DataBase dbHelper;
     private SQLiteDatabase feelingsDb;
+    private Context context;
 
 
     public ComentarioDAO (Context context){
         dbHelper = new DataBase(context);
+        this.context = context;
     }
 
     public Comentario criarComentario(Cursor cursor){
@@ -92,12 +95,18 @@ public class ComentarioDAO {
         String query = "SELECT * FROM " + DataBase.TABELA_COMENTARIO +
                 " ORDER BY " + DataBase.ID + " DESC";
 
-        Cursor cursor = feelingsDb.rawQuery(query, null);
+        try{
+            Cursor cursor = feelingsDb.rawQuery(query, null);
+        } catch (Exception e){
+            GuiUtil.myAlertDialog(context, e);
+            Cursor cursor = null;
+        }
 
-        while (cursor.moveToNext()){
+
+        /*while (cursor.moveToNext()){
             Comentario comentario = criarComentario(cursor);
             comentarioUser.add(comentario);
-        }
+        }*/
         feelingsDb.close();
         return comentarioUser;
     }

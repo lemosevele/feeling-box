@@ -95,7 +95,7 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
             ivUser      = (ImageView) itemView.findViewById(R.id.ivUser);
             txtDonoPost = (TextView) itemView.findViewById(R.id.txtDonoPost);
             txtPostagem = (TextView) itemView.findViewById(R.id.txtPostagem);
-            txtData     = (TextView) itemView.findViewById(R.id.lblSeguindo);
+            txtData     = (TextView) itemView.findViewById(R.id.txtData);
             btnComentar = (Button) itemView.findViewById(R.id.btnComentar);
 
             ivUser.setOnClickListener(this);

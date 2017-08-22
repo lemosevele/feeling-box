@@ -32,7 +32,7 @@ public class ActHome extends AppCompatActivity {
 
     public ActHome() {
         super();
-        sessao.limparHistoricoEUsuarios();
+        sessao.limparHistoricoUsuariosModosPosts();
         sessao.addHistorico(ACT_HOME);
         usuarioLogado = sessao.getUsuarioLogado();
 

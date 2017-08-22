@@ -18,6 +18,7 @@ import com.ufrpe.feelingsbox.redesocial.dominio.Post;
 import com.ufrpe.feelingsbox.redesocial.dominio.Sessao;
 import com.ufrpe.feelingsbox.redesocial.gui.ActCriarComentario;
 import com.ufrpe.feelingsbox.redesocial.gui.ActPerfilPost;
+import com.ufrpe.feelingsbox.redesocial.gui.ActPost;
 import com.ufrpe.feelingsbox.redesocial.redesocialservices.RedeServices;
 import com.ufrpe.feelingsbox.usuario.dominio.Usuario;
 import com.ufrpe.feelingsbox.usuario.usuarioservices.UsuarioService;
@@ -109,6 +110,10 @@ public class PostFragment extends Fragment implements RecyclerViewOnClickListene
                 getActivity().finish();
                 break;
             case -1:
+                sessao.addPost(mList.get(position));
+                intent = new Intent(view.getContext(), ActPost.class);
+                startActivity(intent);
+                getActivity().finish();
                 break;
         }
 
@@ -125,8 +130,6 @@ public class PostFragment extends Fragment implements RecyclerViewOnClickListene
         private Context mContext;
         private GestureDetector mGestureDetector;
         private RecyclerViewOnClickListenerhack mRecyclerViewOnClickListenerhack;
-
-
 
         //Construtor
         public RecyclerViewTouchListener(Context mContext, final RecyclerView recyclerView, final RecyclerViewOnClickListenerhack mRecyclerViewOnClickListenerhack) {

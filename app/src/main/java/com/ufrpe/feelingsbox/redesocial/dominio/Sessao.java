@@ -14,6 +14,7 @@ public class Sessao {
     private List<Usuario> listaUsuarios = new ArrayList<>();
     private List<ActEnum> historicoDeTelas = new ArrayList<>();
     private List<BundleEnum> listaModos = new ArrayList<>();
+    private List<Post> listaPosts = new ArrayList<>();
 
     public static Sessao getInstancia(){
 
@@ -117,9 +118,33 @@ public class Sessao {
         return listaModos.get(this.indiceUltimoModo());
     }
 
-    public void limparHistoricoEUsuarios(){
+    public void addPost(Post post){ listaPosts.add(post); }
+
+    public void limparListaPosts(){ listaPosts.clear();}
+
+    private int indiceUltimoPost(){ return (listaPosts.size()-1); }
+
+    public Post popPost(){
+        if(listaPosts.isEmpty()){
+            return (null);
+        }
+        Post post = this.getUltimoPost();
+        listaPosts.remove(this.indiceUltimoPost());
+
+        return post;
+    }
+
+    public Post getUltimoPost() {
+        if (listaPosts.isEmpty()) {
+            return (null);
+        }
+        return listaPosts.get(this.indiceUltimoPost());
+    }
+
+    public void limparHistoricoUsuariosModosPosts(){
         this.limparListaUsuarios();
         this.limparListaHistorico();
         this.limparListaModos();
+        this.limparListaPosts();
     }
 }

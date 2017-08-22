@@ -80,4 +80,5 @@
     <string name="tilte_menu_pesquisar">Pesquisar</string>
     <string name="title_menu_home">Home</string>
     <string name="lbl_bem_vindo">BEM-VINDO</string>
+    <string name="title_activity_act_post">ActPost</string>
 </resources>
