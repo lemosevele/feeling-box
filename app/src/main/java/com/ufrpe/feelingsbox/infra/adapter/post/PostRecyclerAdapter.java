@@ -66,6 +66,8 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
         usuarioService = new UsuarioService(mLayoutInflater.getContext());
         long idUsuario = mList.get(position).getIdUsuario();
         String nickUsuario = usuarioService.buscarNick(idUsuario) ;
+        long qtnComentario = 0;
+        holder.numComentario.setText(qtnComentario < 2 ? qtnComentario + " comentário" : qtnComentario + " comentários");
         holder.txtDonoPost.setText(nickUsuario);
         holder.txtPostagem.setText(mList.get(position).getTexto());
         String data = FormataData.tempoParaMostrarEmPost(mList.get(position).getDataHora());
@@ -86,7 +88,7 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
     //ViewHolder personalizada
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         public ImageView ivUser;
-        public TextView txtDonoPost, txtPostagem, txtData;
+        public TextView txtDonoPost, txtPostagem, txtData, numComentario;
         public Button btnComentar;
 
 
@@ -97,6 +99,7 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
             txtDonoPost = (TextView) itemView.findViewById(R.id.txtDonoPost);
             txtPostagem = (TextView) itemView.findViewById(R.id.txtPostagem);
             txtData     = (TextView) itemView.findViewById(R.id.txtData);
+            numComentario = (TextView) itemView.findViewById(R.id.numComentario);
             btnComentar = (Button) itemView.findViewById(R.id.btnComentar);
 
             ivUser.setOnClickListener(this);

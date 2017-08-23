@@ -25,7 +25,7 @@ import static com.ufrpe.feelingsbox.redesocial.dominio.BundleEnum.MAIN_FRAG;
 
 public class ActPost extends AppCompatActivity {
     private Sessao sessao = Sessao.getInstancia();
-    private TextView txtDonoPost, txtData, txtPostagem;
+    private TextView txtDonoPost, txtData, txtPostagem, numComentario;
     private Post postDonoTela;
     private Usuario usuarioDonoTela;
     private ImageView ivUser;
@@ -54,6 +54,7 @@ public class ActPost extends AppCompatActivity {
         txtDonoPost = (TextView) findViewById(R.id.txtDonoPost);
         txtData     = (TextView) findViewById(R.id.txtData);
         txtPostagem = (TextView) findViewById(R.id.txtPostagem);
+        numComentario = (TextView) findViewById(R.id.numComentario);
         ivUser      = (ImageView) findViewById(R.id.ivUser);
     }
 
@@ -61,6 +62,9 @@ public class ActPost extends AppCompatActivity {
         txtDonoPost.setText(usuarioDonoTela.getNick());
         txtData.setText(FormataData.tempoParaMostrarEmPost(postDonoTela.getDataHora()));
         txtPostagem.setText(postDonoTela.getTexto());
+        long qtnComentario = 0;
+        numComentario.setText(qtnComentario < 2 ? qtnComentario + " comentário" : qtnComentario + " comentários");
+
     }
 
     private void iniciarFragment(){

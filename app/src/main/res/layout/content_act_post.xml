@@ -84,12 +84,24 @@
                         android:textColor="@color/colorPostFont"
                         android:textSize="@dimen/post_text" />
 
+                    <TextView
+                        android:id="@+id/numComentario"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txtPostagem"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
+                        android:layout_marginTop="8dp"
+                        android:hint="@string/exemplo_num_comentarios"
+                        android:textColor="@color/colorNumComentarios"
+                        android:textSize="@dimen/post_num_comentario" />
+
                     <Button
                         android:id="@+id/btnComentar"
                         style="@style/Widget.AppCompat.Button.Borderless.Colored"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/txtPostagem"
+                        android:layout_below="@+id/numComentario"
                         android:layout_marginBottom="8dp"
                         android:layout_marginLeft="5dp"
                         android:onClick="onClickComentar"

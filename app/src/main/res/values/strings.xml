@@ -84,4 +84,5 @@
     <string name="lbl_bem_vindo">BEM-VINDO</string>
     <string name="title_activity_act_post">Postagem</string>
     <string name="btn_responder">Responder</string>
+    <string name="exemplo_num_comentarios">0 Comentário</string>
 </resources>

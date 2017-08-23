@@ -24,8 +24,7 @@
 
     <color name="colorBoxBackground">#e1e1e1</color>
     <color name="colorItemBackground">#ffffff</color>
-
-
+    <color name="colorNumComentarios">#808080</color>
 
 
 </resources>
