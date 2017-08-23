@@ -13,21 +13,34 @@ import com.ufrpe.feelingsbox.R;
 import com.ufrpe.feelingsbox.infra.GuiUtil;
 import com.ufrpe.feelingsbox.infra.SpaceTokenizer;
 import com.ufrpe.feelingsbox.infra.ValidacaoService;
+import com.ufrpe.feelingsbox.redesocial.dominio.BundleEnum;
 import com.ufrpe.feelingsbox.redesocial.dominio.Sessao;
 import com.ufrpe.feelingsbox.redesocial.redesocialservices.RedeServices;
 
 import java.util.ArrayList;
 
-public class ActCriarComentario extends AppCompatActivity {
+public class ActCriarPostComentario extends AppCompatActivity {
     private MultiAutoCompleteTextView edtComentario;
     private Long idPost;
     private Sessao sessao = Sessao.getInstancia();
+    private BundleEnum modo;
+
+    public ActCriarPostComentario() {
+        modo = sessao.getUltimoModo();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.act_criar_comentario);
+        setContentView(R.layout.act_criar_post_comentario);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        if(modo == BundleEnum.POST){
+            toolbar.setTitle(getString(R.string.title_activity_act_criar_post));
+        } else if(modo == BundleEnum.COMENTARIO){
+            toolbar.setTitle(getString(R.string.title_activity_act_criar_comentario));
+        } else {
+            toolbar.setTitle("Modo é igual a " + modo);
+        }
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -57,7 +70,17 @@ public class ActCriarComentario extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void onClickComentar(View view){
+    public void onClickPostarComentar(View view){
+        if(modo == BundleEnum.POST){
+            this.registrarPost();
+        } else if(modo == BundleEnum.COMENTARIO){
+            this.registrarComentario();
+        } else {
+            GuiUtil.myAlertDialog(this, "Modo é igual a " + modo);
+        }
+    }
+
+    private void registrarComentario(){
         String texto = edtComentario.getText().toString();
 
         Bundle extras = getIntent().getExtras();
@@ -80,12 +103,32 @@ public class ActCriarComentario extends AppCompatActivity {
         }
     }
 
+    private void registrarPost(){
+        String texto = edtComentario.getText().toString();
+
+        ValidacaoService validarPost = new ValidacaoService(getApplicationContext());
+        boolean postVazio = false;
+        if (validarPost.isCampoVazio(texto)){
+            edtComentario.requestFocus();
+            edtComentario.setError(getString(R.string.print_erro_validacao_post_campovazio));
+            postVazio = true;
+        }
+        if (!postVazio){
+            RedeServices redeServices = new RedeServices(getApplicationContext());
+            redeServices.salvarPost(texto);
+            GuiUtil.myToast(this, getString(R.string.print_msg_postado));
+            retornarHome();
+        }
+    }
+
     @Override
     public void onBackPressed() {
         retornarHome();
         super.onBackPressed();
     }
+
     private void retornarHome(){
+        sessao.popModo();
         Intent intent = new Intent(this, sessao.popHistorico().getValor());
         startActivity(intent);
         finish();

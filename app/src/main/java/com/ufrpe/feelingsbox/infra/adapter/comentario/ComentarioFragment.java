@@ -16,7 +16,7 @@ import com.ufrpe.feelingsbox.R;
 import com.ufrpe.feelingsbox.infra.adapter.post.RecyclerViewOnClickListenerhack;
 import com.ufrpe.feelingsbox.redesocial.dominio.Comentario;
 import com.ufrpe.feelingsbox.redesocial.dominio.Sessao;
-import com.ufrpe.feelingsbox.redesocial.gui.ActCriarComentario;
+import com.ufrpe.feelingsbox.redesocial.gui.ActCriarPostComentario;
 import com.ufrpe.feelingsbox.redesocial.gui.ActPerfilPost;
 import com.ufrpe.feelingsbox.redesocial.redesocialservices.RedeServices;
 import com.ufrpe.feelingsbox.usuario.dominio.Usuario;
@@ -24,6 +24,7 @@ import com.ufrpe.feelingsbox.usuario.usuarioservices.UsuarioService;
 
 import java.util.List;
 
+import static com.ufrpe.feelingsbox.redesocial.dominio.BundleEnum.COMENTARIO;
 import static com.ufrpe.feelingsbox.redesocial.dominio.BundleEnum.ID_POST;
 
 public class ComentarioFragment extends Fragment implements RecyclerViewOnClickListenerhack {
@@ -91,7 +92,8 @@ public class ComentarioFragment extends Fragment implements RecyclerViewOnClickL
                 getActivity().finish();
                 break;
             case R.id.btnComentar:
-                intent = new Intent(view.getContext(), ActCriarComentario.class);
+                sessao.addModo(COMENTARIO);
+                intent = new Intent(view.getContext(), ActCriarPostComentario.class);
                 intent.putExtra(ID_POST.getValor(), mList.get(position).getId());
                 startActivity(intent);
                 getActivity().finish();

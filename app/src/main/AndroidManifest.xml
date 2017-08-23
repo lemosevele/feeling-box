@@ -58,11 +58,7 @@
             android:windowSoftInputMode="stateHidden"> <!-- Impede do teclado abrir automaticamente ao Entrar na Activity e mudar Orientação e Tamanho da Tela -->
         </activity>
         <activity
-            android:name=".redesocial.gui.ActCriarPost"
-            android:label="@string/title_activity_act_criar_post"
-            android:theme="@style/MyAppTheme.NoActionBar" />
-        <activity
-            android:name=".redesocial.gui.ActCriarComentario"
+            android:name=".redesocial.gui.ActCriarPostComentario"
             android:label="@string/title_activity_act_criar_comentario"
             android:theme="@style/MyAppTheme" />
         <activity

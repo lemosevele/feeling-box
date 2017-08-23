@@ -28,6 +28,7 @@ import com.ufrpe.feelingsbox.usuario.usuarioservices.UsuarioService;
 
 import java.util.ArrayList;
 
+import static com.ufrpe.feelingsbox.redesocial.dominio.BundleEnum.COMENTARIO;
 import static com.ufrpe.feelingsbox.redesocial.dominio.BundleEnum.ID_POST;
 
 public class ActSearchable extends AppCompatActivity implements RecyclerViewOnClickListenerhack{
@@ -152,7 +153,8 @@ public class ActSearchable extends AppCompatActivity implements RecyclerViewOnCl
                 finish();
                 break;
             case R.id.btnComentar:
-                intent = new Intent(view.getContext(), ActCriarComentario.class);
+                sessao.addModo(COMENTARIO);
+                intent = new Intent(view.getContext(), ActCriarPostComentario.class);
                 intent.putExtra(ID_POST.getValor(), mListAux.get(position).getId());
                 startActivity(intent);
                 finish();

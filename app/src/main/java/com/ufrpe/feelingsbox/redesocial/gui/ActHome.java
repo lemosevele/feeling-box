@@ -23,6 +23,7 @@ import com.ufrpe.feelingsbox.usuario.gui.ActLogin;
 
 import static com.ufrpe.feelingsbox.redesocial.dominio.ActEnum.ACT_HOME;
 import static com.ufrpe.feelingsbox.redesocial.dominio.BundleEnum.MAIN_FRAG;
+import static com.ufrpe.feelingsbox.redesocial.dominio.BundleEnum.POST;
 
 
 public class ActHome extends AppCompatActivity {
@@ -51,7 +52,8 @@ public class ActHome extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ActHome.this, ActCriarPost.class);
+                sessao.addModo(POST);
+                Intent intent = new Intent(ActHome.this, ActCriarPostComentario.class);
                 startActivity(intent);
                 finish();
             }

@@ -20,6 +20,7 @@ import com.ufrpe.feelingsbox.redesocial.dominio.Sessao;
 import com.ufrpe.feelingsbox.usuario.dominio.Usuario;
 
 import static com.ufrpe.feelingsbox.redesocial.dominio.ActEnum.ACT_POST;
+import static com.ufrpe.feelingsbox.redesocial.dominio.BundleEnum.COMENTARIO;
 import static com.ufrpe.feelingsbox.redesocial.dominio.BundleEnum.ID_POST;
 import static com.ufrpe.feelingsbox.redesocial.dominio.BundleEnum.MAIN_FRAG;
 
@@ -122,7 +123,8 @@ public class ActPost extends AppCompatActivity {
         finish();
     }
     public void onClickComentar(View view){
-        Intent intent = new Intent(view.getContext(), ActCriarComentario.class);
+        sessao.addModo(COMENTARIO);
+        Intent intent = new Intent(view.getContext(), ActCriarPostComentario.class);
         intent.putExtra(ID_POST.getValor(), postDonoTela.getId());
         startActivity(intent);
         finish();
