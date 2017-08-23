@@ -8,6 +8,9 @@ import android.database.sqlite.SQLiteDatabase;
 import com.ufrpe.feelingsbox.infra.DataBase;
 import com.ufrpe.feelingsbox.infra.provider.SearchableProvider;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class TagDAO {
     private DataBase dbHelper;
     private SQLiteDatabase feelingsDb;
@@ -40,7 +43,7 @@ public class TagDAO {
         return cursor.getString(indexColunaTexto);
     }
 
-    public String getTagTexto(String texto) {        //Retorna Tag se existe, se nao, retorna null
+    public String getTagTexto(String texto) {
         feelingsDb = dbHelper.getReadableDatabase();
 
         String query = "SELECT * FROM " + DataBase.TABELA_TAG +
@@ -56,11 +59,25 @@ public class TagDAO {
 
             tag = criarTag(cursor);
         }
-
         cursor.close();
         feelingsDb.close();
-
         return tag;
     }
 
+    public List<String> getTagsByOrder(){
+        feelingsDb = dbHelper.getReadableDatabase();
+        List<String> listaTags = new ArrayList<>();
+
+        String query = "SELECT * FROM " + DataBase.TABELA_TAG +
+                " ORDER BY " + DataBase.TAG_TEXTO + " DESC";
+
+        Cursor cursor = feelingsDb.rawQuery(query, null);
+
+        while (cursor.moveToNext()){
+            String tag = criarTag(cursor);
+            listaTags.add(tag);
+        }
+        feelingsDb.close();
+        return listaTags;
+    }
 }

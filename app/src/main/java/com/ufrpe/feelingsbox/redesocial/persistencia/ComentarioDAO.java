@@ -6,7 +6,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.ufrpe.feelingsbox.infra.DataBase;
-import com.ufrpe.feelingsbox.infra.GuiUtil;
 import com.ufrpe.feelingsbox.redesocial.dominio.Comentario;
 
 import java.util.ArrayList;
@@ -106,5 +105,4 @@ public class ComentarioDAO {
         feelingsDb.close();
         return comentarioUser;
     }
-
 }

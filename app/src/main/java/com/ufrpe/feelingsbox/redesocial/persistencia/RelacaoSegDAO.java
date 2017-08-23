@@ -114,7 +114,6 @@ public class RelacaoSegDAO {
         long id = feelingsDb.insert(tabela, null, values);
 
         feelingsDb.close();
-
         return id;
     }
 
@@ -145,6 +144,5 @@ public class RelacaoSegDAO {
         Cursor cursor = feelingsDb.rawQuery(query, argumentos);
 
         return (cursor.moveToNext());
-
     }
 }

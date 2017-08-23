@@ -77,7 +77,6 @@ public class SessaoDAO {
         }
         cursor.close();
         feelingsDb.close();
-
         return pessoa;
     }
 

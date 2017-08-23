@@ -78,7 +78,7 @@ public class PostFragment extends Fragment implements RecyclerViewOnClickListene
         if(usuarioDonoTela != null){
             mList = redeServices.exibirPosts(usuarioDonoTela.getId());
         } else {
-            mList = redeServices.exibirPosts();
+            mList = redeServices.postsEmAlta();
         }
 
         PostRecyclerAdapter adapter = new PostRecyclerAdapter(getActivity(), mList);

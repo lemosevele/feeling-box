@@ -15,6 +15,8 @@ import com.ufrpe.feelingsbox.redesocial.persistencia.TagDAO;
 import com.ufrpe.feelingsbox.usuario.dominio.Pessoa;
 import com.ufrpe.feelingsbox.usuario.dominio.Usuario;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -31,6 +33,7 @@ public class RedeServices {
     private Comentario comentario;
     private RelacaoSegDAO relacaoSegDAO;
     private SugestaoDAO sugestaoDAO;
+    private TagDAO tagDAO;
 
     private static final int UM = 1;
 
@@ -140,6 +143,19 @@ public class RedeServices {
 
     public List<Post> postsEmAlta(){
         sugestaoDAO = new SugestaoDAO(context);
+        //postDAO = new PostDAO(context);
         return sugestaoDAO.getPostsMaisComentadosHoje();
+        /*HashSet<Post> listaFiltrada = new HashSet<>();
+        List<Post> lista = sugestaoDAO.getPostsMaisComentadosHoje();
+        lista.addAll(postDAO.getPostsByOrderId());
+        listaFiltrada.addAll(lista);
+        List<Post> listaFiltradaFinal = new ArrayList<>();
+        listaFiltradaFinal.addAll(listaFiltrada);
+        return listaFiltradaFinal;*/
+    }
+
+    public List<String> listaTags(){
+        tagDAO = new TagDAO(context);
+        return tagDAO.getTagsByOrder();
     }
 }

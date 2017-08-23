@@ -123,7 +123,6 @@ public class PostDAO {
 
         cursor.close();
         feelingsDb.close();
-
         return post;
     }
 
