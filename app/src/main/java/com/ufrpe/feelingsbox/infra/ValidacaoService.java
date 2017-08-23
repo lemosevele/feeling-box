@@ -9,7 +9,7 @@ import com.ufrpe.feelingsbox.usuario.persistencia.UsuarioDAO;
 
 public class ValidacaoService {
     private UsuarioDAO usuarioDAO;
-    private static final int DURACAO = 1000;
+    private static final int TAMANHO_DATA = 10;
 
     public ValidacaoService(Context context){
         this.usuarioDAO = new UsuarioDAO(context);
@@ -32,7 +32,7 @@ public class ValidacaoService {
     }
 
     public boolean isNascValido(String nasc) {
-        return(FormataData.dataExiste(nasc) && FormataData.dataMenorOuIgualQueAtual(nasc) && nasc.length() == DURACAO);
+        return(FormataData.dataExiste(nasc) && FormataData.dataMenorOuIgualQueAtual(nasc) && nasc.length() == TAMANHO_DATA);
     }
 
     public boolean isSenhaValida(String senha){

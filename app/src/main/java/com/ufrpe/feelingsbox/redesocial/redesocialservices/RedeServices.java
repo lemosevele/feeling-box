@@ -94,9 +94,9 @@ public class RedeServices {
         return postDAO.getPostByUser(id);
     }
 
-    public List<Comentario> exibirComentarios(){
+    public List<Comentario> exibirComentarios(long idPost){
         comentarioDAO = new ComentarioDAO(context);
-        return comentarioDAO.getComentariorioByUser();
+        return comentarioDAO.getComentariorioByPost(idPost);
     }
 
     public void seguirUser(long idUser, long idSeguir){
