@@ -30,8 +30,7 @@ public class ComentarioFragment extends Fragment implements RecyclerViewOnClickL
     private RecyclerView mRecyclerView;
     private List<Comentario> mList;
     private Sessao sessao = Sessao.getInstancia();
-    private Usuario usuarioDonoTela;
-
+    
     //Setando o RecyclerView
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -69,13 +68,7 @@ public class ComentarioFragment extends Fragment implements RecyclerViewOnClickL
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
 
         RedeServices redeServices = new RedeServices(getActivity());
-        usuarioDonoTela = sessao.getUltimoUsuario();
-
-        if(usuarioDonoTela != null){
-            mList = redeServices.exibirComentarios(sessao.getUltimoPost().getId());
-        } else {
-            mList = redeServices.exibirComentarios(sessao.getUltimoPost().getId());
-        }
+        mList = redeServices.exibirComentarios(sessao.getUltimoPost().getId());
 
         ComentarioRecyclerAdapter adapter = new ComentarioRecyclerAdapter(getActivity(), mList);
         adapter.setRecyclerViewOnClickListenerhack(this);
