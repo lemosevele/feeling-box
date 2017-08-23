@@ -52,7 +52,6 @@ public class FormataData {
         }catch (Exception e){
             return e.getMessage();
         }
-
     }
 
     //Retorna uma string data atual no formato para guardar no banco
@@ -90,7 +89,6 @@ public class FormataData {
         }
 
         return false;
-
     }
 
     static boolean dataMenorOuIgualQueAtual(String data){

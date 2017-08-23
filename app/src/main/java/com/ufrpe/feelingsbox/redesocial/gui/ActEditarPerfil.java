@@ -52,10 +52,10 @@ public class ActEditarPerfil extends AppCompatActivity {
     }
 
     private void encontrandoItens(){
-        edtNomePerfil = (EditText) findViewById(R.id.edtNomePerfil);
-        edtNickPerfil = (EditText) findViewById(R.id.edtNickPerfil);
+        edtNomePerfil  = (EditText) findViewById(R.id.edtNomePerfil);
+        edtNickPerfil  = (EditText) findViewById(R.id.edtNickPerfil);
         edtEmailPerfil = (EditText) findViewById(R.id.edtEmailPerfil);
-        edtNascPerfil = (EditText) findViewById(R.id.edtNascPerfil);
+        edtNascPerfil  = (EditText) findViewById(R.id.edtNascPerfil);
         edtSenhaPerfil = (EditText) findViewById(R.id.edtSenhaPerfil);
         edtNascPerfil.addTextChangedListener(Mask.insert("##/##/####", edtNascPerfil));
     }
@@ -92,12 +92,12 @@ public class ActEditarPerfil extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        String nome = edtNomePerfil.getText().toString();
-        String nick = edtNickPerfil.getText().toString();
+        String nome  = edtNomePerfil.getText().toString();
+        String nick  = edtNickPerfil.getText().toString();
         String email = edtEmailPerfil.getText().toString();
-        String nasc = edtNascPerfil.getText().toString();
+        String nasc  = edtNascPerfil.getText().toString();
         String senha = edtSenhaPerfil.getText().toString();
-        String sexo = (String) spnSexoPerfil.getSelectedItem();
+        String sexo  = (String) spnSexoPerfil.getSelectedItem();
 
         switch (item.getItemId()){
             case R.id.action_salvar:
@@ -123,7 +123,6 @@ public class ActEditarPerfil extends AppCompatActivity {
         Intent intent = new Intent(this, ActPerfil.class);
         startActivity(intent);
         finish();
-
     }
 
     private void editaPerfil(String nome, String nick, String email, String nasc, String senha, String sexo){

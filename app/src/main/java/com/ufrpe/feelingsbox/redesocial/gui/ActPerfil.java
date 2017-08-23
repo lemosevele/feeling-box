@@ -46,12 +46,12 @@ public class ActPerfil extends AppCompatActivity {
         this.atualizarDados();
     }
     private void encontrandoItens(){
-        txtNome = (TextView) findViewById(R.id.txtNome);
-        txtNicK = (TextView) findViewById(R.id.txtNick);
-        txtNasc = (TextView) findViewById(R.id.txtNasc);
-        txtSexo = (TextView) findViewById(R.id.txtSexo);
-        txtEmail = (TextView) findViewById(R.id.txtEmail);
-        numSeguidos = (TextView) findViewById(R.id.txtSeguidosValor);
+        txtNome       = (TextView) findViewById(R.id.txtNome);
+        txtNicK       = (TextView) findViewById(R.id.txtNick);
+        txtNasc       = (TextView) findViewById(R.id.txtNasc);
+        txtSexo       = (TextView) findViewById(R.id.txtSexo);
+        txtEmail      = (TextView) findViewById(R.id.txtEmail);
+        numSeguidos   = (TextView) findViewById(R.id.txtSeguidosValor);
         numSeguidores = (TextView) findViewById(R.id.txtSeguidoresValor);
     }
 

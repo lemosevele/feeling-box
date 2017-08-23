@@ -34,7 +34,7 @@ public class ActSeguidosSeguidores extends AppCompatActivity {
             String texto = sessao.getUltimoModo().getValor();
             toolbar.setTitle(texto);
         } catch (Exception e){
-            GuiUtil.myAlertDialog(this, e.getMessage() + sessao.getUltimoModo());
+            GuiUtil.myAlertDialog(this, e.getMessage() + " - " + sessao.getUltimoModo());
         }
 
         setSupportActionBar(toolbar);
@@ -61,6 +61,7 @@ public class ActSeguidosSeguidores extends AppCompatActivity {
 
         return super.onCreateOptionsMenu(menu);
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -72,7 +73,6 @@ public class ActSeguidosSeguidores extends AppCompatActivity {
                 startActivity(intent);
                 finish();
                 break;
-
         }
         return super.onOptionsItemSelected(item);
     }
@@ -90,5 +90,4 @@ public class ActSeguidosSeguidores extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
-
 }

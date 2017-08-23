@@ -6,6 +6,8 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ufrpe.feelingsbox.R;
@@ -23,6 +25,7 @@ public class ActPost extends AppCompatActivity {
     private TextView txtDonoPost, txtData, txtPostagem;
     private Post postDonoTela;
     private Usuario usuarioDonoTela;
+    private ImageView ivUser;
 
     public ActPost() {
         super();
@@ -42,13 +45,13 @@ public class ActPost extends AppCompatActivity {
         encontrandoItens();
         atualizarPostagem();
         iniciarFragment();
-
     }
 
     private void encontrandoItens(){
         txtDonoPost = (TextView) findViewById(R.id.txtDonoPost);
-        txtData = (TextView) findViewById(R.id.txtData);
+        txtData     = (TextView) findViewById(R.id.txtData);
         txtPostagem = (TextView) findViewById(R.id.txtPostagem);
+        ivUser      = (ImageView) findViewById(R.id.ivUser);
     }
 
     private void atualizarPostagem(){
@@ -92,4 +95,10 @@ public class ActPost extends AppCompatActivity {
         finish();
     }
 
+    private void onCLickFotoPost(View view){
+        sessao.addUsuario(usuarioDonoTela);
+        Intent intent = new Intent(this, ActPerfilPost.class);
+        startActivity(intent);
+        finish();
+    }
 }

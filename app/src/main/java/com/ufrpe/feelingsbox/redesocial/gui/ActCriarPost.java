@@ -68,7 +68,6 @@ public class ActCriarPost extends AppCompatActivity {
                     edtTexto.setError(getString(R.string.print_erro_validacao_post_campovazio));
                     postVazio = true;
                 }
-
                 if (!postVazio){
                     RedeServices redeServices = new RedeServices(getApplicationContext());
                     redeServices.salvarPost(texto);

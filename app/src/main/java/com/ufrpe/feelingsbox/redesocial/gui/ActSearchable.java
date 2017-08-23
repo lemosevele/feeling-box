@@ -68,7 +68,6 @@ public class ActSearchable extends AppCompatActivity implements RecyclerViewOnCl
         } catch (Exception e){
             GuiUtil.myToast(this, e);
         }
-
     }
 
     @Override
@@ -102,7 +101,6 @@ public class ActSearchable extends AppCompatActivity implements RecyclerViewOnCl
             txtMsgNaoEncontrado.setVisibility(View.INVISIBLE);
             SearchableProvider.salvarSugestao(getApplicationContext(), stringBusca);
         }
-
         adapter.notifyDataSetChanged();
     }
 
@@ -111,7 +109,6 @@ public class ActSearchable extends AppCompatActivity implements RecyclerViewOnCl
         outState.putParcelableArrayList("mListAux", mListAux);
 
         super.onSaveInstanceState(outState);
-
     }
 
     @Override
@@ -172,7 +169,5 @@ public class ActSearchable extends AppCompatActivity implements RecyclerViewOnCl
     }
 
     @Override
-    public void onLongPressClickListener(View view, int position) {
-
-    }
+    public void onLongPressClickListener(View view, int position) {}
 }

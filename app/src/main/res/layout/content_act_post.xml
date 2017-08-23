@@ -44,6 +44,7 @@
                         android:layout_marginLeft="16dp"
                         android:layout_marginRight="16dp"
                         android:layout_marginTop="8dp"
+                        android:clickable="false"
                         android:src="@drawable/perfil"
                         app:civ_border_color="#FF000000"
                         app:civ_border_width="0dp" />
