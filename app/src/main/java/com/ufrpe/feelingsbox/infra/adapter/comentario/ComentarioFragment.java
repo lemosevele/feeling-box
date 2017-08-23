@@ -72,9 +72,9 @@ public class ComentarioFragment extends Fragment implements RecyclerViewOnClickL
         usuarioDonoTela = sessao.getUltimoUsuario();
 
         if(usuarioDonoTela != null){
-            mList = redeServices.exibirComentarios();
+            mList = redeServices.exibirComentarios(sessao.getUltimoPost().getId());
         } else {
-            mList = redeServices.exibirComentarios();
+            mList = redeServices.exibirComentarios(sessao.getUltimoPost().getId());
         }
 
         ComentarioRecyclerAdapter adapter = new ComentarioRecyclerAdapter(getActivity(), mList);

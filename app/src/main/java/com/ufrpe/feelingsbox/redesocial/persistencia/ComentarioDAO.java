@@ -87,25 +87,22 @@ public class ComentarioDAO {
         return id;
     }
 
-    public List<Comentario> getComentariorioByUser(){
+    public List<Comentario> getComentariorioByPost(long idPost){
         feelingsDb = dbHelper.getReadableDatabase();
         ArrayList<Comentario> comentarioUser = new ArrayList<>();
 
         String query = "SELECT * FROM " + DataBase.TABELA_COMENTARIO +
-                " ORDER BY " + DataBase.ID + " DESC";
+                " WHERE " + DataBase.COMENTARIO_POST_ID + " LIKE ?";
 
-        try{
-            Cursor cursor = feelingsDb.rawQuery(query, null);
-        } catch (Exception e){
-            GuiUtil.myAlertDialog(context, e);
-            Cursor cursor = null;
-        }
+        String idString = Long.toString(idPost);
+        String[] argumentos = {idString};
 
+        Cursor cursor = feelingsDb.rawQuery(query, argumentos);
 
-        /*while (cursor.moveToNext()){
+        while (cursor.moveToNext()){
             Comentario comentario = criarComentario(cursor);
             comentarioUser.add(comentario);
-        }*/
+        }
         feelingsDb.close();
         return comentarioUser;
     }
