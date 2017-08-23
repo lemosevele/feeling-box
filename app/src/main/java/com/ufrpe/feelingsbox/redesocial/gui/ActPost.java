@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -18,6 +20,7 @@ import com.ufrpe.feelingsbox.redesocial.dominio.Sessao;
 import com.ufrpe.feelingsbox.usuario.dominio.Usuario;
 
 import static com.ufrpe.feelingsbox.redesocial.dominio.ActEnum.ACT_POST;
+import static com.ufrpe.feelingsbox.redesocial.dominio.BundleEnum.ID_POST;
 import static com.ufrpe.feelingsbox.redesocial.dominio.BundleEnum.MAIN_FRAG;
 
 public class ActPost extends AppCompatActivity {
@@ -71,10 +74,23 @@ public class ActPost extends AppCompatActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_act_post, menu);
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
                 retornarTela();
+                break;
+            case R.id.action_home:
+                Intent intent = new Intent(this, ActHome.class);
+                startActivity(intent);
+                finish();
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -95,9 +111,15 @@ public class ActPost extends AppCompatActivity {
         finish();
     }
 
-    private void onCLickFotoPost(View view){
+    public void onCLickFotoPost(View view){
         sessao.addUsuario(usuarioDonoTela);
         Intent intent = new Intent(this, ActPerfilPost.class);
+        startActivity(intent);
+        finish();
+    }
+    public void onClickComentar(View view){
+        Intent intent = new Intent(view.getContext(), ActCriarComentario.class);
+        intent.putExtra(ID_POST.getValor(), postDonoTela.getId());
         startActivity(intent);
         finish();
     }

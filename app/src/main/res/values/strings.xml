@@ -46,13 +46,15 @@
     <string name="title_menu_cancelar">Cancelar</string>
     <string name="title_menu_sair">Sair</string>
     <string name="title_activity_act_criar_post">Criar Postagem</string>
-    <string name="edt_texto_post">Digite sua mensagem aqui...</string>
+    <string name="edt_texto_post">Digite aqui...</string>
     <string name="edt_texto_tags">Digite suas tags aqui...</string>
     <string name="title_menu_postar">Postar</string>
     <string name="exemplo_hint_usuario">Nome do Usuário</string>
     <string name="exemplo_hint_post">post do usuário</string>
     <string name="print_erro_validacao_post_campovazio">Digite algo para publicar.</string>
+    <string name="print_erro_validacao_comentario_campovazio">Digite algo para comentar.</string>
     <string name="print_msg_postado">Postado com sucesso.</string>
+    <string name="print_msg_comentado">Comentario enviado com sucesso.</string>
     <string name="print_erro_validacao_edt_senha_invalida">Senha inválida.</string>
     <string name="print_erro_validacao_edt_data_invalida">Data inválida.</string>
     <string name="print_erro_validacao_edt_email_invalido">Email inválido.</string>

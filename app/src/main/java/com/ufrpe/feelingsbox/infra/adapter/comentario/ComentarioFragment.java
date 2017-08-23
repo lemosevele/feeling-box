@@ -30,7 +30,7 @@ public class ComentarioFragment extends Fragment implements RecyclerViewOnClickL
     private RecyclerView mRecyclerView;
     private List<Comentario> mList;
     private Sessao sessao = Sessao.getInstancia();
-    
+
     //Setando o RecyclerView
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
