@@ -9,6 +9,7 @@ import com.ufrpe.feelingsbox.redesocial.persistencia.ComentarioDAO;
 import com.ufrpe.feelingsbox.redesocial.persistencia.PosTagDAO;
 import com.ufrpe.feelingsbox.redesocial.persistencia.PostDAO;
 import com.ufrpe.feelingsbox.redesocial.persistencia.RelacaoSegDAO;
+import com.ufrpe.feelingsbox.redesocial.persistencia.RelacaoUserTagDAO;
 import com.ufrpe.feelingsbox.redesocial.persistencia.SessaoDAO;
 import com.ufrpe.feelingsbox.redesocial.persistencia.SugestaoDAO;
 import com.ufrpe.feelingsbox.redesocial.persistencia.TagDAO;
@@ -34,6 +35,7 @@ public class RedeServices {
     private RelacaoSegDAO relacaoSegDAO;
     private SugestaoDAO sugestaoDAO;
     private TagDAO tagDAO;
+    private RelacaoUserTagDAO relacaoUserTagDAO;
 
     private static final int UM = 1;
 
@@ -140,7 +142,7 @@ public class RedeServices {
         return sessaoDAO.getPessoaLogada();
     }
 
-    public List<Post> postsEmAlta(){
+    public List<Post> postsFiltradosComentarios(){
         sugestaoDAO = new SugestaoDAO(context);
         postDAO = new PostDAO(context);
         LinkedHashSet<Post> listaFiltrada = new LinkedHashSet<>();
@@ -159,5 +161,10 @@ public class RedeServices {
     public long qtdComentariosPost(long idPost){
         comentarioDAO = new ComentarioDAO(context);
         return comentarioDAO.qtdQuantidadeComentario(idPost);
+    }
+
+    public List<String> postsFiltradosTags(long idUser){
+        relacaoUserTagDAO = new RelacaoUserTagDAO(context);
+        return relacaoUserTagDAO.getTagsByUser(idUser);
     }
 }
