@@ -78,7 +78,7 @@ public class PostFragment extends Fragment implements RecyclerViewOnClickListene
         if(usuarioDonoTela != null){
             mList = redeServices.exibirPosts(usuarioDonoTela.getId());
         } else {
-            mList = redeServices.postsEmAlta();
+            mList = redeServices.postsFiltradosComentarios();
         }
 
         PostRecyclerAdapter adapter = new PostRecyclerAdapter(getActivity(), mList);
@@ -121,7 +121,6 @@ public class PostFragment extends Fragment implements RecyclerViewOnClickListene
                 getActivity().finish();
                 break;
         }
-
     }
     //Click longo
     @Override
@@ -160,7 +159,6 @@ public class PostFragment extends Fragment implements RecyclerViewOnClickListene
                     if(cv != null && mRecyclerViewOnClickListenerhack != null){
                         mRecyclerViewOnClickListenerhack.onClickListener(cv, recyclerView.getChildPosition(cv));
                     }
-
                     return true;
                 }
             });
