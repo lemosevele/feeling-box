@@ -75,6 +75,7 @@ public class ActHome extends AppCompatActivity {
     private void atualizarElementos(){
         viewPager.setAdapter(new TabsAdapter(getSupportFragmentManager(), this));
         tabLayout.setupWithViewPager(viewPager);
+        viewPager.setCurrentItem(sessao.getTabAtiva());
     }
     private void iniciarFragment(){
         PostFragment frag = (PostFragment) getSupportFragmentManager().findFragmentByTag(MAIN_FRAG.getValor());

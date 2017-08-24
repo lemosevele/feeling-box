@@ -87,4 +87,5 @@
     <string name="exemplo_num_comentarios">0 Comentário</string>
     <string name="title_tab_home">Home</string>
     <string name="title_tab_favoritos">Favoritos</string>
+    <string name="title_tab_recomendados">Recomendados</string>
 </resources>

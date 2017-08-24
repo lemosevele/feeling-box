@@ -14,6 +14,15 @@ public class Sessao {
     private List<ActEnum> historicoDeTelas = new ArrayList<>();
     private List<BundleEnum> listaModos = new ArrayList<>();
     private List<Post> listaPosts = new ArrayList<>();
+    private int tabAtiva = 0;
+
+    public int getTabAtiva() {
+        return tabAtiva;
+    }
+
+    public void setTabAtiva(int tabAtiva) {
+        this.tabAtiva = tabAtiva;
+    }
 
     public static Sessao getInstancia(){
 

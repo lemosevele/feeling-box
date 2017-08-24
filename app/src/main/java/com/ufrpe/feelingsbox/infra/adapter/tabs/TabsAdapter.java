@@ -9,20 +9,24 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import com.ufrpe.feelingsbox.R;
 import com.ufrpe.feelingsbox.infra.adapter.post.PostFragment;
+import com.ufrpe.feelingsbox.redesocial.dominio.Sessao;
 
 public class TabsAdapter extends FragmentPagerAdapter {
     private Context mContext;
     private String[] titles;
+    private Sessao sessao = Sessao.getInstancia();
 
     public TabsAdapter(FragmentManager fm, Context context) {
         super(fm);
         mContext = context;
         titles = new String[]{mContext.getString(R.string.title_tab_home),
-                              mContext.getString(R.string.title_tab_favoritos)};
+                              mContext.getString(R.string.title_tab_favoritos),
+                              mContext.getString(R.string.title_tab_recomendados)};
     }
 
     @Override
     public Fragment getItem(int position) {
+        sessao.setTabAtiva(position);
         Fragment fragment = new PostFragment();
 
         Bundle bundle = new Bundle();
