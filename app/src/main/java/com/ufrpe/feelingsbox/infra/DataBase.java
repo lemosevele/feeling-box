@@ -62,6 +62,9 @@ public class DataBase extends SQLiteOpenHelper {
     public static final String SEGUIDOR_ID = "seguidor_id"; //id de quem segue
     public static final String SEGUIDO_ID = "seguido_id"; //id de quem é seguido
 
+    public static final String TABELA_REL_USER_TAG = "user_tag";
+    public static final String REL_USER_ID = "user_id";
+
     private Context context;
 
     public DataBase(Context context) {
@@ -117,6 +120,11 @@ public class DataBase extends SQLiteOpenHelper {
                 SEGUIDOR_ID  + " INTEGER, " +
                 SEGUIDO_ID + " INTEGER);");
 
+        db.execSQL("CREATE TABLE " + TABELA_REL_USER_TAG + " (" +
+                ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                REL_TEXTO_TAG + " TEXT NOT NULL, " +
+                REL_USER_ID + " INTEGER);");
+
     }
 
     //Atualização da tabela
@@ -147,6 +155,9 @@ public class DataBase extends SQLiteOpenHelper {
 
         String query8 = "DROP TABLE IF EXISTS " + TABELA_REL_SEGUIDORES;
         db.execSQL(query8);
+
+        String query9 = "DROP TABLE IF EXISTS " + TABELA_REL_USER_TAG;
+        db.execSQL(query9);
 
         this.onCreate(db);
 
