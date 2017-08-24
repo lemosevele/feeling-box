@@ -9,6 +9,7 @@ import com.ufrpe.feelingsbox.infra.DataBase;
 import com.ufrpe.feelingsbox.redesocial.dominio.Post;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class PosTagDAO {
     private DataBase dbHelper;
@@ -63,4 +64,18 @@ public class PosTagDAO {
         return id;
     }
 
+    public boolean getRelacaoTagPost(long idPost, String tag){
+        feelingsDb = dbHelper.getWritableDatabase();
+
+        String query = "SELECT * FROM " + DataBase.TABELA_REL_TAG_POST +
+                " WHERE " + DataBase.REL_ID_POST + " LIKE ? AND " +
+                DataBase.REL_TEXTO_TAG + " LIKE ?";
+
+        String idString = Long.toString(idPost);
+        String[] argumentos = {idString, tag};
+
+        Cursor cursor = feelingsDb.rawQuery(query, argumentos);
+
+        return cursor.moveToNext();
+    }
 }

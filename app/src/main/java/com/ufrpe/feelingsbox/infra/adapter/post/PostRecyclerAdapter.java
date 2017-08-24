@@ -84,7 +84,6 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
             holder.txtDonoPost.setTextColor(mLayoutInflater.getContext().getResources()
                                             .getColor(R.color.colorUserFont));
         }
-        
         Animacao.animacaoZoomIn(holder.itemView);
     }
 

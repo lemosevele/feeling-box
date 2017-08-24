@@ -19,6 +19,7 @@ import com.ufrpe.feelingsbox.usuario.dominio.Usuario;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -69,7 +70,7 @@ public class RedeServices {
         }
     }
 
-    public void salvarComentario(String texto, long idPost){
+    public void salvarComentario(String texto, long idPost) {
         comentarioDAO = new ComentarioDAO(context);
         comentario = new Comentario();
         comentario.setTexto(texto);
@@ -85,67 +86,68 @@ public class RedeServices {
         return postDAO.getPostsByOrderId();
     }
 
-    public void finalizarSessao(){
+    public void finalizarSessao() {
         sessaoDAO = new SessaoDAO(context);
         sessaoDAO.removerPessoa();
         sessao.invalidarSessao();
     }
 
-    public List<Post> buscarPosts(String tag){
+    public List<Post> buscarPosts(String tag) {
         posTagDAO = new PosTagDAO(context);
         return posTagDAO.getPostByTag(tag);
     }
 
-    public List<Post> exibirPosts(long id){
+    public List<Post> exibirPosts(long id) {
         postDAO = new PostDAO(context);
         return postDAO.getPostByUser(id);
     }
 
-    public List<Comentario> exibirComentarios(long idPost){
+    public List<Comentario> exibirComentarios(long idPost) {
         comentarioDAO = new ComentarioDAO(context);
         return comentarioDAO.getComentariorioByPost(idPost);
     }
 
-    public void seguirUser(long idUser, long idSeguir){
+    public void seguirUser(long idUser, long idSeguir) {
         relacaoSegDAO = new RelacaoSegDAO(context);
         relacaoSegDAO.inserirRelSeguidores(idUser, idSeguir);
     }
 
-    public void deletarUser(long idSeguidor, long idSeguido){
+    public void deletarUser(long idSeguidor, long idSeguido) {
         relacaoSegDAO = new RelacaoSegDAO(context);
         relacaoSegDAO.deletarRelSeguidores(idSeguidor, idSeguido);
     }
 
-    public List<Usuario> listarSeguidores(long id){
+    public List<Usuario> listarSeguidores(long id) {
         relacaoSegDAO = new RelacaoSegDAO(context);
         return relacaoSegDAO.getSeguidoresUser(id);
     }
 
-    public List<Usuario> listarSeguidos(long id){
+    public List<Usuario> listarSeguidos(long id) {
         relacaoSegDAO = new RelacaoSegDAO(context);
         return relacaoSegDAO.getSeguidosUser(id);
     }
 
-    public long qtdSeguidores(long id){
+    public long qtdSeguidores(long id) {
         relacaoSegDAO = new RelacaoSegDAO(context);
         return relacaoSegDAO.getQtdSeguidoresUser(id);
     }
 
-    public long qtdSeguidos(long id){
+    public long qtdSeguidos(long id) {
         relacaoSegDAO = new RelacaoSegDAO(context);
         return relacaoSegDAO.getQtdSeguidosUser(id);
     }
 
-    public boolean verificacaoSeguidor(long idSeguidor, long idSeguido){
+    public boolean verificacaoSeguidor(long idSeguidor, long idSeguido) {
         relacaoSegDAO = new RelacaoSegDAO(context);
         return relacaoSegDAO.verificaSeguidor(idSeguidor, idSeguido);
     }
-    public Pessoa verificarSessao(){
+
+    public Pessoa verificarSessao() {
         sessaoDAO = new SessaoDAO(context);
         return sessaoDAO.getPessoaLogada();
     }
 
-    public List<Post> postsFiltradosComentarios(){
+    public List<Post> postsFiltradosComentarios() {
         sugestaoDAO = new SugestaoDAO(context);
         postDAO = new PostDAO(context);
         LinkedHashSet<Post> listaFiltrada = new LinkedHashSet<>();
@@ -156,27 +158,27 @@ public class RedeServices {
         return listaFiltradaFinal;
     }
 
-    public List<String> listaTags(){
+    public List<String> listaTags() {
         tagDAO = new TagDAO(context);
         return tagDAO.getTagsByOrder();
     }
 
-    public long qtdComentariosPost(long idPost){
+    public long qtdComentariosPost(long idPost) {
         comentarioDAO = new ComentarioDAO(context);
         return comentarioDAO.qtdQuantidadeComentario(idPost);
     }
 
-    public List<String> postsFiltradosTags(long idUser){
+    public List<String> postsFiltradosTags(long idUser) {
         relacaoUserTagDAO = new RelacaoUserTagDAO(context);
         return relacaoUserTagDAO.getTagsByUser(idUser);
     }
 
-    public BigDecimal CalcAproximacaoTag(ArrayList<Integer> vetor1, ArrayList<Integer> vetor2){
+    public BigDecimal calcAproximacaoTag(ArrayList<Integer> vetor1, ArrayList<Integer> vetor2) {
         int numerador = 0;
         double prodInt1 = 0;
         double prodInt2 = 0;
 
-        for(int i = 0; i < vetor1.size(); i++){
+        for (int i = 0; i < vetor1.size(); i++) {
             numerador += vetor1.get(i) * vetor2.get(i);
             prodInt1 += vetor1.get(i) * vetor1.get(i);
             prodInt2 += vetor2.get(i) * vetor2.get(i);
@@ -185,7 +187,40 @@ public class RedeServices {
         double denominador = Math.sqrt(prodInt1) * Math.sqrt(prodInt2);
         BigDecimal big1 = new BigDecimal(numerador);
         BigDecimal big2 = new BigDecimal(denominador);
-        return big1.divide(big2,3, RoundingMode.UP);
+        return big1.divide(big2, 3, RoundingMode.UP);
     }
 
+    public ArrayList<ArrayList<Integer>> gerarMatriz(List<String> listaTag, List<Long> listaIdPost) {
+        posTagDAO = new PosTagDAO(context);
+        ArrayList<ArrayList<Integer>> matriz = new ArrayList<>();
+
+        for (int linha = 0; linha < listaIdPost.size(); linha++) {
+            ArrayList<Integer> arrayLinha = new ArrayList<>();
+            for (int coluna = 0; coluna < listaTag.size(); coluna++) {
+                arrayLinha.add(posTagDAO.getRelacaoTagPost(listaIdPost.get(linha),listaTag.get(coluna)) ? 1 : 0);
+            }
+            matriz.add(arrayLinha);
+        }
+        return  matriz;
+    }
+
+    public String recomendaTag(String tag){
+        postDAO = new PostDAO(context);
+        tagDAO = new TagDAO(context);
+        ArrayList<Long> listaPostId = postDAO.getListaPostId();
+        ArrayList<String> listaTags = tagDAO.getListaTags(tag);
+        listaTags.add(0,tag);
+
+        ArrayList<ArrayList<Integer>> matriz = gerarMatriz(listaTags, listaPostId);
+        ArrayList<BigDecimal> aproximacoes = new ArrayList<>();
+
+        for (int i = 1; i < matriz.size(); i++){
+            aproximacoes.add(calcAproximacaoTag(matriz.get(0), matriz.get(i)));
+        }
+
+        BigDecimal maiorAprox = Collections.max(aproximacoes);
+        int indexMaiorAprox = aproximacoes.indexOf(maiorAprox);
+        return listaTags.get(indexMaiorAprox + 1);
+
+    }
 }

@@ -80,4 +80,23 @@ public class TagDAO {
         feelingsDb.close();
         return listaTags;
     }
+
+    public ArrayList<String> getListaTags(String texto){
+        feelingsDb = dbHelper.getReadableDatabase();
+        ArrayList<String> listaTags = new ArrayList<>();
+
+        String query = "SELECT * FROM " + DataBase.TABELA_TAG +
+                " WHERE " + DataBase.TAG_TEXTO + "  NOT LIKE ?";
+
+        String[] argumentos = {texto};
+
+        Cursor cursor = feelingsDb.rawQuery(query,argumentos);
+
+        while (cursor.moveToNext()){
+            String tag = criarTag(cursor);
+            listaTags.add(tag);
+        }
+        feelingsDb.close();
+        return listaTags;
+    }
 }

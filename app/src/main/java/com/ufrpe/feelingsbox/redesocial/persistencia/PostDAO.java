@@ -126,6 +126,26 @@ public class PostDAO {
         return post;
     }
 
+    public ArrayList<Long> getListaPostId() {
+        feelingsDb = dbHelper.getReadableDatabase();
+        ArrayList<Long> listaIdPost = new ArrayList<>();
+
+        String query = "SELECT " + DataBase.ID + " FROM " + DataBase.TABELA_POST;
+
+        Cursor cursor = feelingsDb.rawQuery(query, null);
+
+        int colunaIndexId = cursor.getColumnIndex(DataBase.ID);
+
+        while (cursor.moveToNext()) {
+            listaIdPost.add((long) cursor.getInt(colunaIndexId));
+        }
+
+
+        cursor.close();
+        feelingsDb.close();
+        return listaIdPost;
+    }
+
     public List<Post> getPostByUser(long id){
         feelingsDb = dbHelper.getReadableDatabase();
         ArrayList<Post> postUser = new ArrayList<>();

@@ -47,4 +47,6 @@ public class SugestaoDAO {
         feelingsDb.close();
         return listaPostsFiltrados;
     }
+
+
 }
