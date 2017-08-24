@@ -5,7 +5,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
@@ -16,6 +18,7 @@ import android.view.View;
 
 import com.ufrpe.feelingsbox.R;
 import com.ufrpe.feelingsbox.infra.adapter.post.PostFragment;
+import com.ufrpe.feelingsbox.infra.adapter.tabs.TabsAdapter;
 import com.ufrpe.feelingsbox.redesocial.dominio.Sessao;
 import com.ufrpe.feelingsbox.redesocial.redesocialservices.RedeServices;
 import com.ufrpe.feelingsbox.usuario.dominio.Usuario;
@@ -29,6 +32,8 @@ import static com.ufrpe.feelingsbox.redesocial.dominio.BundleEnum.POST;
 public class ActHome extends AppCompatActivity {
     private Sessao sessao = Sessao.getInstancia();
     private Usuario usuarioLogado;
+    private TabLayout tabLayout;
+    private ViewPager viewPager;
 
 
     public ActHome() {
@@ -58,9 +63,19 @@ public class ActHome extends AppCompatActivity {
                 finish();
             }
         });
-        this.iniciarFragment();
+        this.encontrandoElementos();
+        this.atualizarElementos();
+        //this.iniciarFragment();
     }
 
+    private void encontrandoElementos(){
+        tabLayout = (TabLayout) findViewById(R.id.tabs);
+        viewPager = (ViewPager) findViewById(R.id.vp_tabs);
+    }
+    private void atualizarElementos(){
+        viewPager.setAdapter(new TabsAdapter(getSupportFragmentManager(), this));
+        tabLayout.setupWithViewPager(viewPager);
+    }
     private void iniciarFragment(){
         PostFragment frag = (PostFragment) getSupportFragmentManager().findFragmentByTag(MAIN_FRAG.getValor());
         if(frag == null) {

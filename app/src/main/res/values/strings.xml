@@ -85,4 +85,6 @@
     <string name="title_activity_act_post">Postagem</string>
     <string name="btn_responder">Responder</string>
     <string name="exemplo_num_comentarios">0 Comentário</string>
+    <string name="title_tab_home">Home</string>
+    <string name="title_tab_favoritos">Favoritos</string>
 </resources>
