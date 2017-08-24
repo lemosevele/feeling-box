@@ -68,6 +68,12 @@ public class ActPost extends AppCompatActivity {
         txtPostagem.setText(postDonoTela.getTexto());
         long qtnComentario = redeServices.qtdComentariosPost(postDonoTela.getId());
         numComentario.setText(qtnComentario < 2 ? qtnComentario + " comentário" : qtnComentario + " comentários");
+
+        if(redeServices.verificacaoSeguidor(sessao.getUsuarioLogado().getId(), usuarioDonoTela.getId())){
+            txtDonoPost.setTextColor(getResources().getColor(R.color.colorUserFontFavorite));
+        } else {
+            txtDonoPost.setTextColor(getResources().getColor(R.color.colorUserFont));
+        }
     }
 
     private void iniciarFragment(){

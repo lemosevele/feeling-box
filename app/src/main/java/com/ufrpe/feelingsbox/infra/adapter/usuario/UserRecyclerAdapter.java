@@ -2,16 +2,14 @@ package com.ufrpe.feelingsbox.infra.adapter.usuario;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.daimajia.androidanimations.library.Techniques;
-import com.daimajia.androidanimations.library.YoYo;
 import com.ufrpe.feelingsbox.R;
+import com.ufrpe.feelingsbox.infra.Animacao;
 import com.ufrpe.feelingsbox.infra.adapter.post.RecyclerViewOnClickListenerhack;
 import com.ufrpe.feelingsbox.redesocial.dominio.Sessao;
 import com.ufrpe.feelingsbox.redesocial.redesocialservices.RedeServices;
@@ -25,7 +23,6 @@ public class UserRecyclerAdapter extends RecyclerView.Adapter<UserRecyclerAdapte
     private RecyclerViewOnClickListenerhack mRecyclerViewOnClickListenerhack;
     private RedeServices redeServices;
     private Sessao sessao = Sessao.getInstancia();
-    private static final int DURACAO = 1000;
 
     //Construtor
     public UserRecyclerAdapter(Context context, List<Usuario> lista) {
@@ -85,7 +82,16 @@ public class UserRecyclerAdapter extends RecyclerView.Adapter<UserRecyclerAdapte
             holder.btnFollow.setVisibility(View.VISIBLE);
             holder.btnUnfollow.setVisibility(View.INVISIBLE);
         }
-        this.animacaoCard(holder);
+
+        if(redeServices.verificacaoSeguidor(sessao.getUsuarioLogado().getId(), usuario.getId())){
+            holder.txtUser.setTextColor(mLayoutInflater.getContext().getResources()
+                    .getColor(R.color.colorUserFontFavorite));
+        } else {
+            holder.txtUser.setTextColor(mLayoutInflater.getContext().getResources()
+                    .getColor(R.color.colorUserFont));
+        }
+
+        Animacao.animacaoZoomIn(holder.itemView);
     }
 
     private String atualizarNumSeguidos(long idUser){
@@ -96,17 +102,6 @@ public class UserRecyclerAdapter extends RecyclerView.Adapter<UserRecyclerAdapte
     private String atualizarNumSeguidores(long idUser){
         long longSeguidores = redeServices.qtdSeguidores(idUser);
         return Long.toString(longSeguidores);
-    }
-
-    private void animacaoCard(MyViewHolder holder){
-        try {
-            YoYo.with(Techniques.ZoomIn)
-                    .duration(DURACAO)
-                    .repeat(0)
-                    .playOn(holder.itemView);
-        }catch (Exception e){
-            Log.d("animacaoCard();", "Erro ao animar o User Card");
-        }
     }
 
     //ViewHolder personalizada

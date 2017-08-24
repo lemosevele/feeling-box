@@ -10,19 +10,17 @@ public class Sessao {
     private static Sessao instancia = new Sessao();
     private Pessoa pessoaLogada = null;
     private Usuario usuarioLogado = null;
+    private int tabAtiva = 0;
     private List<Usuario> listaUsuarios = new ArrayList<>();
     private List<ActEnum> historicoDeTelas = new ArrayList<>();
     private List<BundleEnum> listaModos = new ArrayList<>();
     private List<Post> listaPosts = new ArrayList<>();
-    private int tabAtiva = 0;
 
     public int getTabAtiva() {
         return tabAtiva;
     }
 
-    public void setTabAtiva(int tabAtiva) {
-        this.tabAtiva = tabAtiva;
-    }
+    public void setTabAtiva(int tabAtiva) { this.tabAtiva = tabAtiva; }
 
     public static Sessao getInstancia(){
 
@@ -46,6 +44,9 @@ public class Sessao {
     public void invalidarSessao() {
         pessoaLogada = null;
         usuarioLogado = null;
+        tabAtiva = 0;
+        this.limparHistoricoUsuariosModosPosts();
+
     }
 
     public void addUsuario(Usuario usuario){ listaUsuarios.add(usuario); }

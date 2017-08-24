@@ -27,12 +27,16 @@ import java.util.List;
 
 import static com.ufrpe.feelingsbox.redesocial.dominio.BundleEnum.COMENTARIO;
 import static com.ufrpe.feelingsbox.redesocial.dominio.BundleEnum.ID_POST;
+import static com.ufrpe.feelingsbox.redesocial.dominio.BundleEnum.TAB;
 
 public class PostFragment extends Fragment implements RecyclerViewOnClickListenerhack{
     private RecyclerView mRecyclerView;
     private List<Post> mList;
     private Sessao sessao = Sessao.getInstancia();
     private Usuario usuarioDonoTela;
+    private final int TAB_HOME = 0;
+    private final int TAB_FAVORITO = 1;
+    private final int TAB_RECOMENDADO = 2;
 
     //Setando o RecyclerView
     @Override
@@ -74,10 +78,18 @@ public class PostFragment extends Fragment implements RecyclerViewOnClickListene
 
         RedeServices redeServices = new RedeServices(getActivity());
         usuarioDonoTela = sessao.getUltimoUsuario();
-
+        int tab = 0;
+        Bundle bundle = getArguments();
+        if(bundle != null){
+            tab = bundle.getInt(TAB.getValor());
+        }
         if(usuarioDonoTela != null){
             mList = redeServices.exibirPosts(usuarioDonoTela.getId());
-        } else {
+        } else if (tab == TAB_HOME){
+            mList = redeServices.postsFiltradosComentarios();
+        } else if (tab == TAB_FAVORITO){
+            mList = redeServices.postsFiltradosComentarios();
+        } else if (tab == TAB_RECOMENDADO){
             mList = redeServices.postsFiltradosComentarios();
         }
 
@@ -122,6 +134,8 @@ public class PostFragment extends Fragment implements RecyclerViewOnClickListene
                 break;
         }
     }
+
+
     //Click longo
     @Override
     public void onLongPressClickListener(View view, int position) {

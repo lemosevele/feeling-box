@@ -11,10 +11,11 @@ import com.ufrpe.feelingsbox.R;
 import com.ufrpe.feelingsbox.infra.adapter.post.PostFragment;
 import com.ufrpe.feelingsbox.redesocial.dominio.Sessao;
 
+import static com.ufrpe.feelingsbox.redesocial.dominio.BundleEnum.TAB;
+
 public class TabsAdapter extends FragmentPagerAdapter {
     private Context mContext;
     private String[] titles;
-    private Sessao sessao = Sessao.getInstancia();
 
     public TabsAdapter(FragmentManager fm, Context context) {
         super(fm);
@@ -26,11 +27,9 @@ public class TabsAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        sessao.setTabAtiva(position);
         Fragment fragment = new PostFragment();
-
         Bundle bundle = new Bundle();
-        bundle.putInt("posicao", position);
+        bundle.putInt(TAB.getValor(), position);
         fragment.setArguments(bundle);
 
         return fragment;
@@ -45,4 +44,6 @@ public class TabsAdapter extends FragmentPagerAdapter {
     public CharSequence getPageTitle(int position) {
         return (titles[position]);
     }
+
+
 }

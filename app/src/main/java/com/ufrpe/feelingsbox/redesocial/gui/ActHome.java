@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
@@ -17,7 +16,6 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.ufrpe.feelingsbox.R;
-import com.ufrpe.feelingsbox.infra.adapter.post.PostFragment;
 import com.ufrpe.feelingsbox.infra.adapter.tabs.TabsAdapter;
 import com.ufrpe.feelingsbox.redesocial.dominio.Sessao;
 import com.ufrpe.feelingsbox.redesocial.redesocialservices.RedeServices;
@@ -25,7 +23,6 @@ import com.ufrpe.feelingsbox.usuario.dominio.Usuario;
 import com.ufrpe.feelingsbox.usuario.gui.ActLogin;
 
 import static com.ufrpe.feelingsbox.redesocial.dominio.ActEnum.ACT_HOME;
-import static com.ufrpe.feelingsbox.redesocial.dominio.BundleEnum.MAIN_FRAG;
 import static com.ufrpe.feelingsbox.redesocial.dominio.BundleEnum.POST;
 
 
@@ -58,14 +55,11 @@ public class ActHome extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 sessao.addModo(POST);
-                Intent intent = new Intent(ActHome.this, ActCriarPostComentario.class);
-                startActivity(intent);
-                finish();
+                mudarTela(ActCriarPostComentario.class);
             }
         });
         this.encontrandoElementos();
         this.atualizarElementos();
-        //this.iniciarFragment();
     }
 
     private void encontrandoElementos(){
@@ -77,15 +71,7 @@ public class ActHome extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);
         viewPager.setCurrentItem(sessao.getTabAtiva());
     }
-    private void iniciarFragment(){
-        PostFragment frag = (PostFragment) getSupportFragmentManager().findFragmentByTag(MAIN_FRAG.getValor());
-        if(frag == null) {
-            frag = new PostFragment();
-            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.rl_fragment_container, frag, MAIN_FRAG.getValor());
-            ft.commit();
-        }
-    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -119,10 +105,10 @@ public class ActHome extends AppCompatActivity {
                 mudarTela(ActLogin.class);
                 finish();
                 break;
-            
         }
         return super.onOptionsItemSelected(item);
     }
+
     private void mudarTela(Class novaTela){
         Intent it = new Intent(this, novaTela);
         startActivity(it);

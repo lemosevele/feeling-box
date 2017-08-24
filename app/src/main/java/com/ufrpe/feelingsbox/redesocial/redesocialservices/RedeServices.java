@@ -86,6 +86,7 @@ public class RedeServices {
     public void finalizarSessao(){
         sessaoDAO = new SessaoDAO(context);
         sessaoDAO.removerPessoa();
+        sessao.invalidarSessao();
     }
 
     public List<Post> buscarPosts(String tag){

@@ -9,27 +9,31 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.daimajia.androidanimations.library.Techniques;
-import com.daimajia.androidanimations.library.YoYo;
 import com.ufrpe.feelingsbox.R;
+import com.ufrpe.feelingsbox.infra.Animacao;
 import com.ufrpe.feelingsbox.infra.FormataData;
 import com.ufrpe.feelingsbox.infra.adapter.post.RecyclerViewOnClickListenerhack;
 import com.ufrpe.feelingsbox.redesocial.dominio.Comentario;
+import com.ufrpe.feelingsbox.redesocial.dominio.Sessao;
+import com.ufrpe.feelingsbox.redesocial.redesocialservices.RedeServices;
 import com.ufrpe.feelingsbox.usuario.usuarioservices.UsuarioService;
 
 import java.util.List;
 
 public class ComentarioRecyclerAdapter extends RecyclerView.Adapter<ComentarioRecyclerAdapter.MyViewHolder> {
+    private Sessao sessao = Sessao.getInstancia();
+    private RedeServices redeServices;
+    private UsuarioService usuarioService;
     private List<Comentario> mList;
     private LayoutInflater mLayoutInflater;
     private RecyclerViewOnClickListenerhack mRecyclerViewOnClickListenerhack;
-    private UsuarioService usuarioService;
-    private static final int DURACAO = 1000;
 
     //Construtor
     public ComentarioRecyclerAdapter(Context context, List<Comentario> lista) {
         mList = lista;
         mLayoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        redeServices = new RedeServices(mLayoutInflater.getContext());
+        usuarioService = new UsuarioService(mLayoutInflater.getContext());
     }
 
     //Cria os Itens da Lista (até alguns a mais do que a tela comporta)
@@ -64,7 +68,6 @@ public class ComentarioRecyclerAdapter extends RecyclerView.Adapter<ComentarioRe
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         //holder.ivUser.setImageResource( mList.get(position).getFoto() );
-        usuarioService = new UsuarioService(mLayoutInflater.getContext());
         long idUsuario = mList.get(position).getIdUsuario();
         String nickUsuario = usuarioService.buscarNick(idUsuario) ;
         holder.txtDonoComentario.setText(nickUsuario);
@@ -72,15 +75,15 @@ public class ComentarioRecyclerAdapter extends RecyclerView.Adapter<ComentarioRe
         String data = FormataData.tempoParaMostrarEmPost(mList.get(position).getDataHora());
         holder.txtData.setText(data);
 
-        //Animação
-        try {
-            YoYo.with(Techniques.ZoomIn)
-                    .duration(DURACAO)
-                    .repeat(0)
-                    .playOn(holder.itemView);
-        }catch (Exception e){
-
+        if(redeServices.verificacaoSeguidor(sessao.getUsuarioLogado().getId(), idUsuario)){
+            holder.txtDonoComentario.setTextColor(mLayoutInflater.getContext().getResources()
+                    .getColor(R.color.colorUserFontFavorite));
+        } else {
+            holder.txtDonoComentario.setTextColor(mLayoutInflater.getContext().getResources()
+                    .getColor(R.color.colorUserFont));
         }
+
+        Animacao.animacaoZoomIn(holder.itemView);
 
     }
 

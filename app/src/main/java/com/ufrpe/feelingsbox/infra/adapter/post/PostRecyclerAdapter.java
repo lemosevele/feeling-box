@@ -9,28 +9,30 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.daimajia.androidanimations.library.Techniques;
-import com.daimajia.androidanimations.library.YoYo;
 import com.ufrpe.feelingsbox.R;
+import com.ufrpe.feelingsbox.infra.Animacao;
 import com.ufrpe.feelingsbox.infra.FormataData;
 import com.ufrpe.feelingsbox.redesocial.dominio.Post;
+import com.ufrpe.feelingsbox.redesocial.dominio.Sessao;
 import com.ufrpe.feelingsbox.redesocial.redesocialservices.RedeServices;
 import com.ufrpe.feelingsbox.usuario.usuarioservices.UsuarioService;
 
 import java.util.List;
 
 public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapter.MyViewHolder> {
+    private Sessao sessao = Sessao.getInstancia();
+    private RedeServices redeServices;
+    private UsuarioService usuarioService;
     private List<Post> mList;
     private LayoutInflater mLayoutInflater;
     private RecyclerViewOnClickListenerhack mRecyclerViewOnClickListenerhack;
-    private UsuarioService usuarioService;
-    private RedeServices redeServices;
-    private static final int DURACAO = 1000;
 
     //Construtor
     public PostRecyclerAdapter(Context context, List<Post> lista) {
         mList = lista;
         mLayoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        redeServices = new RedeServices(mLayoutInflater.getContext());
+        usuarioService = new UsuarioService(mLayoutInflater.getContext());
     }
 
     //Cria os Itens da Lista (até alguns a mais do que a tela comporta)
@@ -65,26 +67,25 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         //holder.ivUser.setImageResource( mList.get(position).getFoto() );
-        usuarioService = new UsuarioService(mLayoutInflater.getContext());
-        redeServices = new RedeServices(mLayoutInflater.getContext());
         long idUsuario = mList.get(position).getIdUsuario();
         long idPost = mList.get(position).getId();
-        String nickUsuario = usuarioService.buscarNick(idUsuario) ;
         long qtnComentario = redeServices.qtdComentariosPost(idPost);
+        String nickUsuario = usuarioService.buscarNick(idUsuario) ;
+        String data = FormataData.tempoParaMostrarEmPost(mList.get(position).getDataHora());
         holder.numComentario.setText(qtnComentario < 2 ? qtnComentario + " comentário" : qtnComentario + " comentários");
         holder.txtDonoPost.setText(nickUsuario);
         holder.txtPostagem.setText(mList.get(position).getTexto());
-        String data = FormataData.tempoParaMostrarEmPost(mList.get(position).getDataHora());
         holder.txtData.setText(data);
 
-        //Animação
-        try {
-            YoYo.with(Techniques.ZoomIn)
-                    .duration(DURACAO)
-                    .repeat(0)
-                    .playOn(holder.itemView);
-        }catch (Exception e){
+        if(redeServices.verificacaoSeguidor(sessao.getUsuarioLogado().getId(), idUsuario)){
+            holder.txtDonoPost.setTextColor(mLayoutInflater.getContext().getResources()
+                                            .getColor(R.color.colorUserFontFavorite));
+        } else {
+            holder.txtDonoPost.setTextColor(mLayoutInflater.getContext().getResources()
+                                            .getColor(R.color.colorUserFont));
         }
+        
+        Animacao.animacaoZoomIn(holder.itemView);
     }
 
     //ViewHolder personalizada
