@@ -16,6 +16,8 @@ import com.ufrpe.feelingsbox.redesocial.persistencia.TagDAO;
 import com.ufrpe.feelingsbox.usuario.dominio.Pessoa;
 import com.ufrpe.feelingsbox.usuario.dominio.Usuario;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -168,4 +170,22 @@ public class RedeServices {
         relacaoUserTagDAO = new RelacaoUserTagDAO(context);
         return relacaoUserTagDAO.getTagsByUser(idUser);
     }
+
+    public BigDecimal CalcAproximacaoTag(ArrayList<Integer> vetor1, ArrayList<Integer> vetor2){
+        int numerador = 0;
+        double prodInt1 = 0;
+        double prodInt2 = 0;
+
+        for(int i = 0; i < vetor1.size(); i++){
+            numerador += vetor1.get(i) * vetor2.get(i);
+            prodInt1 += vetor1.get(i) * vetor1.get(i);
+            prodInt2 += vetor2.get(i) * vetor2.get(i);
+        }
+
+        double denominador = Math.sqrt(prodInt1) * Math.sqrt(prodInt2);
+        BigDecimal big1 = new BigDecimal(numerador);
+        BigDecimal big2 = new BigDecimal(denominador);
+        return big1.divide(big2,3, RoundingMode.UP);
+    }
+
 }
