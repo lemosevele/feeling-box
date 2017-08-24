@@ -127,8 +127,6 @@ public class RelacaoSegDAO {
                 DataBase.SEGUIDO_ID + "=?", new String[] {idSeguidorStr,idSeguidoStr});
     }
 
-
-
     public boolean verificaSeguidor (long idSeguidor, long idSeguido){
         feelingsDb = dbHelper.getReadableDatabase();
 

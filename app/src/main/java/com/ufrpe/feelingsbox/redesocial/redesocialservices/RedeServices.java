@@ -16,7 +16,7 @@ import com.ufrpe.feelingsbox.usuario.dominio.Pessoa;
 import com.ufrpe.feelingsbox.usuario.dominio.Usuario;
 
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -143,15 +143,13 @@ public class RedeServices {
 
     public List<Post> postsEmAlta(){
         sugestaoDAO = new SugestaoDAO(context);
-        //postDAO = new PostDAO(context);
-        return sugestaoDAO.getPostsMaisComentadosHoje();
-        /*HashSet<Post> listaFiltrada = new HashSet<>();
-        List<Post> lista = sugestaoDAO.getPostsMaisComentadosHoje();
-        lista.addAll(postDAO.getPostsByOrderId());
-        listaFiltrada.addAll(lista);
+        postDAO = new PostDAO(context);
+        LinkedHashSet<Post> listaFiltrada = new LinkedHashSet<>();
+        listaFiltrada.addAll(sugestaoDAO.getPostsMaisComentadosHoje());
+        listaFiltrada.addAll(postDAO.getPostsByOrderId());
         List<Post> listaFiltradaFinal = new ArrayList<>();
         listaFiltradaFinal.addAll(listaFiltrada);
-        return listaFiltradaFinal;*/
+        return listaFiltradaFinal;
     }
 
     public List<String> listaTags(){

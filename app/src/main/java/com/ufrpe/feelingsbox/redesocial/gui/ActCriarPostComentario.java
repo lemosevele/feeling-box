@@ -17,7 +17,6 @@ import com.ufrpe.feelingsbox.redesocial.dominio.BundleEnum;
 import com.ufrpe.feelingsbox.redesocial.dominio.Sessao;
 import com.ufrpe.feelingsbox.redesocial.redesocialservices.RedeServices;
 
-import java.util.ArrayList;
 
 public class ActCriarPostComentario extends AppCompatActivity {
     private MultiAutoCompleteTextView edtComentario;
@@ -45,16 +44,11 @@ public class ActCriarPostComentario extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //Encontrando elementos
-        ArrayList listaTags = new ArrayList<String>();
-        listaTags.add("#mpoo");
-        listaTags.add("#duvida");
-        listaTags.add("#prazo");
-        listaTags.add("#peperone");
-        listaTags.add("#profilaxia");
-        listaTags.add("#cansado");
+        RedeServices redeServices = new RedeServices(getApplicationContext());
+        redeServices.listaTags();
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_dropdown_item_1line, listaTags);
+                android.R.layout.simple_dropdown_item_1line, redeServices.listaTags());
         edtComentario = (MultiAutoCompleteTextView) findViewById(R.id.edtComentario);
         edtComentario.setAdapter(adapter);
         edtComentario.setTokenizer(new SpaceTokenizer());
