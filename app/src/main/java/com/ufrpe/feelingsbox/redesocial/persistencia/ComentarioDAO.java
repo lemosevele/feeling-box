@@ -3,6 +3,7 @@ package com.ufrpe.feelingsbox.redesocial.persistencia;
 import android.content.Context;
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.ufrpe.feelingsbox.infra.DataBase;
@@ -15,12 +16,10 @@ import java.util.List;
 public class ComentarioDAO {
     private DataBase dbHelper;
     private SQLiteDatabase feelingsDb;
-    private Context context;
 
 
     public ComentarioDAO (Context context){
         dbHelper = new DataBase(context);
-        this.context = context;
     }
 
     public Comentario criarComentario(Cursor cursor){
@@ -71,7 +70,7 @@ public class ComentarioDAO {
         values.put(colunaPostId,idPost);
 
         String colunaStatus = DataBase.COMENTARIO_STATUS;
-        values.put(colunaStatus,"visivel"); //Inicialmente o comentário não está excluído, está visível
+        values.put(colunaStatus,"visivel");
 
         String colunaDataHora = DataBase.POST_DATAHORA;
         String dataHora = comentario.getDataHora();
@@ -82,7 +81,6 @@ public class ComentarioDAO {
         long id = feelingsDb.insert(tabela, null, values);
 
         feelingsDb.close();
-
         return id;
     }
 
@@ -105,4 +103,16 @@ public class ComentarioDAO {
         feelingsDb.close();
         return comentarioUser;
     }
+
+    public long  qtdQuantidadeComentario(long id) {
+        feelingsDb = dbHelper.getReadableDatabase();
+        String idString = Long.toString(id);
+        String[] argumentos = {idString};
+
+        Long resultado = DatabaseUtils.queryNumEntries(feelingsDb, DataBase.TABELA_COMENTARIO,
+                DataBase.COMENTARIO_POST_ID+ "= ?", argumentos);
+        feelingsDb.close();
+        return resultado;
+    }
+
 }

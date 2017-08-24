@@ -63,7 +63,6 @@ public class RedeServices {
             }
             posTagDAO.inserirTagIdPost(hashTagStr.toLowerCase(), idPost);
         }
-
     }
 
     public void salvarComentario(String texto, long idPost){
@@ -155,5 +154,10 @@ public class RedeServices {
     public List<String> listaTags(){
         tagDAO = new TagDAO(context);
         return tagDAO.getTagsByOrder();
+    }
+
+    public long qtdComentariosPost(long idPost){
+        comentarioDAO = new ComentarioDAO(context);
+        return comentarioDAO.qtdQuantidadeComentario(idPost);
     }
 }

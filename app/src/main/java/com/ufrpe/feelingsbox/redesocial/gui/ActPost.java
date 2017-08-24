@@ -17,6 +17,7 @@ import com.ufrpe.feelingsbox.infra.FormataData;
 import com.ufrpe.feelingsbox.infra.adapter.comentario.ComentarioFragment;
 import com.ufrpe.feelingsbox.redesocial.dominio.Post;
 import com.ufrpe.feelingsbox.redesocial.dominio.Sessao;
+import com.ufrpe.feelingsbox.redesocial.redesocialservices.RedeServices;
 import com.ufrpe.feelingsbox.usuario.dominio.Usuario;
 
 import static com.ufrpe.feelingsbox.redesocial.dominio.ActEnum.ACT_POST;
@@ -30,6 +31,7 @@ public class ActPost extends AppCompatActivity {
     private Post postDonoTela;
     private Usuario usuarioDonoTela;
     private ImageView ivUser;
+    private RedeServices redeServices;
 
     public ActPost() {
         super();
@@ -60,13 +62,14 @@ public class ActPost extends AppCompatActivity {
     }
 
     private void atualizarPostagem(){
+        redeServices = new RedeServices(getApplicationContext());
         txtDonoPost.setText(usuarioDonoTela.getNick());
         txtData.setText(FormataData.tempoParaMostrarEmPost(postDonoTela.getDataHora()));
         txtPostagem.setText(postDonoTela.getTexto());
-        long qtnComentario = 0;
+        long qtnComentario = redeServices.qtdComentariosPost(sessao.getUltimoPost().getId());
         numComentario.setText(qtnComentario < 2 ? qtnComentario + " comentário" : qtnComentario + " comentários");
-
     }
+
 
     private void iniciarFragment(){
         ComentarioFragment frag = (ComentarioFragment) getSupportFragmentManager().findFragmentByTag(MAIN_FRAG.getValor());

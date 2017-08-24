@@ -14,6 +14,7 @@ import com.daimajia.androidanimations.library.YoYo;
 import com.ufrpe.feelingsbox.R;
 import com.ufrpe.feelingsbox.infra.FormataData;
 import com.ufrpe.feelingsbox.redesocial.dominio.Post;
+import com.ufrpe.feelingsbox.redesocial.redesocialservices.RedeServices;
 import com.ufrpe.feelingsbox.usuario.usuarioservices.UsuarioService;
 
 import java.util.List;
@@ -23,6 +24,7 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
     private LayoutInflater mLayoutInflater;
     private RecyclerViewOnClickListenerhack mRecyclerViewOnClickListenerhack;
     private UsuarioService usuarioService;
+    private RedeServices redeServices;
     private static final int DURACAO = 1000;
 
     //Construtor
@@ -64,9 +66,11 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
     public void onBindViewHolder(MyViewHolder holder, int position) {
         //holder.ivUser.setImageResource( mList.get(position).getFoto() );
         usuarioService = new UsuarioService(mLayoutInflater.getContext());
+        redeServices = new RedeServices(mLayoutInflater.getContext());
         long idUsuario = mList.get(position).getIdUsuario();
+        long idPost = mList.get(position).getId();
         String nickUsuario = usuarioService.buscarNick(idUsuario) ;
-        long qtnComentario = 0;
+        long qtnComentario = redeServices.qtdComentariosPost(idPost);
         holder.numComentario.setText(qtnComentario < 2 ? qtnComentario + " comentário" : qtnComentario + " comentários");
         holder.txtDonoPost.setText(nickUsuario);
         holder.txtPostagem.setText(mList.get(position).getTexto());
@@ -80,9 +84,7 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
                     .repeat(0)
                     .playOn(holder.itemView);
         }catch (Exception e){
-
         }
-
     }
 
     //ViewHolder personalizada
@@ -105,7 +107,6 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
             ivUser.setOnClickListener(this);
             btnComentar.setOnClickListener(this);
             itemView.setOnClickListener(this);
-
         }
 
         @Override
