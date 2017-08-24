@@ -5,6 +5,7 @@ import android.os.Parcelable;
 
 import com.ufrpe.feelingsbox.infra.FormataData;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Post implements Parcelable{
     private String texto;
@@ -96,4 +97,19 @@ public class Post implements Parcelable{
             return new Post[size];
         }
     };
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Post post = (Post) o;
+
+        return getId() == post.getId();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(this.id);
+    }
 }
