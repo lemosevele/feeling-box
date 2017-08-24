@@ -7,4 +7,5 @@ public enum PostStatusEnum {
 
     PostStatusEnum(String valor){ this.valor = valor; }
 
+    public String getValor() { return valor; }
 }

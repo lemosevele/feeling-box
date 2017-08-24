@@ -7,4 +7,6 @@ public enum UsuarioStatusEnum {
     private String valor;
 
     UsuarioStatusEnum(String valor){ this.valor = valor; }
+
+    public String getValor() { return valor; }
 }

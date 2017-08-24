@@ -103,9 +103,9 @@ public class Post implements Parcelable{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Post post = (Post) o;
+        Post that = (Post) o;
 
-        return getId() == post.getId();
+        return this.getId() == that.getId();
     }
 
     @Override

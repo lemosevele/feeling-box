@@ -66,10 +66,9 @@ public class ActPost extends AppCompatActivity {
         txtDonoPost.setText(usuarioDonoTela.getNick());
         txtData.setText(FormataData.tempoParaMostrarEmPost(postDonoTela.getDataHora()));
         txtPostagem.setText(postDonoTela.getTexto());
-        long qtnComentario = redeServices.qtdComentariosPost(sessao.getUltimoPost().getId());
+        long qtnComentario = redeServices.qtdComentariosPost(postDonoTela.getId());
         numComentario.setText(qtnComentario < 2 ? qtnComentario + " comentário" : qtnComentario + " comentários");
     }
-
 
     private void iniciarFragment(){
         ComentarioFragment frag = (ComentarioFragment) getSupportFragmentManager().findFragmentByTag(MAIN_FRAG.getValor());
