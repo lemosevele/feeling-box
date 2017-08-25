@@ -68,6 +68,7 @@ public class RedeServices {
                 tagDAO.inserirTag(hashTagStr.toLowerCase());
             }
             posTagDAO.inserirTagIdPost(hashTagStr.toLowerCase(), idPost);
+            setTagUser(hashTagStr.toLowerCase(), sessao.getUsuarioLogado().getId());
         }
     }
 
@@ -93,6 +94,7 @@ public class RedeServices {
                 tagDAO.inserirTag(hashTagStr.toLowerCase());
             }
             posTagDAO.inserirTagIdPost(hashTagStr.toLowerCase(), idPost);
+            setTagUser(hashTagStr.toLowerCase(), sessao.getUsuarioLogado().getId());
         }
     }
 
