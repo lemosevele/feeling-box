@@ -166,4 +166,26 @@ public class PostDAO {
         feelingsDb.close();
         return postUser;
     }
+
+    // Passa o id do Usuário e retorna os posts de quem ele segue
+    public List<Post> getPostFavoritos(long id){
+        feelingsDb = dbHelper.getReadableDatabase();
+        ArrayList<Post> postsFavoritos = new ArrayList<>();
+        String idString = Long.toString(id);
+
+        String query = "SELECT P." + DataBase.ID + ", P." + DataBase.POST_TEXTO + ", P." + DataBase.POST_DATAHORA +
+                ", P." + DataBase.POST_VISIVEL + ", P." + DataBase.POST_STATUS + ", P." + DataBase.POST_USER_ID +
+                " FROM " + DataBase.TABELA_POST + " AS P INNER JOIN (SELECT * FROM "+ DataBase.TABELA_REL_SEGUIDORES +
+                 " WHERE " + DataBase.SEGUIDOR_ID + " = " + idString +") AS S ON P." + DataBase.POST_USER_ID  +
+                " = S." + DataBase.SEGUIDO_ID + " ORDER BY P." + DataBase.POST_DATAHORA + " DESC";
+
+        Cursor cursor = feelingsDb.rawQuery(query, null);
+        while (cursor.moveToNext()){
+            Post post = criarPost(cursor);
+            postsFavoritos.add(post);
+        }
+        feelingsDb.close();
+        return postsFavoritos;
+
+    }
 }

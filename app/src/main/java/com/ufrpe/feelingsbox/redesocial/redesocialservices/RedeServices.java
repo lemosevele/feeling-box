@@ -260,4 +260,10 @@ public class RedeServices {
         posTagDAO = new PosTagDAO(context);
         return posTagDAO.getPostByTag(tagAproximada);
     }
+
+    public List<Post> getPostsFavoritos(long idUser){
+        postDAO = new PostDAO(context);
+        return postDAO.getPostFavoritos(idUser);
+    }
+
 }
