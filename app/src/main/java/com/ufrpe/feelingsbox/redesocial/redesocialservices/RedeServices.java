@@ -79,6 +79,20 @@ public class RedeServices {
         comentario.setIdPost(idPost);
         long idComentario = comentarioDAO.inserirComentario(comentario);
         comentario.setId(idComentario);
+
+        tagDAO = new TagDAO(context);
+        posTagDAO = new PosTagDAO(context);
+        String regexHashTag = "(#\\w+)";
+
+        Pattern pattern = Pattern.compile(regexHashTag);
+        Matcher matcher = pattern.matcher(texto);
+        while (matcher.find()) {
+            String hashTagStr = matcher.group(UM);
+            if (tagDAO.getTagTexto(hashTagStr) == null) {
+                tagDAO.inserirTag(hashTagStr.toLowerCase());
+            }
+            posTagDAO.inserirTagIdPost(hashTagStr.toLowerCase(), idPost);
+        }
     }
 
     public List<Post> exibirPosts() {
@@ -171,6 +185,11 @@ public class RedeServices {
     public List<String> postsFiltradosTags(long idUser) {
         relacaoUserTagDAO = new RelacaoUserTagDAO(context);
         return relacaoUserTagDAO.getTagsByUser(idUser);
+    }
+
+    public void setTagUser(String tag, long idUser){
+        relacaoUserTagDAO = new RelacaoUserTagDAO(context);
+        relacaoUserTagDAO.inserirRelUserTag(tag, idUser);
     }
 
     public BigDecimal calcAproximacaoTag(ArrayList<Integer> vetor1, ArrayList<Integer> vetor2) {
