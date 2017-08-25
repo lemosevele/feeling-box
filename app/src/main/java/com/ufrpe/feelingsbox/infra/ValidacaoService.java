@@ -43,4 +43,8 @@ public class ValidacaoService {
             return (senha.matches(rex));
         }
     }
+
+    public boolean verificarTagPesquisada(String textoTag){
+      return textoTag.matches("(#\\w+)");
+    }
 }

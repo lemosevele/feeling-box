@@ -2,6 +2,7 @@ package com.ufrpe.feelingsbox.redesocial.redesocialservices;
 
 import android.content.Context;
 
+import com.ufrpe.feelingsbox.infra.ValidacaoService;
 import com.ufrpe.feelingsbox.redesocial.dominio.Comentario;
 import com.ufrpe.feelingsbox.redesocial.dominio.Post;
 import com.ufrpe.feelingsbox.redesocial.dominio.Sessao;
@@ -187,9 +188,12 @@ public class RedeServices {
         return relacaoUserTagDAO.getTagsByUser(idUser);
     }
 
-    public void setTagUser(String tag, long idUser){
-        relacaoUserTagDAO = new RelacaoUserTagDAO(context);
-        relacaoUserTagDAO.inserirRelUserTag(tag, idUser);
+    public void setTagUser(String tag, long idUser) {
+        ValidacaoService validacaoService = new ValidacaoService(context);
+        if (validacaoService.verificarTagPesquisada(tag)) {
+            relacaoUserTagDAO = new RelacaoUserTagDAO(context);
+            relacaoUserTagDAO.inserirRelUserTag(tag, idUser);
+        }
     }
 
     public BigDecimal calcAproximacaoTag(ArrayList<Integer> vetor1, ArrayList<Integer> vetor2) {

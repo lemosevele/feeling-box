@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.ufrpe.feelingsbox.R;
 import com.ufrpe.feelingsbox.infra.GuiUtil;
+import com.ufrpe.feelingsbox.infra.ValidacaoService;
 import com.ufrpe.feelingsbox.infra.adapter.post.PostRecyclerAdapter;
 import com.ufrpe.feelingsbox.infra.adapter.post.RecyclerViewOnClickListenerhack;
 import com.ufrpe.feelingsbox.infra.provider.SearchableProvider;
@@ -88,6 +89,7 @@ public class ActSearchable extends AppCompatActivity implements RecyclerViewOnCl
     public void buscarPosts(String stringBusca){
         mListAux.clear();
         RedeServices redeServices = new RedeServices(this);
+        redeServices.setTagUser(stringBusca, sessao.getUsuarioLogado().getId());
 
         ArrayList<Post> mList = (ArrayList<Post>) redeServices.buscarPosts(stringBusca);
 
