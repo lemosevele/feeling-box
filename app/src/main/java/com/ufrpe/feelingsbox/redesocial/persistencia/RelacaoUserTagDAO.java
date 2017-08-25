@@ -7,8 +7,10 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.ufrpe.feelingsbox.infra.DataBase;
+import com.ufrpe.feelingsbox.redesocial.dominio.Post;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class RelacaoUserTagDAO {
@@ -19,11 +21,11 @@ public class RelacaoUserTagDAO {
         this.dbHelper = new DataBase(context);
     }
 
-    public long inserirRelUserTag(String tag, long idUser){
+    public long inserirRelUserTag(String tag, long idUser) {
         feelingsDb = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
 
-        String colunaTag =  DataBase.REL_TEXTO_TAG;
+        String colunaTag = DataBase.REL_TEXTO_TAG;
         values.put(colunaTag, tag);
 
         String colunaUser = DataBase.REL_USER_ID;
@@ -62,5 +64,27 @@ public class RelacaoUserTagDAO {
         cursor.close();
         feelingsDb.close();
         return listaSeguidores;
+    }
+
+    public String getTagsMaisPesquisadas(long idUser) {
+        feelingsDb = dbHelper.getReadableDatabase();
+
+        String query = "SELECT COUNT (" + DataBase.REL_TEXTO_TAG + ") AS qtd FROM " +
+                DataBase.TABELA_REL_USER_TAG + " WHERE " + DataBase.REL_USER_ID + " LIKE ?" +
+                " ORDER BY qtde DESC";
+
+        String idString = Long.toString(idUser);
+        String[] argumentos = {idString};
+
+        Cursor cursor = feelingsDb.rawQuery(query, argumentos);
+
+        String tag = null;
+        if (cursor.moveToNext()) {
+            tag = criarTag(cursor);
+        }
+
+        cursor.close();
+        feelingsDb.close();
+        return tag;
     }
 }

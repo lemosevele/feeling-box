@@ -90,7 +90,7 @@ public class PostFragment extends Fragment implements RecyclerViewOnClickListene
         } else if (tab == TAB_FAVORITO){
             mList = redeServices.postsFiltradosComentarios();
         } else if (tab == TAB_RECOMENDADO){
-            mList = redeServices.postsFiltradosComentarios();
+            mList = redeServices.gerarPostsTagAproximada(sessao.getUsuarioLogado().getId());
         }
 
         PostRecyclerAdapter adapter = new PostRecyclerAdapter(getActivity(), mList);

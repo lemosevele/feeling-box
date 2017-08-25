@@ -114,5 +114,4 @@ public class ComentarioDAO {
         feelingsDb.close();
         return resultado;
     }
-
 }

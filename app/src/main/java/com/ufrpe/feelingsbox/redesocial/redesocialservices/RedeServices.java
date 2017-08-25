@@ -246,4 +246,16 @@ public class RedeServices {
         return listaTags.get(indexMaiorAprox + 1);
 
     }
+
+    public String getTagMaisUsada(long idUser){
+        relacaoUserTagDAO = new RelacaoUserTagDAO(context);
+        return relacaoUserTagDAO.getTagsMaisPesquisadas(idUser);
+    }
+
+    public ArrayList<Post> gerarPostsTagAproximada(long idUser){
+        String tagMaisUsada = getTagMaisUsada(idUser);
+        String tagAproximada = recomendaTag(tagMaisUsada);
+        posTagDAO = new PosTagDAO(context);
+        return posTagDAO.getPostByTag(tagAproximada);
+    }
 }
