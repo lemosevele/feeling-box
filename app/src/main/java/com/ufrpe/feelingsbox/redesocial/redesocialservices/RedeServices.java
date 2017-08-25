@@ -192,7 +192,7 @@ public class RedeServices {
         ValidacaoService validacaoService = new ValidacaoService(context);
         if (validacaoService.verificarTagPesquisada(tag)) {
             relacaoUserTagDAO = new RelacaoUserTagDAO(context);
-            relacaoUserTagDAO.inserirRelUserTag(tag, idUser);
+            relacaoUserTagDAO.inserirRelUserTag(tag.toLowerCase(), idUser);
         }
     }
 
