@@ -17,13 +17,13 @@ import com.ufrpe.feelingsbox.usuario.usuarioservices.UsuarioService;
 
 import static com.ufrpe.feelingsbox.usuario.dominio.SexoEnum.sexoEnumLista;
 
-public class ActSignUp extends AppCompatActivity {
+/**
+ * Classe responsável pela Tela de Cadastro
+ */
 
-    //Declarando os Elementos da Tela(activity)
+public class ActSignUp extends AppCompatActivity {
     private EditText edtNome, edtNick, edtEmail, edtNasc, edtSenha;
     private Spinner spinner;
-
-    //Lista para por no Spinner
     private String[] listaSexo = sexoEnumLista();
 
     @Override
@@ -31,7 +31,6 @@ public class ActSignUp extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_sign_up);
 
-        //Encontrando Elemento da Tela(activity)
         edtNome = (EditText)findViewById(R.id.edtNome);
         edtNick = (EditText)findViewById(R.id.edtNick);
         edtEmail = (EditText)findViewById(R.id.edtEmail);
@@ -39,11 +38,10 @@ public class ActSignUp extends AppCompatActivity {
         edtNasc.addTextChangedListener(Mask.insert("##/##/####", edtNasc));
         edtSenha = (EditText)findViewById(R.id.edtSenha);
 
-        //ArrayAdapter é usado preparar a lista da por no Spinner
+        //ArrayAdapter é usado para preparar a lista que será usada no Spinner
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, listaSexo);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        //Encontrando o Spinner e colocando a lista adaptada
         spinner = (Spinner)findViewById(R.id.spnSexo);
         spinner.setAdapter(adapter);
 
@@ -61,46 +59,49 @@ public class ActSignUp extends AppCompatActivity {
             }
         });
     }
-    //Ação ao Clicar no botão Cadastrar
+
+    /**
+     * Método passará os dados digitados pelo usuário para serem validados pela Classe @see {@link ValidacaoService},
+     * após uma válidação positiva, os dados serão enviados para a Classe @see {@link UsuarioService}
+     * para serem gravadas no banco. Mensagens de erro serão mostradas caso a validação ou o registro
+     * no banco falhem.
+     * @param view - Referência ao Botão Cadastrar @see {@link View} e {@link com.ufrpe.feelingsbox.R.layout}
+     */
+
     public void validarCadastrar(View view){
-        //Pegando os valores dos EditText
         String nome     = edtNome.getText().toString();
         String nick     = edtNick.getText().toString();
         String email    = edtEmail.getText().toString();
         String nasc     = edtNasc.getText().toString();
         String senha    = edtSenha.getText().toString();
-
-        //Pegando os valor do Spinner
-        String sexoTexto = (String) spinner.getSelectedItem();     //Retorna a String do elemento selecionado do Spinner
-        //long sexoId = spinner.getSelectedItemId();                  //Retorna o ID do elemento selecionado do Spinner
-        //int sexoPosicao = spinner.getSelectedItemPosition();        //Retorna a Posição do elemento selecionado do Spinner
+        String sexoTexto = (String) spinner.getSelectedItem();
 
         ValidacaoService validacaoCadastro = new ValidacaoService(getApplicationContext());
         boolean valid = true;
         if (!validacaoCadastro.isSenhaValida(senha)){
             edtSenha.requestFocus();
-            edtSenha.setError("Senha fora do padrão.");
+            edtSenha.setError(getString(R.string.msg_senha_fora_padrão));
             valid = false;
         }
         if (!validacaoCadastro.isNascValido(nasc)){
             edtNasc.requestFocus();
-            edtNasc.setError("Data Inválida.");
+            edtNasc.setError(getString(R.string.msg_data_invalida));
             valid = false;
         }
         if (!validacaoCadastro.isEmailValido(email)){
             edtEmail.requestFocus();
-            edtEmail.setError("Endereço de Email Inválido.");
+            edtEmail.setError(getString(R.string.msg_email_invalido));
             valid = false;
         }
         if (!validacaoCadastro.isNickValido(nick)){
             edtNick.requestFocus();
-            edtNick.setError("Apelido Inválido");
+            edtNick.setError(getString(R.string.msg_nick_invalido));
             valid = false;
         }
 
         if (validacaoCadastro.isCampoVazio(nome)){
             edtNome.requestFocus();
-            edtNome.setError("Nome Inválido");
+            edtNome.setError(getString(R.string.msg_nome_invalido));
             valid = false;
         }
 
@@ -108,7 +109,7 @@ public class ActSignUp extends AppCompatActivity {
             UsuarioService service = new UsuarioService(getApplicationContext());
             try {
                 service.cadastrar(nome, sexoTexto, nasc, nick, email, senha);
-                GuiUtil.myToast(this, "Cadastrado com Sucesso!");
+                GuiUtil.myToast(this, getString(R.string.msg_cadastro_sucesso));
                 finish();
             } catch (Exception e) {
                 GuiUtil.myToast(this, e);
@@ -116,8 +117,12 @@ public class ActSignUp extends AppCompatActivity {
         }
     }
 
-    public void cancelarCadastro(View view){
+    /**
+     * Retorna para a Tela de Login
+     * @param view - Referência ao Botão Cancelar @see {@link View} e {@link com.ufrpe.feelingsbox.R.layout}
+     */
 
+    public void cancelarCadastro(View view){
         finish();
     }
 }

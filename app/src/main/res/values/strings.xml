@@ -88,4 +88,11 @@
     <string name="title_tab_home">Home</string>
     <string name="title_tab_favoritos">Favoritos</string>
     <string name="title_tab_recomendados">Recomendados</string>
+    <string name="msg_login_senha_incorreto">Login ou senha incorretos.</string>
+    <string name="msg_data_invalida">Data Inválida.</string>
+    <string name="msg_senha_fora_padrão">A senha precisa ter entre 6 e 10 caracteres, ter ao menos uma letra minúscula, maiúscula e um número.</string>
+    <string name="msg_email_invalido">Endereço de Email Inválido.</string>
+    <string name="msg_nick_invalido">Apelido Inválido</string>
+    <string name="msg_nome_invalido">Nome Inválido</string>
+    <string name="msg_cadastro_sucesso">Cadastrado com Sucesso!</string>
 </resources>

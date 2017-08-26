@@ -14,6 +14,10 @@ import com.ufrpe.feelingsbox.infra.ValidacaoService;
 import com.ufrpe.feelingsbox.redesocial.gui.ActHome;
 import com.ufrpe.feelingsbox.usuario.usuarioservices.UsuarioService;
 
+/**
+ * Classe responsável pela Tela de Login
+ */
+
 public class ActLogin extends AppCompatActivity {
     private EditText edtLogin, edtSenha;
     private UsuarioService usuarioService;
@@ -27,15 +31,32 @@ public class ActLogin extends AppCompatActivity {
         Animacao.animacaoZoomIn(findViewById(R.id.mainLayoutLogin));
     }
 
+    /**
+     * Método que declara os tipos dos atributos que referenciam os campos Login e Senha que serão
+     * mostrados na Tela.
+     */
+
     private void encontrandoItens(){
         edtLogin = (EditText)findViewById(R.id.edtLogin);
         edtSenha = (EditText)findViewById(R.id.edtSenha);
     }
 
+    /**
+     * Método que muda da tela atual para a Tela de Cadastro @see {@link ActSignUp}
+     * @param view - Referência ao Botão Cadastrar @see {@link View} e {@link com.ufrpe.feelingsbox.R.layout}
+     */
+
     public void cadastrarUsuario(View view){
         Intent it = new Intent(ActLogin.this, ActSignUp.class);
         startActivity(it);
     }
+
+    /**
+     * Método que passará texto dos campos Login e Senha para serem analisados pelo método isCampoVazio
+     * @see {@link ValidacaoService}, que verificará se os campos estão vazios, Caso não estejam
+     * chamará método (@link chamarValidacao)
+     * @param view - Referência ao Botão Logar @see {@link View} e {@link com.ufrpe.feelingsbox.R.layout}
+     */
 
     public void efetuarLogin(View view){
         String login = edtLogin.getText().toString();
@@ -59,6 +80,14 @@ public class ActLogin extends AppCompatActivity {
         }
     }
 
+    /**
+     * Método que passará o texto digitado nos Campos Login e Senha para a Classe @see {@link UsuarioService}
+     * as devida validações junto ao banco. Dependendo do retorno dado pela Classe @link {@link UsuarioService}
+     * este método chamará o método @see irTelaHome ou apresentará uma mensagem de erro para o usuário.
+     * @param login - Texto do Campo Login
+     * @param senha - Texto do Campo Senha
+     */
+
     private void chamarValidacao(String login, String senha){
         usuarioService = new UsuarioService(getApplicationContext());
         if (!validacaoService.isEmail(login)) {
@@ -67,7 +96,7 @@ public class ActLogin extends AppCompatActivity {
                 irTelaHome();
             }
             catch (Exception e) {
-                GuiUtil.myToast(this, "Login ou senha incorretos.");
+                GuiUtil.myToast(this, getString(R.string.msg_login_senha_incorreto));
             }
         }
 
@@ -77,10 +106,14 @@ public class ActLogin extends AppCompatActivity {
                 irTelaHome();
             }
             catch (Exception e) {
-                GuiUtil.myToast(this, "Login ou senha incorretos.");
+                GuiUtil.myToast(this, getString(R.string.msg_login_senha_incorreto));
             }
         }
     }
+
+    /**
+     * Método que muda da tela atual para a Tela Principal @see {@link ActHome}
+     */
 
     private void irTelaHome(){
         Intent it = new Intent(ActLogin.this, ActHome.class);
