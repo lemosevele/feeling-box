@@ -40,6 +40,7 @@ public class RedeServices {
     private SugestaoDAO sugestaoDAO;
     private TagDAO tagDAO;
     private RelacaoUserTagDAO relacaoUserTagDAO;
+    private static final long ZERO = 0;
 
     private static final int UM = 1;
 
@@ -266,4 +267,9 @@ public class RedeServices {
         return postDAO.getPostFavoritos(idUser);
     }
 
+    public boolean getNovato(long idUser){
+        relacaoUserTagDAO = new RelacaoUserTagDAO(context);
+        String tagUser = relacaoUserTagDAO.getTagsMaisPesquisadas(idUser);
+        return tagUser == null;
+    }
 }

@@ -88,9 +88,15 @@ public class PostFragment extends Fragment implements RecyclerViewOnClickListene
         } else if (tab == TAB_HOME){
             mList = redeServices.exibirPosts();
         } else if (tab == TAB_FAVORITO){
-            mList = redeServices.postsFiltradosComentarios();
+            //mList = redeServices.getPostsFavoritos(sessao.getUsuarioLogado().getId());
+            mList = redeServices.exibirPosts();
         } else if (tab == TAB_RECOMENDADO){
-            mList = redeServices.gerarPostsTagAproximada(sessao.getUsuarioLogado().getId());
+            if (redeServices.getNovato(sessao.getUsuarioLogado().getId())){
+                mList = redeServices.postsFiltradosComentarios();
+            }
+            else {
+                mList = redeServices.gerarPostsTagAproximada(sessao.getUsuarioLogado().getId());
+            }
         }
 
         PostRecyclerAdapter adapter = new PostRecyclerAdapter(getActivity(), mList);

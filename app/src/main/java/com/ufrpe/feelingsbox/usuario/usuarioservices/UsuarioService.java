@@ -11,7 +11,9 @@ import com.ufrpe.feelingsbox.usuario.persistencia.UsuarioDAO;
 import com.ufrpe.feelingsbox.usuario.dominio.Usuario;
 import com.ufrpe.feelingsbox.usuario.dominio.Pessoa;
 
-// Classe faz comunicação com a classe UsuarioDAO e validações, faz pesquisas no banco
+/**
+ * Classe faz comunicação com a classe UsuarioDAO e validações, faz pesquisas no banco
+ */
 
 public class UsuarioService {
     private Sessao sessao = Sessao.getInstancia();
@@ -27,6 +29,17 @@ public class UsuarioService {
         usuarioDAO = new UsuarioDAO(context);
         sessaoDAO = new SessaoDAO(context);
     }
+
+    /**
+     * Método que faz verificações e comunicação com o banco para cadastrar um usuário;
+     * @param nome
+     * @param sexo
+     * @param nasc
+     * @param nick
+     * @param email
+     * @param senha
+     * @throws Exception
+     */
 
     public void cadastrar(String nome, String sexo, String nasc, String nick, String email, String senha) throws Exception {
         Usuario verificarEmail = usuarioDAO.getUsuarioEmail(email);

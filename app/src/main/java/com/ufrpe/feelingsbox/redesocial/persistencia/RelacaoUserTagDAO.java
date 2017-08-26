@@ -7,10 +7,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.ufrpe.feelingsbox.infra.DataBase;
-import com.ufrpe.feelingsbox.redesocial.dominio.Post;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class RelacaoUserTagDAO {
