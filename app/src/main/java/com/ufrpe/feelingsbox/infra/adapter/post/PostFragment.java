@@ -89,7 +89,6 @@ public class PostFragment extends Fragment implements RecyclerViewOnClickListene
             mList = redeServices.exibirPosts();
         } else if (tab == TAB_FAVORITO){
             mList = redeServices.getPostsFavoritos(sessao.getUsuarioLogado().getId());
-            //mList = redeServices.exibirPosts();
         } else if (tab == TAB_RECOMENDADO){
             if (redeServices.getNovato(sessao.getUsuarioLogado().getId())){
                 mList = redeServices.postsFiltradosComentarios();
