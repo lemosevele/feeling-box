@@ -15,6 +15,10 @@ import com.ufrpe.feelingsbox.redesocial.dominio.Post;
 public class PostDAO {
     private DataBase dbHelper;
     private SQLiteDatabase feelingsDb;
+    private final int ID_INDEX = 0;
+    private final int USER_ID_INDEX = 1;
+    private final int TEXTO_INDEX = 2;
+    private final int DATAHORA_INDEX = 3;
 
     public PostDAO(Context context){
         dbHelper = new DataBase(context);
@@ -39,6 +43,25 @@ public class PostDAO {
         String colunaDataHora = DataBase.POST_DATAHORA;
         int indexColunaDataHora = cursor.getColumnIndex(colunaDataHora);
         String datahora = cursor.getString(indexColunaDataHora);
+
+        Post post = new Post();
+        post.setId(id);
+        post.setTexto(texto);
+        post.setIdUsuario(idUsuario);
+        post.setDataHora(datahora);
+
+        return post;
+    }
+
+    public Post criarPostInnerJoin(Cursor cursor){
+
+        long id = cursor.getInt(ID_INDEX);
+
+        long idUsuario = cursor.getInt(USER_ID_INDEX);
+
+        String texto = cursor.getString(TEXTO_INDEX);
+
+        String datahora = cursor.getString(DATAHORA_INDEX);
 
         Post post = new Post();
         post.setId(id);
@@ -173,15 +196,16 @@ public class PostDAO {
         ArrayList<Post> postsFavoritos = new ArrayList<>();
         String idString = Long.toString(id);
 
-        String query = "SELECT P." + DataBase.ID + ", P." + DataBase.POST_TEXTO + ", P." + DataBase.POST_DATAHORA +
-                ", P." + DataBase.POST_VISIVEL + ", P." + DataBase.POST_STATUS + ", P." + DataBase.POST_USER_ID +
-                " FROM " + DataBase.TABELA_POST + " AS P INNER JOIN (SELECT * FROM "+ DataBase.TABELA_REL_SEGUIDORES +
-                 " WHERE " + DataBase.SEGUIDOR_ID + " = " + idString +") AS S ON P." + DataBase.POST_USER_ID  +
+        String query = "SELECT P." + DataBase.ID + ", P." + DataBase.POST_USER_ID + ", P." + DataBase.POST_TEXTO + ", P." +
+                DataBase.POST_DATAHORA + ", P." + DataBase.POST_VISIVEL + ", P." + DataBase.POST_STATUS +
+                " FROM " + DataBase.TABELA_POST + " AS P INNER JOIN (SELECT " + DataBase.SEGUIDOR_ID +
+                ", " + DataBase.SEGUIDO_ID + " FROM " + DataBase.TABELA_REL_SEGUIDORES +
+                " WHERE " + DataBase.SEGUIDOR_ID + " = " + idString +") AS S ON P." + DataBase.POST_USER_ID  +
                 " = S." + DataBase.SEGUIDO_ID + " ORDER BY P." + DataBase.POST_DATAHORA + " DESC";
 
         Cursor cursor = feelingsDb.rawQuery(query, null);
         while (cursor.moveToNext()){
-            Post post = criarPost(cursor);
+            Post post = criarPostInnerJoin(cursor);
             postsFavoritos.add(post);
         }
         feelingsDb.close();
