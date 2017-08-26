@@ -6,7 +6,10 @@ import android.database.sqlite.SQLiteOpenHelper; // Cria banco de dados
 
 import com.ufrpe.feelingsbox.infra.provider.SearchableProvider;
 
-//Classe responsável por criar o banco de dados
+/**
+ * Classe responsável por criar tabelas e o banco de dados
+ */
+
 public class DataBase extends SQLiteOpenHelper {
 
     private static final int DATABASE_VERSION = 4;

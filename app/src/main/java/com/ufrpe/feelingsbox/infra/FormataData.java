@@ -7,6 +7,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * Classe contém vários métodos que formatam datas que serão utilizadas em diferentes funcionalidades
+ */
 
 public class FormataData {
     private static final String DATA_POST_BANCO  = "yyyyMMddHHmmss";
@@ -30,8 +33,12 @@ public class FormataData {
     private static final int NUMDATA4 = 0;
     private static final int NUMDATA5 = 2;
 
+    /**
+     * Recebe data no formato dd/MM/yyyy
+     * @param data Recebe data
+     * @return Retorna data no formato yyMMdd
+     */
 
-    //Recebe data no formato 01/10/2000 -> 20001001
     public static String americano(String data){
         StringBuilder novaData = new StringBuilder();
         novaData.append(data.substring(NUMDATA1));
@@ -40,6 +47,12 @@ public class FormataData {
 
         return novaData.toString();
     }
+
+    /**
+     * Método que formata data no formato que será exibido para o Usuario
+     * @param stringData
+     * @return Retorna data no forato dd/MM/yyyy
+     */
 
     public static String formatarDataHoraDataBaseParaExibicao (String stringData){
         SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat(DATA_NASC_BANCO);
@@ -54,12 +67,21 @@ public class FormataData {
         }
     }
 
-    //Retorna uma string data atual no formato para guardar no banco
+    /**
+     * Método utilizado para fornecer a data no formato que será inserido no banco
+     * @return Retorna data no formato yyyyMMddHHmmss
+     */
+
     public static String formatarDataHoraAtualParaPostDataBase(){
         Date date = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DATA_POST_BANCO);
         return simpleDateFormat.format(date);
     }
+
+    /**
+     * Método utilizado para formatar data atual
+     * @return retorna data no formato yyyyMMddHHmmss
+     */
 
     public static String formataDataHoraHoje(){
         Date date = new Date();
@@ -120,6 +142,7 @@ public class FormataData {
 
         return false;
     }
+
     public static String tempoParaMostrarEmPost(String data){
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat (DATA_POST_BANCO);

@@ -12,15 +12,29 @@ import com.ufrpe.feelingsbox.redesocial.dominio.Comentario;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Classe de persistência da classe Comentario
+ */
 
 public class ComentarioDAO {
     private DataBase dbHelper;
     private SQLiteDatabase feelingsDb;
 
+    /**
+     * Constructor
+     * @param context
+     * @see Comentario
+     */
 
     public ComentarioDAO (Context context){
         dbHelper = new DataBase(context);
     }
+
+    /**
+     * Método que cria um objeto Comentario através de um Cursor
+     * @param cursor Recebe Cursor que percorre as colunas da tabela
+     * @return Retorna objeto Comentario criado
+     */
 
     public Comentario criarComentario(Cursor cursor){
         String colunaId = DataBase.ID;
@@ -53,6 +67,12 @@ public class ComentarioDAO {
         return comentario;
     }
 
+    /**
+     * Insere Comentario na TABELA_COMENTARIO no banco de dados
+     * @param comentario Recebe objeto Comentario a ser inserido
+     * @return Retorna id do Comentario inserido
+     */
+
     public long inserirComentario(Comentario comentario){
         feelingsDb = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -84,6 +104,12 @@ public class ComentarioDAO {
         return id;
     }
 
+    /**
+     * Método que retorna todos os comentários de um Post
+     * @param idPost Recebe o id do Post a ter todos seus comentários pesquisados
+     * @return Rertorna um Array  com comentários do Post
+     */
+
     public List<Comentario> getComentariorioByPost(long idPost){
         feelingsDb = dbHelper.getReadableDatabase();
         ArrayList<Comentario> comentarioUser = new ArrayList<>();
@@ -100,9 +126,16 @@ public class ComentarioDAO {
             Comentario comentario = criarComentario(cursor);
             comentarioUser.add(comentario);
         }
+        cursor.close();
         feelingsDb.close();
         return comentarioUser;
     }
+
+    /**
+     * Método utilizado para contar a quantidade de Comentario de um Post
+     * @param id Recebe id do Post a ter seus comentários contados
+     * @return Retorna a quantidade de comentários do Post
+     */
 
     public long  qtdQuantidadeComentario(long id) {
         feelingsDb = dbHelper.getReadableDatabase();

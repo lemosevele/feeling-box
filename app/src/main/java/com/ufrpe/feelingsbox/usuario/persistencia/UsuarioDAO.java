@@ -8,16 +8,32 @@ import android.database.sqlite.SQLiteDatabase;
 import com.ufrpe.feelingsbox.infra.DataBase;
 import com.ufrpe.feelingsbox.usuario.dominio.Usuario;
 
+/**
+ * Classe de persistência da classe Usuario
+ * @see Usuario
+ */
 
 public class UsuarioDAO {
 
     private DataBase dbHelper;
     private SQLiteDatabase feelingsDb;
 
+    /**
+     *  Constructor
+     * @param context
+     */
+
     public UsuarioDAO(Context context) {
 
         dbHelper = new DataBase(context);
     }
+
+    /**
+     * Busca Usuario na TABELA_USUARIO no banco de dados
+     * @param email Email do Usuario a ser buscado
+     * @param senha Senha do Usuario a ser buscado
+     * @return Se objeto existir retorna o objeto da Classe Usuario, se não, retorna null
+     */
 
     public Usuario getUsuarioEmailSenha(String email, String senha) {
         feelingsDb = dbHelper.getReadableDatabase();
@@ -41,6 +57,13 @@ public class UsuarioDAO {
         return usuario;
     }
 
+    /**
+     * Busca usuário na TABELA_USUARIO através do email e senha
+     * @param nick Nick do Usuario a ser buscado
+     * @param senha Senha do Usuario a ser buscado
+     * @return Se objeto existir, retorna o objeto Usuario, se não, retorna null
+     */
+
     public Usuario getUsuarioNickSenha(String nick, String senha) {
         feelingsDb = dbHelper.getReadableDatabase();
 
@@ -63,6 +86,11 @@ public class UsuarioDAO {
         return usuario;
     }
 
+    /**
+     * Busca Usuario na TABELA_USUARIO no banco de dados
+     * @param nick Nick do Usuario a ser buscado
+     * @return Rertorna objeto Usuario se for encontrado, se não, retorna null
+     */
     public Usuario getUsuarioNick(String nick) {
 
         feelingsDb = dbHelper.getReadableDatabase();
@@ -86,6 +114,12 @@ public class UsuarioDAO {
 
         return usuario;
     }
+
+    /**
+     * Busca Usuario na TABELA_USUARIO no banco de dados
+     * @param id Id do Usuario a ser pesquisado
+     * @return Retorna objeto Usuario caso seja encontrado, se não, retorna null
+     */
 
     public Usuario getUsuarioId(long id){
         feelingsDb = dbHelper.getReadableDatabase();
@@ -111,6 +145,12 @@ public class UsuarioDAO {
         return usuario;
     }
 
+    /**
+     * Busca Usuario na TABELA_USUARIO do banco de dados
+     * @param email Email do Usuario a ser buscado
+     * @return Se encontrado, retorna objeto Usuario pesquisado, se não, retorna null
+     */
+
     public Usuario getUsuarioEmail(String email) {
         feelingsDb = dbHelper.getReadableDatabase();
 
@@ -134,7 +174,12 @@ public class UsuarioDAO {
         return usuario;
     }
 
-    // Insere o Obj Usuario na TABELA_USUARIO, pegando os atributos e inserindo
+
+    /**
+     * Insere Usuario na TABELA_USUARIO do banco de dados
+     * @param usuario Recebe Usuario a ser inserido no banco de dados
+     * @return Retorna id do Usuario inserido
+     */
 
     public long inserirUsuario(Usuario usuario){
         feelingsDb = dbHelper.getWritableDatabase();
@@ -160,7 +205,11 @@ public class UsuarioDAO {
         return id;
     }
 
-    // Cursor percorre as colunas da TABELA_USUARIO e retorna um objeto Usuario
+    /**
+     * Cria objeto Usuario através de um Cursor
+     * @param cursor Recebe Cursor que percorre as colunas da TABELA_USUARIO
+     * @return Rertorna objeto Usuario criado
+     */
 
     public Usuario criarUsuario(Cursor cursor){
 
@@ -189,7 +238,12 @@ public class UsuarioDAO {
         return usuario;
     }
 
-    //Atualiza o Usuário na Tabela Usuario
+    /**
+     * Atualiza dados do Usuario na TABELA_USUARIO no banco de dados
+     * @param usuario Recebe Usuario a ser atualizado na tabela
+     * @return Retorna o id do Usuario que teve seus dados atualizados
+     */
+
     public long atualizarUsuario(Usuario usuario){
         feelingsDb = dbHelper.getWritableDatabase();
 

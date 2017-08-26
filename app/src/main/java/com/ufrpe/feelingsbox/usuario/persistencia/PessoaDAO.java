@@ -9,18 +9,31 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+/**
+ * Classe de persistência da classe Pessoa
+ * @see Pessoa
+ */
+
 public class PessoaDAO {
 
     private DataBase dbHelper;
     private SQLiteDatabase feelingsDb;
 
+    /**
+     * Constructor
+     * @param context
+     */
 
     public PessoaDAO(Context context){
 
         dbHelper = new DataBase(context);
     }
 
-    // Cursor percorre as colunas da TABELA_PESSOA e cria Objeto Pessoa
+    /**
+     * Cria um objeto Pessoa através de um Cursor
+     * @param cursor Recebe cursor que irá percorrer as colunas da tabela
+     * @return Retorna objeto Pessoa criado
+     */
 
     public Pessoa criarPessoa(Cursor cursor){
 
@@ -55,7 +68,11 @@ public class PessoaDAO {
         return pessoa;
     }
 
-    // Insere o Obj pessoa na TABELA_PESSOA, pegando os atributos e inserindo
+    /**
+     * Insere objeto Pessoa na TABELA_PESSOA do banco de dados
+     * @param pessoa Recebe Pessoa a ser inserida no banco de dados
+     * @return Retorna id do objeto Pessoa inserido na tabela
+     */
 
     public long inserirPessoa(Pessoa pessoa){
         feelingsDb = dbHelper.getWritableDatabase();
@@ -86,7 +103,11 @@ public class PessoaDAO {
         return id;
     }
 
-    // Busca um objeto Pessoa na TABELA_PESSOA passando um objeto Usuario
+    /**
+     * Busca um objeto Pessoa na TABELA_PESSOA no banco de dados
+     * @param usuario Recebe objeto Usuario
+     * @return Rertorna objeto Pessoa, se for encontrado, se não, retorna null
+     */
 
     public Pessoa getPessoa(Usuario usuario){
         feelingsDb = dbHelper.getReadableDatabase();
@@ -112,7 +133,12 @@ public class PessoaDAO {
         return pessoa;
     }
 
-    //Atualiza o Pessoa na Tabela Pessoa
+    /**
+     * Atualiza os dados do objeto Pessoa na TABELA_PESSOA
+     * @param pessoa Recebe objeto Pessoa com seus dados atualizados
+     * @return Retorna o id do objeto pessoa que foi atualizado
+     */
+
     public long atualizarPessoa(Pessoa pessoa){
         feelingsDb = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -141,6 +167,12 @@ public class PessoaDAO {
 
         return id;
     }
+
+    /**
+     * Busca Pessoa na TABELA_PESSOA do banco de dados
+     * @param id Recebe id do objeto Pessoa a ser buscado
+     * @return Se encontrado, retorna objeto Pessoa, se não, retorna null
+     */
 
     public Pessoa getPessoa(long id){
         feelingsDb = dbHelper.getReadableDatabase();

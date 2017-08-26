@@ -1,5 +1,8 @@
 package com.ufrpe.feelingsbox.usuario.dominio;
 
+/**
+ * Classe responsável por criar os objetos Pessoa
+ */
 
 public class Pessoa {
     private String nome;

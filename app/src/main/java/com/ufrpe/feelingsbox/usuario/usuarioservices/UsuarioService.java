@@ -24,6 +24,11 @@ public class UsuarioService {
     private Pessoa pessoa;
     private SessaoDAO sessaoDAO;
 
+    /**
+     * Constructor
+     * @param context
+     */
+
     public UsuarioService(Context context) {
         pessoaDAO = new PessoaDAO(context);
         usuarioDAO = new UsuarioDAO(context);
@@ -31,14 +36,19 @@ public class UsuarioService {
     }
 
     /**
-     * Método que faz verificações e comunicação com o banco para cadastrar um usuário;
-     * @param nome
-     * @param sexo
-     * @param nasc
-     * @param nick
-     * @param email
-     * @param senha
-     * @throws Exception
+     * Método que recebe dados de um usuário a ser cadastrado, valida os dados e solicita seu cadastro
+     * @param nome Nome da Pessoa
+     * @param sexo Sexo da Pessoa
+     * @param nasc Data de nascimento da Pessoa
+     * @param nick Nick do Usuario
+     * @param email Email do Usuario
+     * @param senha Senha do Usuario
+     * @throws Exception Se existir um Nick ou Email já cadastrado
+     * @see PessoaDAO
+     * @see UsuarioDAO
+     * @see Pessoa
+     * @see Usuario
+     * @see Criptografia
      */
 
     public void cadastrar(String nome, String sexo, String nasc, String nick, String email, String senha) throws Exception {
@@ -66,6 +76,16 @@ public class UsuarioService {
         }
     }
 
+    /**
+     * Método utilizado para logar usuario no sistema
+     * @param nick Nick do Usuario a ser logado
+     * @param senha Senha do Usuario a ser logado
+     * @throws Exception Caso os dados não estejam corretos
+     * @see Criptografia
+     * @see UsuarioDAO
+     * @see SessaoDAO
+     */
+
     public void logarNick(String nick, String senha) throws Exception {
         String senhaCriptografada = criptografia.criptografarSenha(senha);
         Usuario nickValido = usuarioDAO.getUsuarioNickSenha(nick, senhaCriptografada);
@@ -81,6 +101,12 @@ public class UsuarioService {
         }
     }
 
+    /**
+     * Método utilizado para logar automaticamente o usuario no sistema
+     * @param nick Nick do usuario a ser logado
+     * @param senha senha do usuari a ser logado
+     */
+
     public void autoLogarNick(String nick, String senha) throws Exception {
         Usuario usuario = usuarioDAO.getUsuarioNick(nick);
         Pessoa pessoa = pessoaDAO.getPessoa(usuario);
@@ -88,6 +114,17 @@ public class UsuarioService {
         sessao.setUsuarioLogado(usuario);
         sessaoDAO.inserirIdPessoa(sessao);
         }
+
+    /**
+     * Método utilizado para logar usuario no sistema
+     * @param email Email do Usuario a ser logado
+     * @param senha Senha do Usuario logado
+     * @see PessoaDAO
+     * @see Criptografia
+     * @see UsuarioDAO
+     * @see SessaoDAO
+     * @throws Exception Caso sejam fornecidos dados incorretos
+     */
 
     public void logarEmail(String email, String senha) throws Exception {
         String senhaCriptografada = criptografia.criptografarSenha(senha);
@@ -105,15 +142,38 @@ public class UsuarioService {
         }
     }
 
+    /**
+     * Método que solicita a edição de perfil de um usuario
+     * @param pessoaLogada Pessoa a ter seus dados editados
+     * @param usuarioLogado Usuario a ter seus dados editados
+     * @see PessoaDAO
+     * @see UsuarioDAO
+     */
+
     public void editarPerfil(Pessoa pessoaLogada, Usuario usuarioLogado){
         pessoaDAO.atualizarPessoa(pessoaLogada);
         usuarioDAO.atualizarUsuario(usuarioLogado);
     }
+
+    /**
+     * Método que retorna o nick do usuario
+     * @param id Recebe id do Usuario a ter seu nick pesquisado
+     * @return Nick do Usuario
+     * @see UsuarioDAO
+     */
 
     public String buscarNick(long id){
        usuario = usuarioDAO.getUsuarioId(id);
         return usuario.getNick();
     }
 
-    public Usuario buscarUsuario(long id){ return usuarioDAO.getUsuarioId(id); }
+    /**
+     * Busca um Usuario no banco de dados
+     * @param id Recebe id do usuario a ser buscado
+     * @return Rertorna Usuario pesquisado
+     * @see UsuarioDAO
+     */
+
+    public Usuario buscarUsuario(long id){
+        return usuarioDAO.getUsuarioId(id); }
 }

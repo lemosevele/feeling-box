@@ -11,6 +11,9 @@ import com.ufrpe.feelingsbox.redesocial.dominio.Post;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Classe de persistência dos Post sugeridos para o Usuario
+ */
 
 public class SugestaoDAO {
     private DataBase dbHelper;
@@ -20,10 +23,20 @@ public class SugestaoDAO {
     private static final int CONTADOR_INICIO = 0;
     private static final int CONTADOR_FIM = 4;
 
+    /**
+     * Construct
+     * @param context
+     */
+
     public SugestaoDAO(Context context){
         dbHelper = new DataBase(context);
         postDAO = new PostDAO(context);
     }
+
+    /**
+     * Método que pesquisa os Post mais comentados do dia
+     * @return Retorna Array com Post mais comentados do dia
+     */
 
     public List<Post> getPostsMaisComentadosHoje(){
         feelingsDb = dbHelper.getReadableDatabase();
@@ -44,6 +57,7 @@ public class SugestaoDAO {
             listaPostsFiltrados.add(post);
             contador ++;
         }
+        cursor.close();
         feelingsDb.close();
         return listaPostsFiltrados;
     }

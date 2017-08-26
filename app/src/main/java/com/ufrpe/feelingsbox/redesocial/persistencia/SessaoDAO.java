@@ -11,18 +11,33 @@ import com.ufrpe.feelingsbox.redesocial.dominio.Sessao;
 import com.ufrpe.feelingsbox.usuario.dominio.Pessoa;
 import com.ufrpe.feelingsbox.usuario.persistencia.PessoaDAO;
 
+/**
+ * Método de persistência da classe Sessao
+ * @see SessaoDAO
+ * @see PessoaDAO
+ * @see Pessoa
+ */
 
 public class SessaoDAO {
     private DataBase dbHelper;
     private SQLiteDatabase feelingsDb;
     private PessoaDAO pessoaDAO;
 
+    /**
+     * Constructor
+     * @param context
+     */
+
     public SessaoDAO (Context context){
         dbHelper = new DataBase(context);
         pessoaDAO = new PessoaDAO(context);
     }
 
-    // Recebe a Sessao da pessoa a logar e insere na tabela
+    /**
+     * Método que recebe Sessao da Pessoa a logar e insere na TABELA_SESSAO do banco de dados
+     * @param sessao
+     */
+
     public void inserirIdPessoa(Sessao sessao){
         feelingsDb = dbHelper.getWritableDatabase();
 
@@ -34,31 +49,10 @@ public class SessaoDAO {
         feelingsDb.insert(DataBase.TABELA_SESSAO, null, values);
     }
 
-
-    // Pesquisa idPessoa, se pessoa estiver logada retorna True, se não, retorna False
-    public boolean getIdPessoaLogada(long id){
-        feelingsDb = dbHelper.getReadableDatabase();
-
-        String query = "SELECT * FROM " + DataBase.TABELA_SESSAO +
-                " WHERE " + DataBase.ID_PESSOA + " LIKE ?";
-
-        String idString = Long.toString(id);
-        String[] argumentos = {idString};
-
-        Cursor cursor = feelingsDb.rawQuery(query, argumentos);
-
-        boolean idPessoa = false;
-
-        if(cursor.moveToNext()){
-
-            idPessoa = true;
-        }
-
-        cursor.close();
-        feelingsDb.close();
-
-        return idPessoa;
-    }
+    /**
+     * Método que na TABELA_SESSAO busca qual pessoa está logada
+     * @return Retorna objeto Pessoa que está logada no sistema, se não, retorna null
+     */
 
     public Pessoa getPessoaLogada(){
         feelingsDb = dbHelper.getReadableDatabase();
@@ -80,7 +74,10 @@ public class SessaoDAO {
         return pessoa;
     }
 
-    //Encerra a sessao
+    /**
+     * Encerra a Sessao da Pessoa no sistema
+     */
+
     public void removerPessoa() {
         feelingsDb = dbHelper.getWritableDatabase();
         feelingsDb.delete(DataBase.TABELA_SESSAO, null, null);

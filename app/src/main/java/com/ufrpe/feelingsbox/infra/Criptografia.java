@@ -4,6 +4,9 @@ package com.ufrpe.feelingsbox.infra;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+/**
+ * Classe responsável por criptografar a senha fornecida pelo Usuario
+ */
 
 public class Criptografia {
     private static final int HEXADECIMAL1 = 0xff;

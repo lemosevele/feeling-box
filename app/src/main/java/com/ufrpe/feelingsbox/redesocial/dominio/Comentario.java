@@ -3,6 +3,10 @@ package com.ufrpe.feelingsbox.redesocial.dominio;
 
 import com.ufrpe.feelingsbox.infra.FormataData;
 
+/**
+ * Classe utilizada para criar os objetos Comentario que serão feitos pelo usuario
+ */
+
 public class Comentario {
     private String texto;
     private long id;

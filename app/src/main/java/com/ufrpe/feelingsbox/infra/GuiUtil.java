@@ -6,7 +6,10 @@ import android.widget.Toast;
 
 import com.ufrpe.feelingsbox.R;
 
-//Classe retorna elementos de texto na Tela
+/**
+ * Classe responsável pela criação dos Toasts
+ */
+
 public class GuiUtil {
 
     public static void myToast(Context context, String text, int time){

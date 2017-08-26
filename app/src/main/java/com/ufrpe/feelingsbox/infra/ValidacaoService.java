@@ -7,6 +7,8 @@ import android.util.Patterns;
 import com.ufrpe.feelingsbox.usuario.persistencia.UsuarioDAO;
 
 
+
+
 public class ValidacaoService {
     private UsuarioDAO usuarioDAO;
     private static final int TAMANHO_DATA = 10;

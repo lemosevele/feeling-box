@@ -6,6 +6,10 @@ import com.ufrpe.feelingsbox.usuario.dominio.Usuario;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Classe utilizada para manter o status do usuario
+ */
+
 public class Sessao {
     private static Sessao instancia = new Sessao();
     private Pessoa pessoaLogada = null;

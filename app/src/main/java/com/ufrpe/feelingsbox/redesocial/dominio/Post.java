@@ -7,6 +7,10 @@ import com.ufrpe.feelingsbox.infra.FormataData;
 import java.util.ArrayList;
 import java.util.Objects;
 
+/**
+ * Classe responsável por criar os objetos Post que serão feitos pelo usuario
+ */
+
 public class Post implements Parcelable{
     private String texto;
     private ArrayList<String> listaTags = new ArrayList<String>();

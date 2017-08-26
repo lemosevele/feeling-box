@@ -9,17 +9,33 @@ import com.ufrpe.feelingsbox.infra.DataBase;
 import com.ufrpe.feelingsbox.redesocial.dominio.Post;
 
 import java.util.ArrayList;
-import java.util.List;
+
+/**
+ * Classe de persitência da relação entre tag e Post
+ * @see PostDAO
+ * @see Post
+ */
 
 public class PosTagDAO {
     private DataBase dbHelper;
     private SQLiteDatabase feelingsDb;
     private PostDAO postDAO;
 
+    /**
+     * Constructor
+     * @param context
+     */
+
     public PosTagDAO(Context context){
         this.postDAO = new PostDAO(context);
         this.dbHelper = new DataBase(context);
     }
+
+    /**
+     * Método que pesquisa todos Post que possuem uma determinada tag
+     * @param tag Recebe a tag a ser pesquisada
+     * @return Retorna um Array de Post que possuem a tag
+     */
 
     public ArrayList<Post> getPostByTag(String tag) {
         feelingsDb = dbHelper.getReadableDatabase();
@@ -46,6 +62,13 @@ public class PosTagDAO {
         return listaPost;
     }
 
+    /**
+     * Método que insere no banco de dados um relacionamento entre o Post e a tag na TABELA_REL_POS_TAG
+     * @param tag Recebe Tag que está no Post feito pelo Usuario
+     * @param idPost Recebe id do Post a ser inserido
+     * @return Retorna o id que foi inserido na tabela de relacionamento
+     */
+
     public long inserirTagIdPost(String tag, long idPost){
         feelingsDb = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -63,6 +86,13 @@ public class PosTagDAO {
 
         return id;
     }
+
+    /**
+     * Método que utiliza banco para verificar se uma tag está relacionada ao Post (verifica se a tag existe no Post)
+     * @param idPost Recebe id do Post a ser pesquisado
+     * @param tag Recebe tag a ser pesquisada
+     * @return Retorna verdadeiro se a tag está relacionada ao Post, se não, retorna falso
+     */
 
     public boolean getRelacaoTagPost(long idPost, String tag){
         feelingsDb = dbHelper.getWritableDatabase();

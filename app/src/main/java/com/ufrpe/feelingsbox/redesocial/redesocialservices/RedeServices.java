@@ -40,7 +40,6 @@ public class RedeServices {
     private SugestaoDAO sugestaoDAO;
     private TagDAO tagDAO;
     private RelacaoUserTagDAO relacaoUserTagDAO;
-    private static final long ZERO = 0;
 
     private static final int UM = 1;
 

@@ -11,6 +11,10 @@ import java.util.List;
 import com.ufrpe.feelingsbox.infra.DataBase;
 import com.ufrpe.feelingsbox.redesocial.dominio.Post;
 
+/**
+ * Classe de persistência da classe Post
+ * @see PostDAO
+ */
 
 public class PostDAO {
     private DataBase dbHelper;
@@ -20,11 +24,20 @@ public class PostDAO {
     private final int TEXTO_INDEX = 2;
     private final int DATAHORA_INDEX = 3;
 
+    /**
+     * Constructor
+     * @param context
+     */
+
     public PostDAO(Context context){
         dbHelper = new DataBase(context);
     }
 
-    // Cria objeto post passando o cursor, retorna objeto post criado
+    /**
+     * Método que cria um objeto Post através de um Cursor
+     * @param cursor Recebe um Cursor que percorre as colnas da tabela
+     * @return Rertorna objeto Post criado
+     */
 
     public Post criarPost(Cursor cursor){
 
@@ -53,6 +66,12 @@ public class PostDAO {
         return post;
     }
 
+    /**
+     * Método utilizado para criar um Post (Para auxiliar no método getPostsFavoritos)
+     * @param cursor Cursor que irá percorrer as colunas da tabela
+     * @return Retorna objeto Post criado
+     */
+
     public Post criarPostInnerJoin(Cursor cursor){
 
         long id = cursor.getInt(ID_INDEX);
@@ -72,7 +91,11 @@ public class PostDAO {
         return post;
     }
 
-    //Insere objeto Post na TABELA_POST, retorna id do post
+    /**
+     * Método que insere um post na TABELA_POST do banco de dados
+     * @param post Recebe objeto Post a ser inserido
+     * @return Rertorna id do Post inserido
+     */
 
     public long inserirPost(Post post){
         feelingsDb = dbHelper.getWritableDatabase();
@@ -106,7 +129,10 @@ public class PostDAO {
         return id;
     }
 
-    //Retorna lista de posts, ordenados pelo id
+    /**
+     * Método que busca todos os Post já inseridos na TABELA_POST
+     * @return Rertorna um Array com todos os Post ordenados pela hora em que foram criados
+     */
 
     public List<Post> getPostsByOrderId (){
         feelingsDb = dbHelper.getReadableDatabase();
@@ -121,11 +147,16 @@ public class PostDAO {
             Post post = criarPost(cursor);
             listaPosts.add(post);
         }
+        cursor.close();
         feelingsDb.close();
         return listaPosts;
     }
 
-    // Passa o id do post e retorna o post
+    /**
+     * Método que busca um post na TABELA_POST do banco de dados
+     * @param id Recebe o id do Post a ser buscado
+     * @return Retorna Post se existir, se não, retorna null
+     */
 
     public Post getPostId(long id){
         feelingsDb = dbHelper.getReadableDatabase();
@@ -149,6 +180,11 @@ public class PostDAO {
         return post;
     }
 
+    /**
+     * Método que busca todos os Post já inseridos na TABELA_POST
+     * @return Rertorna um Array com os id dos Post
+     */
+
     public ArrayList<Long> getListaPostId() {
         feelingsDb = dbHelper.getReadableDatabase();
         ArrayList<Long> listaIdPost = new ArrayList<>();
@@ -169,6 +205,12 @@ public class PostDAO {
         return listaIdPost;
     }
 
+    /**
+     * Método que busca todos os Post de um Usuario
+     * @param id Recebe id do Usuario a ter seus Post pesquisados
+     * @return Rertorna um Array com os Post do Usuario
+     */
+
     public List<Post> getPostByUser(long id){
         feelingsDb = dbHelper.getReadableDatabase();
         ArrayList<Post> postUser = new ArrayList<>();
@@ -186,11 +228,19 @@ public class PostDAO {
             Post post = criarPost(cursor);
             postUser.add(post);
         }
+        cursor.close();
         feelingsDb.close();
         return postUser;
     }
 
     // Passa o id do Usuário e retorna os posts de quem ele segue
+
+    /**
+     * Método que busca todos Post de quem o usuário logado segue
+     * @param id Recebe id do Usuario logado
+     * @return Rertorna um Array com todos os Post de quem o Usuario segue
+     */
+
     public List<Post> getPostFavoritos(long id){
         feelingsDb = dbHelper.getReadableDatabase();
         ArrayList<Post> postsFavoritos = new ArrayList<>();
@@ -208,6 +258,7 @@ public class PostDAO {
             Post post = criarPostInnerJoin(cursor);
             postsFavoritos.add(post);
         }
+        cursor.close();
         feelingsDb.close();
         return postsFavoritos;
 

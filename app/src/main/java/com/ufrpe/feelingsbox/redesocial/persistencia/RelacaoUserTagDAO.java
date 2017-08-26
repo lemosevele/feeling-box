@@ -10,14 +10,31 @@ import com.ufrpe.feelingsbox.infra.DataBase;
 
 import java.util.ArrayList;
 
+/**
+ * Classe de persistência para o relacionamento em tag e Usuario
+ */
 
 public class RelacaoUserTagDAO {
     private DataBase dbHelper;
     private SQLiteDatabase feelingsDb;
 
+
+    /**
+     * Constructor
+     * @param context
+     */
+
     public RelacaoUserTagDAO(Context context) {
         this.dbHelper = new DataBase(context);
     }
+
+    /**
+     * Método que insere relacionamento entre tag e Usuario no banco de dados na TABELA_REL_USER_TAG
+     * que recebe uma tag que foi pesquisada ou usada por um Usuario
+     * @param tag Recebe tag pesquisada ou usada por um Usuario
+     * @param idUser Recebe id do Usuario
+     * @return Rertorna id que foi inserido na tabela de relacionamento
+     */
 
     public long inserirRelUserTag(String tag, long idUser) {
         feelingsDb = dbHelper.getWritableDatabase();
@@ -36,15 +53,27 @@ public class RelacaoUserTagDAO {
         return id;
     }
 
-    public String criarTag(Cursor cursor) {
+    /**
+     * Método utilizado para retornar uma Tag no banco de dados
+     * @param cursor Cursor que irá percorrer as colunas da tabela
+     * @return Retorna tag encontrada na linha da tabela
+     */
+
+    public String pesquisarTag(Cursor cursor) {
         String colunaTexto = DataBase.REL_TEXTO_TAG;
         int indexColunaTexto = cursor.getColumnIndex(colunaTexto);
         return cursor.getString(indexColunaTexto);
     }
 
+    /**
+     * Método pesquisa as tags utilizadas pelo Usuario
+     * @param idUser recebe id do usuario a ter tags utilizadas por ele pesquisadas
+     * @return Retorna Array com tags pesquisadas pelo Usuario
+     */
+
     public ArrayList<String> getTagsByUser(long idUser) {
         feelingsDb = dbHelper.getReadableDatabase();
-        ArrayList<String> listaSeguidores = new ArrayList<>();
+        ArrayList<String> listaTags = new ArrayList<>();
 
         String query = "SELECT * FROM " + DataBase.TABELA_REL_USER_TAG +
                 " WHERE " + DataBase.REL_USER_ID + " LIKE ?" +
@@ -56,13 +85,19 @@ public class RelacaoUserTagDAO {
         Cursor cursor = feelingsDb.rawQuery(query, argumentos);
 
         while (cursor.moveToNext()) {
-            String tag = criarTag(cursor);
-            listaSeguidores.add(tag);
+            String tag = pesquisarTag(cursor);
+            listaTags.add(tag);
         }
         cursor.close();
         feelingsDb.close();
-        return listaSeguidores;
+        return listaTags;
     }
+
+    /**
+     * Método que pesquisa tag mais pesquisada pelo Usuario
+     * @param idUser Recebe id do Usuario
+     * @return Retorna tag mais utilizada pelo Usuario
+     */
 
     public String getTagsMaisPesquisadas(long idUser) {
         feelingsDb = dbHelper.getReadableDatabase();
@@ -78,7 +113,7 @@ public class RelacaoUserTagDAO {
 
         String tag = null;
         if (cursor.moveToNext()) {
-            tag = criarTag(cursor);
+            tag = pesquisarTag(cursor);
         }
 
         cursor.close();
