@@ -4,13 +4,24 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.EditText;
 
-//Adiciona Máscara aos EditText
+/**
+ * Classe responsável por gerar uma máscara para os @see {@link EditText}.
+ */
+
 public abstract class Mask {
     public static String unmask(String s) {
         return s.replaceAll("[.]", "").replaceAll("[-]", "")
                 .replaceAll("[/]", "").replaceAll("[(]", "")
                 .replaceAll("[)]", "");
     }
+
+    /**
+     * Método estático que será vinculado ao @see {@link EditText} para a formatação do texto de
+     * acordo com o padrão passado.
+     * @param mask - String com o padrão que a máscara utilizará.
+     * @param ediTxt - @see {@link EditText} que receberá a formatação da máscara.
+     * @return - Retorna o texto formatado.
+     */
 
     public static TextWatcher insert(final String mask, final EditText ediTxt) {
         return new TextWatcher() {
@@ -41,7 +52,11 @@ public abstract class Mask {
                 ediTxt.setText(mascara);
                 ediTxt.setSelection(mascara.length());
             }
+
+            @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
             public void afterTextChanged(Editable s) {}
         };
     }
