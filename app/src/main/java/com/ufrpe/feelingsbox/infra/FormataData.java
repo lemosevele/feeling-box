@@ -89,6 +89,12 @@ public class FormataData {
         return simpleDateFormat.format(date);
     }
 
+    /**
+     * Método para verificar se a data está no formato adequado
+     * @param data Data
+     * @return Retorna se a data é válida ou não
+     */
+
     static boolean dataExiste(String data){
         SimpleDateFormat dataFormatada = new SimpleDateFormat (DATA_COMUM_GUI);
         dataFormatada.setLenient (false);
@@ -112,6 +118,12 @@ public class FormataData {
 
         return false;
     }
+
+    /**
+     * Método para verificar se a data informada é menor ou igual a de hoje
+     * @param data Data
+     * @return Retorna se a data é menor ou igal que a atual
+     */
 
     static boolean dataMenorOuIgualQueAtual(String data){
         SimpleDateFormat dataFormatada = new SimpleDateFormat (DATA_COMUM_GUI);
@@ -142,6 +154,12 @@ public class FormataData {
 
         return false;
     }
+
+    /**
+     * Método para exibir horário/data da criação do post
+     * @param data Data de criação do post
+     * @return Retorna uma String com a descrição do horário/data da criação do post
+     */
 
     public static String tempoParaMostrarEmPost(String data){
 
