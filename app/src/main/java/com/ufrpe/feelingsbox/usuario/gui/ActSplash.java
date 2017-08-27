@@ -15,7 +15,7 @@ import com.ufrpe.feelingsbox.usuario.gui.ActLogin;
 import com.ufrpe.feelingsbox.usuario.usuarioservices.UsuarioService;
 
 /**
- * Classe responsável pela Tela de Carregamento Inicial
+ * Classe responsável pela Tela de Carregamento Inicial.
  */
 
 public class ActSplash extends AppCompatActivity {
@@ -28,8 +28,8 @@ public class ActSplash extends AppCompatActivity {
         setContentView(R.layout.act_splash);
 
         /**
-         * Thread que parará a aplicação um curto periódo para exibição da Tela de Boas-Vindas
-         * e logo após chamará método que analisará se há uma sessão no banco para logar
+         * @see Thread que parará a aplicação um curto periódo para exibição da Tela de Boas-Vindas
+         * e logo após chamará método que analisará se há uma sessão no banco de dados para logar
          * automaticamente.
          */
 
@@ -57,7 +57,7 @@ public class ActSplash extends AppCompatActivity {
     }
 
     /**
-     * Método que muda da tela atual para a Tela de Login @see {@link ActLogin}
+     * Método que muda da tela atual para a Tela de Login @see {@link ActLogin}.
      */
 
     private void mudarTelaLogin(){
@@ -67,9 +67,9 @@ public class ActSplash extends AppCompatActivity {
     }
 
     /**
-     * Método que tentará logar automáticamente caso haja uma sessão no banco, caso contrário,
-     * chamará o método @see mudarTelaLogin
-     * @param usuario - Objeto do tipo usuário @see {@link Usuario}
+     * Método que tentará logar automáticamente caso haja uma sessão no banco de dados, caso contrário,
+     * chamará o método @see mudarTelaLogin.
+     * @param usuario - Objeto do tipo usuário @see {@link Usuario}.
      */
 
     private void chamarValidacao(Usuario usuario){

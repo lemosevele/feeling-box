@@ -32,6 +32,10 @@ import java.util.ArrayList;
 import static com.ufrpe.feelingsbox.redesocial.dominio.BundleEnum.COMENTARIO;
 import static com.ufrpe.feelingsbox.redesocial.dominio.BundleEnum.ID_POST;
 
+/**
+ * Classe responsável pela Tela de Busca.
+ */
+
 public class ActSearchable extends AppCompatActivity implements RecyclerViewOnClickListenerhack{
     private ArrayList<Post> mListAux;
     private RecyclerView mRecyclerView;
@@ -78,6 +82,11 @@ public class ActSearchable extends AppCompatActivity implements RecyclerViewOnCl
         handleSearch(intent);
     }
 
+    /**
+     * Captura o texto digitado para ser usado no método @see buscarPosts.
+     * @param intent - @see {@link Intent}.
+     */
+
     public void handleSearch(Intent intent){
         if(Intent.ACTION_SEARCH.equalsIgnoreCase(intent.getAction())){
             String stringBusca = intent.getStringExtra(SearchManager.QUERY);
@@ -85,6 +94,12 @@ public class ActSearchable extends AppCompatActivity implements RecyclerViewOnCl
             buscarPosts(stringBusca);
         }
     }
+
+    /**
+     * Método envia a string para @see {@link RedeServices} para exibir uma lista de Postagens
+     * (@see {@link Post}) com base no resultado da pesquisa do banco de dados.
+     * @param stringBusca - Texto digitado pelo usuário.
+     */
 
     public void buscarPosts(String stringBusca){
         mListAux.clear();

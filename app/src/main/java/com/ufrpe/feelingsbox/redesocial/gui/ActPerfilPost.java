@@ -22,6 +22,9 @@ import static com.ufrpe.feelingsbox.redesocial.dominio.BundleEnum.MAIN_FRAG;
 import static com.ufrpe.feelingsbox.redesocial.dominio.BundleEnum.SEGUIDORES;
 import static com.ufrpe.feelingsbox.redesocial.dominio.BundleEnum.SEGUIDOS;
 
+/**
+ * Classe responsável pela Tela de Perfil Público.
+ */
 public class ActPerfilPost extends AppCompatActivity {
     private Sessao sessao = Sessao.getInstancia();
     private MenuItem actionFollow;
@@ -30,6 +33,11 @@ public class ActPerfilPost extends AppCompatActivity {
     private TextView numSeguidos, numSeguidores;
     private RedeServices redeServices;
     private long longSeguidos, longSeguidores;
+
+    /**
+     Construtor - Envia para a pilha de histórico de Telas uma referência da própria classe. @see {@link Sessao}.
+     * E define o @see {@link Usuario} logado como atributo da Classe.
+     */
 
     public ActPerfilPost() {
         super();
@@ -53,6 +61,11 @@ public class ActPerfilPost extends AppCompatActivity {
         this.atualizarNumSeguidores();
         this.iniciarFragment();
     }
+
+    /**
+     * Método que declara os tipos dos atributos que referenciam os @see {@link TextView} que serão
+     * modificados com base nos dados do @see {@link Usuario} a serem exibido.
+     */
 
     private void encontrandoItens(){
         numSeguidos = (TextView) findViewById(R.id.txtSeguidosValor);
@@ -132,6 +145,11 @@ public class ActPerfilPost extends AppCompatActivity {
         super.onBackPressed();
     }
 
+    /**
+     * Método retorna para a Tela anterior com base no penúltimo resgistro na pilha de histórico na
+     * instância Classe @see {@link Sessao}´, pois o último é uma auto referência.
+     */
+
     private void retornarTela(){
         sessao.popHistorico();
         sessao.popUsuario();
@@ -140,12 +158,22 @@ public class ActPerfilPost extends AppCompatActivity {
         finish();
     }
 
+    /**
+     * Método que muda a tela para a Tela de Seguindo @see {@link ActSeguidosSeguidores}..
+     * @param view - Referência ao Botão Seguindo @see {@link View} e {@link com.ufrpe.feelingsbox.R.layout}.
+     */
+
     public void onClickSeguidos(View view){
         Intent intent = new Intent(this, ActSeguidosSeguidores.class);
         sessao.addModo(SEGUIDOS);
         startActivity(intent);
         finish();
     }
+
+    /**
+     * Método que muda a tela para a Tela de Seguidores @see {@link ActSeguidosSeguidores}..
+     * @param view - Referência ao Botão Seguidores @see {@link View} e {@link com.ufrpe.feelingsbox.R.layout}.
+     */
 
     public void onClickSeguidores(View view){
         Intent intent = new Intent(this, ActSeguidosSeguidores.class);
