@@ -17,6 +17,11 @@ import com.ufrpe.feelingsbox.usuario.dominio.Usuario;
 
 import java.util.List;
 
+/**
+ * Classe que personaliza o @see {@link android.support.v7.widget.RecyclerView.Adapter} para exibição
+ * dos @see {@link Usuario}.
+ */
+
 public class UserRecyclerAdapter extends RecyclerView.Adapter<UserRecyclerAdapter.MyViewHolder> {
     private List<Usuario> mList;
     private LayoutInflater mLayoutInflater;
@@ -24,7 +29,12 @@ public class UserRecyclerAdapter extends RecyclerView.Adapter<UserRecyclerAdapte
     private RedeServices redeServices;
     private Sessao sessao = Sessao.getInstancia();
 
-    //Construtor
+    /**
+     * Construtor - Recebe a @see {@link List} com os @see {@link Usuario} para usar no @see {@link LayoutInflater}.
+     * @param context - Contexto da aplicação.
+     * @param lista - Lista com os @see {@link Usuario}.
+     */
+
     public UserRecyclerAdapter(Context context, List<Usuario> lista) {
         mList = lista;
         mLayoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -49,13 +59,30 @@ public class UserRecyclerAdapter extends RecyclerView.Adapter<UserRecyclerAdapte
         mRecyclerViewOnClickListenerhack = r;
     }
 
+    /**
+     * Método adiciona um @see {@link Usuario} a lista.
+     * @param usuario - @see {@link Usuario}.
+     * @param position - Posição.
+     */
+
     public void addListItem(Usuario usuario, int position){
         mList.add(usuario);
         notifyItemInserted(position);
     }
+
+    /**
+     * Atualiza item da lista quando o usuário segue ou dessegue ao click no botão no @see {@link android.support.v7.widget.CardView}.
+     * @param position - Posição.
+     */
+
     public void atualizarSeguir(int position){
         notifyItemChanged(position);
     }
+
+    /**
+     * Método remove um @see {@link Usuario} da lista.
+     * @param position - Posição.
+     */
 
     public void removeListItem(int position){
         mList.remove(position);
@@ -94,17 +121,32 @@ public class UserRecyclerAdapter extends RecyclerView.Adapter<UserRecyclerAdapte
         Animacao.animacaoZoomIn(holder.itemView);
     }
 
+    /**
+     * Método consulta o número de seguidos do @see {@link Usuario}
+     * @param idUser - Id do @see {@link Usuario}.
+     * @return - String com o número de Seguidos
+     */
+
     private String atualizarNumSeguidos(long idUser){
         long longSeguidos = redeServices.qtdSeguidos(idUser);
         return Long.toString(longSeguidos);
     }
+
+    /**
+     * Método consulta o número de seguidores do @see {@link Usuario}
+     * @param idUser - Id do @see {@link Usuario}.
+     * @return - String com o número de Seguidores
+     */
 
     private String atualizarNumSeguidores(long idUser){
         long longSeguidores = redeServices.qtdSeguidores(idUser);
         return Long.toString(longSeguidores);
     }
 
-    //ViewHolder personalizada
+    /**
+     * Classe que personaliza o @see {@link android.support.v7.widget.RecyclerView.ViewHolder}
+     */
+
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         public ImageView ivUser, btnFollow, btnUnfollow;
         public TextView txtUser, numSeguidos, numSeguidores;

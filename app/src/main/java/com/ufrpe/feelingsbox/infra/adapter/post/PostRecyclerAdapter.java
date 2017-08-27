@@ -19,6 +19,11 @@ import com.ufrpe.feelingsbox.usuario.usuarioservices.UsuarioService;
 
 import java.util.List;
 
+/**
+ * Classe que personaliza o @see {@link android.support.v7.widget.RecyclerView.Adapter} para exibição
+ * dos @see {@link Post}.
+ */
+
 public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapter.MyViewHolder> {
     private Sessao sessao = Sessao.getInstancia();
     private RedeServices redeServices;
@@ -27,7 +32,12 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
     private LayoutInflater mLayoutInflater;
     private RecyclerViewOnClickListenerhack mRecyclerViewOnClickListenerhack;
 
-    //Construtor
+    /**
+     * Construtor - Recebe a @see {@link List} com os @see {@link Post} para usar no @see {@link LayoutInflater}.
+     * @param context - Contexto da aplicação.
+     * @param lista - Lista com os @see {@link Post}.
+     */
+
     public PostRecyclerAdapter(Context context, List<Post> lista) {
         mList = lista;
         mLayoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -53,10 +63,21 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
         mRecyclerViewOnClickListenerhack = r;
     }
 
+    /**
+     * Método adiciona um @see {@link Post} a lista.
+     * @param post - @see {@link Post}.
+     * @param position - Posição.
+     */
+
     public void addListItem(Post post, int position){
         mList.add(post);
         notifyItemInserted(position);
     }
+
+    /**
+     * Método remove um @see {@link Post} da lista.
+     * @param position - Posição.
+     */
 
     public void removeListItem(int position){
         mList.remove(position);
@@ -87,7 +108,10 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostRecyclerAdapte
         Animacao.animacaoZoomIn(holder.itemView);
     }
 
-    //ViewHolder personalizada
+    /**
+     * Classe que personaliza o @see {@link android.support.v7.widget.RecyclerView.ViewHolder}
+     */
+
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         public ImageView ivUser;
         public TextView txtDonoPost, txtPostagem, txtData, numComentario;

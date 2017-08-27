@@ -27,6 +27,11 @@ import java.util.List;
 import static com.ufrpe.feelingsbox.redesocial.dominio.BundleEnum.COMENTARIO;
 import static com.ufrpe.feelingsbox.redesocial.dominio.BundleEnum.ID_POST;
 
+/**
+ * Classe que exibirá @see {@link android.support.v7.widget.CardView} com os dados do @see {@link Comentario}
+ * em um @see {@link ComentarioRecyclerAdapter}.
+ */
+
 public class ComentarioFragment extends Fragment implements RecyclerViewOnClickListenerhack {
     private RecyclerView mRecyclerView;
     private List<Comentario> mList;
@@ -78,7 +83,12 @@ public class ComentarioFragment extends Fragment implements RecyclerViewOnClickL
         return view;
     }
 
-    //Click Normal
+    /**
+     * Método que executa ação ao clicar em um elemento da @see {@link android.support.v7.widget.RecyclerView.ViewHolder}
+     * @param view
+     * @param position
+     */
+
     @Override
     public void onClickListener(View view, int position) {
         Intent intent;
@@ -103,63 +113,11 @@ public class ComentarioFragment extends Fragment implements RecyclerViewOnClickL
         }
 
     }
+
     //Click longo
     @Override
     public void onLongPressClickListener(View view, int position) {
         ComentarioRecyclerAdapter adapter = (ComentarioRecyclerAdapter) mRecyclerView.getAdapter();
         adapter.removeListItem(position);
-    }
-
-    //Passa o objeto pressionado atraves da posição
-    private static class RecyclerViewTouchListener implements RecyclerView.OnItemTouchListener{
-        private Context mContext;
-        private GestureDetector mGestureDetector;
-        private RecyclerViewOnClickListenerhack mRecyclerViewOnClickListenerhack;
-
-        //Construtor
-        public RecyclerViewTouchListener(Context mContext, final RecyclerView recyclerView, final RecyclerViewOnClickListenerhack mRecyclerViewOnClickListenerhack) {
-            this.mContext = mContext;
-            this.mRecyclerViewOnClickListenerhack = mRecyclerViewOnClickListenerhack;
-
-            mGestureDetector = new GestureDetector(mContext, new GestureDetector.SimpleOnGestureListener(){
-                @Override
-                public void onLongPress(MotionEvent e) {
-                    super.onLongPress(e);
-
-                    View cv = recyclerView.findChildViewUnder(e.getX(), e.getY());
-
-                    if(cv != null && mRecyclerViewOnClickListenerhack != null){
-                        mRecyclerViewOnClickListenerhack.onLongPressClickListener(cv, recyclerView.getChildPosition(cv));
-                    }
-                }
-
-                @Override
-                public boolean onSingleTapUp(MotionEvent e) {
-                    View cv = recyclerView.findChildViewUnder(e.getX(), e.getY());
-
-                    if(cv != null && mRecyclerViewOnClickListenerhack != null){
-                        mRecyclerViewOnClickListenerhack.onClickListener(cv, recyclerView.getChildPosition(cv));
-                    }
-
-                    return true;
-                }
-            });
-        }
-
-        @Override
-        public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
-            mGestureDetector.onTouchEvent(e);
-            return false;
-        }
-
-        @Override
-        public void onTouchEvent(RecyclerView rv, MotionEvent e) {
-
-        }
-
-        @Override
-        public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
-
-        }
     }
 }
