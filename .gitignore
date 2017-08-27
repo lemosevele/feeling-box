@@ -35,5 +35,5 @@ build/
 #NDK
 obj/
 
-#md
+#Mark Down
 *.md
