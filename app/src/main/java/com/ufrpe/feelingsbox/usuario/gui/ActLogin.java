@@ -15,7 +15,7 @@ import com.ufrpe.feelingsbox.redesocial.gui.ActHome;
 import com.ufrpe.feelingsbox.usuario.usuarioservices.UsuarioService;
 
 /**
- * Classe responsável pela Tela de Login
+ * Classe responsável pela Tela de Login.
  */
 
 public class ActLogin extends AppCompatActivity {
@@ -32,8 +32,8 @@ public class ActLogin extends AppCompatActivity {
     }
 
     /**
-     * Método que declara os tipos dos atributos que referenciam os campos Login e Senha que serão
-     * mostrados na Tela.
+     * Método que declara os tipos dos atributos que referenciam os campos Login e Senha (@see {@link EditText})
+     * que serão mostrados na Tela.
      */
 
     private void encontrandoItens(){
@@ -42,8 +42,8 @@ public class ActLogin extends AppCompatActivity {
     }
 
     /**
-     * Método que muda da tela atual para a Tela de Cadastro @see {@link ActSignUp}
-     * @param view - Referência ao Botão Cadastrar @see {@link View} e {@link com.ufrpe.feelingsbox.R.layout}
+     * Método que muda da tela atual para a Tela de Cadastro @see {@link ActSignUp}.
+     * @param view - Referência ao Botão Cadastrar @see {@link View} e {@link com.ufrpe.feelingsbox.R.layout}.
      */
 
     public void cadastrarUsuario(View view){
@@ -54,8 +54,8 @@ public class ActLogin extends AppCompatActivity {
     /**
      * Método que passará texto dos campos Login e Senha para serem analisados pelo método isCampoVazio
      * @see {@link ValidacaoService}, que verificará se os campos estão vazios, Caso não estejam
-     * chamará método (@link chamarValidacao)
-     * @param view - Referência ao Botão Logar @see {@link View} e {@link com.ufrpe.feelingsbox.R.layout}
+     * chamará método (@link chamarValidacao).
+     * @param view - Referência ao Botão Logar @see {@link View} e {@link com.ufrpe.feelingsbox.R.layout}.
      */
 
     public void efetuarLogin(View view){
@@ -82,10 +82,10 @@ public class ActLogin extends AppCompatActivity {
 
     /**
      * Método que passará o texto digitado nos Campos Login e Senha para a Classe @see {@link UsuarioService}
-     * as devida validações junto ao banco. Dependendo do retorno dado pela Classe @link {@link UsuarioService}
+     * as devida validações junto ao banco de dados. Dependendo do retorno dado pela Classe @link {@link UsuarioService}
      * este método chamará o método @see irTelaHome ou apresentará uma mensagem de erro para o usuário.
-     * @param login - Texto do Campo Login
-     * @param senha - Texto do Campo Senha
+     * @param login - Texto do Campo Login.
+     * @param senha - Texto do Campo Senha.
      */
 
     private void chamarValidacao(String login, String senha){
@@ -112,7 +112,7 @@ public class ActLogin extends AppCompatActivity {
     }
 
     /**
-     * Método que muda da tela atual para a Tela Principal @see {@link ActHome}
+     * Método que muda da tela atual para a Tela Principal @see {@link ActHome}.
      */
 
     private void irTelaHome(){

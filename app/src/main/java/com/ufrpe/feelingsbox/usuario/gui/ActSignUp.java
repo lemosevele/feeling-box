@@ -18,7 +18,7 @@ import com.ufrpe.feelingsbox.usuario.usuarioservices.UsuarioService;
 import static com.ufrpe.feelingsbox.usuario.dominio.SexoEnum.sexoEnumLista;
 
 /**
- * Classe responsável pela Tela de Cadastro
+ * Classe responsável pela Tela de Cadastro.
  */
 
 public class ActSignUp extends AppCompatActivity {
@@ -63,9 +63,9 @@ public class ActSignUp extends AppCompatActivity {
     /**
      * Método passará os dados digitados pelo usuário para serem validados pela Classe @see {@link ValidacaoService},
      * após uma válidação positiva, os dados serão enviados para a Classe @see {@link UsuarioService}
-     * para serem gravadas no banco. Mensagens de erro serão mostradas caso a validação ou o registro
-     * no banco falhem.
-     * @param view - Referência ao Botão Cadastrar @see {@link View} e {@link com.ufrpe.feelingsbox.R.layout}
+     * para serem gravadas no banco de dados. Mensagens de erro serão mostradas caso a validação ou o registro
+     * no banco de dados falhem.
+     * @param view - Referência ao Botão Cadastrar @see {@link View} e {@link com.ufrpe.feelingsbox.R.layout}.
      */
 
     public void validarCadastrar(View view){
@@ -118,8 +118,8 @@ public class ActSignUp extends AppCompatActivity {
     }
 
     /**
-     * Retorna para a Tela de Login
-     * @param view - Referência ao Botão Cancelar @see {@link View} e {@link com.ufrpe.feelingsbox.R.layout}
+     * Retorna para a @see {@link ActLogin}.
+     * @param view - Referência ao Botão Cancelar @see {@link View} e {@link com.ufrpe.feelingsbox.R.layout}.
      */
 
     public void cancelarCadastro(View view){

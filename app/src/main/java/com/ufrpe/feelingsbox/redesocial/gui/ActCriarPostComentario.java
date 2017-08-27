@@ -17,12 +17,20 @@ import com.ufrpe.feelingsbox.redesocial.dominio.BundleEnum;
 import com.ufrpe.feelingsbox.redesocial.dominio.Sessao;
 import com.ufrpe.feelingsbox.redesocial.redesocialservices.RedeServices;
 
+/**
+ * Classe responsável pela Tela de Criação de Postagens e Comentários.
+ */
 
 public class ActCriarPostComentario extends AppCompatActivity {
     private MultiAutoCompleteTextView edtComentario;
     private Long idPost;
     private Sessao sessao = Sessao.getInstancia();
     private BundleEnum modo;
+
+    /**
+     * Construtor - Recebe um @see {@link BundleEnum} da Classe @see {@link Sessao} que indicará
+     * se a Tela será de Postagem ou Comentário.
+     */
 
     public ActCriarPostComentario() {
         modo = sessao.getUltimoModo();
@@ -64,6 +72,11 @@ public class ActCriarPostComentario extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Método chamará @see registrarComentario @see registrarPost com base valor recebido no Construtor.
+     * @param view - Referência ao Botão Enviar @see {@link View} e @see {@link com.ufrpe.feelingsbox.R.layout}.
+     */
+
     public void onClickPostarComentar(View view){
         if(modo == BundleEnum.POST){
             this.registrarPost();
@@ -73,6 +86,11 @@ public class ActCriarPostComentario extends AppCompatActivity {
             GuiUtil.myAlertDialog(this, "Modo é igual a " + modo);
         }
     }
+
+    /**
+     * Método registra o Comentário digitado no banco de dados.
+     * @see {@link RedeServices}.
+     */
 
     private void registrarComentario(){
         String texto = edtComentario.getText().toString();
@@ -97,6 +115,11 @@ public class ActCriarPostComentario extends AppCompatActivity {
         }
     }
 
+    /**
+     * Método registra a Postagem (@see {@link com.ufrpe.feelingsbox.redesocial.dominio.Post}) digitada no banco de dados.
+     * @see {@link RedeServices}.
+     */
+
     private void registrarPost(){
         String texto = edtComentario.getText().toString();
 
@@ -120,6 +143,11 @@ public class ActCriarPostComentario extends AppCompatActivity {
         retornarHome();
         super.onBackPressed();
     }
+
+    /**
+     * Método retorna para a Tela anterior com base no último resgistro na pilha de histórico na
+     * instância Classe @see {@link Sessao}.
+     */
 
     private void retornarHome(){
         sessao.popModo();

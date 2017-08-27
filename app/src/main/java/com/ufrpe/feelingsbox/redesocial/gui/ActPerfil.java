@@ -21,11 +21,20 @@ import static com.ufrpe.feelingsbox.redesocial.dominio.ActEnum.ACT_PERFIL;
 import static com.ufrpe.feelingsbox.redesocial.dominio.BundleEnum.SEGUIDORES;
 import static com.ufrpe.feelingsbox.redesocial.dominio.BundleEnum.SEGUIDOS;
 
+/**
+ * Classe responsável para Tela de Perfil (Conta).
+ */
+
 public class ActPerfil extends AppCompatActivity {
     private TextView txtNome, txtNicK, txtNasc, txtSexo, txtEmail, numSeguidos, numSeguidores;
     private Sessao sessao = Sessao.getInstancia();
     private Pessoa pessoaLogada;
     private Usuario usuarioLogado;
+
+    /**
+     * Construtor - Envia para a pilha de histórico de Telas uma referência da própria classe. @see {@link Sessao}.
+     * E define o @see {@link Usuario} e @see {@link Pessoa} logado como atributo da Classe.
+     */
 
     public ActPerfil() {
         super();
@@ -45,6 +54,12 @@ public class ActPerfil extends AppCompatActivity {
         this.encontrandoItens();
         this.atualizarDados();
     }
+
+    /**
+     * Método que declara os tipos dos atributos que referenciam os @see {@link TextView} que serão modificados com
+     * base nos dados do @see {@link Usuario} a serem exibidos.
+     */
+
     private void encontrandoItens(){
         txtNome       = (TextView) findViewById(R.id.txtNome);
         txtNicK       = (TextView) findViewById(R.id.txtNick);
@@ -54,6 +69,10 @@ public class ActPerfil extends AppCompatActivity {
         numSeguidos   = (TextView) findViewById(R.id.txtSeguidosValor);
         numSeguidores = (TextView) findViewById(R.id.txtSeguidoresValor);
     }
+
+    /**
+     * Exibe os valores nos @see {@link TextView} com base nos dados do @see {@link Usuario}.
+     */
 
     private void atualizarDados(){
         txtNome.setText(pessoaLogada.getNome());
@@ -99,11 +118,20 @@ public class ActPerfil extends AppCompatActivity {
         super.onBackPressed();
     }
 
+    /**
+     * Método retorna para @see {@link ActHome}.
+     */
+
     private void retornarHome(){
         Intent intent = new Intent(this, ActHome.class);
         startActivity(intent);
         finish();
     }
+
+    /**
+     * Método que muda a tela para a Tela de Seguindo @see {@link ActSeguidosSeguidores}.
+     * @param view - Referência ao Botão Seguindo @see {@link View} e {@link com.ufrpe.feelingsbox.R.layout}.
+     */
 
     public void onClickSeguidos(View view){
         Intent intent = new Intent(this, ActSeguidosSeguidores.class);
@@ -111,6 +139,11 @@ public class ActPerfil extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
+    /**
+     * Método que muda a tela para a Tela de Seguidores @see {@link ActSeguidosSeguidores}..
+     * @param view - Referência ao Botão Seguidores @see {@link View} e {@link com.ufrpe.feelingsbox.R.layout}.
+     */
 
     public void onClickSeguidores(View view){
         Intent intent = new Intent(this, ActSeguidosSeguidores.class);

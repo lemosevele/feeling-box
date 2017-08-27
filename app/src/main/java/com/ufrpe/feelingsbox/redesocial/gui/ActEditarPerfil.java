@@ -29,6 +29,9 @@ import java.util.Objects;
 
 import static com.ufrpe.feelingsbox.usuario.dominio.SexoEnum.sexoEnumLista;
 
+/**
+ * Classe responsável pela Tela de Edição de Perfil.
+ */
 
 public class ActEditarPerfil extends AppCompatActivity {
     private EditText edtNomePerfil, edtNickPerfil, edtEmailPerfil, edtNascPerfil, edtSenhaPerfil;
@@ -51,6 +54,11 @@ public class ActEditarPerfil extends AppCompatActivity {
         encontrandoSpinner();
     }
 
+    /**
+     * Método que declara os tipos dos atributos que referenciam os Campos do @see {@link EditText}
+     * e o @see {@link Spinner} na Tela.
+     */
+
     private void encontrandoItens(){
         edtNomePerfil  = (EditText) findViewById(R.id.edtNomePerfil);
         edtNickPerfil  = (EditText) findViewById(R.id.edtNickPerfil);
@@ -59,6 +67,11 @@ public class ActEditarPerfil extends AppCompatActivity {
         edtSenhaPerfil = (EditText) findViewById(R.id.edtSenhaPerfil);
         edtNascPerfil.addTextChangedListener(Mask.insert("##/##/####", edtNascPerfil));
     }
+
+    /**
+     * Método que define os valores a serem exibidos no @see {@link Spinner}, onde o valor
+     * da seleção inicial é definido com base no Sexo do usuário (@see {@link Pessoa}) logado.
+     */
 
     private void encontrandoSpinner(){
         //ArrayAdapter é usado preparar a lista da por no Spinner
@@ -119,11 +132,26 @@ public class ActEditarPerfil extends AppCompatActivity {
         super.onBackPressed();
     }
 
+    /**
+     * Método retorna para a @see {@link ActPerfil}
+     */
+
     private void retornaPerfil(){
         Intent intent = new Intent(this, ActPerfil.class);
         startActivity(intent);
         finish();
     }
+
+    /**
+     * Método envia os dados digitados para serem validados pela Classe @see {@link ValidacaoService}.
+     * e caso a validação seja positiva, envia os dados para serem gravados no banco de dados. @see {@link UsuarioService}.
+     * @param nome - Nome @see {@link Pessoa}.
+     * @param nick - Apelido @see {@link Usuario}.
+     * @param email - E-mail do @see {@link Usuario}.
+     * @param nasc - Data de Nascimento @see {@link Pessoa}.
+     * @param senha - Senha @see {@link Usuario}.
+     * @param sexo - Sexo @see {@link Pessoa}.
+     */
 
     private void editaPerfil(String nome, String nick, String email, String nasc, String senha, String sexo){
         Pessoa pessoaLogada = sessao.getPessoaLogada();
@@ -159,7 +187,15 @@ public class ActEditarPerfil extends AppCompatActivity {
         }
     }
 
-    private boolean validaSenha(String senha,Usuario usuarioLogado, ValidacaoService validaEdt){
+    /**
+     * Método envia a senha para ser Criptografada @see {@link Criptografia}.
+     * @param senha - Senha digitada.
+     * @param usuarioLogado - @see {@link Usuario} logado.
+     * @param validaEdt - Instância de @see {@link ValidacaoService}.
+     * @return - Verdadeiro quando a senha é criptografada com sucesso.
+     */
+
+    private boolean validaSenha(String senha, Usuario usuarioLogado, ValidacaoService validaEdt){
         if (validaEdt.isSenhaValida(senha)){
             Criptografia criptografia = new Criptografia();
             String senhaCriptografada = null;
@@ -178,6 +214,14 @@ public class ActEditarPerfil extends AppCompatActivity {
         }
     }
 
+    /**
+     * Método envia a Data para ser formatada @see {@link FormataData}.
+     * @param nasc - Data de Nascimento @see {@link Pessoa}.
+     * @param pessoaLogada - @see {@link Pessoa} logada.
+     * @param validaEdt - Instância de @see {@link ValidacaoService}.
+     * @return - Retorna verdadeiro quando a Data digitada está no formato correto.
+     */
+
     private boolean validaNasc(String nasc, Pessoa pessoaLogada, ValidacaoService validaEdt) {
         if (validaEdt.isNascValido(nasc)) {
             pessoaLogada.setDataNasc(FormataData.americano(nasc));
@@ -188,6 +232,14 @@ public class ActEditarPerfil extends AppCompatActivity {
             return false;
         }
     }
+
+    /**
+     * Método envia o E-mail para ser validado @see {@link ValidacaoService}.
+     * @param email - E-mail @see {@link Usuario}.
+     * @param usuarioLogado - @see {@link Usuario} logado.
+     * @param validaEdt  - Instância de @see {@link ValidacaoService}.
+     * @return - Retorna verdadeiro quando o E-mail digitado está no formato correto.
+     */
 
     private boolean validaEmail(String email, Usuario usuarioLogado, ValidacaoService validaEdt){
         if (validaEdt.isEmailValido(email)) {
@@ -200,6 +252,14 @@ public class ActEditarPerfil extends AppCompatActivity {
             return false;
         }
     }
+
+    /**
+     * Método envia o apelido para ser validado. @see {@link ValidacaoService}.
+     * @param nick - Apelido @see {@link Usuario}.
+     * @param usuarioLogado - @see {@link Usuario} logado.
+     * @param validaEdt  - Instância de @see {@link ValidacaoService}.
+     * @return - Retorna verdadeiro quando o E-mail digitado é válido.
+     */
 
     private boolean validaNick(String nick, Usuario usuarioLogado, ValidacaoService validaEdt){
         if (validaEdt.isNickValido(nick)){

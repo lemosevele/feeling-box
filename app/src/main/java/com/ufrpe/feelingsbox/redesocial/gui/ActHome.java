@@ -25,6 +25,9 @@ import com.ufrpe.feelingsbox.usuario.gui.ActLogin;
 import static com.ufrpe.feelingsbox.redesocial.dominio.ActEnum.ACT_HOME;
 import static com.ufrpe.feelingsbox.redesocial.dominio.BundleEnum.POST;
 
+/**
+ * Classe responsável pela Tela Principal.
+ */
 
 public class ActHome extends AppCompatActivity {
     private Sessao sessao = Sessao.getInstancia();
@@ -32,6 +35,10 @@ public class ActHome extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
 
+    /**
+     * Construtor - Limpa os dados das listas de navegação da instâcia e define o Usuário Logado da
+     * Classe @see {@link Sessao} como atributo da Classe.
+     */
 
     public ActHome() {
         super();
@@ -62,14 +69,23 @@ public class ActHome extends AppCompatActivity {
         this.atualizarElementos();
     }
 
+    /**
+     * Método que declara os tipos dos atributos que referenciam o @see {@link TabLayout} e @see {@link ViewPager}.
+     */
+
     private void encontrandoElementos(){
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         viewPager = (ViewPager) findViewById(R.id.vp_tabs);
     }
+
+    /**
+     * Método vincula a @see {@link TabLayout} ao @see {@link ViewPager}.
+     */
+
     private void atualizarElementos(){
         viewPager.setAdapter(new TabsAdapter(getSupportFragmentManager(), this));
         tabLayout.setupWithViewPager(viewPager);
-        viewPager.setCurrentItem(sessao.getTabAtiva());
+        //viewPager.setCurrentItem(sessao.getTabAtiva());
     }
 
 
@@ -108,6 +124,12 @@ public class ActHome extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+
+    /**
+     * Método que muda da tela atual para uma nova Tela com base no parametro recebido.
+     * @param novaTela - Classe da proxima Tela a ser exibida.
+     */
 
     private void mudarTela(Class novaTela){
         Intent it = new Intent(this, novaTela);

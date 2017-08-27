@@ -5,7 +5,18 @@ import android.text.Spanned;
 import android.text.TextUtils;
 import android.widget.MultiAutoCompleteTextView;
 
+/**
+ * Classe responsável pela interação do @see {@link MultiAutoCompleteTextView} com lista de sugestões.
+ */
+
 public class SpaceTokenizer implements MultiAutoCompleteTextView.Tokenizer {
+
+    /**
+     * @see {@Link android.widget.MultiAutoCompleteTextView.Tokenizer}.
+     * @param text - Texto.
+     * @param cursor - Posição do Cursor.
+     * @return - Retorna o índice de inicio do Token.
+     */
 
     public int findTokenStart(CharSequence text, int cursor) {
         int i = cursor;
@@ -19,6 +30,13 @@ public class SpaceTokenizer implements MultiAutoCompleteTextView.Tokenizer {
 
         return i;
     }
+
+    /**
+     * @see {@Link android.widget.MultiAutoCompleteTextView.Tokenizer}.
+     * @param text - Texto.
+     * @param cursor - Posição do Cursor.
+     * @return - Retorna o índice de fim do Token.
+     */
 
     public int findTokenEnd(CharSequence text, int cursor) {
         int i = cursor;
@@ -34,6 +52,12 @@ public class SpaceTokenizer implements MultiAutoCompleteTextView.Tokenizer {
 
         return len;
     }
+
+    /**
+     * @see {@Link android.widget.MultiAutoCompleteTextView.Tokenizer}.
+     * @param text - Texto.
+     * @return - Retorna texto modificado.
+     */
 
     public CharSequence terminateToken(CharSequence text) {
         int i = text.length();

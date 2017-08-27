@@ -25,6 +25,10 @@ import static com.ufrpe.feelingsbox.redesocial.dominio.BundleEnum.COMENTARIO;
 import static com.ufrpe.feelingsbox.redesocial.dominio.BundleEnum.ID_POST;
 import static com.ufrpe.feelingsbox.redesocial.dominio.BundleEnum.MAIN_FRAG;
 
+/**
+ * Classe responsável pela Tela de Postagem
+ */
+
 public class ActPost extends AppCompatActivity {
     private Sessao sessao = Sessao.getInstancia();
     private TextView txtDonoPost, txtData, txtPostagem, numComentario;
@@ -32,6 +36,11 @@ public class ActPost extends AppCompatActivity {
     private Usuario usuarioDonoTela;
     private ImageView ivUser;
     private RedeServices redeServices;
+
+    /**
+     * Construtor - Envia para a pilha de histórico de Telas uma referência da própria classe. @see {@link Sessao}.
+     * E define o @see {@link Usuario} logado e o @see {@link Post} como atributo da Classe.
+     */
 
     public ActPost() {
         super();
@@ -53,6 +62,11 @@ public class ActPost extends AppCompatActivity {
         iniciarFragment();
     }
 
+    /**
+     * Método que declara os tipos dos atributos que referenciam os @see {@link TextView} que serão
+     * modificados com base nos dados do @see {@link Post} a serem exibido.
+     */
+
     private void encontrandoItens(){
         txtDonoPost = (TextView) findViewById(R.id.txtDonoPost);
         txtData     = (TextView) findViewById(R.id.txtData);
@@ -60,6 +74,10 @@ public class ActPost extends AppCompatActivity {
         numComentario = (TextView) findViewById(R.id.numComentario);
         ivUser      = (ImageView) findViewById(R.id.ivUser);
     }
+
+    /**
+     * Exibe os valores nos textos com base nos dados do @see {@link Post}.
+     */
 
     private void atualizarPostagem(){
         redeServices = new RedeServices(getApplicationContext());
@@ -75,6 +93,10 @@ public class ActPost extends AppCompatActivity {
             txtDonoPost.setTextColor(getResources().getColor(R.color.colorUserFont));
         }
     }
+
+    /**
+     * Método inicia o @see {@link ComentarioFragment} que exibirá a listagem de @see {@link com.ufrpe.feelingsbox.redesocial.dominio.Comentario}.
+     */
 
     private void iniciarFragment(){
         ComentarioFragment frag = (ComentarioFragment) getSupportFragmentManager().findFragmentByTag(MAIN_FRAG.getValor());
@@ -115,6 +137,11 @@ public class ActPost extends AppCompatActivity {
         super.onBackPressed();
     }
 
+    /**
+     * Método retorna para a Tela anterior com base no penúltimo resgistro na pilha de histórico na
+     * instância Classe @see {@link Sessao}´, pois o último é uma auto referência.
+     */
+
     private void retornarTela(){
         sessao.popHistorico();
         sessao.popPost();
@@ -124,12 +151,23 @@ public class ActPost extends AppCompatActivity {
         finish();
     }
 
+    /**
+     * Método muda a tela para @see {@link ActPerfilPost}.
+     * @param view - Referência ao Botão Foto de Perfil @see {@link View} e @see {@link com.ufrpe.feelingsbox.R.layout}.
+     */
+
     public void onCLickFotoPost(View view){
         sessao.addUsuario(usuarioDonoTela);
         Intent intent = new Intent(this, ActPerfilPost.class);
         startActivity(intent);
         finish();
     }
+
+    /**
+     * Método muda a tela para @see {@link ActCriarPostComentario}.
+     * @param view - Referência ao Botão Comentar @see {@link View} e @see {@link com.ufrpe.feelingsbox.R.layout}.
+     */
+
     public void onClickComentar(View view){
         sessao.addModo(COMENTARIO);
         Intent intent = new Intent(view.getContext(), ActCriarPostComentario.class);

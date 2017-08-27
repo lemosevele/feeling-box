@@ -17,8 +17,16 @@ import com.ufrpe.feelingsbox.redesocial.dominio.Sessao;
 import static com.ufrpe.feelingsbox.redesocial.dominio.ActEnum.ACT_SEGUIDOS_SEGUIDORES;
 import static com.ufrpe.feelingsbox.redesocial.dominio.BundleEnum.MAIN_FRAG;
 
+/**
+ * Classe responsável pela Tela de Seguindo e Seguidores.
+ */
+
 public class ActSeguidosSeguidores extends AppCompatActivity {
     private Sessao sessao = Sessao.getInstancia();
+
+    /**
+     * Construtor - Envia para a pilha de histórico de Telas uma referência da própria classe. @see {@link Sessao}.
+     */
 
     public ActSeguidosSeguidores() {
         super();
@@ -43,6 +51,10 @@ public class ActSeguidosSeguidores extends AppCompatActivity {
 
         this.iniciarFragment();
     }
+
+    /**
+     * Método inicia o @see {@link UserFragment} que exibirá a listagem de seguindo ou seguidores.
+     */
 
     private void iniciarFragment(){
         UserFragment frag = (UserFragment) getSupportFragmentManager().findFragmentByTag(MAIN_FRAG.getValor());
@@ -82,6 +94,11 @@ public class ActSeguidosSeguidores extends AppCompatActivity {
         retornarTela();
         super.onBackPressed();
     }
+
+    /**
+     * Método retorna para a Tela anterior com base no penúltimo resgistro na pilha de histórico na
+     * instância Classe @see {@link Sessao}´, pois o último é uma auto referência.
+     */
 
     public void retornarTela(){
         sessao.popHistorico();
