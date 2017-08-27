@@ -1,9 +1,3 @@
-<h2>
-  <p align="center">
-    Repositório do projeto da disciplina Modelagem e Programação Orientada a Objetos da UFRPE
-  </p>
-</h2>
-
 <p align="center">
   <a href="https://sites.google.com/view/feelingbox" >
     <img alt="FeelingBox" src="https://lh4.googleusercontent.com/PwyO7_4kO3E9bDZuKQ2ZQpoDadNGIgHOOA8It5Qe7BWJbvRHhfsaF0zWA_jUCCCfME7z0vw1JGS3H9k=w1680-h920-rw" width="200"/>
@@ -11,6 +5,13 @@
 </p>
 
 <h1> <p align="center"> FeelingBox </p> </h1>
+
+<h2>
+  <p align="center">
+    Repositório do projeto da disciplina Modelagem e Programação Orientada a Objetos da UFRPE
+  </p>
+</h2>
+
 
 ## [Documentação](https://sites.google.com/view/feelingbox/documenta%C3%A7%C3%A3o)
 
