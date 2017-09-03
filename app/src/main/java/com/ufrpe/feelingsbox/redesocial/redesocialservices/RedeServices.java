@@ -324,7 +324,12 @@ public class RedeServices {
         double denominador = Math.sqrt(prodInt1) * Math.sqrt(prodInt2);
         BigDecimal big1 = new BigDecimal(numerador);
         BigDecimal big2 = new BigDecimal(denominador);
-        return big1.divide(big2, 3, RoundingMode.UP);
+
+        if(denominador != (double) 0){
+            return big1.divide(big2, 3, RoundingMode.UP);
+        } else {
+            return big2;
+        }
     }
 
     /**
