@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -34,6 +35,14 @@ public class ActCriarPostComentario extends AppCompatActivity {
 
     public ActCriarPostComentario() {
         modo = sessao.getUltimoModo();
+        if(modo == null) {
+            Log.d("ActCriarPostComentari()", getString(R.string.erro_msg_mododonotela_null));
+            GuiUtil.myToast(this, getString(R.string.erro_msg_mododonotela_null));
+            Intent intent = new Intent(this, ActHome.class);
+            startActivity(intent);
+            finish();
+        }
+
     }
 
     @Override
@@ -66,7 +75,7 @@ public class ActCriarPostComentario extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case android.R.id.home:
-                retornarHome();
+                retornarTela();
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -84,6 +93,7 @@ public class ActCriarPostComentario extends AppCompatActivity {
             this.registrarComentario();
         } else {
             GuiUtil.myAlertDialog(this, "Modo é igual a " + modo);
+            retornarTela();
         }
     }
 
@@ -111,7 +121,7 @@ public class ActCriarPostComentario extends AppCompatActivity {
             RedeServices redeServices = new RedeServices(getApplicationContext());
             redeServices.salvarComentario(texto, idPost);
             GuiUtil.myToast(this, getString(R.string.print_msg_comentado));
-            retornarHome();
+            retornarTela();
         }
     }
 
@@ -134,13 +144,13 @@ public class ActCriarPostComentario extends AppCompatActivity {
             RedeServices redeServices = new RedeServices(getApplicationContext());
             redeServices.salvarPost(texto);
             GuiUtil.myToast(this, getString(R.string.print_msg_postado));
-            retornarHome();
+            retornarTela();
         }
     }
 
     @Override
     public void onBackPressed() {
-        retornarHome();
+        retornarTela();
         super.onBackPressed();
     }
 
@@ -149,9 +159,18 @@ public class ActCriarPostComentario extends AppCompatActivity {
      * instância Classe @see {@link Sessao}.
      */
 
-    private void retornarHome(){
-        sessao.popModo();
-        Intent intent = new Intent(this, sessao.popHistorico().getValor());
+    private void retornarTela(){
+        Intent intent;
+        //Try para evitar que o aplicativo feche quando voltar o segundo plano
+        // e alguma das pilhas da instância de sessão forem desfeitas.
+        try {
+            sessao.popModo();
+            intent = new Intent(this, sessao.popHistorico().getValor());
+        } catch (Exception e){
+            Log.d("retornarTela-ActCPComen", e.getMessage());
+            GuiUtil.myToast(this, e);
+            intent = new Intent(this, ActHome.class);
+        }
         startActivity(intent);
         finish();
     }

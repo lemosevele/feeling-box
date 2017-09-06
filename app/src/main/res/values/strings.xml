@@ -95,4 +95,7 @@
     <string name="msg_nick_invalido">Apelido Inválido</string>
     <string name="msg_nome_invalido">Nome Inválido</string>
     <string name="msg_cadastro_sucesso">Cadastrado com Sucesso!</string>
+    <string name="erro_msg_postdonotela_null">postDonoTela é igual a null</string>
+    <string name="erro_msg_usuariodonotela_null">usuarioDonoTela é igual a null</string>
+    <string name="erro_msg_mododonotela_null">modo é igual a null</string>
 </resources>

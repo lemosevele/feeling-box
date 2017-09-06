@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -42,6 +43,7 @@ public class ActSeguidosSeguidores extends AppCompatActivity {
             String texto = sessao.getUltimoModo().getValor();
             toolbar.setTitle(texto);
         } catch (Exception e){
+            Log.d("onCreate-ActSSeguidores", e.getMessage() + " - " + sessao.getUltimoModo());
             GuiUtil.myAlertDialog(this, e.getMessage() + " - " + sessao.getUltimoModo());
         }
 
@@ -101,9 +103,18 @@ public class ActSeguidosSeguidores extends AppCompatActivity {
      */
 
     public void retornarTela(){
-        sessao.popHistorico();
-        sessao.popModo();
-        Intent intent = new Intent(this, sessao.popHistorico().getValor());
+        Intent intent;
+        //Try para evitar que o aplicativo feche quando voltar o segundo plano
+        // e alguma das pilhas da instância de sessão forem desfeitas.
+        try{
+            sessao.popHistorico();
+            sessao.popModo();
+            intent = new Intent(this, sessao.popHistorico().getValor());
+        } catch (Exception e){
+            Log.d("retornarTela-ActSSeguid", e.getMessage());
+            GuiUtil.myToast(this, e);
+            intent = new Intent(this, ActHome.class);
+        }
         startActivity(intent);
         finish();
     }

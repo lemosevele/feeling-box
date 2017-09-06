@@ -1,14 +1,11 @@
 package com.ufrpe.feelingsbox.infra.adapter.post;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.GestureDetector;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -50,7 +47,7 @@ public class PostFragment extends Fragment implements RecyclerViewOnClickListene
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_list);
         mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.setOnScrollListener(new RecyclerView.OnScrollListener(){
+        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener(){
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
@@ -118,10 +115,9 @@ public class PostFragment extends Fragment implements RecyclerViewOnClickListene
     public void onClickListener(View view, int position) {
         Intent intent;
         UsuarioService usuarioService = new UsuarioService(view.getContext());
-        Usuario usuarioSelecionado;
+        Usuario usuarioSelecionado = usuarioService.buscarUsuario(mList.get(position).getIdUsuario());
         switch (view.getId()){
             case R.id.ivUser:
-                usuarioSelecionado = usuarioService.buscarUsuario(mList.get(position).getIdUsuario());
                 if(sessao.getUltimoHistorico() == ActEnum.ACT_PERFIL_POST && usuarioDonoTela.getId() == usuarioSelecionado.getId()){
                     break;
                 }
@@ -138,7 +134,6 @@ public class PostFragment extends Fragment implements RecyclerViewOnClickListene
                 getActivity().finish();
                 break;
             case -1:
-                usuarioSelecionado = usuarioService.buscarUsuario(mList.get(position).getIdUsuario());
                 sessao.addPost(mList.get(position));
                 sessao.addUsuario(usuarioSelecionado);
                 intent = new Intent(view.getContext(), ActPost.class);

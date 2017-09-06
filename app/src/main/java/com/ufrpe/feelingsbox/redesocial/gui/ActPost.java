@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 
 import com.ufrpe.feelingsbox.R;
 import com.ufrpe.feelingsbox.infra.FormataData;
+import com.ufrpe.feelingsbox.infra.GuiUtil;
 import com.ufrpe.feelingsbox.infra.adapter.comentario.ComentarioFragment;
 import com.ufrpe.feelingsbox.redesocial.dominio.Post;
 import com.ufrpe.feelingsbox.redesocial.dominio.Sessao;
@@ -45,8 +47,23 @@ public class ActPost extends AppCompatActivity {
     public ActPost() {
         super();
         sessao.addHistorico(ACT_POST);
+        //Try para evitar que o aplicativo feche quando voltar o segundo plano
+        // e alguma das pilhas da instância de sessão forem desfeitas.
         postDonoTela = sessao.getUltimoPost();
         usuarioDonoTela = sessao.getUltimoUsuario();
+        if(postDonoTela == null){
+            Log.d("ActPost()", getString(R.string.erro_msg_postdonotela_null));
+            GuiUtil.myToast(this, getString(R.string.erro_msg_postdonotela_null));
+            Intent intent = new Intent(this, ActHome.class);
+            startActivity(intent);
+            finish();
+        } else if (usuarioDonoTela == null){
+            Log.d("ActPost()", getString(R.string.erro_msg_usuariodonotela_null));
+            GuiUtil.myToast(this, getString(R.string.erro_msg_usuariodonotela_null));
+            Intent intent = new Intent(this, ActHome.class);
+            startActivity(intent);
+            finish();
+        }
     }
 
     @Override
@@ -143,10 +160,19 @@ public class ActPost extends AppCompatActivity {
      */
 
     private void retornarTela(){
-        sessao.popHistorico();
-        sessao.popPost();
-        sessao.popUsuario();
-        Intent intent = new Intent(this, sessao.popHistorico().getValor());
+        Intent intent;
+        //Try para evitar que o aplicativo feche quando voltar o segundo plano
+        // e alguma das pilhas da instância de sessão forem desfeitas.
+        try {
+            sessao.popHistorico();
+            sessao.popPost();
+            sessao.popUsuario();
+            intent = new Intent(this, sessao.popHistorico().getValor());
+        } catch (Exception e){
+            Log.d("retornarTela-ActPost", e.getMessage());
+            GuiUtil.myToast(this, e);
+            intent = new Intent(this, ActHome.class);
+        }
         startActivity(intent);
         finish();
     }

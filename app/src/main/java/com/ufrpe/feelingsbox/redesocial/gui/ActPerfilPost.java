@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.ufrpe.feelingsbox.R;
+import com.ufrpe.feelingsbox.infra.GuiUtil;
 import com.ufrpe.feelingsbox.infra.adapter.post.PostFragment;
 import com.ufrpe.feelingsbox.redesocial.dominio.Sessao;
 import com.ufrpe.feelingsbox.redesocial.redesocialservices.RedeServices;
@@ -43,6 +45,13 @@ public class ActPerfilPost extends AppCompatActivity {
         super();
         sessao.addHistorico(ACT_PERFIL_POST);
         usuarioDonoTela = sessao.getUltimoUsuario();
+        if(usuarioDonoTela == null) {
+            Log.d("ActPerfilPost()", getString(R.string.erro_msg_usuariodonotela_null));
+            GuiUtil.myToast(this, getString(R.string.erro_msg_usuariodonotela_null));
+            Intent intent = new Intent(this, ActHome.class);
+            startActivity(intent);
+            finish();
+        }
     }
 
     @Override
@@ -151,9 +160,18 @@ public class ActPerfilPost extends AppCompatActivity {
      */
 
     private void retornarTela(){
-        sessao.popHistorico();
-        sessao.popUsuario();
-        Intent intent = new Intent(this, sessao.popHistorico().getValor());
+        Intent intent;
+        //Try para evitar que o aplicativo feche quando voltar o segundo plano
+        // e alguma das pilhas da instância de sessão forem desfeitas.
+        try{
+            sessao.popHistorico();
+            sessao.popUsuario();
+            intent = new Intent(this, sessao.popHistorico().getValor());
+        } catch (Exception e){
+            Log.d("retornarTela-ActPerPost", e.getMessage());
+            GuiUtil.myToast(this, e);
+            intent = new Intent(this, ActHome.class);
+        }
         startActivity(intent);
         finish();
     }

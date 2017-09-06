@@ -1,22 +1,22 @@
 package com.ufrpe.feelingsbox.infra.adapter.usuario;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.GestureDetector;
+import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.ufrpe.feelingsbox.R;
+import com.ufrpe.feelingsbox.infra.GuiUtil;
 import com.ufrpe.feelingsbox.infra.adapter.post.PostRecyclerAdapter;
 import com.ufrpe.feelingsbox.infra.adapter.post.RecyclerViewOnClickListenerhack;
 import com.ufrpe.feelingsbox.redesocial.dominio.BundleEnum;
 import com.ufrpe.feelingsbox.redesocial.dominio.Sessao;
+import com.ufrpe.feelingsbox.redesocial.gui.ActHome;
 import com.ufrpe.feelingsbox.redesocial.gui.ActPerfilPost;
 import com.ufrpe.feelingsbox.redesocial.redesocialservices.RedeServices;
 import com.ufrpe.feelingsbox.usuario.dominio.Usuario;
@@ -24,6 +24,7 @@ import com.ufrpe.feelingsbox.usuario.dominio.Usuario;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.ufrpe.feelingsbox.redesocial.dominio.BundleEnum.SEGUIDORES;
 import static com.ufrpe.feelingsbox.redesocial.dominio.BundleEnum.SEGUIDOS;
 
 /**
@@ -47,7 +48,7 @@ public class UserFragment extends Fragment implements RecyclerViewOnClickListene
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_list);
         mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.setOnScrollListener(new RecyclerView.OnScrollListener(){
+        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener(){
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
@@ -82,8 +83,15 @@ public class UserFragment extends Fragment implements RecyclerViewOnClickListene
 
         if(modo == SEGUIDOS && usuarioDonoTela != null) {
             mList = redeServices.listarSeguidos(usuarioDonoTela.getId());
-        } else if (usuarioDonoTela != null){
+        } else if (modo == SEGUIDORES && usuarioDonoTela != null){
             mList = redeServices.listarSeguidores(usuarioDonoTela.getId());
+        } else {
+            String msgErro = "usuarioDonoTela = " + usuarioDonoTela + " modo = " + modo;
+            Log.d("onCreateView-UserFragme", msgErro);
+            GuiUtil.myToast(getActivity(), msgErro);
+            Intent intent = new Intent(getActivity(), ActHome.class);
+            startActivity(intent);
+            getActivity().finish();
         }
 
         adapter = new UserRecyclerAdapter(getActivity(), mList);

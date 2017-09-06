@@ -1,22 +1,22 @@
 package com.ufrpe.feelingsbox.infra.adapter.comentario;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.GestureDetector;
+import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.ufrpe.feelingsbox.R;
+import com.ufrpe.feelingsbox.infra.GuiUtil;
 import com.ufrpe.feelingsbox.infra.adapter.post.RecyclerViewOnClickListenerhack;
 import com.ufrpe.feelingsbox.redesocial.dominio.Comentario;
 import com.ufrpe.feelingsbox.redesocial.dominio.Sessao;
 import com.ufrpe.feelingsbox.redesocial.gui.ActCriarPostComentario;
+import com.ufrpe.feelingsbox.redesocial.gui.ActHome;
 import com.ufrpe.feelingsbox.redesocial.gui.ActPerfilPost;
 import com.ufrpe.feelingsbox.redesocial.redesocialservices.RedeServices;
 import com.ufrpe.feelingsbox.usuario.dominio.Usuario;
@@ -44,7 +44,7 @@ public class ComentarioFragment extends Fragment implements RecyclerViewOnClickL
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_list);
         mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.setOnScrollListener(new RecyclerView.OnScrollListener(){
+        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener(){
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
@@ -74,7 +74,17 @@ public class ComentarioFragment extends Fragment implements RecyclerViewOnClickL
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
 
         RedeServices redeServices = new RedeServices(getActivity());
-        mList = redeServices.exibirComentarios(sessao.getUltimoPost().getId());
+
+        if(sessao.getUltimoPost() != null){
+            mList = redeServices.exibirComentarios(sessao.getUltimoPost().getId());
+        } else {
+            String msgErro = "Ultimo comentário = " + sessao.getUltimoPost();
+            Log.d("onCreateView-ComentFrag", msgErro);
+            GuiUtil.myToast(getActivity(), msgErro);
+            Intent intent = new Intent(getActivity(), ActHome.class);
+            startActivity(intent);
+            getActivity().finish();
+        }
 
         ComentarioRecyclerAdapter adapter = new ComentarioRecyclerAdapter(getActivity(), mList);
         adapter.setRecyclerViewOnClickListenerhack(this);
