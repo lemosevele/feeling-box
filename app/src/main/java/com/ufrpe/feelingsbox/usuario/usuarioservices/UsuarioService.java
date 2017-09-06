@@ -112,7 +112,6 @@ public class UsuarioService {
         Pessoa pessoa = pessoaDAO.getPessoa(usuario);
         sessao.setPessoaLogada(pessoa);
         sessao.setUsuarioLogado(usuario);
-        sessaoDAO.inserirIdPessoa(sessao);
         }
 
     /**
