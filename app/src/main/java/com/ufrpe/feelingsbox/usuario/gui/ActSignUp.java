@@ -1,6 +1,7 @@
 package com.ufrpe.feelingsbox.usuario.gui;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -110,7 +111,7 @@ public class ActSignUp extends AppCompatActivity {
             try {
                 service.cadastrar(nome, sexoTexto, nasc, nick, email, senha);
                 GuiUtil.myToast(this, getString(R.string.msg_cadastro_sucesso));
-                finish();
+                this.retornarTela();
             } catch (Exception e) {
                 GuiUtil.myToast(this, e);
             }
@@ -123,6 +124,12 @@ public class ActSignUp extends AppCompatActivity {
      */
 
     public void cancelarCadastro(View view){
+        this.retornarTela();
+    }
+
+    private void retornarTela(){
+        Intent intent = new Intent(this, ActLogin.class);
+        startActivity(intent);
         finish();
     }
 }

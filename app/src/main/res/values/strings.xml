@@ -98,4 +98,15 @@
     <string name="erro_msg_postdonotela_null">postDonoTela é igual a null</string>
     <string name="erro_msg_usuariodonotela_null">usuarioDonoTela é igual a null</string>
     <string name="erro_msg_mododonotela_null">modo é igual a null</string>
+    <string name="description_logotipo_feelingbox">Logotipo FEELINGBOX</string>
+    <string name="default_follow_number">0</string>
+    <string name="lbl_nome">Nome</string>
+    <string name="default_lbl_nome">Nome do Usuário</string>
+    <string name="lbl_nick">Apelido</string>
+    <string name="default_lnl_nick">Apelido do Usuário</string>
+    <string name="lbl_nasc">Data de Nascimento</string>
+    <string name="default_lbl_nasc">dd/mm/aaaa</string>
+    <string name="default_lbl_sexo">Masculino</string>
+    <string name="lbl_email">Email</string>
+    <string name="default_lbl_email">Email@Email.com</string>
 </resources>

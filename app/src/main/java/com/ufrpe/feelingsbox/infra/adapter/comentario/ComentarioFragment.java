@@ -111,12 +111,12 @@ public class ComentarioFragment extends Fragment implements RecyclerViewOnClickL
                 startActivity(intent);
                 getActivity().finish();
                 break;
-            case R.id.btnComentar:
-                sessao.addModo(COMENTARIO);
+            case R.id.btnResponder:
+                /*sessao.addModo(COMENTARIO);
                 intent = new Intent(view.getContext(), ActCriarPostComentario.class);
                 intent.putExtra(ID_POST.getValor(), mList.get(position).getId());
                 startActivity(intent);
-                getActivity().finish();
+                getActivity().finish();*/
                 break;
             case -1:
                 break;

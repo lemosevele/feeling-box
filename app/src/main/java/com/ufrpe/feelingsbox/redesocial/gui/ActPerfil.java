@@ -133,7 +133,7 @@ public class ActPerfil extends AppCompatActivity {
      * @param view - Referência ao Botão Seguindo @see {@link View} e {@link com.ufrpe.feelingsbox.R.layout}.
      */
 
-    public void onClickSeguidos(View view){
+    public void onClickSeguidosPerfil(View view){
         Intent intent = new Intent(this, ActSeguidosSeguidores.class);
         sessao.addModo(SEGUIDOS);
         startActivity(intent);
@@ -145,10 +145,17 @@ public class ActPerfil extends AppCompatActivity {
      * @param view - Referência ao Botão Seguidores @see {@link View} e {@link com.ufrpe.feelingsbox.R.layout}.
      */
 
-    public void onClickSeguidores(View view){
+    public void onClickSeguidoresPerfil(View view){
         Intent intent = new Intent(this, ActSeguidosSeguidores.class);
         sessao.addModo(SEGUIDORES);
         startActivity(intent);
         finish();
     }
+
+    /**
+     * Habilita o som do clique ao clicar no LinearLayout
+     * @param view - view que será clicada.
+     */
+
+    public void onClickSound(View view){}
 }

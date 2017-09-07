@@ -33,7 +33,6 @@
                     android:id="@+id/circleImageView"
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
-                    android:layout_alignParentLeft="true"
                     android:layout_marginBottom="8dp"
                     android:layout_marginTop="8dp"
                     android:layout_weight="1"
@@ -52,7 +51,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:onClick="onClickSeguidos"
+                        android:background="?android:attr/selectableItemBackground"
+                        android:onClick="onClickSeguidosPerfilPost"
                         android:orientation="vertical">
 
                         <TextView
@@ -60,9 +60,11 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:paddingEnd="0dp"
                             android:paddingStart="16dp"
                             android:paddingTop="8dp"
                             android:text="@string/txtseguidos"
+                            android:textColor="@color/colorBtnBlue"
                             android:textSize="18sp" />
 
                         <TextView
@@ -71,16 +73,18 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:paddingBottom="8dp"
-                            android:paddingLeft="16dp"
+                            android:paddingEnd="0dp"
+                            android:paddingStart="16dp"
                             android:paddingTop="8dp"
-                            android:text="0"
+                            android:text="@string/default_follow_number"
+                            android:textColor="@color/colorFontSubLabel"
                             android:textSize="18sp" />
 
                     </LinearLayout>
 
                     <View
                         android:id="@+id/view"
-                        android:layout_width="1dp"
+                        android:layout_width="@dimen/divider_thickness"
                         android:layout_height="match_parent"
                         android:layout_weight="0"
                         android:layout_marginTop="4dp"
@@ -91,7 +95,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:onClick="onClickSeguidores"
+                        android:onClick="onClickSeguidoresPerfilPost"
+                        android:background="?android:attr/selectableItemBackground"
                         android:orientation="vertical">
 
                         <TextView
@@ -99,9 +104,11 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:paddingEnd="0dp"
                             android:paddingStart="16dp"
                             android:paddingTop="8dp"
                             android:text="@string/txtseguidores"
+                            android:textColor="@color/colorBtnBlue"
                             android:textSize="18sp" />
 
                         <TextView
@@ -110,9 +117,11 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:paddingBottom="8dp"
-                            android:paddingLeft="16dp"
+                            android:paddingEnd="0dp"
+                            android:paddingStart="16dp"
                             android:paddingTop="8dp"
-                            android:text="0"
+                            android:text="@string/default_follow_number"
+                            android:textColor="@color/colorFontSubLabel"
                             android:textSize="18sp" />
                     </LinearLayout>
                 </LinearLayout>

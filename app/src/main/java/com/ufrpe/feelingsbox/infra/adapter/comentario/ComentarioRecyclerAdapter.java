@@ -125,7 +125,7 @@ public class ComentarioRecyclerAdapter extends RecyclerView.Adapter<ComentarioRe
             txtDonoComentario = (TextView) itemView.findViewById(R.id.txtDonoPost);
             txtComentario = (TextView) itemView.findViewById(R.id.txtPostagem);
             txtData     = (TextView) itemView.findViewById(R.id.lblSeguindo);
-            btnComentar = (Button) itemView.findViewById(R.id.btnComentar);
+            btnComentar = (Button) itemView.findViewById(R.id.btnResponder);
 
             ivUser.setOnClickListener(this);
             btnComentar.setOnClickListener(this);

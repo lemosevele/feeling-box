@@ -13,7 +13,8 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="?android:attr/selectableItemBackground">
 
         <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/ivUser"
@@ -25,7 +26,8 @@
             android:layout_marginTop="8dp"
             android:src="@drawable/perfil"
             app:civ_border_color="#FF000000"
-            app:civ_border_width="0dp" />
+            app:civ_border_width="0dp"
+            android:background="?android:attr/selectableItemBackgroundBorderless"/>
 
         <TextView
             android:id="@+id/txtDonoPost"
@@ -62,7 +64,7 @@
             android:textSize="@dimen/post_text" />
 
         <Button
-            android:id="@+id/btnComentar"
+            android:id="@+id/btnResponder"
             style="@style/Widget.AppCompat.Button.Borderless.Colored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -71,7 +73,7 @@
             android:layout_marginLeft="5dp"
             android:text="@string/btn_responder"
             android:textColor="@color/colorFontLogo"
-            android:visibility="invisible" />
+            android:visibility="visible" />
 
 
 

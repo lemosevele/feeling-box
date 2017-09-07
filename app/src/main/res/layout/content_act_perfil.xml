@@ -19,29 +19,33 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:paddingTop="8dp">
+                android:orientation="horizontal">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:onClick="onClickSeguidos"
-                    android:orientation="vertical">
+                    android:onClick="onClickSeguidosPerfil"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:orientation="vertical"
+                    android:paddingTop="@dimen/top_border_pad"
+                    android:paddingBottom="12dp">
 
                     <TextView
                         android:id="@+id/lblSeguindo"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:paddingStart="16dp"
+                        android:paddingStart="@dimen/txt_start_pad"
+                        android:paddingEnd="@dimen/txt_end_pad"
                         android:text="@string/txtseguidos"
+                        android:textColor="@color/colorBtnBlue"
                         android:textSize="18sp" />
 
                     <TextView
@@ -49,24 +53,31 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:paddingLeft="16dp"
-                        android:paddingTop="8dp"
-                        android:text="0"
+                        android:paddingStart="@dimen/txt_start_pad"
+                        android:paddingEnd="@dimen/txt_end_pad"
+                        android:paddingTop="@dimen/txt_sub_top_pad"
+                        android:text="@string/default_follow_number"
+                        android:textColor="@color/colorFontSubLabel"
                         android:textSize="18sp" />
                 </LinearLayout>
 
                 <View
                     android:id="@+id/view"
-                    android:layout_width="1dp"
+                    android:layout_width="@dimen/divider_thickness"
                     android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/divider_left_and_right"
+                    android:layout_marginBottom="@dimen/divider_left_and_right"
                     android:background="@color/colorBtnYellow"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:onClick="onClickSeguidores"
-                    android:orientation="vertical">
+                    android:onClick="onClickSeguidoresPerfil"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:orientation="vertical"
+                    android:paddingTop="@dimen/top_border_pad"
+                    android:paddingBottom="12dp">
 
                     <TextView
                         android:id="@+id/lblSeguidores"
@@ -74,7 +85,9 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:paddingStart="16dp"
+                        android:paddingEnd="0dp"
                         android:text="@string/txtseguidores"
+                        android:textColor="@color/colorBtnBlue"
                         android:textSize="18sp" />
 
                     <TextView
@@ -82,9 +95,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:paddingLeft="16dp"
-                        android:paddingTop="8dp"
-                        android:text="0"
+                        android:paddingStart="@dimen/txt_start_pad"
+                        android:paddingEnd="@dimen/txt_end_pad"
+                        android:paddingTop="@dimen/txt_sub_top_pad"
+                        android:text="@string/default_follow_number"
+                        android:textColor="@color/colorFontSubLabel"
                         android:textSize="18sp" />
                 </LinearLayout>
 
@@ -92,8 +107,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="12dp"
+                android:layout_height="@dimen/divider_thickness"
                 android:layout_marginLeft="@dimen/divider_left_and_right"
                 android:layout_marginRight="@dimen/divider_left_and_right"
                 android:background="@color/colorBtnYellow" />
@@ -101,17 +115,22 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:onClick="onClickSound"
                 android:orientation="vertical"
-                android:paddingTop="8dp">
+                android:paddingBottom="@dimen/bottom_border_pad"
+                android:paddingTop="@dimen/top_border_pad">
 
                 <TextView
                     android:id="@+id/lblNome"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:paddingLeft="16dp"
-                    android:paddingTop="8dp"
-                    android:text="Nome"
+                    android:paddingEnd="@dimen/txt_end_pad"
+                    android:paddingStart="@dimen/txt_start_pad"
+                    android:text="@string/lbl_nome"
+                    android:textColor="@color/colorFontNormalDark"
                     android:textSize="18sp" />
 
                 <TextView
@@ -119,16 +138,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:paddingLeft="16dp"
-                    android:paddingTop="8dp"
-                    android:text="Nome do Usuário"
+                    android:paddingEnd="@dimen/txt_end_pad"
+                    android:paddingStart="@dimen/txt_start_pad"
+                    android:paddingTop="@dimen/txt_sub_top_pad"
+                    android:text="@string/default_lbl_nome"
+                    android:textColor="@color/colorFontSubLabel"
                     android:textSize="18sp" />
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="12dp"
+                android:layout_height="@dimen/divider_thickness"
                 android:layout_marginLeft="@dimen/divider_left_and_right"
                 android:layout_marginRight="@dimen/divider_left_and_right"
                 android:background="@color/colorBtnYellow" />
@@ -136,17 +156,22 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:onClick="onClickSound"
                 android:orientation="vertical"
-                android:paddingTop="8dp">
+                android:paddingBottom="@dimen/bottom_border_pad"
+                android:paddingTop="@dimen/top_border_pad">
 
                 <TextView
                     android:id="@+id/lblNick"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:paddingLeft="16dp"
-                    android:paddingTop="8dp"
-                    android:text="Apelido"
+                    android:paddingEnd="@dimen/txt_end_pad"
+                    android:paddingStart="@dimen/txt_start_pad"
+                    android:text="@string/lbl_nick"
+                    android:textColor="@color/colorFontNormalDark"
                     android:textSize="18sp" />
 
                 <TextView
@@ -154,106 +179,41 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:paddingLeft="16dp"
-                    android:paddingTop="8dp"
-                    android:text="Apelido do Usuário"
+                    android:paddingEnd="@dimen/txt_end_pad"
+                    android:paddingStart="@dimen/txt_start_pad"
+                    android:paddingTop="@dimen/txt_sub_top_pad"
+                    android:text="@string/default_lnl_nick"
+                    android:textColor="@color/colorFontSubLabel"
                     android:textSize="18sp" />
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="12dp"
+                android:layout_height="@dimen/divider_thickness"
                 android:layout_marginLeft="@dimen/divider_left_and_right"
                 android:layout_marginRight="@dimen/divider_left_and_right"
                 android:background="@color/colorBtnYellow" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:paddingTop="8dp">
-
-                <TextView
-                    android:id="@+id/lblNasc"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:paddingLeft="16dp"
-                    android:paddingTop="8dp"
-                    android:text="Data de Nascimento"
-                    android:textSize="18sp" />
-
-                <TextView
-                    android:id="@+id/txtNasc"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:paddingLeft="16dp"
-                    android:paddingTop="8dp"
-                    android:text="12/12/2017"
-                    android:textSize="18sp" />
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginLeft="@dimen/divider_left_and_right"
-                android:layout_marginRight="@dimen/divider_left_and_right"
-                android:background="@color/colorBtnYellow" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:paddingTop="8dp">
-
-                <TextView
-                    android:id="@+id/lblSexo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:paddingLeft="16dp"
-                    android:paddingTop="8dp"
-                    android:text="Sexo"
-                    android:textSize="18sp" />
-
-                <TextView
-                    android:id="@+id/txtSexo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:paddingLeft="16dp"
-                    android:paddingTop="8dp"
-                    android:text="Masculino"
-                    android:textSize="18sp" />
-
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginLeft="@dimen/divider_left_and_right"
-                android:layout_marginRight="@dimen/divider_left_and_right"
-                android:background="@color/colorBtnYellow" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="0dp"
                 android:layout_weight="1"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:onClick="onClickSound"
                 android:orientation="vertical"
-                android:paddingTop="8dp">
+                android:paddingBottom="@dimen/bottom_border_pad"
+                android:paddingTop="@dimen/top_border_pad">
 
                 <TextView
                     android:id="@+id/lblEmail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:paddingLeft="16dp"
-                    android:paddingTop="8dp"
-                    android:text="Email"
+                    android:paddingEnd="@dimen/txt_end_pad"
+                    android:paddingStart="@dimen/txt_start_pad"
+                    android:text="@string/lbl_email"
+                    android:textColor="@color/colorFontNormalDark"
                     android:textSize="18sp" />
 
                 <TextView
@@ -261,16 +221,102 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:paddingLeft="16dp"
-                    android:paddingTop="8dp"
-                    android:text="Email@Email.com"
+                    android:paddingEnd="@dimen/txt_end_pad"
+                    android:paddingStart="@dimen/txt_start_pad"
+                    android:paddingTop="@dimen/txt_sub_top_pad"
+                    android:text="@string/default_lbl_email"
+                    android:textColor="@color/colorFontSubLabel"
                     android:textSize="18sp" />
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="12dp"
+                android:layout_height="@dimen/divider_thickness"
+                android:layout_marginLeft="@dimen/divider_left_and_right"
+                android:layout_marginRight="@dimen/divider_left_and_right"
+                android:background="@color/colorBtnYellow" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:onClick="onClickSound"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/bottom_border_pad"
+                android:paddingTop="@dimen/top_border_pad">
+
+                <TextView
+                    android:id="@+id/lblNasc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingEnd="@dimen/txt_end_pad"
+                    android:paddingStart="@dimen/txt_start_pad"
+                    android:text="@string/lbl_nasc"
+                    android:textColor="@color/colorFontNormalDark"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/txtNasc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingEnd="@dimen/txt_end_pad"
+                    android:paddingStart="@dimen/txt_start_pad"
+                    android:paddingTop="@dimen/txt_sub_top_pad"
+                    android:text="@string/default_lbl_nasc"
+                    android:textColor="@color/colorFontSubLabel"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/divider_thickness"
+                android:layout_marginLeft="@dimen/divider_left_and_right"
+                android:layout_marginRight="@dimen/divider_left_and_right"
+                android:background="@color/colorBtnYellow" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:onClick="onClickSound"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/bottom_border_pad"
+                android:paddingTop="@dimen/top_border_pad">
+
+                <TextView
+                    android:id="@+id/lblSexo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingEnd="@dimen/txt_end_pad"
+                    android:paddingStart="@dimen/txt_start_pad"
+                    android:text="@string/lbl_sexo"
+                    android:textColor="@color/colorFontNormalDark"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/txtSexo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingEnd="@dimen/txt_end_pad"
+                    android:paddingStart="@dimen/txt_start_pad"
+                    android:paddingTop="@dimen/txt_sub_top_pad"
+                    android:text="@string/default_lbl_sexo"
+                    android:textColor="@color/colorFontSubLabel"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
+
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/divider_thickness"
                 android:layout_marginLeft="@dimen/divider_left_and_right"
                 android:layout_marginRight="@dimen/divider_left_and_right"
                 android:background="@color/colorBtnYellow" />

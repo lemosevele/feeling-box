@@ -49,6 +49,7 @@ public class ActLogin extends AppCompatActivity {
     public void cadastrarUsuario(View view){
         Intent it = new Intent(ActLogin.this, ActSignUp.class);
         startActivity(it);
+        finish();
     }
 
     /**
