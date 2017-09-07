@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://sites.google.com/view/feelingbox" >
-    <img alt="FeelingBox" src="https://raw.githubusercontent.com/lemosevele/feeling-box/master/app/src/main/res/drawable-xxxhdpi/logo.png" width="200"/>
+    <img alt="FeelingBox" src="https://raw.githubusercontent.com/lemosevele/feeling-box/master/FeelingBox%20Banner.png" width="900"/>
   </a>
 </p>
 
