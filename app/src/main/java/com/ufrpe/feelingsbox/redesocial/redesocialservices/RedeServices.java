@@ -41,7 +41,9 @@ public class RedeServices {
     private TagDAO tagDAO;
     private RelacaoUserTagDAO relacaoUserTagDAO;
 
+    private static final double ZERO = 0;
     private static final int UM = 1;
+    private static final int ESCALA = 3;
 
     public RedeServices(Context context) {
         this.context = context;
@@ -325,8 +327,8 @@ public class RedeServices {
         BigDecimal big1 = new BigDecimal(numerador);
         BigDecimal big2 = new BigDecimal(denominador);
 
-        if(denominador != (double) 0){
-            return big1.divide(big2, 3, RoundingMode.UP);
+        if(denominador != ZERO){
+            return big1.divide(big2, ESCALA, RoundingMode.UP);
         } else {
             return big2;
         }
@@ -346,7 +348,7 @@ public class RedeServices {
         for (int linha = 0; linha < listaIdPost.size(); linha++) {
             ArrayList<Integer> arrayLinha = new ArrayList<>();
             for (int coluna = 0; coluna < listaTag.size(); coluna++) {
-                arrayLinha.add(posTagDAO.getRelacaoTagPost(listaIdPost.get(linha),listaTag.get(coluna)) ? 1 : 0);
+                arrayLinha.add(posTagDAO.getRelacaoTagPost(listaIdPost.get(linha), listaTag.get(coluna)) ? 1 : 0);
             }
             matriz.add(arrayLinha);
         }
