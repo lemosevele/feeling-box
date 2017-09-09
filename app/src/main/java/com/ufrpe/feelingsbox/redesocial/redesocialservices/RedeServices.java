@@ -345,10 +345,10 @@ public class RedeServices {
         posTagDAO = new PosTagDAO(context);
         ArrayList<ArrayList<Integer>> matriz = new ArrayList<>();
 
-        for (int linha = 0; linha < listaIdPost.size(); linha++) {
+        for (int linha = 0; linha < listaTag.size(); linha++) {
             ArrayList<Integer> arrayLinha = new ArrayList<>();
-            for (int coluna = 0; coluna < listaTag.size(); coluna++) {
-                arrayLinha.add(posTagDAO.getRelacaoTagPost(listaIdPost.get(linha), listaTag.get(coluna)) ? 1 : 0);
+            for (int coluna = 0; coluna < listaIdPost.size(); coluna++) {
+                arrayLinha.add(posTagDAO.getRelacaoTagPost(listaIdPost.get(coluna), listaTag.get(linha)) ? 1 : 0);
             }
             matriz.add(arrayLinha);
         }

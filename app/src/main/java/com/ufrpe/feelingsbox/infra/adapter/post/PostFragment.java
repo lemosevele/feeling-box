@@ -20,6 +20,7 @@ import com.ufrpe.feelingsbox.redesocial.redesocialservices.RedeServices;
 import com.ufrpe.feelingsbox.usuario.dominio.Usuario;
 import com.ufrpe.feelingsbox.usuario.usuarioservices.UsuarioService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.ufrpe.feelingsbox.redesocial.dominio.BundleEnum.COMENTARIO;
@@ -96,6 +97,8 @@ public class PostFragment extends Fragment implements RecyclerViewOnClickListene
             else {
                 mList = redeServices.gerarPostsTagAproximada(sessao.getUsuarioLogado().getId());
             }
+        } else {
+            mList = new ArrayList<>();
         }
 
         PostRecyclerAdapter adapter = new PostRecyclerAdapter(getActivity(), mList);

@@ -102,9 +102,14 @@ public class RelacaoUserTagDAO {
     public String getTagsMaisPesquisadas(long idUser) {
         feelingsDb = dbHelper.getReadableDatabase();
 
-        String query = "SELECT COUNT (" + DataBase.REL_TEXTO_TAG + ") AS qtd, " + DataBase.REL_TEXTO_TAG + " FROM " +
+        /*String query = "SELECT COUNT (" + DataBase.REL_TEXTO_TAG + ") AS qtd, " + DataBase.REL_TEXTO_TAG + " FROM " +
                 DataBase.TABELA_REL_USER_TAG + " WHERE " + DataBase.REL_USER_ID + " LIKE ?" +
-                " ORDER BY qtd DESC";
+                " ORDER BY qtd DESC";*/
+
+        String query = "SELECT " + DataBase.REL_TEXTO_TAG + ", COUNT(" + DataBase.REL_TEXTO_TAG +
+                       ") AS qtd FROM " + DataBase.TABELA_REL_USER_TAG + " WHERE " +
+                       DataBase.REL_USER_ID + " LIKE ? GROUP BY " + DataBase.REL_TEXTO_TAG +
+                       " ORDER BY qtd DESC LIMIT 1";
 
         String idString = Long.toString(idUser);
         String[] argumentos = {idString};

@@ -32,7 +32,9 @@ public class TabsAdapter extends FragmentPagerAdapter {
         mContext = context;
         titles = new String[]{mContext.getString(R.string.title_tab_home),
                               mContext.getString(R.string.title_tab_favoritos),
-                              mContext.getString(R.string.title_tab_recomendados)};
+                              mContext.getString(R.string.title_tab_recomendados)};/*,
+                              mContext.getString(R.string.title_tab_mais_comentados),
+                              mContext.getString(R.string.title_tab_pegando_fogo)};*/
     }
 
     @Override

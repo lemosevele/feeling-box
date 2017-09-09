@@ -109,4 +109,6 @@
     <string name="default_lbl_sexo">Masculino</string>
     <string name="lbl_email">Email</string>
     <string name="default_lbl_email">Email@Email.com</string>
+    <string name="title_tab_mais_comentados">Mais Comentados</string>
+    <string name="title_tab_pegando_fogo">Pegando Fogo</string>
 </resources>
